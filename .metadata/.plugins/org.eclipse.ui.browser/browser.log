@@ -1,0 +1,30 @@
+
+5月 12, 2021 21:49:15.975 NEW SESSION
+5月 12, 2021 21:49:15.975 [11988:9548:0512/214915.953:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 12, 2021 21:49:15.976 [11988:9548:0512/214915.953:ERROR:device_event_log_impl.cc(214)] [21:49:15.954] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 12, 2021 21:49:15.976 [11988:9548:0512/214915.958:ERROR:device_event_log_impl.cc(214)] [21:49:15.959] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+5月 12, 2021 21:52:03.590 [10436:7260:0512/215203.589:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 12, 2021 21:52:03.590 [10436:7260:0512/215203.589:ERROR:device_event_log_impl.cc(214)] [21:52:03.589] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 12, 2021 21:52:03.626 [10436:7260:0512/215203.595:ERROR:device_event_log_impl.cc(214)] [21:52:03.595] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+5月 12, 2021 21:54:36.336 [11028:7428:0512/215436.335:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 12, 2021 21:54:36.336 [11028:7428:0512/215436.335:ERROR:device_event_log_impl.cc(214)] [21:54:36.336] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 12, 2021 21:54:36.341 [11028:7428:0512/215436.341:ERROR:device_event_log_impl.cc(214)] [21:54:36.342] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+
+5月 13, 2021 09:18:37.878 NEW SESSION
+5月 13, 2021 09:18:37.878 [8532:128:0513/091837.830:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 13, 2021 09:18:37.889 [8532:128:0513/091837.830:ERROR:device_event_log_impl.cc(214)] [09:18:37.830] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 13, 2021 09:18:37.889 [8532:128:0513/091837.835:ERROR:device_event_log_impl.cc(214)] [09:18:37.835] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+
+5月 13, 2021 09:19:39.609 NEW SESSION
+5月 13, 2021 09:19:39.609 [9948:6964:0513/091939.608:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 13, 2021 09:19:39.610 [9948:6964:0513/091939.608:ERROR:device_event_log_impl.cc(214)] [09:19:39.607] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 13, 2021 09:19:39.616 [9948:6964:0513/091939.615:ERROR:device_event_log_impl.cc(214)] [09:19:39.615] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+5月 13, 2021 10:50:18.164 [9840:1028:0513/105018.163:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 13, 2021 10:50:18.164 [9840:1028:0513/105018.163:ERROR:device_event_log_impl.cc(214)] [10:50:18.163] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 13, 2021 10:50:18.169 [9840:1028:0513/105018.169:ERROR:device_event_log_impl.cc(214)] [10:50:18.169] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+5月 13, 2021 11:55:39.148 [5104:5456:0513/115539.148:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 13, 2021 11:55:39.148 [5104:5456:0513/115539.148:ERROR:device_event_log_impl.cc(214)] [11:55:39.147] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 13, 2021 11:55:39.154 [5104:5456:0513/115539.154:ERROR:device_event_log_impl.cc(214)] [11:55:39.153] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+5月 13, 2021 12:07:07.738 [10912:10540:0513/120707.737:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
+5月 13, 2021 12:07:07.738 [10912:10540:0513/120707.737:ERROR:device_event_log_impl.cc(214)] [12:07:07.737] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+5月 13, 2021 12:07:07.751 [10912:10540:0513/120707.751:ERROR:device_event_log_impl.cc(214)] [12:07:07.751] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.

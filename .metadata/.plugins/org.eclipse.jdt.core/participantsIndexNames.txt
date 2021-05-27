@@ -1,0 +1,11 @@
+INDEX VERSION 1.131
+C:\myProject2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2825568350.index
+\myProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\Project2
+C:\myProject2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3606538851.index
+\myProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\Project2
+C:\Users\Student\Desktop\Java_class\java\myProject\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1342055493.index
+\Project\src
+C:\Users\Student\Desktop\Java_class\java\myProject\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2926312857.index
+\Test\src
+C:\Users\Student\Desktop\Java_class\java\myProject\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3785776747.index
+\Project2\src
