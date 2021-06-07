@@ -8,11 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import tw.company_6.bean.Company_6;
 
-@Repository
+@Repository("companyDao")
 @Transactional
 public class CompanyDao implements CompanyDaoInt{
 	

@@ -102,7 +102,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./6_company.jsp">
+                                <a class="nav-link active" href="./company">
                                     <span class="me-1"><i class="fas fa-building"></i></span>
                                     公司資料
                                 </a>
