@@ -8,14 +8,18 @@ import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableTransactionManagement
+@EnableWebMvc
+@ComponentScan(basePackages = "tw")
 public class RootAppConfig {
 	
 	// jndi
@@ -29,7 +33,7 @@ public class RootAppConfig {
 	}
 	
 	// session Factory
-	@Bean
+	@Bean(destroyMethod = "destroy")
 	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setPackagesToScan("tw");
@@ -48,7 +52,7 @@ public class RootAppConfig {
 	}
 	
 	// tracnsaction 
-	@Bean
+	@Bean(name = "transactionManager")
 	@Autowired
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();

@@ -13,9 +13,68 @@
   </head>
   <body>
     <h1>Hello, world!</h1>
+    
 
+    
     <div class="container">
+        <!-- Table one -->
+        <!-- 表單 -->
+        <div id="formData">
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col mb-3">
+              <label for="" class="form-label">統一編號</label> 
+              <input
+                type="text" class="form-control" id="business_Accounting_NO" placeholder=""
+                name="business_Accounting_NO"
+                value="" property="business_Accounting_NO" >
+            </div>
+            <div class="col mb-3">
+              <label for="" class="form-label">公司名稱</label> 
+              <input
+                type="text" class="form-control" id="company_Name" placeholder=""
+                name="company_Name"
+                value="" property="company_Name" >
+            </div>
+            <div class="col mb-3">
+              <label for="" class="form-label">資本總額(登記資本額)</label> 
+              <input
+                type="text" class="form-control" id="capital_Stock_Amount" placeholder=""
+                name="capital_Stock_Amount"
+                value="" property="s_capital_Stock_Amount" >
+            </div>
+            <div class="col mb-3">
+              <label for="" class="form-label">代表人姓名</label> 
+              <input
+                type="text" class="form-control" id="responsible_Name" placeholder=""
+                name="responsible_Name"
+                value="" property="responsible_Name" >
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-lg-1">
+            <div class="col mb-3">
+            <label for="" class="form-label">公司所在地</label>
+            <input type="text" class="form-control" id="company_Location" placeholder="" name="company_Location"
+              value="" property="company_Location" >
+          </div>
+          
+        </div>
 
+        <!-- 選項 -->
+        <div class="item_CRUD mt-5 row">
+          <div class="col-4"></div>
+          <div class="col-2 d-grid">
+              <button type="button" class="btn btn-outline-primary" id="select">新增資料
+              </button>
+          </div>
+          <div class="col-2 d-grid">
+              <button type="button" class="btn btn-outline-secondary" id="insert">返回
+              <a href="./companyInsert"></a>
+              </button>
+          </div>
+        </div> 
+        <hr>
+        <br>
+        <!-- table -->
         <table class="table table-striped">
             <thead>
               <tr>

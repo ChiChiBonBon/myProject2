@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%-- <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %> --%>
     <!doctype html>
     <html lang="en">
 
@@ -102,7 +103,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./6_company.jsp">
+                                <a class="nav-link active" href="./company">
                                     <span class="me-1"><i class="fas fa-building"></i></span>
                                     公司資料
                                 </a>
@@ -116,13 +117,16 @@
                     <div class="container">           
                         <div class="item_CRUD mt-5 row">
                             <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-outline-primary" id="select">查詢資料</button>
+                                <button type="button" class="btn btn-outline-primary" id="select">查詢資料
+                                </button>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" id="search" placeholder="統一編號" onfocus="this.placeholder=''" onblur="this.placeholder='統一編號'">
+                                <input type="text" class="form-control" id="search" placeholder="統一編號" onfocus="this.placeholder=''" onblur="this.placeholder='統一編號'" value="${cAcc}">
                             </div>
                             <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-outline-primary" id="insert">新增資料</button>
+                                
+                                <a href="./companyInsert"><button type="button" class="btn btn-outline-primary" id="insert">新增資料</button></a>
+                                
                             </div>
                         </div>
                         <!-- 分隔線 -->
@@ -132,9 +136,9 @@
                         </div>
                         <hr>
                         <!-- 資料內容 -->
-                        <div class="content mt-5 col-6">
+                        <div class="content mt-5 row">
                             
-                            <div id="dataArea"></div>
+                            <div class="col-12"  id="dataArea"></div>
                             
                         </div>
                     </div>
@@ -155,33 +159,56 @@
                 $("#select").on('click', function(){
                     var aa = $('#search').val();
                     var xhr =  new XMLHttpRequest();
-                    var url = "<c:url value='/companyController' />"
-                    
+                    var url = './companyController/'
+                    $("#search").val("");          
                     if(aa == ""){
+                        console.log(url)
                         xhr.open("GET", url);
                         xhr.send();
-                    }else if( !isNaN(aa)){
-                        url = url + "?" + aa;
-                        xhr.open("GET", url);
-                        xhr.send();
-                    }else{
-                       $('$dataArea').html('<h2>請重新輸入統一編號</h2>') 
-                       $('$dataArea').css({'color': 'red'}) 
-                    }
-                  
-                    xhr.onreadystatechange = function(){
+                        xhr.onreadystatechange = function(){
                         if( xhr.readyState == 4 && xhr.status == 200 ){
-                            $('$dataArea').html(selectData(xhr.responseText)) 
+                            $('#dataArea').html(selectDataAll(xhr.responseText)) 
                         }
 
                     }
+                    }else if( !isNaN(aa)){
+                        url = url + aa;
+                        console.log(url)
+                        xhr.open("GET", url);
+                        xhr.send();
+                        xhr.onreadystatechange = function(){
+                        if( xhr.readyState == 4 && xhr.status == 200 ){
+                            $('#dataArea').html(selectData(xhr.responseText)) 
+                        }
+                        if(xhr.responseText == ""){
+                            $('#dataArea').html('<h2>無該筆資料</h2>') 
+                            $('#dataArea').css({'color': 'red'}) 
+                        }
+                    }
+                    }else{
+                       $('#dataArea').html('<h2>請重新輸入統一編號</h2>') 
+                       $('#dataArea').css({'color': 'red'}) 
+                    }
+                  
+                    
 
                 })
 
+                $("#dataArea").on('click', "#delete", function(){
+                    var x = $(this).parent().parent().index()
+                    console.log($('.Accounting_NO:eq('+ x +')').text())
+                    
+                })
 
-                function selectData(text){
+                $("#dataArea").on('click', "#update", function(){
+                    var x = $(this).parent().parent().index()
+                    console.log('aaa')
+                    
+                })
+
+                function selectDataAll(text){
                     var json = JSON.parse(text);
-                    var jsonData = '<table class="table table-striped">';
+                    var jsonData = '<table class="table table-striped" >';
                         jsonData += '<thead> <tr>'
                         jsonData += '<th scope="col">統一編號</th>'   
                         jsonData += '<th scope="col">公司名稱</th>'   
@@ -196,19 +223,48 @@
                         for(var x in json){
                             var company = json[x]
                             jsonData += "<tr>"
-                            jsonData += '<th scope="row">' + company.business_Accounting_NO + '</th>'
+                            jsonData += '<th scope="row" class="Accounting_NO">' + company.business_Accounting_NO + '</th>'
                             jsonData += '<th scope="row">' + company.company_Name + '</th>'
                             jsonData += '<th scope="row">' + company.capital_Stock_Amount + '</th>'
                             jsonData += '<th scope="row">' + company.responsible_Name + '</th>'
                             jsonData += '<th scope="row">' + company.company_Location + '</th>'
-                            jsonData += '<td><button style="border: none;" id="update"><i class="fas fa-edit" style="font-size: 1.5em;"></i></button></td>'
-                            jsonData += '<td><button style="border: none;" id="delete"><i class="fas fa-trash-alt" style="font-size: 1.5em;"></i></button></td>'   
-                            jsonData += "</tr>"
+                            jsonData += '<th ><button style="border: none;" id="update"><i  class="fas fa-edit" style="font-size: 1.5em;"></i></button></th>'
+                            jsonData += '<th ><button style="border: none;" id="delete"><i  class="fas fa-trash-alt" style="font-size: 1.5em;"></i></button></th>'   
+                            jsonData += "</th>"
                         }
                         jsonData += "</tbody>"
                         jsonData += "</table>"
                     return jsonData;
                 }
+
+                function selectData(text){
+                    var company = JSON.parse(text);
+                    var jsonData = '<table class="table table-striped">';
+                        jsonData += '<thead> <tr>'
+                        jsonData += '<th scope="col">統一編號</th>'   
+                        jsonData += '<th scope="col">公司名稱</th>'   
+                        jsonData += '<th scope="col">資本總額</th>'   
+                        jsonData += '<th scope="col">代表人姓名</th>'   
+                        jsonData += '<th scope="col">公司所在地</th>'   
+                        jsonData += '<th scope="col">Udpate</th>'   
+                        jsonData += '<th scope="col">Delete</th>'   
+                        jsonData +=  "</tr></thead>"                   
+                        
+                        
+                        jsonData += "<tr>"
+                        jsonData += '<th scope="row">' + company.business_Accounting_NO + '</th>'
+                        jsonData += '<th scope="row">' + company.company_Name + '</th>'
+                        jsonData += '<th scope="row">' + company.capital_Stock_Amount + '</th>'
+                        jsonData += '<th scope="row">' + company.responsible_Name + '</th>'
+                        jsonData += '<th scope="row">' + company.company_Location + '</th>'
+                        jsonData += '<td><button style="border: none;" id="update"><i class="fas fa-edit" style="font-size: 1.5em;"></i></button></td>'
+                        jsonData += '<td><button style="border: none;" id="delete"><i class="fas fa-trash-alt" style="font-size: 1.5em;"></i></button></td>'   
+                        jsonData += "</tr>"
+                        
+                        jsonData += "</tbody>"
+                        jsonData += "</table>"
+                    return jsonData;
+                } 
 
             })
         </script>
