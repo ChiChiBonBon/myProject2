@@ -33,7 +33,7 @@ public class RootAppConfig {
 	}
 	
 	// session Factory
-	@Bean
+	@Bean(destroyMethod = "destroy")
 	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setPackagesToScan("tw");
@@ -52,7 +52,7 @@ public class RootAppConfig {
 	}
 	
 	// tracnsaction 
-	@Bean
+	@Bean(name = "transactionManager")
 	@Autowired
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();

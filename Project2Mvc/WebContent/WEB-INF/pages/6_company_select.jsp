@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%-- <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %> --%>
     <!doctype html>
     <html lang="en">
 
@@ -155,23 +156,25 @@
                 $("#select").on('click', function(){
                     var aa = $('#search').val();
                     var xhr =  new XMLHttpRequest();
-                    var url = "<c:url value='/companyController' />"
-                    
+                    var url = './companyController'
+                              
                     if(aa == ""){
+                        console.log(url)
                         xhr.open("GET", url);
                         xhr.send();
                     }else if( !isNaN(aa)){
                         url = url + "?" + aa;
+                         console.log(url)
                         xhr.open("GET", url);
                         xhr.send();
                     }else{
-                       $('$dataArea').html('<h2>請重新輸入統一編號</h2>') 
-                       $('$dataArea').css({'color': 'red'}) 
+                       $('#dataArea').html('<h2>請重新輸入統一編號</h2>') 
+                       $('#dataArea').css({'color': 'red'}) 
                     }
                   
                     xhr.onreadystatechange = function(){
                         if( xhr.readyState == 4 && xhr.status == 200 ){
-                            $('$dataArea').html(selectData(xhr.responseText)) 
+                            $('#dataArea').html(selectData(xhr.responseText)) 
                         }
 
                     }

@@ -16,17 +16,17 @@ import tw.company_6.model.CompanyService;
 @Controller
 public class CompanyController {
 	
-//	@Autowired @Qualifier("companyService")
-//	private CompanyService service;
-	CompanyDao dao = new CompanyDao();
-	CompanyService service = new CompanyService(dao);
+	@Autowired
+	private CompanyService service;
+//	CompanyDao dao = new CompanyDao();
+//	CompanyService service = new CompanyService(dao);
 	
 	
 	@GetMapping(value = "/company")
 	public String main() {
 		return "6_company_select";
 	}
-	
+	                      
 	@GetMapping(value = "/companyController")
 	public @ResponseBody List<Company_6> selectAll() {
 		List<Company_6> listAll = service.selectAll();
