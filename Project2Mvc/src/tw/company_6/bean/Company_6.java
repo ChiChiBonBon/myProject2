@@ -50,5 +50,12 @@ public class Company_6 {
 		this.company_Location = company_Location;
 	}
 	
+	@Override
+	public String toString() {
+		return "Company_6 [business_Accounting_NO=" + business_Accounting_NO + ", company_Name=" + company_Name
+				+ ", capital_Stock_Amount=" + capital_Stock_Amount + ", responsible_Name=" + responsible_Name
+				+ ", company_Location=" + company_Location + "]";
+	}
+	
 	
 }

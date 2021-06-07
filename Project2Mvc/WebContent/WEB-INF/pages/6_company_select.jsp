@@ -117,13 +117,16 @@
                     <div class="container">           
                         <div class="item_CRUD mt-5 row">
                             <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-outline-primary" id="select">查詢資料</button>
+                                <button type="button" class="btn btn-outline-primary" id="select">查詢資料
+                                </button>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" id="search" placeholder="統一編號" onfocus="this.placeholder=''" onblur="this.placeholder='統一編號'">
+                                <input type="text" class="form-control" id="search" placeholder="統一編號" onfocus="this.placeholder=''" onblur="this.placeholder='統一編號'" value="${cAcc}">
                             </div>
                             <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-outline-primary" id="insert">新增資料</button>
+                                
+                                <a href="./companyInsert"><button type="button" class="btn btn-outline-primary" id="insert">新增資料</button></a>
+                                
                             </div>
                         </div>
                         <!-- 分隔線 -->
@@ -157,7 +160,7 @@
                     var aa = $('#search').val();
                     var xhr =  new XMLHttpRequest();
                     var url = './companyController/'
-                              
+                    $("#search").val("");          
                     if(aa == ""){
                         console.log(url)
                         xhr.open("GET", url);
@@ -177,7 +180,10 @@
                         if( xhr.readyState == 4 && xhr.status == 200 ){
                             $('#dataArea').html(selectData(xhr.responseText)) 
                         }
-
+                        if(xhr.responseText == ""){
+                            $('#dataArea').html('<h2>無該筆資料</h2>') 
+                            $('#dataArea').css({'color': 'red'}) 
+                        }
                     }
                     }else{
                        $('#dataArea').html('<h2>請重新輸入統一編號</h2>') 
@@ -188,10 +194,21 @@
 
                 })
 
+                $("#dataArea").on('click', "#delete", function(){
+                    var x = $(this).parent().parent().index()
+                    console.log($('.Accounting_NO:eq('+ x +')').text())
+                    
+                })
+
+                $("#dataArea").on('click', "#update", function(){
+                    var x = $(this).parent().parent().index()
+                    console.log('aaa')
+                    
+                })
 
                 function selectDataAll(text){
                     var json = JSON.parse(text);
-                    var jsonData = '<table class="table table-striped">';
+                    var jsonData = '<table class="table table-striped" >';
                         jsonData += '<thead> <tr>'
                         jsonData += '<th scope="col">統一編號</th>'   
                         jsonData += '<th scope="col">公司名稱</th>'   
@@ -206,14 +223,14 @@
                         for(var x in json){
                             var company = json[x]
                             jsonData += "<tr>"
-                            jsonData += '<th scope="row">' + company.business_Accounting_NO + '</th>'
+                            jsonData += '<th scope="row" class="Accounting_NO">' + company.business_Accounting_NO + '</th>'
                             jsonData += '<th scope="row">' + company.company_Name + '</th>'
                             jsonData += '<th scope="row">' + company.capital_Stock_Amount + '</th>'
                             jsonData += '<th scope="row">' + company.responsible_Name + '</th>'
                             jsonData += '<th scope="row">' + company.company_Location + '</th>'
-                            jsonData += '<td><button style="border: none;" id="update"><i class="fas fa-edit" style="font-size: 1.5em;"></i></button></td>'
-                            jsonData += '<td><button style="border: none;" id="delete"><i class="fas fa-trash-alt" style="font-size: 1.5em;"></i></button></td>'   
-                            jsonData += "</tr>"
+                            jsonData += '<th ><button style="border: none;" id="update"><i  class="fas fa-edit" style="font-size: 1.5em;"></i></button></th>'
+                            jsonData += '<th ><button style="border: none;" id="delete"><i  class="fas fa-trash-alt" style="font-size: 1.5em;"></i></button></th>'   
+                            jsonData += "</th>"
                         }
                         jsonData += "</tbody>"
                         jsonData += "</table>"

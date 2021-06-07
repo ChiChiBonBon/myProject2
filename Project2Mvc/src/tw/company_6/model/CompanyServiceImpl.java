@@ -33,4 +33,22 @@ public class CompanyServiceImpl implements CompanyService{
 	public Company_6 select(String accNo) {
 		return companyDao.select(accNo);
 	}
+
+	@Override
+	public boolean insert(Company_6 bean) {
+		
+		return companyDao.insert(bean);
+	}
+
+	@Override
+	public boolean update(Company_6 bean) {
+		
+		return companyDao.update(bean);
+	}
+
+	@Override
+	public boolean delete(String accNo) {
+		
+		return companyDao.delete(accNo);
+	}
 }
