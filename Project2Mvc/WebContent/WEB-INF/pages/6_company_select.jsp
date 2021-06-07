@@ -133,9 +133,9 @@
                         </div>
                         <hr>
                         <!-- 資料內容 -->
-                        <div class="content mt-5 col-6">
+                        <div class="content mt-5 row">
                             
-                            <div id="dataArea"></div>
+                            <div class="col-12"  id="dataArea"></div>
                             
                         </div>
                     </div>
@@ -156,33 +156,40 @@
                 $("#select").on('click', function(){
                     var aa = $('#search').val();
                     var xhr =  new XMLHttpRequest();
-                    var url = './companyController'
+                    var url = './companyController/'
                               
                     if(aa == ""){
                         console.log(url)
                         xhr.open("GET", url);
                         xhr.send();
+                        xhr.onreadystatechange = function(){
+                        if( xhr.readyState == 4 && xhr.status == 200 ){
+                            $('#dataArea').html(selectDataAll(xhr.responseText)) 
+                        }
+
+                    }
                     }else if( !isNaN(aa)){
-                        url = url + "?" + aa;
-                         console.log(url)
+                        url = url + aa;
+                        console.log(url)
                         xhr.open("GET", url);
                         xhr.send();
-                    }else{
-                       $('#dataArea').html('<h2>請重新輸入統一編號</h2>') 
-                       $('#dataArea').css({'color': 'red'}) 
-                    }
-                  
-                    xhr.onreadystatechange = function(){
+                        xhr.onreadystatechange = function(){
                         if( xhr.readyState == 4 && xhr.status == 200 ){
                             $('#dataArea').html(selectData(xhr.responseText)) 
                         }
 
                     }
+                    }else{
+                       $('#dataArea').html('<h2>請重新輸入統一編號</h2>') 
+                       $('#dataArea').css({'color': 'red'}) 
+                    }
+                  
+                    
 
                 })
 
 
-                function selectData(text){
+                function selectDataAll(text){
                     var json = JSON.parse(text);
                     var jsonData = '<table class="table table-striped">';
                         jsonData += '<thead> <tr>'
@@ -212,6 +219,35 @@
                         jsonData += "</table>"
                     return jsonData;
                 }
+
+                function selectData(text){
+                    var company = JSON.parse(text);
+                    var jsonData = '<table class="table table-striped">';
+                        jsonData += '<thead> <tr>'
+                        jsonData += '<th scope="col">統一編號</th>'   
+                        jsonData += '<th scope="col">公司名稱</th>'   
+                        jsonData += '<th scope="col">資本總額</th>'   
+                        jsonData += '<th scope="col">代表人姓名</th>'   
+                        jsonData += '<th scope="col">公司所在地</th>'   
+                        jsonData += '<th scope="col">Udpate</th>'   
+                        jsonData += '<th scope="col">Delete</th>'   
+                        jsonData +=  "</tr></thead>"                   
+                        
+                        
+                        jsonData += "<tr>"
+                        jsonData += '<th scope="row">' + company.business_Accounting_NO + '</th>'
+                        jsonData += '<th scope="row">' + company.company_Name + '</th>'
+                        jsonData += '<th scope="row">' + company.capital_Stock_Amount + '</th>'
+                        jsonData += '<th scope="row">' + company.responsible_Name + '</th>'
+                        jsonData += '<th scope="row">' + company.company_Location + '</th>'
+                        jsonData += '<td><button style="border: none;" id="update"><i class="fas fa-edit" style="font-size: 1.5em;"></i></button></td>'
+                        jsonData += '<td><button style="border: none;" id="delete"><i class="fas fa-trash-alt" style="font-size: 1.5em;"></i></button></td>'   
+                        jsonData += "</tr>"
+                        
+                        jsonData += "</tbody>"
+                        jsonData += "</table>"
+                    return jsonData;
+                } 
 
             })
         </script>

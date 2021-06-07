@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.company_6.bean.Company_6;
-import tw.company_6.model.CompanyDao;
+import tw.company_6.model.CompanyDaoImpl;
 import tw.company_6.model.CompanyService;
+import tw.company_6.model.CompanyServiceImpl;
 
 @Controller
 public class CompanyController {
