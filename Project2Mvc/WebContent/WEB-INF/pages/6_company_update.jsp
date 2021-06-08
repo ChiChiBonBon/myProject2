@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%-- <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %> --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 
@@ -11,9 +11,11 @@
 
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href="<c:url value='/css/bootstrap.min.css' />" type="text/css" />
+
     <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel='stylesheet' href="<c:url value='/css/dashboard.css' />" type="text/css" />
+
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
@@ -119,7 +121,8 @@
                 <div class="container mt-5">
                     <!-- Table one -->
                     <!-- 表單 -->
-                    <form:form action="..." method="POST" modelAttribute="bean">
+                    <c:url var="addUrl" value="/companyUpdate"/>
+                    <form:form action="${addUrl}" method="POST" modelAttribute="bean">
                         <div id="formData">
                             <div class="row row-cols-1 row-cols-lg-2">
                                 <div class="col mb-3">
@@ -163,7 +166,7 @@
                             </div>
                             <div class="col-2 d-grid">
                                 
-                                <a href="./company"><button type="button" class="btn btn-outline-secondary" id="insert">返回前頁</button></a>
+                                <a href="<c:url value='/company' />"><button type="button" class="btn btn-outline-secondary" id="insert">返回前頁</button></a>
                                 
                             </div>
                         </div>
@@ -173,10 +176,12 @@
         </div>
     </div>
 
-
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/jquery-3.6.0.js"></script>
-    <script src="./js/company_6.js"></script>
+    
+    
+    
+    <script src="<c:url value='/js/bootstrap.bundle.min.js' />"></script>
+    <script src="<c:url value='/js/jquery-3.6.0.js' />"></script>
+    <script src="<c:url value='/js/company_6.js' />"></script>
     <script>
         $(function () {
 

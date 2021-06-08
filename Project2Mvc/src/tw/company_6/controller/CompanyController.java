@@ -41,7 +41,7 @@ public class CompanyController {
 		return "6_company_insert";
 	}
 	
-	@GetMapping("/companyUpdateController/{accNo}")
+	@GetMapping(value = "/companyUpdateController/{accNo}" )
 	public String mainUpdate(@PathVariable String accNo, Model m) {
 		Company_6 bean = service.select(accNo);
 		m.addAttribute("bean", bean);
@@ -68,6 +68,22 @@ public class CompanyController {
 			return "";
 		}
 		boolean resultBean = service.insert(bean);
+		System.out.println(resultBean);
+		System.out.println(bean);
+		if(resultBean) {			
+			m.addAttribute("cAcc", bean.getBusiness_Accounting_NO());
+		}else {
+			m.addAttribute("cAcc", "新增失敗");
+		}
+		return "6_company_select"; 
+	}
+	
+	@PostMapping(value = "/companyUpdate", produces = "text/plain; charset=UTF-8")
+	public String update(@ModelAttribute Company_6 bean, BindingResult result, Model m) {
+		if(result.hasErrors()) {
+			return "";
+		}
+		boolean resultBean = service.update(bean);
 		System.out.println(resultBean);
 		System.out.println(bean);
 		if(resultBean) {			

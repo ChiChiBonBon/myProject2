@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%-- <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %> --%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
     <!doctype html>
     <html lang="en">
 
@@ -212,8 +213,8 @@
                     var x = $(this).parent().parent().index()
                     var y = $('.Accounting_NO:eq('+ x +')').text()
                     console.log(y)
-                    var confirmAnswer = confirm("Are you sure want to delete 統一編號: "+ y +"?");
-                    window.location = './companyUpdateController/' + y
+                    var confirmAnswer = confirm("Are you sure want to update 統一編號: "+ y +"?");
+                    window.location.href = "./companyUpdateController/" + y
                     
 
                 })
