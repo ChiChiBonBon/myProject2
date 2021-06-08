@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-2 d-grid">
                                 
-                                <a href="./companyInsert"><button type="button" class="btn btn-outline-primary" id="insert">新增資料</button></a>
+                                <a href="./companyInsertController"><button type="button" class="btn btn-outline-primary" id="insert">新增資料</button></a>
                                 
                             </div>
                         </div>
@@ -196,14 +196,26 @@
 
                 $("#dataArea").on('click', "#delete", function(){
                     var x = $(this).parent().parent().index()
-                    console.log($('.Accounting_NO:eq('+ x +')').text())
+                    var y = $('.Accounting_NO:eq('+ x +')').text()
+                    console.log(y)
+                    var confirmAnswer = confirm("Are you sure want to delete 統一編號: "+ y +"?");
                     
+                    if(confirmAnswer){
+                        var xhr =  new XMLHttpRequest();
+                        var url = './companyController/' + y
+                        
+
+                    }
                 })
 
                 $("#dataArea").on('click', "#update", function(){
                     var x = $(this).parent().parent().index()
-                    console.log('aaa')
+                    var y = $('.Accounting_NO:eq('+ x +')').text()
+                    console.log(y)
+                    var confirmAnswer = confirm("Are you sure want to delete 統一編號: "+ y +"?");
+                    window.location = './companyUpdateController/' + y
                     
+
                 })
 
                 function selectDataAll(text){
