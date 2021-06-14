@@ -1,6 +1,8 @@
 package tw.util;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -35,6 +37,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		return new Filter[] {characterEncodingFilter};
 	}
 	
-	
+	@Override
+    protected void customizeRegistration(Dynamic registration) {
+        // additional configuration, here for MultipartConfig
+        super.customizeRegistration(registration);
+        MultipartConfigElement multipartConf = new MultipartConfigElement("", 200000L, -1L, 0);
+        registration.setMultipartConfig(multipartConf);
+    }
 	
 }

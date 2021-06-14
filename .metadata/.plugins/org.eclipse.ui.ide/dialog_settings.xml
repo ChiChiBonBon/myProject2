@@ -16,9 +16,10 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\Student\Documents\GitHub\MyProject2\Project2Mvc"/>
+			<item value="C:\Users\Student\Documents\GitHub\MyProject2\Servers"/>
 			<item value="C:\Project_mid\myProject2\Servers"/>
 			<item value="C:\Project_mid\myProject2\Project2Mvc"/>
-			<item value="C:\Users\Student\Documents\GitHub\MyProject2\Servers"/>
 			<item value="C:\Users\Student\Documents\GitHub\MyProject2\Project2"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
