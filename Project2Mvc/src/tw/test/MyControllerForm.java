@@ -25,21 +25,21 @@ public class MyControllerForm {
 			Model m,
 			@RequestParam(name = "account") String account,
 			@RequestParam String pwd,
-			@RequestParam String memo,
-			@RequestParam String gen,
-			@RequestParam String[] hobby,
-			@RequestParam String[] city,
+//			@RequestParam String memo,
+//			@RequestParam String gen,
+//			@RequestParam String[] hobby,
+//			@RequestParam String[] city,
 			@RequestParam MultipartFile upload
 			) {
 		
 		System.out.println(account);
 		System.out.println(pwd);
-		System.out.println(memo);
-		System.out.println(gen);
-		System.out.println(hobby);
-		System.out.println(hobby[0]);
-		System.out.println(city);
-		System.out.println(city[0]);
+//		System.out.println(memo);
+//		System.out.println(gen);
+//		System.out.println(hobby);
+//		System.out.println(hobby[0]);
+//		System.out.println(city);
+//		System.out.println(city[0]);
 		System.out.println(upload);
 	
 		
