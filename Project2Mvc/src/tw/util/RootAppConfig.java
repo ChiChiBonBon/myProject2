@@ -57,6 +57,8 @@ public class RootAppConfig {
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
+		System.out.println("-----初始化-----");
+		System.out.println(sessionFactory);
 		return txManager;
 	}
 }

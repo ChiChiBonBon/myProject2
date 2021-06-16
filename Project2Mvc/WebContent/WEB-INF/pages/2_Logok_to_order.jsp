@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="en">
 
@@ -37,8 +39,7 @@
         font-size: 3.5rem;
       }
     }
-
-    
+   
 
   </style>
 
@@ -114,42 +115,20 @@
 
       <!-- 內容 -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <form action="checklogin"  method="POST">
-    	
-          <fieldset>
-          <legend>測試帳號申請</legend>
-           <div>
-             <label for="stock_ID">證券測試戶:</label>
-            <input type="text" id="stock_ID" name="stock_ID">
-          </div>
+        <form action="order" method="POST">
+         
+          <label for="">證券測試戶:${stock_ID}</label>
+          <br>
+          <label for="">使用者帳號:${user_account}</label>
+          <br>
+          <label for="">使用者密碼:${user_password}</label>
+          <br>
+          <label for="">申請測試帳號完成</label>
           
           <div>
-             <label for="user_account">使用者帳號:</label>
-            <input type="text" id="user_account" name="user_account">
+             <input  type="submit" value="立即下單">
           </div>
-          
-          <div>
-             <label for="user_password">使用者密碼:</label>
-            <input type="text" id="user_password" name="user_password">
-          </div>
-          </fieldset>
-           
-          <div>
-             <input  type="submit" value="送出申請">
-          </div>
-       
-          </form>
-
-       
-        
-
-
-        
-
-
-
-
-
+      </form>
 
       </main>
 
@@ -160,7 +139,6 @@
 
 
   <script src="./js/bootstrap.bundle.min.js"></script>
-  
 
 
 </body>
