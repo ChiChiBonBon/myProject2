@@ -157,7 +157,7 @@
                     
                     if(confirmAnswer){
                         var xhr =  new XMLHttpRequest();
-                        var url = './companyController/' + y
+                        var url = "<c:url value='/companyController/'/>" + y
                         xhr.open("DELETE", url);
                         xhr.send();
                         xhr.onreadystatechange = function(){
@@ -171,9 +171,14 @@
                 $("#dataArea").on('click', "#update", function(){
                     var x = $(this).parent().parent().index()
                     var y = $('.Accounting_NO:eq('+ x +')').text()
+                    console.log(x)
                     console.log(y)
                     var confirmAnswer = confirm("Are you sure want to update 統一編號: "+ y +"?");
-                    window.location.href = "./companyUpdateController/" + y
+                    
+                    if(confirmAnswer){
+                        window.location.href = "<c:url value='/companyUpdateController/'/>" + y
+                    }
+                    
                     
 
                 })
@@ -211,7 +216,7 @@
 
                 function selectData(text){
                     var company = JSON.parse(text);
-                    var jsonData = '<table class="table table-striped">';
+                    var jsonData = '<table class="table table-striped" >';
                         jsonData += '<thead> <tr>'
                         jsonData += '<th scope="col">統一編號</th>'   
                         jsonData += '<th scope="col">公司名稱</th>'   
@@ -224,7 +229,7 @@
                         
                         
                         jsonData += "<tr>"
-                        jsonData += '<th scope="row">' + company.business_Accounting_NO + '</th>'
+                        jsonData += '<th scope="row" class="Accounting_NO">' + company.business_Accounting_NO + '</th>'
                         jsonData += '<th scope="row">' + company.company_Name + '</th>'
                         jsonData += '<th scope="row">' + company.capital_Stock_Amount + '</th>'
                         jsonData += '<th scope="row">' + company.responsible_Name + '</th>'
