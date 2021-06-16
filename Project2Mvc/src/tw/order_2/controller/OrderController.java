@@ -24,7 +24,6 @@ import tw.order_2.model.Account;
 import tw.order_2.model.AccountDAO;
 import tw.order_2.model.OrderBean;
 import tw.order_2.model.OrderBeanDAO;
-import tw.order_2.model.OrderBeanDAOable;
 import tw.order_2.model.OrderService;
 import tw.order_2.model.OrderServiceable;
 
@@ -38,6 +37,7 @@ public class OrderController {
 	
 	@Autowired
 	private AccountDAO   accountDao   ;
+	@Autowired
 	private OrderBeanDAO orderBeanDao ;
 	private OrderService orderService ;
 	
@@ -96,9 +96,9 @@ public class OrderController {
 		System.out.println("--------");
 		System.out.println(order_list);
 		System.out.println("--------");
-		OrderBeanDAO aaa = new OrderBeanDAO();
-		aaa.insertOrder(order_list);
-		//orderBeanDao.insertOrder(order_list);
+//		OrderBeanDAO aaa = new OrderBeanDAO();
+//		aaa.insertOrder(order_list);
+		orderBeanDao.insertOrder(order_list);
 		//orderService.insertOrder(order_list);
 		
 		return "2_Order" ;

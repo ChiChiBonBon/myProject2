@@ -2,6 +2,5 @@ eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/pages/2_Login.jsp=UTF-8
 encoding//src/tw/order_2/model/OrderBean.java=UTF-8
 encoding//src/tw/order_2/model/OrderBeanDAO.java=UTF-8
-encoding//src/tw/order_2/model/OrderBeanDAOable.java=UTF-8
 encoding//src/tw/order_2/model/OrderService.java=UTF-8
 encoding//src/tw/order_2/model/OrderServiceable.java=UTF-8

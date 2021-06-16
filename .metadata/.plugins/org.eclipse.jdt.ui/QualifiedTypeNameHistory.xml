@@ -43,7 +43,6 @@
     <fullyQualifiedTypeName name="tw.order_2.model.AccountDAO"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.lang.Module"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
@@ -54,4 +53,5 @@
     <fullyQualifiedTypeName name="tw.order_2.model.OrderServiceable"/>
     <fullyQualifiedTypeName name="tw.order_2.model.OrderService"/>
     <fullyQualifiedTypeName name="tw.order_2.model.OrderBeanDAO"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 </qualifiedTypeNameHistroy>
