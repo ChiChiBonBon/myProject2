@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -35,6 +36,13 @@ public class WebAppConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/pages/css/");
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/pages/js/");
 		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/pages/images/");
+	}
+	
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setDefaultEncoding("UTF-8");
+		return multipartResolver;
 	}
 	
 }

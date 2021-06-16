@@ -42,7 +42,9 @@ public class MyControllerForm {
 //		System.out.println(city[0]);
 		System.out.println(upload);
 	
-		
+		// 存圖片
+		String fileName = upload.getOriginalFilename();
+		System.out.println(fileName);
 	
 	}
 	
