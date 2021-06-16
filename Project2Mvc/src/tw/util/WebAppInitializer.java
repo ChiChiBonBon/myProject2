@@ -47,11 +47,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 //        registration.setMultipartConfig(multipartConf);
 //    }
 	
-	@Bean
-	public CommonsMultipartResolver multipartResolver() {
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setDefaultEncoding("UTF-8");
-		return multipartResolver;
-	}
+	
 	
 }

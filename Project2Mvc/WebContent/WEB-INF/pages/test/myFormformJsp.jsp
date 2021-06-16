@@ -12,13 +12,16 @@
 	
 	<c:url var="addUrl" value="/formPrint" />
     <form:form action="${addUrl}" method="POST" modelAttribute="myBeanX">
-		帳號: 	<form:input type="text" path="id"/>
+		帳號: 	<form:input type="text" path="id"/> 
 		密碼: 	<form:input type="password" path="str" /> 
-		
+			<br>
 			<br>
 			<input type="submit" value="送出"  />
 			<input type="reset" value="清除"  />
 	</form:form>
+	<hr>
+	<hr>
+	
 
 </body>
 </html>

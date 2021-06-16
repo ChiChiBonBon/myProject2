@@ -38,6 +38,11 @@ public class WebAppConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/pages/images/");
 	}
 	
-	
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setDefaultEncoding("UTF-8");
+		return multipartResolver;
+	}
 	
 }
