@@ -28,3 +28,25 @@
 5月 13, 2021 12:07:07.738 [10912:10540:0513/120707.737:ERROR:usb_descriptors.cc(160)] Device descriptor parsing error.
 5月 13, 2021 12:07:07.738 [10912:10540:0513/120707.737:ERROR:device_event_log_impl.cc(214)] [12:07:07.737] USB: usb_device_win.cc:93 Failed to read descriptors from \\?\usb#vid_046d&pid_c077#6&3a6a4df7&0&3#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
 5月 13, 2021 12:07:07.751 [10912:10540:0513/120707.751:ERROR:device_event_log_impl.cc(214)] [12:07:07.751] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+
+6月 12, 2021 18:44:40.811 NEW SESSION
+6月 12, 2021 18:44:40.811 [3840:8788:0612/184440.805:ERROR:device_event_log_impl.cc(214)] [18:44:40.806] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 18:44:40.813 [3840:8788:0612/184440.810:ERROR:device_event_log_impl.cc(214)] [18:44:40.810] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+6月 12, 2021 18:44:42.486 [3840:13012:0612/184442.482:ERROR:get_updates_processor.cc(255)] PostClientToServerMessage() failed during GetUpdates with error 2
+6月 12, 2021 20:29:51.371 [12952:13176:0612/202951.371:ERROR:device_event_log_impl.cc(214)] [20:29:51.370] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 20:29:51.375 [12952:13176:0612/202951.373:ERROR:device_event_log_impl.cc(214)] [20:29:51.373] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+
+6月 12, 2021 20:36:38.262 NEW SESSION
+6月 12, 2021 20:36:38.262 [8320:5392:0612/203638.261:ERROR:device_event_log_impl.cc(214)] [20:36:38.261] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 20:36:38.266 [8320:5392:0612/203638.264:ERROR:device_event_log_impl.cc(214)] [20:36:38.264] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+6月 12, 2021 20:37:47.210 [12040:7376:0612/203747.209:ERROR:device_event_log_impl.cc(214)] [20:37:47.209] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 20:37:47.215 [12040:7376:0612/203747.212:ERROR:device_event_log_impl.cc(214)] [20:37:47.212] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+6月 12, 2021 20:38:23.863 [3504:13320:0612/203823.863:ERROR:device_event_log_impl.cc(214)] [20:38:23.863] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 20:38:23.866 [3504:13320:0612/203823.864:ERROR:device_event_log_impl.cc(214)] [20:38:23.864] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 20:38:23.868 [3504:13320:0612/203823.866:ERROR:device_event_log_impl.cc(214)] [20:38:23.866] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+6月 12, 2021 20:39:41.721 [3976:13664:0612/203941.720:ERROR:device_event_log_impl.cc(214)] [20:39:41.721] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 20:39:41.727 [3976:13664:0612/203941.723:ERROR:device_event_log_impl.cc(214)] [20:39:41.724] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+6月 12, 2021 21:06:27.658 [7756:13124:0612/210627.658:ERROR:device_event_log_impl.cc(214)] [21:06:27.657] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 21:06:27.664 [7756:13124:0612/210627.662:ERROR:device_event_log_impl.cc(214)] [21:06:27.661] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.
+6月 12, 2021 21:07:11.93 [8084:12584:0612/210711.093:ERROR:device_event_log_impl.cc(214)] [21:07:11.093] USB: usb_device_handle_win.cc:1058 Failed to read descriptor from node connection: 連結到系統的某個裝置失去作用。 (0x1F)
+6月 12, 2021 21:07:11.99 [8084:12584:0612/210711.096:ERROR:device_event_log_impl.cc(214)] [21:07:11.095] Bluetooth: bluetooth_adapter_winrt.cc:1072 Getting Default Adapter failed.

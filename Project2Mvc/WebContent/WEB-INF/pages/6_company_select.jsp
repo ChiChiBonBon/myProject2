@@ -204,13 +204,8 @@
                     if(confirmAnswer){
                         var xhr =  new XMLHttpRequest();
                         var url = './companyController/' + y
-                        xhr.open("DELETE", url);
-                        xhr.send();
-                        xhr.onreadystatechange = function(){
-                            if( xhr.readyState == 4 && xhr.status == 200 ){
-                                $('#dataArea').html(selectDataAll(xhr.responseText)) 
-                            }
-                        }
+                        
+
                     }
                 })
 

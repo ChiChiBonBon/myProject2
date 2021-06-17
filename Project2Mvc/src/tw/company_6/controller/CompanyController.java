@@ -48,7 +48,7 @@ public class CompanyController {
 		return "6_company_update";
 	} 
 	
-	
+//	----------------------------------------------------------
 	
 	@GetMapping(value = "/companyController")
 	public @ResponseBody List<Company_6> selectAll() {
