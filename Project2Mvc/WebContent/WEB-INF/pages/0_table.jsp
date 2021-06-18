@@ -40,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="<c:url value='/company'/>">
+          <a class="nav-link" href="<c:url value='/company'/>">
             <span class="me-1"><i class="fas fa-building"></i></span>
             公司資料
           </a>
