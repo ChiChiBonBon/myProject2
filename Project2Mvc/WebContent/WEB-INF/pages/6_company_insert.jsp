@@ -11,9 +11,9 @@
 
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href="<c:url value='/css/bootstrap.min.css' />" type="text/css" /> 
     <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel='stylesheet' href="<c:url value='/css/dashboard.css' />" type="text/css" />
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
@@ -69,14 +69,44 @@
 			<%@include file="/WEB-INF/pages/0_table.jsp" %>
 
             <!-- 選項內容 -->
-            <main class="col-md-9 ms-sm-auto col-lg-11 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="container mt-5">
                     <!-- Table one -->
                     <!-- 表單 -->
                     <form:form action="companyController" method="POST" modelAttribute="bean">
                         <div id="formData">
-                            <!-- 套版 -->
-							<%@include file="/WEB-INF/pages/0_table.jsp" %>
+                            <div class="row row-cols-1 row-cols-lg-2">
+                                <div class="col mb-3">
+                                    <label for="" class="form-label">統一編號</label>
+                                    <form:input type="text" class="form-control" id="business_Accounting_NO"
+                                        placeholder="" path="business_Accounting_NO" value=""
+                                        property="business_Accounting_NO"></form:input>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="" class="form-label">公司名稱</label>
+                                    <form:input type="text" class="form-control" id="company_Name" placeholder=""
+                                        path="company_Name" value="" property="company_Name"></form:input>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="" class="form-label">資本總額(登記資本額)</label>
+                                    <form:input type="text" class="form-control" id="capital_Stock_Amount"
+                                        placeholder="" path="capital_Stock_Amount" value=""
+                                        property="s_capital_Stock_Amount"></form:input>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="" class="form-label">代表人姓名</label>
+                                    <form:input type="text" class="form-control" id="responsible_Name" placeholder=""
+                                        path="responsible_Name" value="" property="responsible_Name"></form:input>
+                                </div>
+                            </div>
+                            <div class="row row-cols-1 row-cols-lg-1">
+                                <div class="col mb-3">
+                                    <label for="" class="form-label">公司所在地</label>
+                                    <form:input type="text" class="form-control" id="company_Location" placeholder=""
+                                        path="company_Location" value="" property="company_Location"></form:input>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- 選項 -->
                         <div class="item_CRUD mt-5 row">

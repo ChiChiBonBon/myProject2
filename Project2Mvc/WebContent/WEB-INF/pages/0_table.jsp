@@ -4,13 +4,13 @@
     <div class="position-sticky pt-3">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="./0_dashboard.html">
+          <a class="nav-link" aria-current="page" href="<c:url value='/'/>">
             <span class="me-1"><i class="fas fa-tachometer-alt"></i></span>
             Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./login_1.jsp">
+          <a class="nav-link" href="<c:url value='/....'/>">
             <span class="me-1"><i class="fas fa-sign-in-alt"></i></span>
             會員
           </a>
@@ -22,19 +22,19 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./Post_3.jsp">
+          <a class="nav-link" href="<c:url value='/.....'/>">
             <span class="me-1"><i class="far fa-comment-dots"></i></span>
             討論
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./Buy_4.html">
+          <a class="nav-link" href="<c:url value='/.....'/>">
             <span class="me-1"><i class="fas fa-dice-d20"></i></span>
             抽籤
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./CourseManagement5.html">
+          <a class="nav-link" href="<c:url value='/.....'/>">
             <span class="me-1"><i class="fas fa-clipboard-list"></i></span>
             課程
           </a>

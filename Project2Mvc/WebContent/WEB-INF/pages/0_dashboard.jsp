@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <!doctype html>
 <html lang="en">
 
@@ -7,15 +10,16 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.82.0">
-  <title>Dashboard Template · Bootstrap v5.0</title>
+  <title>Dashboard</title>
 
-  <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
+   <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
    <!-- Bootstrap core CSS -->
-   <link href="./css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="./css/dashboard.css" rel="stylesheet">
-  <!-- fontawesome -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+   <link rel='stylesheet' href="<c:url value='/css/bootstrap.min.css' />" type="text/css" /> 
+   <!-- Custom styles for this template -->
+   <link rel='stylesheet' href="<c:url value='/css/dashboard.css' />" type="text/css" />
+   <!-- fontawesome -->
+   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
 
   <style>
     .bd-placeholder-img {
@@ -69,7 +73,7 @@
   <div class="container-fluid">
     <div class="row">
       <!-- 套版 -->
-			<%@include file="/WEB-INF/pages/0_table.jsp" %>
+	  <%@include file="/WEB-INF/pages/0_table.jsp" %>
 
       <!-- 內容 -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -78,7 +82,7 @@
         
 
         <div class="Hpic">
-          <img src="./images/homepage.png" alt="">
+          <img src="<c:url value='/images/homepage.png' />" alt="">
         </div>
         
 
@@ -86,7 +90,7 @@
 
 
         <div class="pic">
-          <img src="./images/pekoHead.png" alt="" >
+          <img src="<c:url value='/images/pekoHead.png' />" alt="" >
         </div>
 
         
@@ -96,8 +100,9 @@
   </div>
   
 
-  <script src="./js/bootstrap.bundle.min.js"></script>
+  
 
+  <script src="<c:url value='/js/bootstrap.bundle.min.js' />"></script>
 
 </body>
 
