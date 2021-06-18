@@ -64,54 +64,8 @@
         <div></div>
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                    <div class="position-sticky pt-3">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="./0_dashboard.html">
-                                    <span class="me-1"><i class="fas fa-tachometer-alt"></i></span>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./login_1.jsp">
-                                    <span class="me-1"><i class="fas fa-sign-in-alt"></i></span>
-                                    會員
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./Login.jsp">
-                                    <span class="me-1"><i class="fas fa-funnel-dollar"></i></span>
-                                    下單
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./Post_3.jsp">
-                                    <span class="me-1"><i class="far fa-comment-dots"></i></span>
-                                    討論
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./Buy_4.html">
-                                    <span class="me-1"><i class="fas fa-dice-d20"></i></span>
-                                    抽籤
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./CourseManagement5.html">
-                                    <span class="me-1"><i class="fas fa-clipboard-list"></i></span>
-                                    課程
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="./company">
-                                    <span class="me-1"><i class="fas fa-building"></i></span>
-                                    公司資料
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <!-- 套版 -->
+				<%@include file="/WEB-INF/pages/0_table.jsp" %>
 
                 <!-- 選項內容 -->
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -203,7 +157,7 @@
                     
                     if(confirmAnswer){
                         var xhr =  new XMLHttpRequest();
-                        var url = './companyController/' + y
+                        var url = "<c:url value='/companyController/'/>" + y
                         xhr.open("DELETE", url);
                         xhr.send();
                         xhr.onreadystatechange = function(){
@@ -217,9 +171,14 @@
                 $("#dataArea").on('click', "#update", function(){
                     var x = $(this).parent().parent().index()
                     var y = $('.Accounting_NO:eq('+ x +')').text()
+                    console.log(x)
                     console.log(y)
                     var confirmAnswer = confirm("Are you sure want to update 統一編號: "+ y +"?");
-                    window.location.href = "./companyUpdateController/" + y
+                    
+                    if(confirmAnswer){
+                        window.location.href = "<c:url value='/companyUpdateController/'/>" + y
+                    }
+                    
                     
 
                 })
@@ -257,7 +216,7 @@
 
                 function selectData(text){
                     var company = JSON.parse(text);
-                    var jsonData = '<table class="table table-striped">';
+                    var jsonData = '<table class="table table-striped" >';
                         jsonData += '<thead> <tr>'
                         jsonData += '<th scope="col">統一編號</th>'   
                         jsonData += '<th scope="col">公司名稱</th>'   
@@ -270,7 +229,7 @@
                         
                         
                         jsonData += "<tr>"
-                        jsonData += '<th scope="row">' + company.business_Accounting_NO + '</th>'
+                        jsonData += '<th scope="row" class="Accounting_NO">' + company.business_Accounting_NO + '</th>'
                         jsonData += '<th scope="row">' + company.company_Name + '</th>'
                         jsonData += '<th scope="row">' + company.capital_Stock_Amount + '</th>'
                         jsonData += '<th scope="row">' + company.responsible_Name + '</th>'
