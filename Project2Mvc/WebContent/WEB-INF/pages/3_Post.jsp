@@ -13,7 +13,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.82.0">
-<TITLE>Post_3</TITLE>
+<TITLE>3_Post</TITLE>
 
 <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
 <!-- Bootstrap core CSS -->
@@ -184,7 +184,7 @@ thead {
 				</article>
 				<br>
 				<center>
-				<a href = "./index"><button type="button">返回前頁</button></a>
+				<a href = "./3_index"><button type="button">返回前頁</button></a>
 				</center>
 				<br>
 				<hr>
@@ -238,65 +238,92 @@ thead {
                           segment += "<input type='text' hidden>"
                           segment += "<p>留言內容:</p><p></p>"
                           segment += "<p>" + commentall.comment
-                          segment += "</p><br><br><br>"
-                          segment += "<p>留言時間:2020-01-01</p>"
+                          segment += "</p><br><br>"
+//                           segment += "<p>留言時間:2020-01-01</p>"
                           segment += "<p><a href='" + tmp + comments[x].comment_num + "'><input type='button' value='編輯留言' id='btnUpd'></a>"
                           segment += "</p><hr>"
                         }
                         segment += "</form>";
                         var dataArea01 = document.getElementById("dataArea01");
                         dataArea01.innerHTML = segment;
-
-                    
-                    var comment_numValue = segment.getElementById("comment_num").value;
-                    var commentValue = document.getElementById("comment").value;
-                    var dataArea02 = document.getElementById('dataArea02');
-                    var divResult = segment.getElementById('resultMsg');
-                    
-//                     var xhr = new XMLHttpRequest();
-//                     xhr.open("GET", "<c:url value='/commentBoard2/" + comment_num + "' />", true);
-//                     xhr.send();
-                    
-//                     xhr.onreadystatechange = function () {
-//                       if (xhr.readyState == 4 && xhr.status == 200) {
-//                         var commentBean = JSON.parse(xhr.responseText);
-//                         comment_numValue = commentBean.comment_num;
-//                         commentValue = commentBean.comment;
-//                       }
-//                     }
-
-
-                    btnIns.onclick = function () {
-                      if (!commentValue) {
-                        div.innerHTML = "<font color='blue' size='-1'>請輸入內容...</font>";
-                        return;
-                      }
-                      var xhr1 = new XMLHttpRequest();
-                      var url = "<c:url value = '/commentBoard2 '/>";
-                      xhr1.open("POST", url);
-                      var jsonComment = {
-                        "comment_num": comment_numValue,
-                        "comment": commentValue
-                      }
-                      xhr1.setRequestHeader("Content-Type", "application/json");
-                      xhr1.send(JSON.stringify(jsonComment));
-
-                      xhr1.onreadystatechange = function () {
-                        // 伺服器請求完成
-                        if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201)) {
-                          result = JSON.parse(xhr1.responseText);
-                          if (result.fail) {
-                            divResult.innerHTML = "<font color='red' >" + result.fail + "</font>";
-                          } else if (result.success) {
-                            divResult.innerHTML = "<font color='GREEN'>" + result.success + "</font>";
-                          }
-                        }
-                      }
-                    };
-
+						console.log(segment);
+						return segment;
                       }
                     }
 
+                    btnIns.onclick = function () {
+                        var btnIns = document.getElementById("btnIns");
+                        var btnUpd = document.getElementById("btnUpd");
+                        
+                        //秀出全部留言
+                        var xhr0 = new XMLHttpRequest();
+                        var url = "/Project2Mvc/commentBoardJSON ";
+                        xhr0.open("GET", url);
+                        xhr0.send();
+                      xhr0.onreadystatechange = function () {
+                        if (xhr0.readyState == 4 && xhr0.status == 200) {
+                          var comments = JSON.parse(xhr0.responseText);
+                          var segment = " <form>";
+                          for (var x in comments) {
+                            tmp = "<c:url value='/updatecomment/' />";
+                            var commentall = comments[x]
+                            segment += "<input type='hidden'>"
+                            segment += "<div id='resultMsg' style='height: 18px; font-weight: bold;'></div>"
+                            segment += "<p id='comment_num'>" + commentall.comment_num + "樓:</p><br><br>"
+                            segment += "<input type='text' hidden>"
+                            segment += "<p>留言內容:</p><p></p>"
+                            segment += "<p>" + commentall.comment
+                            segment += "</p><br><br>"
+//                             segment += "<p>留言時間:2020-01-01</p>"
+                            segment += "<p><a href='" + tmp + comments[x].comment_num + "'><input type='button' value='編輯留言' id='btnUpd'></a>"
+                            segment += "</p><hr>"
+                          }
+                          segment += "</form>";
+                          var dataArea01 = document.getElementById("dataArea01");
+                          dataArea01.innerHTML = segment;
+
+                          var aa = $('#dataArea01').val();
+                          console.log(aa)
+
+                          var comment_numValue = document.getElementById("comment_num").value;
+                          var commentValue = document.getElementById("comment").value;
+                          var dataArea02 = document.getElementById('dataArea02');
+                          var divResult = document.getElementById('resultMsg');
+
+                         
+                            if (!commentValue) {
+                              div.innerHTML = "<font color='blue' size='-1'>請輸入內容...</font>";
+                              return;
+                            }
+                            var xhr1 = new XMLHttpRequest();
+                            var url = "<c:url value = '/commentBoard2 '/>";
+                            xhr1.open("POST", url);
+                            var jsonComment = {
+                              "comment_num": comment_numValue,
+                              "comment": commentValue
+                            }
+                            xhr1.setRequestHeader("Content-Type", "application/json");
+                            xhr1.send(JSON.stringify(jsonComment));
+
+                            xhr1.onreadystatechange = function () {
+                              // 伺服器請求完成
+                              if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201)) {
+                                result = JSON.parse(xhr1.responseText);
+                                if (result.fail) {
+                                  divResult.innerHTML = "<font color='red' >" + result.fail + "</font>";
+                                } else if (result.success) {
+                                  divResult.innerHTML = "<font color='GREEN'>" + result.success + "</font>";
+                                  document.location.href="<c:url value='/commentBoard' />";
+                                }
+                              }
+                            }
+                          
+
+
+                        }
+                      }
+
+                    }
 				}
 				</script>            
 

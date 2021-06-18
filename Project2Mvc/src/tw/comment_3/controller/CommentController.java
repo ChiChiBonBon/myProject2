@@ -28,7 +28,7 @@ public class CommentController {
 	
 	//跳轉頁面===============================================================================================
 	//進入首頁
-	@GetMapping(value = "/index")
+	@GetMapping(value = "/3_index")
 	public String HomePage() {
 		return "3_index";
 	}
@@ -58,9 +58,7 @@ public class CommentController {
 //		return "3_PostCOL";
 //	}
 	
-	
-	
-	
+
 	
 	
 	//ajax===================================================================================================

@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Company</title>
+<title>3_update</title>
 
 <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
 <!-- Bootstrap core CSS -->
@@ -181,6 +181,7 @@ p {
                                                     divResult.innerHTML = "<font color='red' >" + result.fail + "</font>";
                                                 } else if (result.success) {
                                                     divResult.innerHTML = "<font color='GREEN'>" + result.success + "</font>";
+                                                    window.location.href = "<c:url value='/commentBoard'/>"
                                                 }
                                             }
                                         }
