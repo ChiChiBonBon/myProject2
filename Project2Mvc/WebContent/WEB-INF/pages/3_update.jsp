@@ -47,8 +47,72 @@ p {
 		font-size: 3.5rem;
 	}
 }
-</style>
 
+                  td,
+                  th {
+                    border: 2px solid black;
+                    text-align: center;
+                  }
+
+                  .s1 {
+                    width: 550px;
+                    margin: 10px;
+                  }
+
+                  .s3 {
+                    width: 100px;
+                    float: left;
+                    text-align: right;
+                  }
+
+                  * {
+                    margin: 0px;
+                    padding: 0px;
+                  }
+
+                  h1 {
+                    margin-bottom: 20px;
+                  }
+
+                  .div {
+                    border: 5px solid black;
+                    padding: 30px;
+                    width: 800px;
+                    margin: auto;
+                    margin-top: 30px;
+                    border-radius: 40px;
+                    background-color: white;
+                  }
+
+                  figure {
+                    border: 3px solid black;
+                    float: left;
+                    padding: 10px;
+                    margin-right: 30px;
+                    width: 326px;
+                    font-size: 0.5em;
+                    margin-bottom: 30px;
+                  }
+
+                  p {
+                    line-height: 1.7;
+                    margin-bottom: 15px;
+                    text-align: justify;
+                  }
+
+                  article {
+                    display: block;
+                  }
+
+                  thead {
+                    color: brown;
+                    text-transform: capitalize;
+                  }
+</style>
+                <script>
+                  document.createElement("article")
+                  document.createElement("figure")
+                </script>
 
 </head>
 

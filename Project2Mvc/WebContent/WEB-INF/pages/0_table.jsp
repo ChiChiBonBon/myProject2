@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value='/.....'/>">
+          <a class="nav-link" href="<c:url value='/3_index'/>">
             <span class="me-1"><i class="far fa-comment-dots"></i></span>
             討論
           </a>
