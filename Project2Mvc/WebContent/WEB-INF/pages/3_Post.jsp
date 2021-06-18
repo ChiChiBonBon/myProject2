@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page import="tw.comment_3.bean.Comment_board_3" %>
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+        <%@ page import="java.util.*" %>
+          <%@ page import="java.text.SimpleDateFormat" %>
 
 <!doctype html>
 <html lang="en">
@@ -9,22 +11,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author"
-	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Hugo 0.82.0">
-<TITLE>3_Post</TITLE>
+<title>3_Post</title>
 
 <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
 <!-- Bootstrap core CSS -->
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' href="<c:url value='/css/bootstrap.min.css' />"
+	type="text/css" />
+
+
 <!-- Custom styles for this template -->
-<link href="./css/dashboard.css" rel="stylesheet">
+<link rel='stylesheet' href="<c:url value='/css/dashboard.css' />"
+	type="text/css" />
+
 <!-- fontawesome -->
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
 <style>
+p {
+	display: inline-block;
+	font-size: 16px;
+}
+
 .bd-placeholder-img {
 	font-size: 1.125rem;
 	text-anchor: middle;
@@ -43,71 +51,72 @@
 	}
 }
 
-td, th {
-	border: 2px solid black;
-	text-align: center;
-}
+                  td,
+                  th {
+                    border: 2px solid black;
+                    text-align: center;
+                  }
 
-.s1 {
-	width: 550px;
-	margin: 10px;
-}
+                  .s1 {
+                    width: 550px;
+                    margin: 10px;
+                  }
 
-.s3 {
-	width: 100px;
-	float: left;
-	text-align: right;
-}
+                  .s3 {
+                    width: 100px;
+                    float: left;
+                    text-align: right;
+                  }
 
-* {
-	margin: 0px;
-	padding: 0px;
-}
+                  * {
+                    margin: 0px;
+                    padding: 0px;
+                  }
 
-h1 {
-	margin-bottom: 20px;
-}
+                  h1 {
+                    margin-bottom: 20px;
+                  }
 
-.div {
-	border: 5px solid black;
-	padding: 30px;
-	width: 800px;
-	margin: auto;
-	margin-top: 30px;
-	border-radius: 40px;
-	background-color: white;
-}
+                  .div {
+                    border: 5px solid black;
+                    padding: 30px;
+                    width: 800px;
+                    margin: auto;
+                    margin-top: 30px;
+                    border-radius: 40px;
+                    background-color: white;
+                  }
 
-figure {
-	border: 3px solid black;
-	float: left;
-	padding: 10px;
-	margin-right: 30px;
-	width: 326px;
-	font-size: 0.5em;
-	margin-bottom: 30px;
-}
+                  figure {
+                    border: 3px solid black;
+                    float: left;
+                    padding: 10px;
+                    margin-right: 30px;
+                    width: 326px;
+                    font-size: 0.5em;
+                    margin-bottom: 30px;
+                  }
 
-p {
-	line-height: 1.7;
-	margin-bottom: 15px;
-	text-align: justify;
-}
+                  p {
+                    line-height: 1.7;
+                    margin-bottom: 15px;
+                    text-align: justify;
+                  }
 
-article {
-	display: block;
-}
+                  article {
+                    display: block;
+                  }
 
-thead {
-	color: brown;
-	text-transform: capitalize;
-}
+                  thead {
+                    color: brown;
+                    text-transform: capitalize;
+                  }
 </style>
-<script>
-      document.createElement("article")
-      document.createElement("figure")
-</script>
 
+                <script>
+                  document.createElement("article")
+                  document.createElement("figure")
+                </script>
 </head>
 
 <body>
@@ -132,36 +141,8 @@ thead {
 	<div></div>
 	<div class="container-fluid">
 		<div class="row">
-			<nav id="sidebarMenu"
-				class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-				<div class="position-sticky pt-3">
-					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link" aria-current="page"
-							href="#"> <span class="me-1"><i
-									class="fas fa-tachometer-alt"></i></span> Dashboard
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="me-1"><i class="fas fa-sign-in-alt"></i></span> Login
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="me-1"><i class="fas fa-funnel-dollar"></i></span> 下單
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="Post_3.jsp">
-								<span class="me-1"><i class="far fa-comment-dots"></i></span> 討論
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="me-1"><i class="fas fa-dice-d20"></i></span> 抽籤
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="me-1"><i class="fas fa-clipboard-list"></i></span> 課程
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="me-1"><i class="fas fa-building"></i></span> 公司資料
-						</a></li>
-					</ul>
-				</div>
-			</nav>
-
+			<!-- 套版 -->
+			<%@include file="/WEB-INF/pages/0_table.jsp"%>
 			<!-- 內容 -->
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
