@@ -14,18 +14,13 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
---><!-- The contents of this file will be loaded for each web application -->
-<Context>
+--><!-- The contents of this file will be loaded for each web application --><Context>
 	<Resource name="jdbc/myProject2" auth="Container" type="javax.sql.DataSource"
                maxTotal="100" maxIdle="30" maxWaitMillis="10000"
                username="sa" password="manager" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-               url="jdbc:sqlserver://127.0.0.1:1433;databaseName=Project2"/> 
+               url="jdbc:sqlserver://127.0.0.1:1433;databaseName=Project2"/>
      
-	<Resource name="connectSQLServerJdbc/OrderService"
-		type="javax.sql.DataSource" auth="Container" username="user01"
-		password="P@ssw0rd"
-		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		url="jdbc:sqlserver://localhost:1433;databaseName=HiberDB" />          
+	<Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="connectSQLServerJdbc/OrderService" password="P@ssw0rd" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;databaseName=LeonPower" username="user01"/>      
 	<!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
