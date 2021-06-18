@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
 @Repository("accountDao")
 @Transactional
 public class AccountDAO {
@@ -17,16 +16,13 @@ public class AccountDAO {
 	@Qualifier("sessionFactory")
     private SessionFactory sessionFactory;
 	
-	
 	public  Account insert(Account user) {
 		Session session = sessionFactory.getCurrentSession();
-		Account insertaccount = session.get(Account.class, user.getStock_ID());
-		
-		if(insertaccount==null) {
+			user.getStock_ID();
+			user.getUser_account();
+			user.getUser_password();
 			session.save(user);
 			return user;
-		}
-		return null;
 	}
 	
 	
@@ -35,7 +31,7 @@ public class AccountDAO {
 	public boolean checkLogin(Account users) {
 		Session session = sessionFactory.getCurrentSession();
 		
-		String hqlstr = "from Account where username=:user and userpwd=:pwd";
+		String hqlstr = "from member where mber_acc=:user and mber_psd=:pwd";
 		Query<Account> query = session.createQuery(hqlstr, Account.class);
 		
 		query.setParameter("user", users.getUser_account());

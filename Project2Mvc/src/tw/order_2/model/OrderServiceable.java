@@ -2,17 +2,12 @@ package tw.order_2.model;
 
 import java.util.ArrayList;
 
-public interface OrderServiceable {
-	//�s�W�q��
-	public void insertOrder(ArrayList<OrderBean> orderlist);
-	
-	//�R���q��
-	public void deleteOrder(String delorder_ID);
+import org.springframework.ui.Model;
 
-	//�d�߭q��
-	ArrayList<OrderBean> selectOrder(String stock_ID);
-	
-	//�ק�q��
-	public void updateOrder(String change_ID,String change_price,String change_quant,String change_total);
+public interface OrderServiceable {
+	public  void insertOrder(OrderBean order_list,Model m);
+	public  void deleteOrder(String delorder_ID,OrderBean order_list,Model m);
+	String selectOrder(OrderBean order_list,Model m);
+	public  void updateOrder(String change_ID,String change_price,String change_quant,String change_total,OrderBean order_list,Model m);
 
 }
