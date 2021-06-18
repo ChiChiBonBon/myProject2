@@ -10,12 +10,12 @@
         <title>Company</title>
 
         <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
-        <!-- Bootstrap core CSS -->
-        <link href="./css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="./css/dashboard.css" rel="stylesheet">
-        <!-- fontawesome -->
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+	    <!-- Bootstrap core CSS -->
+	    <link rel='stylesheet' href="<c:url value='/css/bootstrap.min.css' />" type="text/css" /> 
+	    <!-- Custom styles for this template -->
+	    <link rel='stylesheet' href="<c:url value='/css/dashboard.css' />" type="text/css" />
+	    <!-- fontawesome -->
+	    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
         <style>
             p {
@@ -68,7 +68,7 @@
 				<%@include file="/WEB-INF/pages/0_table.jsp" %>
 
                 <!-- 選項內容 -->
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <main class="col-md-9 ms-sm-auto col-lg-11 px-md-4">
                     <div class="container">           
                         <div class="item_CRUD mt-5 row">
                             <div class="col-2 d-grid">
@@ -105,9 +105,9 @@
         </div>
 
 
-        <script src="./js/bootstrap.bundle.min.js"></script>
-        <script src="./js/jquery-3.6.0.js"></script>
-        <!-- <script src="./js/company_6.js"></script> -->
+	    <script src="<c:url value='/js/bootstrap.bundle.min.js' />"></script>
+	    <script src="<c:url value='/js/jquery-3.6.0.js' />"></script>
+<%--     <script src="<c:url value='/js/company_6.js' />"></script> --%>
         <script>
             $(function () {
 
