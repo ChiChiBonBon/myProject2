@@ -26,7 +26,7 @@ public class Account {
 	private String user_password;
 
 	
-//�غc�l�a? �ݽT�{	
+//建構子
 	public Account() {
 	}
 

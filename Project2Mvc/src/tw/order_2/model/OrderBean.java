@@ -8,12 +8,12 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity 
-@Table(name = "order_list")
+@Table(name = "order_list_2")
 @Component("order_list")
 public class OrderBean implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 
-//�ʸ�
+//封裝
 		@Id 
 		@Column(name = "order_ID")
 		private String order_ID ;
@@ -43,16 +43,16 @@ public class OrderBean implements java.io.Serializable{
 		private String trans_cond ;        //ROD=0,IOC=1,FOK=2
 		
 		@Column(name = "trans_sellorbuy")
-		private String trans_sellorbuy ;   //��X=0,�R�i=1,�^��=2
+		private String trans_sellorbuy ;   //賣出=0,買進=1,回補=2
 		
 		@Column(name = "trans_way")
-		private String trans_way ;         //�R=0,�{=1,��=2,��=3
+		private String trans_way ;         //沖=0,現=1,資=2,券=3
 		
 		@Column(name = "trans_stats")
-		private String trans_stats ;       //�R��=0,�w����=1,�e�U��=2,�����=3
+		private String trans_stats ;       //刪單=0,預約單=1,委託單=2,成交單=3
 		
 		@Column(name = "trans_report")
-		private String trans_report ;      //������� 0,�w�����\ 1,�w������ 2,�e�U���\ 3,�e�U���� 4,�������� 5,�������� 6
+		private String trans_report ;      //交易取消=0,預約成功=1,預約失敗=2,委託成功=3,委託失敗=4,部分成交=5,完全成交=6
 
 		
 //get & set

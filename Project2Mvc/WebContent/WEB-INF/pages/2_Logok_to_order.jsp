@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="en">
 
@@ -16,6 +19,7 @@
   <link href="./css/dashboard.css" rel="stylesheet">
   <!-- fontawesome -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  
 
   <style>
     .bd-placeholder-img {
@@ -35,16 +39,8 @@
         font-size: 3.5rem;
       }
     }
+   
 
-    .pic{
-      position:absolute;
-      right:0px;
-      bottom:0px
-    }
-    .Hpic{
-      margin-top: 20%;    
-      margin-left: 20%;
-    }
   </style>
 
 
@@ -69,32 +65,31 @@
   <div class="container-fluid">
     <div class="row">
       <!-- 套版 -->
-			<%@include file="/WEB-INF/pages/0_table.jsp" %>
-
+      <%@include file="/WEB-INF/pages/0_table.jsp" %>
       <!-- 內容 -->
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main class="col-md-9 ms-sm-auto col-lg-11 px-md-4">
+        <form action="order" method="POST">
+         
+          <label for="">證券測試戶:${stock_ID}</label>
+          <br>
+          <label for="">使用者帳號:${user_account}</label>
+          <br>
+          <label for="">使用者密碼:${user_password}</label>
+          <br>
+          <label for="">申請測試帳號完成</label>
+          
+          <div>
+             <input  type="submit" value="立即下單">
+          </div>
+      </form>
 
-        
-        
-
-        <div class="Hpic">
-          <img src="./images/homepage.png" alt="">
-        </div>
-        
-
-
-
-
-        <div class="pic">
-          <img src="./images/pekoHead.png" alt="" >
-        </div>
-
-        
       </main>
-    </div>
 
+
+
+    </div>
   </div>
-  
+
 
   <script src="./js/bootstrap.bundle.min.js"></script>
 
