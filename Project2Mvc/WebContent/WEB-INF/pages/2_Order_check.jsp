@@ -170,7 +170,6 @@
               <input  name="trans_stats"     id="trans_stats"     type="hidden" value ="<%= trans_stats    %>">
               <input  name="trans_report"    id="trans_report"    type="hidden" value ="<%= trans_report   %>">
         </form>
-        
         <button id="delete_order" onclick="cancel_order(this.id),history.back()"> 取消</button>
 
       </main>

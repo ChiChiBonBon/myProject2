@@ -18,7 +18,7 @@
 <body>
 <!-- 接收所有訂單資料 -->  
      <%
-     	String order_list = (String) session.getAttribute("order_list"); 
+     	String order_list = (String) session.getAttribute("order_lists"); 
      %>
 
 <!-- DataTable -->  
@@ -37,7 +37,7 @@
                 <h4 class="modal-title" id="myModalLabel">修改xxx訂單編號:</h4>
             </div>
             <div class="modal-body">
-            	<form action="OrderDAO_Impl" method="POST" >
+            	<form action="<c:url value = '/order/controller/update'/>" method="POST" >
           			<div class="mb-3">
             			<label for="recipient-name" class="col-form-label">價格:</label>
             			<input type="text" class="form-control" id="change_price" name="change_price">
@@ -68,19 +68,16 @@
      
      
 <!-- 傳送要修改訂單編號 -->
-      
-     <form action="delete_order.jsp"  method="post" id ="passForm"> 
+
+     <form action="<c:url value = '/order/delete'/>"  method="post" id ="passForm"> 
      	<input id = 'delorder_ID' type = 'hidden' name="delorder_ID"> 
      </form> 
-     
-     
-     
-     
-    
+        
 <!-- 訂單資料送去JS -->
 <script type="text/javascript"> 
-    var order_list = ${order_list}  ; 
-</script> 
+    var order_list = <%=order_list%>  ; 
+</script>
+ 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

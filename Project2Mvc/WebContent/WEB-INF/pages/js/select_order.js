@@ -44,18 +44,9 @@ $(document).ready(function() {
  		change_quant = $("#change_quant").val();
  		document.getElementById('change_total').value = change_price * change_quant *1000;
  	});
-//測試是否讀取到此js
-	alert("顯示此字串");
+
  	
- 	
- 	
- 	
-    
-    
-    
-    
-    
-    
+
     
 } );
 

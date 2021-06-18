@@ -15,12 +15,13 @@
 
   <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
   <!-- Bootstrap core CSS -->
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="<c:url value = '/css/bootstrap.min.css'/>" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="./css/dashboard.css" rel="stylesheet">
+  <link href="<c:url value = '/css/dashboard.css'/>" rel="stylesheet">
   <!-- fontawesome -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-  <link rel="stylesheet" href="./css/Order_style.css">
+  <link rel="stylesheet" href="<c:url value = '/css/Order_style.css'/>">
+  
   
 
   <style>
@@ -145,7 +146,7 @@
           <iframe id="Top5"  src="https://s.yimg.com/nb/tw_stock_frontend/scripts/StxChart/StxChart.9d11dfe155.html?sid=2330" style="width: 560px; height: 380px; border-width: 0;"></iframe>
       </span>
   
-      <form action="order/check" method="Post" onsubmit="return check_form(this.id);">
+      <form action="<c:url value = '/order/check'/>" method="Post" onsubmit="return check_form(this.id);">
       <fieldset name="fieldset">
           <legend></legend>
           <span>
@@ -218,7 +219,6 @@
   
 	  <div class="content">
     	 <div class="header">訂單查詢</div> 
-    		 <!--    <c:url var="selecturl" value="/order/select"/>       -->
       		 <iframe src="<c:url value='/order/select' />" width="100%" frameborder="0"> id="select_firame"></iframe>
  	  </div>
 					
@@ -231,9 +231,10 @@
   </div>
 
 
-  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="<c:url value = '/js/bootstrap.bundle.min.js'/>"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="./js/Order.js" async defer></script>
+  <script src="<c:url value = '/js/Order.js'/>" async defer></script>
+
 
 
 </body>

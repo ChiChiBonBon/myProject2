@@ -24,28 +24,23 @@ import tw.order_2.model.Account;
 import tw.order_2.model.AccountDAO;
 import tw.order_2.model.OrderBean;
 import tw.order_2.model.OrderBeanDAO;
-import tw.order_2.model.OrderBeanDAOable;
 import tw.order_2.model.OrderService;
 import tw.order_2.model.OrderServiceable;
 
 @Controller
 @EnableTransactionManagement
-@SessionAttributes(names = {"stock_ID", "user_account","user_password","order_list",
-							"com_ID","order_ID","order_price","order_quant","order_total","order_date","order_time",
-							"trans_cond","trans_way","trans_sellorbuy","trans_stats","trans_report"},
+@SessionAttributes(names = {"stock_ID", "user_account","user_password",
+							"com_ID","order_ID","order_price","order_quant","order_total","order_date","order_time","trans_cond","trans_way","trans_sellorbuy","trans_stats","trans_report",
+							"order_list","delorder_ID","order_lists",
+							"change_ID","change_price","change_quant","change_total"},
 				   types = {Account.class,OrderBean.class})
 public class OrderController {
 	
 	@Autowired
 	private AccountDAO   accountDao   ;
-	private OrderBeanDAO orderBeanDao ;
-	private OrderService orderService ;
+	@Autowired
+	private OrderServiceable orderService ;
 	
-	
-	@ModelAttribute(name="order_list")
-	public OrderBean orderinsert() {
-		return new OrderBean();
-	}
 		
 	@GetMapping("/testlogin")
     public String loadLoginPage() {
@@ -68,22 +63,13 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order/check")
-	public String loadCheckOrderPage(OrderBean order_list,Model m, SessionStatus status) {
-//		m.addAttribute("stock_ID"       ,order_list.getStock_ID()       );
-//		m.addAttribute("order_ID"       ,order_list.getOrder_ID()       );
-//		m.addAttribute("com_ID"         ,order_list.getCom_ID()         );
-//		m.addAttribute("order_price"    ,order_list.getOrder_price()    );
-//		m.addAttribute("order_quant"    ,order_list.getOrder_quant()    );
-//		m.addAttribute("order_total"    ,order_list.getOrder_total()    );
-//		m.addAttribute("order_date"     ,order_list.getOrder_date()     );
-//		m.addAttribute("order_time"     ,order_list.getOrder_time()     );
-//		m.addAttribute("trans_cond"     ,order_list.getTrans_cond()     );
-//		m.addAttribute("trans_way"      ,order_list.getTrans_way()      );
-//		m.addAttribute("trans_sellorbuy",order_list.getTrans_sellorbuy());
-//		m.addAttribute("trans_stats"    ,order_list.getTrans_stats()    );
-//		m.addAttribute("trans_report"   ,order_list.getTrans_report()   );
-		System.out.println(order_list);
+	public String loadCheckOrderPage(OrderBean order_list,Model m) {
 		return "2_Order_check" ;
+	}
+	
+	@PostMapping("/order/delete")
+	public String loadCheckDeletePage(OrderBean order_list,Model m) {
+		return "2_Order_delete" ;
 	}
 	
 	@GetMapping("/order/select")
@@ -92,18 +78,35 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order/controller/insert")
-	public String loadOrderService(OrderBean order_list){
-		System.out.println("--------");
-		System.out.println(order_list);
-		System.out.println("--------");
-		OrderBeanDAO aaa = new OrderBeanDAO();
-		aaa.insertOrder(order_list);
-		//orderBeanDao.insertOrder(order_list);
-		//orderService.insertOrder(order_list);
-		
+	public String loadOrderService(OrderBean order_list,Model m){
+		orderService.insertOrder(order_list,m);
 		return "2_Order" ;
-		
 	}
+	
+	@PostMapping("/order/controller/delete")
+	public String loadDeleteOrderService(String delorder_ID,OrderBean order_list,Model m){
+		orderService.deleteOrder(delorder_ID, order_list,m);
+		return "2_Order_select" ;
+	}
+	
+	@PostMapping("/order/controller/update")
+	public String loadUpdateOrderService(String change_ID,String change_price,String change_quant,String change_total,OrderBean order_list,Model m){
+		orderService.updateOrder(change_ID, change_price, change_quant, change_total, order_list, m);
+		return "2_Order_select" ;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
