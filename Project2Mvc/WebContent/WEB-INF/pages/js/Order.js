@@ -120,7 +120,7 @@ function change_odd(input){
 	var check = document.getElementById(input).value
 	
 	if(check == 1){
-		document.getElementById('oneorodd').innerText = 1,000 ;
+		document.getElementById('oneorodd').innerText = 1000 ;
 	}else{
 		document.getElementById('oneorodd').innerText = 1;
 	} 

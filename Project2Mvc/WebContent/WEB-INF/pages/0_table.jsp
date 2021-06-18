@@ -16,7 +16,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./Login.jsp">
+          <a class="nav-link" href="<c:url value='/testlogin'/>">
             <span class="me-1"><i class="fas fa-funnel-dollar"></i></span>
             下單
           </a>
