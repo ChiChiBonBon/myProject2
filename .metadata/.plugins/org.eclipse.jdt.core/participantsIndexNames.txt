@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-C:\Project_mid\myProject2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\915139509.index
-\Project2Mvc\src
