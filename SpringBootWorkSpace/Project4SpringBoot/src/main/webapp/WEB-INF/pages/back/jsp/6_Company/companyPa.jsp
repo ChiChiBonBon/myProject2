@@ -57,10 +57,11 @@
                             <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
                         </a>
                     </div>
-                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
-                            href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
-                        below were created to extend this theme past the default utility classes built into Bootstrap's
-                        framework.</p>
+                    <p class="mb-4"> 
+                        資料來源:  <a href="https://mops.twse.com.tw/mops/web/t163sb06"> 公開資料觀測站</a> 
+                        <br>   
+                        可以將資料匯入進來，目前未檢查資料真偽，以後更新。 2021/6/30 
+                    </p>
                     
                     
                     <!-- Table -->
