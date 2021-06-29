@@ -17,6 +17,8 @@ public class ProfitAnalysis_6 {
 	Double net_Income_Margin;      // 稅前純益率(%)
 	Double net_Profit_Margin;      // 稅後純益率(%)
 	
+	
+	
 	public Integer getCompany_ID() {
 		return company_ID;
 	}
@@ -59,7 +61,9 @@ public class ProfitAnalysis_6 {
 	public void setNet_Profit_Margin(Double net_Profit_Margin) {
 		this.net_Profit_Margin = net_Profit_Margin;
 	}
-	
+
+
+
 	@Override
 	public String toString() {
 		return "ProfitAnalysis [company_ID=" + company_ID + ", company_Name=" + company_Name + ", income=" + income

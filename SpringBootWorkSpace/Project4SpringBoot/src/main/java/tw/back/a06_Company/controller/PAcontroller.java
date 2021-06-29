@@ -27,8 +27,8 @@ public class PAcontroller {
 	public PAservice paService;
 	
 	@GetMapping("/pa")
-	public String companyController() {
-		return "back/jsp/6_Company/company";
+	public String companyPaMain() {
+		return "back/jsp/6_Company/companyPa";
 	}
 	
 	

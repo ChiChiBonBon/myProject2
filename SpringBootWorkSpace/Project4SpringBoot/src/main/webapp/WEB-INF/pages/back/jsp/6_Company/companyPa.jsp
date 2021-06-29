@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CP - 公司介紹</title>
+    <title>PA - 基本面</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -191,7 +191,7 @@
         $(document).ready(function(){
             
             // Sidebar
-            $("#CP_Company, #CP").addClass('active')
+            $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
 
             // Select All Data
@@ -202,13 +202,27 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     $('#dataAreaX').html(showAll(xhr.responseText))
                     $('.tableX').attr('id', 'dataTable')
-                    $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
-                    $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
-                    $.getScript("<c:url value='/back/js/demo/datatables-demo.js' />");
+                    
+                    // $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
+                    // $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
+                    // $.getScript("<c:url value='/back/js/demo/datatables-demo.js' />");
+                    var scriptsToLoad = [
+                        "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
+                        "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+                        "<c:url value='/back/js/demo/datatables-demo.js' />"
+                    ]; 
+
+                    scriptsToLoad.forEach(function(src) {
+                        var script = document.createElement('script');
+                        script.src = src;
+                        script.async = false;
+                        document.body.appendChild(script);
+                    });
                 }
             }
 
-
+            
+            
 
             // Delete Data
             $('tbody').on('click', '#delete', function(){
@@ -346,6 +360,19 @@
 
             })
 
+            // Update Data
+            $('tbody').on('click', '#update', function(){
+                var x =  $(this).parent().parent().index()
+                var paID = $(".idX")[x].textContent
+                console.log(paID)
+                Swal.fire({
+                    template: '#my-update'+ paID
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        location.replace("<c:url value='/paUpdate/' />" + paID);                       
+                    }
+                })
+            })
             
             function showAll(text){
                 var beans = JSON.parse(text);
@@ -354,9 +381,9 @@
                 for(var x in beans){
                     var bean = beans[x]
                     var buttonX =
-                        `<span href="#" class="btn btn-warning btn-circle btn-sm">
+                        `<span href="#" class="btn btn-warning btn-circle btn-sm" id="update">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <template id="my-update`+x+`">
+                            <template id="my-update`+bean.company_ID+`">
                                 <swal-title>
                                 你確定要更新` + bean.company_ID +`?
                                 </swal-title>
