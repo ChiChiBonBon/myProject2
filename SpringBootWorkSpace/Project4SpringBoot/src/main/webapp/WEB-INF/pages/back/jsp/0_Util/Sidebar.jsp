@@ -35,9 +35,20 @@
 	</a></li>
 
 	<!-- Nav Item - 股票篩選器 Collapse Menu -->
-	<li class="nav-item"><a class="nav-link" href="<c:url value='/company' />"> <i
-			class="fas fa-building"></i> <span>股票篩選器</span>
-	</a></li>
+	<li class="nav-item" id="CP">
+		<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseCP"
+		aria-expanded="true" aria-controls="collapseCP" >
+			<i class="fas fa-building"></i>
+			<span>股票篩選器</span>
+		</a>
+		<div id="collapseCP" class="collapse" aria-labelledby="" data-parent="#accordionSidebar" >
+			<div class="bg-white py-2 collapse-inner rounded">
+				<!-- <h6 class="collapse-header">Custom Components:</h6> -->
+				<a class="collapse-item" href="cp_Company.html" id="CP_Company">公司介紹</a>
+				<a class="collapse-item" href="cards.html">基本面</a>
+			</div>
+		</div>
+	</li>
 
 	<!-- Nav Item - 下單 Collapse Menu -->
 	<li class="nav-item"><a class="nav-link" href="#"> <i
