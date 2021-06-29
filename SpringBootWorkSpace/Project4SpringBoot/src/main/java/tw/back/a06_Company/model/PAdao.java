@@ -34,6 +34,12 @@ public class PAdao {
 		return em.createQuery(sql).getResultList();
 	}
 	
+	public ProfitAnalysis_6 select(Integer company_ID) {
+		ProfitAnalysis_6 bean = em.find(ProfitAnalysis_6.class, company_ID);
+		return bean;
+	}
+	
+	
 	public Boolean deleteAll() {
 		Boolean result = false;
 		String sql = "delete from ProfitAnalysis_6";
@@ -59,6 +65,18 @@ public class PAdao {
 				result = false;
 			}
 		}
+		return result;
+	}
+	
+	public Boolean update(ProfitAnalysis_6 bean) {
+		Boolean result = true;
+		try {
+			em.merge(bean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		
 		return result;
 	}
 	

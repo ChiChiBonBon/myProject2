@@ -21,11 +21,19 @@ public class PAservice {
 		return padao.selectAll();
 	}
 	
+	public ProfitAnalysis_6 select(Integer company_ID) {
+		return padao.select(company_ID);
+	}
+	
 	public Boolean deleteAll() {
 		return padao.deleteAll();
 	}
 	
 	public Boolean delete(Integer company_ID) {
 		return padao.delete(company_ID);
+	}
+	
+	public Boolean update(ProfitAnalysis_6 bean) {
+		return padao.update(bean);
 	}
 }
