@@ -53,7 +53,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-1 text-gray-800">Company</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
                         </a>
                     </div>
@@ -222,7 +222,27 @@
                 }
             }
 
-            
+            // Download CSV
+            // $('#downloadCsv').on('click', function(){
+            //     console.log("Ready")
+            //     var xhr = new XMLHttpRequest();
+            //     xhr.open("GET", "<c:url value='/pa/downloadCsv' />", true);
+            //     xhr.send();
+            //     xhr.onreadystatechange = function() {
+            //         if (xhr.readyState == 4 && xhr.status == 200) {
+            //             console.log("OK")
+            //             if(!xhr.responseText){
+            //                 Swal.fire({
+            //                     // timer: 1500,
+            //                     icon: 'error',
+            //                     title: 'Oops...',
+            //                     text: 'Something went wrong!',
+            //                     // footer: '<a href="">Why do I have this issue?</a>'
+            //                 })
+            //             }
+            //         }
+            //     }
+            // })
             
 
             // Delete Data

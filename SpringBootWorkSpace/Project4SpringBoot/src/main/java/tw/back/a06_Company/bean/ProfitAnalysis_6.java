@@ -71,5 +71,10 @@ public class ProfitAnalysis_6 {
 				+ ", net_Income_Margin=" + net_Income_Margin + ", net_Profit_Margin=" + net_Profit_Margin + "]";
 	}
 	
+	public String toCsv() {
+		return company_ID + "," + company_Name + "," + income + "," + gross_Margin+ "," + 
+	           operating_Profit_Ratio + "," + net_Income_Margin + "," + net_Profit_Margin;
+	}
+	
 	
 }
