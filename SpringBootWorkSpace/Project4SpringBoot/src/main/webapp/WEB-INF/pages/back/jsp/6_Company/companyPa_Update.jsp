@@ -164,7 +164,8 @@
             // Sidebar
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
-
+			$("#dashboard").removeClass('active')
+			
             // confirm
             $('#submitButton').on('click', function(){
                 Swal.fire({

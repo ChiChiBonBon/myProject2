@@ -87,6 +87,13 @@
     <!-- Page level custom scripts -->
 <%--     <script src="<c:url value='/back/js/demo/chart-area-demo.js' />"></script> --%>
 <%--     <script src="<c:url value='/back/js/demo/chart-pie-demo.js' />"></script> --%>
+	<script>
+		$(function(){
+            // Sidebar
+            $("#dashboard").addClass('active')
+		})
+	</script>
+
 
 </body>
 

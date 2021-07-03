@@ -192,6 +192,7 @@
         $(document).ready(function(){
             
             // Sidebar
+            $("#dashboard").removeClass('active')
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
 
@@ -222,29 +223,7 @@
                 }
             }
 
-            // Download CSV
-            // $('#downloadCsv').on('click', function(){
-            //     console.log("Ready")
-            //     var xhr = new XMLHttpRequest();
-            //     xhr.open("GET", "<c:url value='/pa/downloadCsv' />", true);
-            //     xhr.send();
-            //     xhr.onreadystatechange = function() {
-            //         if (xhr.readyState == 4 && xhr.status == 200) {
-            //             console.log("OK")
-            //             if(!xhr.responseText){
-            //                 Swal.fire({
-            //                     // timer: 1500,
-            //                     icon: 'error',
-            //                     title: 'Oops...',
-            //                     text: 'Something went wrong!',
-            //                     // footer: '<a href="">Why do I have this issue?</a>'
-            //                 })
-            //             }
-            //         }
-            //     }
-            // })
             
-
             // Delete Data
             $('tbody').on('click', '#delete', function(){
                 var x =  $(this).parent().parent().index()
