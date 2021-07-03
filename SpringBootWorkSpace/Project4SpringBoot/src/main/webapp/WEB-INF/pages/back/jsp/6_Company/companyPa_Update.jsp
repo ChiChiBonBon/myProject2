@@ -74,30 +74,35 @@
                                     <label class="col-sm-2 col-form-label text-primary">營業收入<br>(百萬元)</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="範例: 120.5" id="income" value="${bean.income}">
+                                        <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">毛利率(%)</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control"  id="gross_Margin" value="${bean.gross_Margin}">
+                                        <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">營業利益率(%)</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="範例: 20.12" id="operating_Profit_Ratio" value="${bean.gross_Margin}">
+                                        <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">稅前純益率(%)</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="範例: -20.12" id="net_Income_Margin" value="${bean.gross_Margin}">
+                                        <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">稅後純益率(%)</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="範例: 20.12" id="net_Profit_Margin" value="${bean.gross_Margin}">
+                                        <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                             </div>
@@ -155,11 +160,12 @@
     <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
     <script>
         $(document).ready(function(){
-            
+
             // Sidebar
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
-
+			$("#dashboard").removeClass('active')
+			
             // confirm
             $('#submitButton').on('click', function(){
                 Swal.fire({
@@ -222,13 +228,46 @@
                                     // footer: '<a href="">Why do I have this issue?</a>'
                                 })
                             }
-
                         }
-                        
-                        
-
                     }
                 })
+            })
+
+            // Check Number
+            $('#income').on('change', function () {
+                if (isNaN($('#income').val())) {
+                    $('#income').addClass('is-invalid')
+                } else {
+                    $('#income').removeClass('is-invalid')
+                }
+            })
+            $('#gross_Margin').on('change', function () {
+                if (isNaN($('#gross_Margin').val())) {
+                    $('#gross_Margin').addClass('is-invalid')
+                } else {
+                    $('#gross_Margin').removeClass('is-invalid')
+                }
+            })
+            $('#operating_Profit_Ratio').on('change', function () {
+                if (isNaN($('#operating_Profit_Ratio').val())) {
+                    $('#operating_Profit_Ratio').addClass('is-invalid')
+                } else {
+                    $('#operating_Profit_Ratio').removeClass('is-invalid')
+                }
+            })
+            $('#net_Income_Margin').on('change', function () {
+                if (isNaN($('#net_Income_Margin').val())) {
+                    $('#net_Income_Margin').addClass('is-invalid')
+                } else {
+                    $('#net_Income_Margin').removeClass('is-invalid')
+                }
+            })
+            $('#net_Profit_Margin').on('change', function () {
+                if (isNaN($('#net_Profit_Margin').val())) {
+                    $('#net_Profit_Margin').addClass('is-invalid')
+                } else {
+                    $('#net_Profit_Margin').removeClass('is-invalid')
+                }
             })
 
         })
