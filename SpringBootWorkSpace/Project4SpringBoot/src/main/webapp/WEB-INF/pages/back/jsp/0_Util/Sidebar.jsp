@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion"
 	id="accordionSidebar">
 
@@ -51,9 +54,19 @@
 	</li>
 
 	<!-- Nav Item - 下單 Collapse Menu -->
-	<li class="nav-item"><a class="nav-link" href="#"> <i
-			class="fas fa-money-bill-wave"></i> <span>下單</span>
-	</a></li>
+	<li class="nav-item">
+			<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOD"
+				aria-expanded="true" aria-controls="collapseOD" >
+				<i class="fas fa-building"></i>
+				<span>股票下單</span>
+			</a>
+			<div id="collapseOD" class="collapse" aria-labelledby="" data-parent="#accordionSidebar" >
+				<div class="bg-white py-2 collapse-inner rounded">
+					<a class="collapse-item" href="<c:url value='/admin/login' />" id="back_auth">權限修改</a>
+					<a class="collapse-item" href="<c:url value='/admin/order' />" id="back_order">代客下單</a>
+				</div>
+			</div>
+	</li>
 
 	<!-- Nav Item - 抽籤 Collapse Menu -->
 	<li class="nav-item"><a class="nav-link" href="#"> <i
