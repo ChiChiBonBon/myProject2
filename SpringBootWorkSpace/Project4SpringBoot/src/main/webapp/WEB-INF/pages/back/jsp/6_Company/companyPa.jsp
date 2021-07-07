@@ -222,7 +222,7 @@
                     });
                 }
             }
-
+	
             
             // Delete Data
             $('tbody').on('click', '#delete', function(){
