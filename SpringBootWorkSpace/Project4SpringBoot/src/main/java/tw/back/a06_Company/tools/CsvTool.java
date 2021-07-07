@@ -29,7 +29,7 @@ public class CsvTool {
 		List<String> Lists = new ArrayList<String>();
 		
 		try (   InputStream is = multipartFile.getInputStream();
-				InputStreamReader isr = new InputStreamReader(is,"big5");
+				InputStreamReader isr = new InputStreamReader(is,"Big5_HKSCS");
 				BufferedReader br = new BufferedReader(isr);
 			) {
 
