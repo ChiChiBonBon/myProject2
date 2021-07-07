@@ -3,7 +3,7 @@
   <!-- ======= A04 Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-newsletter">
+    <div class="footer-newsletter mt-5">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
