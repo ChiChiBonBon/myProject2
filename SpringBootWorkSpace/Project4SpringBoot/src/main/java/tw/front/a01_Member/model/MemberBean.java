@@ -1,4 +1,4 @@
-package com.infotran.springboot.modal;
+package tw.front.a01_Member.model;
 
 import java.sql.Blob;
 import java.sql.Timestamp;
@@ -46,7 +46,9 @@ public class MemberBean {
 	private String cellphone;
 	
 	private String address;
+	
 	private String job;
+	
 	private String carrier;
 	private Timestamp registertime;
 	
@@ -61,8 +63,16 @@ public class MemberBean {
 	MultipartFile memberImage;
 	
 	private String mimeType;
-	private String member_status;
 	
+	@Column(unique = true)
+	private String pictureFile_name;
+	
+	@Column(unique = true)
+	private String member_stock_ID; 
+	private String member_quote;  
+	private String member_auth;
+	
+	private String member_status;
 	
 	
 	public Long getId() {
@@ -173,5 +183,30 @@ public class MemberBean {
 	public void setMemberImage(MultipartFile memberImage) {
 		this.memberImage = memberImage;
 	}
+	public String getMember_stock_ID() {
+		return member_stock_ID;
+	}
+	public void setMember_stock_ID(String member_stock_ID) {
+		this.member_stock_ID = member_stock_ID;
+	}
+	public String getMember_quote() {
+		return member_quote;
+	}
+	public void setMember_quote(String member_quote) {
+		this.member_quote = member_quote;
+	}
+	public String getMember_auth() {
+		return member_auth;
+	}
+	public void setMember_auth(String member_auth) {
+		this.member_auth = member_auth;
+	}
+	public String getPictureFile_name() {
+		return pictureFile_name;
+	}
+	public void setPictureFile_name(String pictureFile_name) {
+		this.pictureFile_name = pictureFile_name;
+	}
+
 }
 

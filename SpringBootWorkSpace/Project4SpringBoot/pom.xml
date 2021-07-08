@@ -17,16 +17,16 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-thymeleaf</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-thymeleaf</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -56,8 +56,15 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+
+		<!-- 產生特殊 string 的 lib -->
+		<dependency>
+			<groupId>com.aventrix.jnanoid</groupId>
+			<artifactId>jnanoid</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 	</dependencies>
-	
+
 
 	<build>
 		<plugins>
