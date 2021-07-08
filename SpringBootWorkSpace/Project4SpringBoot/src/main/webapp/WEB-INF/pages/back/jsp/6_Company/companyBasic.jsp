@@ -21,7 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value='/back/css/sb-admin-2.min.css' />" rel="stylesheet">
-
+    
     <!-- Custom styles for this page -->
     <link href="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.css' />" rel="stylesheet">
 
@@ -44,8 +44,7 @@
 
                 <!-- A02 Topbar -->
                 <%@include file="/WEB-INF/pages/back/jsp/0_Util/Topbar.jsp" %>
-				
-				
+								
 				<!-- 內容 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
