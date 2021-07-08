@@ -1,4 +1,4 @@
-package com.infotran.springboot.modal;
+package tw.back.a01_Member.model;
 
 import java.sql.Date;
 
