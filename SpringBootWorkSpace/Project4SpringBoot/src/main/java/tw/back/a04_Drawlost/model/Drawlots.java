@@ -1,5 +1,6 @@
 package tw.back.a04_Drawlost.model;
 
+
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.Set;
@@ -77,6 +78,7 @@ public class Drawlots {
 	private Set<SecuritiesAccount> securitiesAccountSet;
 	
 	@Column(name="companyLogo")
+
 	private Blob companyLogo;
 	
 	@Column(name="picturePath")

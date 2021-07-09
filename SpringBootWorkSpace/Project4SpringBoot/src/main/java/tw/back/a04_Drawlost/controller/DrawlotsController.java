@@ -15,5 +15,4 @@ public class DrawlotsController {
 	public String drawlotsLogin() {
 		return "back/jsp/4_Drawlost/logIn";
 	}
-	
 }
