@@ -69,7 +69,7 @@
 	</li>
 
 	<!-- Nav Item - 抽籤 Collapse Menu -->
-	<li class="nav-item"><a class="nav-link" href="#"> <i
+	<li class="nav-item"><a class="nav-link" href="<c:url value='/back/drawlots' />" > <i
 			class="fas fa-vote-yea"></i> <span>抽籤</span>
 	</a></li>
 
