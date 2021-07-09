@@ -21,7 +21,7 @@ public class SecuritiesAccount {
 	private Integer drawableAccountSN;
 	
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String securitiesAccountID;
+	private Long securitiesAccountID;
 	
     @Column(name = "drawStatus")
 	private Boolean drawStatus;
@@ -58,11 +58,11 @@ public class SecuritiesAccount {
 		this.drawableAccountSN = drawableAccountSN;
 	}
 
-	public String getSecuritiesAccountID() {
+	public Long getSecuritiesAccountID() {
 		return securitiesAccountID;
 	}
 
-	public void setSecuritiesAccountID(String securitiesAccountID) {
+	public void setSecuritiesAccountID(Long securitiesAccountID) {
 		this.securitiesAccountID = securitiesAccountID;
 	}
 

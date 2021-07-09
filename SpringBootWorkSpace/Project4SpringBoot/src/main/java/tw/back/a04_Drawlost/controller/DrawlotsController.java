@@ -11,4 +11,8 @@ public class DrawlotsController {
 		return "back/jsp/4_Drawlost/drawlotsInformation";
 	}
 	
+	@GetMapping(value = "/back/drawlots/login")
+	public String drawlotsLogin() {
+		return "back/jsp/4_Drawlost/logIn";
+	}
 }

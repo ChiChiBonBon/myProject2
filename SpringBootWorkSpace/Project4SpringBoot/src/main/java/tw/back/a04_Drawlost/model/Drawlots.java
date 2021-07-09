@@ -1,5 +1,7 @@
 package tw.back.a04_Drawlost.model;
 
+
+import java.sql.Blob;
 import java.sql.Date;
 import java.util.Set;
 
@@ -10,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "drawlots_7")
@@ -73,11 +78,60 @@ public class Drawlots {
 	private Set<SecuritiesAccount> securitiesAccountSet;
 	
 	@Column(name="companyLogo")
-	private byte[] companyLogo;
+
+	private Blob companyLogo;
 	
 	@Column(name="picturePath")
 	private String picturePath;
 	
+	@Transient
+	private MultipartFile mpf;
+	
+	@Column(name="mediaType")
+	private String mimeType;
+	
+	
+	
+	public Set<SecuritiesAccount> getSecuritiesAccountSet() {
+		return securitiesAccountSet;
+	}
+
+	public void setSecuritiesAccountSet(Set<SecuritiesAccount> securitiesAccountSet) {
+		this.securitiesAccountSet = securitiesAccountSet;
+	}
+
+	public Blob getCompanyLogo() {
+		return companyLogo;
+	}
+
+	public void setCompanyLogo(Blob companyLogo) {
+		this.companyLogo = companyLogo;
+	}
+
+	public String getPicturePath() {
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
+	}
+
+	public MultipartFile getMpf() {
+		return mpf;
+	}
+
+	public void setMpf(MultipartFile mpf) {
+		this.mpf = mpf;
+	}
+
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
 	public Integer getDrawLotsID() {
 		return drawLotsID;
 	}
