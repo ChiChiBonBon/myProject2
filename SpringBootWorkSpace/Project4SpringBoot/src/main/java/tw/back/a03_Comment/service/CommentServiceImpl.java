@@ -1,51 +1,56 @@
-//package tw.back.a03_Comment.service;
-//
-//import java.util.List;
-//
-//import javax.transaction.Transactional;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.EnableTransactionManagement;
-//
-//import tw.back.a03_Comment.dao.CommentDaoImpl;
-//import tw.back.a03_Comment.model.Comment_board_3;
-//
-//
-//@Service("socialService")
-//public class CommentServiceImpl{
-//
-//	public CommentServiceImpl() {
-//		System.out.println("---CommentServiceImpl------------------------------------");
-//	}
-//	
-//	@Autowired
-//	public CommentDaoImpl commentDao;
-//	
-//	
-//	@Override
-//	public Comment_board_3 findCommentByComment_num(Integer comment_num) {
-//		return socialDao.findCommentByComment_num(comment_num);
-//	}
-//
-//	@Override
-//	public List<Comment_board_3> findAllText() {
-//		return socialDao.findAllText();
-//	}
-//
-//	@Override
-//	public boolean insertComment(Comment_board_3 bean) {
-//		return socialDao.insertComment(bean);
-//	}
-//
-//	@Override
-//	public boolean deleteComment(Integer comment_num) {
-//		return socialDao.deleteComment(comment_num);
-//	}
-//
-//	@Override
-//	public boolean updateComment(Comment_board_3 bean) {
-//		return socialDao.updateComment(bean);
-//	}
-//
-//}
+package tw.back.a03_Comment.service;
+
+import java.util.Map;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import tw.back.a03_Comment.dao.CommentDaoImpl;
+import tw.back.a03_Comment.dao.PostDaoImpl;
+import tw.back.a03_Comment.model.Comment_board_3;
+import tw.back.a03_Comment.model.Post_board_3;
+
+
+@Service
+@Transactional
+public class CommentServiceImpl{
+
+	public CommentServiceImpl() {
+		System.out.println("---CommentServiceImpl------------------------------------");
+	}
+	
+	@Autowired
+	public CommentDaoImpl commentDao;
+	
+	@Autowired
+	public PostDaoImpl postdao;
+	
+	
+	public Comment_board_3 findCommentByComment_num(Integer comment_num) {
+		return commentDao.findCommentByComment_num(comment_num);
+	}
+
+	public Map<String, Object> findBypost_num(Integer postboard) {
+		System.out.println("service post_num = "+ postboard);
+		return commentDao.findBypost_num(postboard);
+	}
+	
+	// 關聯資料表=======================================
+	public boolean insertComment(Comment_board_3 bean) {
+		Post_board_3 postboard = postdao.findPostByPost_num(bean.getPostboard().getPost_num());
+		bean.setPostboard(postboard);
+		return commentDao.insertComment(bean);
+	}
+	// =================================================
+
+	public boolean deleteComment(Integer comment_num) {
+		return commentDao.deleteComment(comment_num);
+	}
+
+	public boolean updateComment(Comment_board_3 bean) {
+		return commentDao.updateComment(bean);
+	}
+
+}

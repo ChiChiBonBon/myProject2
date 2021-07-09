@@ -180,7 +180,6 @@ p {
 							placeholder="分享一下吧"></textarea>
 						<button NAME="INSERT" id="btnIns">送出</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<div id="dataArea02"></div>
 						<div id="dataArea01"></div>
 
 						<br>
@@ -268,7 +267,6 @@ p {
 
                           var comment_numValue = document.getElementById("comment_num").value;
                           var commentValue = document.getElementById("comment").value;
-                          var dataArea02 = document.getElementById('dataArea02');
                           var divResult = document.getElementById('resultMsg');
 
                          
