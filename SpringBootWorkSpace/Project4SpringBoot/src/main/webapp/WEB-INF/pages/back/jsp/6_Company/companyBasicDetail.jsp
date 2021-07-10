@@ -49,101 +49,104 @@
 				<!-- 內容 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    
+
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-1 text-gray-800">Company</h1>
-                        <a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
-                    </div>
-                    <p class="mb-4"> 
-                        資料來源:  <a href="https://mops.twse.com.tw/mops/web/t163sb06"> 公開資料觀測站</a> 
-                        <br>   
-                        可以將CSV資料匯入進來 (Big-5編碼)，目前未檢查資料真偽，以後更新。 2021/6/30 
-                    </p>
-                    
-                    
-                    <!-- Table -->
-                    <!-- Table Upolad-->
-                    <div class="card shadow mb-4">
-                        <div class="card-header">
-                            <div class="input-group w-50">
-                                <a  href="#" class="btn btn-primary btn-icon-split" >
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-file-upload"></i>
-                                    </span>
-                                    <span class="text" id="uploadFile">上傳檔案</span>
-                                </a >
-                                
-                                <form method="POST" enctype="multipart/form-data" id="UploadForm">
-                                    <input type="file" class="form-control" id="csvFile" name="csvFile" accept=".csv">
-                                </form>
-                            </div>
-                        </div>
-                       
-                        <!-- Table Content-->
-                        <div class="card-body">
-                            <div class="table-responsive"> 
-                                <table class="table table-bordered tableX" id="" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>公司代號</th>
-                                            <th>公司名稱</th>
-                                            <th>營業收入(百萬)</th>
-                                            <th>毛利率(%)</th>
-                                            <th>營業利益率(%)</th>
-                                            <th>稅前純益率(%)</th>
-                                            <th>稅後純益率(%)</th>
-                                            <th>修改 / 刪除</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>公司代號</th>
-                                            <th>公司名稱</th>
-                                            <th>營業收入(百萬)</th>
-                                            <th>毛利率(%)</th>
-                                            <th>營業利益率(%)</th>
-                                            <th>稅前純益率(%)</th>
-                                            <th>稅後純益率(%)</th>
-                                            <th>修改 / 刪除</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody id="dataAreaX">
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>   
-
-
-                    <!-- Delete Button -->
-                    <div class="float-right" id="deleteAll">
-                        <a class="btn btn-danger btn-icon-split ">
+                    <h1 class="h3 mb-4 text-gray-800">
+                        <span class="text-primary">台積電(2330)</span>
+                        詳細資料 
+                        
+                        <span class="btn btn-danger btn-icon-split float-right">
                             <span class="icon text-white-50">
                                 <i class="fas fa-trash"></i>
                             </span>
-                            <span class="text">Delete All Data</span>
-                            <template id="deleteAll-template">
-                                <swal-title>
-                                你確定要刪除全部資料?
-                                </swal-title>
-                                <swal-icon type="warning" color="red"></swal-icon>
-                                <swal-button type="confirm">
-                                取消
-                                </swal-button>
-                                <swal-button type="deny">
-                                刪除全部
-                                </swal-button>
-                                <swal-param name="allowEscapeKey" value="false" />
-                                <swal-param
-                                name="customClass"
-                                value='{ "popup": "my-popup" }' />
-                            </template>
+                            <span class="text">刪除資料</span>
+                            
+                        </span>
+                        <span class="float-right">&emsp;</span> 
+                        <span class="btn btn-warning btn-icon-split float-right">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="text">修該資料</span>
+                        </span>
+                    </h1>
+                    
+                   
+                    <!-- form -->
+                    <div class="border border-secondary rounded bg-white">
+                        <!-- <h2 id='id'>2330</h2> -->
+                        
+                        <!-- API -->
+                        <span class="justify-content-center d-flex mt-5">
+                            <iframe id="Top5"  src="https://s.yimg.com/nb/tw_stock_frontend/scripts/StxChart/StxChart.9d11dfe155.html?sid=2330" style="width: 560px; height: 382px; border-width: 0;"></iframe>
+                        </span>
+                        <!-- 詳細資料 -->
+                        <div class="row text-dark" style="font-size:13px">
+                            <div class="col-4">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">出表日期:&emsp; -----</li>
+                                    <li class="list-group-item">公司代號:&emsp; -----</li>
+                                    <li class="list-group-item">公司名稱:&emsp; -----</li>
+                                    <li class="list-group-item">公司簡稱:&emsp; -----</li>
+                                    <li class="list-group-item">外國企業註冊地國:&emsp;-----</li>
+                                    <li class="list-group-item">產業別:&emsp; ----- </li>
+                                    <li class="list-group-item">住址:&emsp; ----- </li>
+                                    <li class="list-group-item">營利事業統一編號:&emsp;----- </li>
+                                    <li class="list-group-item">董事長:&emsp; ----- </li>
+                                    <li class="list-group-item">總經理:&emsp; ----- </li>
+                                    <li class="list-group-item">發言人:&emsp; ----- </li>
+                                    <li class="list-group-item"> </li>
+                                  </ul>
+                            </div>
+                            <div class="col-4">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">發言人職稱:&emsp; -----</li>
+                                    <li class="list-group-item">代理發言人:&emsp; -----</li>
+                                    <li class="list-group-item">總機電話:&emsp; -----</li>
+                                    <li class="list-group-item">成立日期:&emsp; -----</li>
+                                    <li class="list-group-item">上市日期:&emsp; -----</li>
+                                    <li class="list-group-item">普通股每股面額:&emsp; ----- </li>
+                                    <li class="list-group-item">實收資本額:&emsp; ----- </li>
+                                    <li class="list-group-item">私募股數:&emsp; ----- </li>
+                                    <li class="list-group-item">特別股:&emsp; ----- </li>
+                                    <li class="list-group-item">編制財務報表類型:&emsp; ----- </li>
+                                    <li class="list-group-item">股票過戶機構:&emsp; ----- </li>
+                                    <li class="list-group-item"> </li>
+                                  </ul>
+                            </div>
+                            <div class="col-4">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">過戶電話:&emsp; -----</li>
+                                    <li class="list-group-item">過戶地址:&emsp; -----</li>
+                                    <li class="list-group-item">簽證會計師事務所:&emsp; -----</li>
+                                    <li class="list-group-item">簽證會計師1:&emsp; ----- </li>
+                                    <li class="list-group-item">簽證會計師2:&emsp; ----- </li>
+                                    <li class="list-group-item">英文簡稱:&emsp; ----- </li>
+                                    <li class="list-group-item">英文通訊地址:&emsp; ----- </li>
+                                    <li class="list-group-item">傳真機號碼:&emsp; ----- </li>
+                                    <li class="list-group-item">電子郵件信箱:&emsp; ----- </li>
+                                    <li class="list-group-item">網址:&emsp; -----</li>
+                                    <li class="list-group-item"> </li>
+                                  </ul>
+                            </div>
+                            
+
+                        </div>
+
+                        
+                        
+
+                    </div>
+                    <!-- 返回前頁 Button -->
+                    <div class="mt-5 float-right">
+                        <a href="#" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                            <span class="text">返回前頁</span>
                         </a>
                     </div>
+
 
                 </div>
                 <!-- End of Page Content -->

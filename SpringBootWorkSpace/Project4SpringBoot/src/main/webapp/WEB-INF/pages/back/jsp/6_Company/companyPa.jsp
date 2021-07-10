@@ -192,7 +192,6 @@
         $(document).ready(function(){
             
             // Sidebar
-            $("#dashboard").removeClass('active')
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
 
