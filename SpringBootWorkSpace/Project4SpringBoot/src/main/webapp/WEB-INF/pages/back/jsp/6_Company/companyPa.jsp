@@ -85,7 +85,7 @@
                         <!-- Table Content-->
                         <div class="card-body">
                             <div class="table-responsive"> 
-                                <table class="table table-bordered tableX" id="" width="100%" cellspacing="0">
+                                <table class="table table-bordered tableArea" id="" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>公司代號</th>
@@ -110,7 +110,7 @@
                                             <th>修改 / 刪除</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody id="dataAreaX">
+                                    <tbody id="dataArea">
                                         
                                     </tbody>
                                 </table>
@@ -201,8 +201,8 @@
             xhr.send()
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    $('#dataAreaX').html(showAll(xhr.responseText))
-                    $('.tableX').attr('id', 'dataTable')
+                    $('#dataArea').html(showAll(xhr.responseText))
+                    $('.tableArea').attr('id', 'dataTable')
                     
                     // $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
                     // $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");

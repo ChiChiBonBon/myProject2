@@ -19,5 +19,23 @@ public class CDetailDao {
 		em.persist(bean);
 	}
 	
+	public CompanyDetail_6 select(String stock){
+		return em.find(CompanyDetail_6.class, stock);
+	}
+	
+	public Boolean update(CompanyDetail_6 bean){
+		Boolean result = true;
+		try {
+			em.merge(bean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		
+		return result;
+		
+		
+		
+	}
 	
 }

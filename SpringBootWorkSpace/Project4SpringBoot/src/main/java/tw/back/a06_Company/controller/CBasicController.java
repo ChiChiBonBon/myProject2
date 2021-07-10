@@ -8,7 +8,9 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.back.a06_Company.bean.CompanyBasic_6;
 import tw.back.a06_Company.bean.CompanyDetail_6;
+import tw.back.a06_Company.bean.ProfitAnalysis_6;
 import tw.back.a06_Company.model.CBasicService;
 import tw.back.a06_Company.model.CDetailService;
 import tw.back.a06_Company.model.PAservice;
@@ -24,7 +27,7 @@ import tw.back.a06_Company.tools.TimeTool;
 import tw.back.a06_Company.tools.UrlTool;
 
 @Controller
-@RequestMapping("/back")
+@RequestMapping("/back/cBasic")
 public class CBasicController {
 
 	@Autowired
@@ -34,12 +37,12 @@ public class CBasicController {
 	public CDetailService cDetailService;
 	
 	
-	@GetMapping("/cBasicMain")
+	@GetMapping("/Main")
 	public String cBasicMain() {
 		return "/back/jsp/6_Company/companyBasic";
 	}
 	
-	@PostMapping(value = "/cBasic/insertData", consumes = { "multipart/form-data" })
+	@PostMapping(value = "/insertData", consumes = { "multipart/form-data" })
 	public @ResponseBody Boolean insertBasicData(@RequestParam MultipartFile csvFile) {
 		long time1 = System.currentTimeMillis(); 
 		Boolean result = true;
@@ -130,7 +133,7 @@ public class CBasicController {
 					try {
 						beanBasic.setCapital_Stock_Amount((Long)jsonObjectX.get("Capital_Stock_Amount"));
 					} catch (Exception e) {
-						beanBasic.setCapital_Stock_Amount(null);
+						beanBasic.setCapital_Stock_Amount(0L);
 					}
 					beanBasic.setResponsible_Name((String)jsonObjectX.get("Responsible_Name"));
 					beanBasic.setCompany_Location((String)jsonObjectX.get("Company_Location"));
@@ -169,4 +172,53 @@ public class CBasicController {
 		System.out.println("總共有 " + countE +" 筆錯誤資料");
 		return result;
 	}
+
+	@GetMapping("/showAllData")
+	public @ResponseBody List<CompanyBasic_6> showAllData() {
+		return cBasicService.selectAll();
+	}
+
+	@PutMapping("/Update/{stock}")
+	public @ResponseBody CompanyBasic_6 update(@PathVariable String stock) {
+		CompanyBasic_6 beanBasic = cBasicService.select(stock);
+		String business_Accounting_NO = beanBasic.getBusiness_Accounting_NO();
+		
+		// 03 API 放到Bean
+		String urlResource = "";
+		String url = "https://data.gcis.nat.gov.tw/od/data/api/5F64D864-61CB-4D0D-8AD9-492047CC1EA6?$format=json&$filter=Business_Accounting_NO+20eq+"
+				+ business_Accounting_NO
+				+ "&$skip=0&$top=50";
+		urlResource = UrlTool.urlToString(url);
+		int urlSize = urlResource.length();
+		if( urlSize!=0 ) {
+			JSONObject jsonObjectX = new JSONObject(urlResource.replace("[", "").replace("]",""));
+			
+			beanBasic.setBusiness_Accounting_NO((String)jsonObjectX.get("Business_Accounting_NO"));
+			beanBasic.setCompany_Name((String)jsonObjectX.get("Company_Name"));
+			try {
+				beanBasic.setCapital_Stock_Amount((Long)jsonObjectX.get("Capital_Stock_Amount"));
+			} catch (Exception e) {
+				beanBasic.setCapital_Stock_Amount(0L);
+			}
+			beanBasic.setResponsible_Name((String)jsonObjectX.get("Responsible_Name"));
+			beanBasic.setCompany_Location((String)jsonObjectX.get("Company_Location"));
+
+		}
+		
+		
+		// 04 update beanBasic
+		cBasicService.insertCBasic(beanBasic);
+		CompanyBasic_6 beanBasicNew = cBasicService.select(stock);
+		
+		// 05 update beanDetail
+		CompanyDetail_6 beanDetail =  cDetailService.select(stock);
+		beanDetail.setBusiness_Accounting_NO(beanBasicNew.getBusiness_Accounting_NO());
+		beanDetail.setCompany_NikeName(beanBasicNew.getCompany_Name());
+		beanDetail.setChairman_Board(beanBasicNew.getResponsible_Name());
+		beanDetail.setCompany_Location(beanBasicNew.getCompany_Location());
+		cDetailService.update(beanDetail);
+		
+		return beanBasicNew;
+	}
+
 }

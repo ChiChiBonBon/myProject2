@@ -6,17 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import tw.back.a06_Company.tools.TimeTool;
+
 @Entity
 @Table(name = "companyDetail_6")
 public class CompanyDetail_6 {
-
+	
 	@Id
 	private String stock; 					// 公司代號(PK)
+	// get 改寫成String
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date formData;					// 出表日期 ex: 1100101
 	private String company_Name;			// 公司名稱
 	private String company_NikeName;		// 公司簡稱
 	private String foreign_Country;			// 外國企業註冊地國
-	private String Industry_No;				// 產業別 ex:01
+	private String industry_No;				// 產業別 ex:01
 	private String company_Location;		// 住址
 	private String business_Accounting_NO;	// 營利事業統一編號
 	private String chairman_Board;			// 董事長
@@ -25,7 +32,11 @@ public class CompanyDetail_6 {
 	private String spokesman_Title;			// 發言人職稱
 	private String spokesman_Acting;		// 代理發言人
 	private String telephone;				// 總機電話
+	// get 改寫成String
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date establishment_Date;		// 成立日期 ex: 19910101
+	// get 改寫成String
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date appear_Market_Date;		// 上市日期 ex: 19910101
 	private String denomination_per_Stock;	// 普通股每股面額 ex: "新台幣  10.0000元" !!!
 	private Long paid_In_Capital_Amount;	// 實收資本額
@@ -52,8 +63,8 @@ public class CompanyDetail_6 {
 	public void setStock(String stock) {
 		this.stock = stock;
 	}
-	public Date getFormData() {
-		return formData;
+	public String getFormData() {
+		return TimeTool.formateMSSQLTime(formData) ;
 	}
 	public void setFormData(Date formData) {
 		this.formData = formData;
@@ -74,13 +85,13 @@ public class CompanyDetail_6 {
 		return foreign_Country;
 	}
 	public void setForeign_Country(String foreign_Country) {
-		this.foreign_Country = foreign_Country;
+		this.foreign_Country = foreign_Country.trim();
 	}
 	public String getIndustry_No() {
-		return Industry_No;
+		return industry_No;
 	}
 	public void setIndustry_No(String industry_No) {
-		Industry_No = industry_No;
+		this.industry_No = industry_No;
 	}
 	public String getCompany_Location() {
 		return company_Location;
@@ -130,14 +141,14 @@ public class CompanyDetail_6 {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public Date getEstablishment_Date() {
-		return establishment_Date;
+	public String getEstablishment_Date() {
+		return TimeTool.formateMSSQLTime(establishment_Date);
 	}
 	public void setEstablishment_Date(Date establishment_Date) {
 		this.establishment_Date = establishment_Date;
 	}
-	public Date getAppear_Market_Date() {
-		return appear_Market_Date;
+	public String getAppear_Market_Date() {
+		return TimeTool.formateMSSQLTime(appear_Market_Date);
 	}
 	public void setAppear_Market_Date(Date appear_Market_Date) {
 		this.appear_Market_Date = appear_Market_Date;
@@ -243,7 +254,7 @@ public class CompanyDetail_6 {
 	public String toString() {
 		return "CompanyDetail_6 [stock=" + stock + ", formData=" + formData + ", company_Name=" + company_Name
 				+ ", company_NikeName=" + company_NikeName + ", foreign_Country=" + foreign_Country + ", Industry_No="
-				+ Industry_No + ", company_Location=" + company_Location + ", business_Accounting_NO="
+				+ industry_No + ", company_Location=" + company_Location + ", business_Accounting_NO="
 				+ business_Accounting_NO + ", chairman_Board=" + chairman_Board + ", general_Manager=" + general_Manager
 				+ ", spokesman=" + spokesman + ", spokesman_Title=" + spokesman_Title + ", spokesman_Acting="
 				+ spokesman_Acting + ", telephone=" + telephone + ", establishment_Date=" + establishment_Date

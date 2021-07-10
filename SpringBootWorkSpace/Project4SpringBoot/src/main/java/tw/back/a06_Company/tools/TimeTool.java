@@ -51,4 +51,20 @@ public class TimeTool {
 		return null;
 	}
 	
+	public static String formateMSSQLTime(Date date) { // ex: 1962-02-09 00:00:00.0 >> 1962-02-09
+
+		DateFormat toFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			
+			String parse2String = toFormat2.format(date);
+			return parse2String;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+	
+	
 }
