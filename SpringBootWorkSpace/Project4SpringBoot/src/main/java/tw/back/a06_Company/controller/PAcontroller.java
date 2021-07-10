@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
 import tw.back.a06_Company.model.PAservice;
-import tw.back.a06_Company.tools.CsvTool;
+import tw.back.a06_Company.tools.FileTool;
 import tw.back.a06_Company.tools.TimeTool;
 
 @Controller
@@ -48,7 +48,7 @@ public class PAcontroller {
 	@PostMapping(value = "/pa/insertData", consumes = { "multipart/form-data" })
 	public @ResponseBody Boolean insertData(@RequestParam MultipartFile csvFile) {
 		Boolean result = true;
-		List<String> Lists = CsvTool.multiToStringBig5(csvFile);
+		List<String> Lists = FileTool.multiToStringBig5(csvFile);
 		for (String line : Lists) {
 			ProfitAnalysis_6 bean = new ProfitAnalysis_6();
 			System.out.println("=================================");
@@ -111,7 +111,7 @@ public class PAcontroller {
 		response.setContentLength(contentlength);
 		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName + ".csv");
 			
-		CsvTool.downloadCsv(response, Lists, title);
+		FileTool.downloadCsv(response, Lists, title);
 	}
 
 }
