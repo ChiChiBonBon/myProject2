@@ -15,5 +15,11 @@ public class CDetailService {
 		dao.insertCDetail(bean);
 	}
 	
+	public CompanyDetail_6 select(String stock){
+		return dao.select(stock);
+	}
 	
+	public Boolean update(CompanyDetail_6 bean){
+		return dao.update(bean);
+	}
 }
