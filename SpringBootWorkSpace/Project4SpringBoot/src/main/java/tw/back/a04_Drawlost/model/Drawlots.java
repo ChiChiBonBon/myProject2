@@ -15,13 +15,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
-
+//hello 老孫
 @Entity
 @Table(name = "drawlots_7")
 public class Drawlots {
 	
 	@Column(name = "drawLotsID")
-	private Integer drawLotsID;
+	private String drawLotsID;
 	
 	@Id
 	private String stockCode;
@@ -90,6 +90,8 @@ public class Drawlots {
 	@Column(name="mediaType")
 	private String mimeType;
 	
+	@Column(name="display")
+	private Boolean display;
 	
 	
 	public Set<SecuritiesAccount> getSecuritiesAccountSet() {
@@ -132,11 +134,11 @@ public class Drawlots {
 		this.mimeType = mimeType;
 	}
 
-	public Integer getDrawLotsID() {
+	public String getDrawLotsID() {
 		return drawLotsID;
 	}
 
-	public void setDrawLotsID(Integer drawLotsID) {
+	public void setDrawLotsID(String drawLotsID) {
 		this.drawLotsID = drawLotsID;
 	}
 
@@ -274,6 +276,14 @@ public class Drawlots {
 
 	public void setProbability(Float probability) {
 		this.probability = probability;
+	}
+
+	public Boolean getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(Boolean display) {
+		this.display = display;
 	}
 	
 	
