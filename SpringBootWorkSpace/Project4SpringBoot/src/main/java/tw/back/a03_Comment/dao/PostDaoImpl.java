@@ -71,6 +71,7 @@ public class PostDaoImpl {
 	// 修改
 	public boolean updatePost(Post_board_3 bean) {
 		Boolean result = true;
+		System.out.println("updatePost dao控制器");
 		try {
 			em.merge(bean);
 		} catch (Exception e) {

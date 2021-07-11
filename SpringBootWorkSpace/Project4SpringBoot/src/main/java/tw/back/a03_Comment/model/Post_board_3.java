@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CollectionId;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,8 +49,12 @@ public class Post_board_3 {
 	@Lob
 	private String post;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy年MM月dd日 HH:mm", timezone="Asia/Taipei")
-	private Timestamp ptime;
+	@Column(updatable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, timezone="Asia/Taipei",pattern = "yyyy-MM-dd")
+	private Date ptime;
+	
+	// 前端圖檔送進來java是MultipartFile java給前端是base64字串
+	// base64 就是 blob+mimeType
 	
 	@JsonIgnore
 	// 圖片太大 不會轉成JSON
@@ -65,11 +71,11 @@ public class Post_board_3 {
 	// 送進來
 	@Transient   // @Transient簡單講就是不要在資料庫建立欄位
 	private MultipartFile postImage;
-
+	
 	public Post_board_3() {		
 	}
 
-	public Post_board_3(Integer post_num, String userid, String postType, String title, String post, Timestamp ptime,
+	public Post_board_3(Integer post_num, String userid, String postType, String title, String post,Date ptime,
 			Blob ppicture, String pmimeType, String pictureString, MultipartFile postImage) {
 		super();
 		this.post_num = post_num;
@@ -77,11 +83,25 @@ public class Post_board_3 {
 		this.postType = postType;
 		this.title = title;
 		this.post = post;
-		this.ptime = ptime;
+		this.ptime = new Date(System.currentTimeMillis());
 		this.ppicture = ppicture;
 		this.pmimeType = pmimeType;
 		this.pictureString = pictureString;
 		this.postImage = postImage;
+	}
+
+	public Post_board_3(Integer post_num, String userid, String postType, String title, String post,Date ptime,
+			Blob ppicture, String pmimeType, String pictureString) {
+		super();
+		this.post_num = post_num;
+		this.userid = userid;
+		this.postType = postType;
+		this.title = title;
+		this.post = post;
+		this.ptime = new Date(System.currentTimeMillis());
+		this.ppicture = ppicture;
+		this.pmimeType = pmimeType;
+		this.pictureString = pictureString;
 	}
 
 	public Integer getPost_num() {
@@ -124,17 +144,17 @@ public class Post_board_3 {
 		this.post = post;
 	}
 
-	public Timestamp getPtime() {
+	public Date getPtime() {
 		return ptime;
 	}
 	
 	// el可以抓到ptime2  el是抓getter setter裡的變數名(小寫)
-	public String getPtime2() {
-		DateFormat toFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-		return toFormat.format(ptime);
-	}
+//	public String getPtime2() {
+//		DateFormat toFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+//		return toFormat.format(ptime);
+//	}
 
-	public void setPtime(Timestamp ptime) {
+	public void setPtime(Date ptime) {
 		this.ptime = ptime;
 	}
 
