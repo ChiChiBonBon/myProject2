@@ -32,7 +32,20 @@
 	rel="stylesheet">
 
 </head>
+    <style>
+        .pic {
+            overflow: hidden;
+        }
 
+        .pic img {
+            transform: scale(1, 1);
+            transition: all 1s ease-out;
+        }
+
+        .pic img:hover {
+            transform: scale(1.2, 1.2);
+        }
+    </style>
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -57,12 +70,10 @@
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">編輯文章</h1>
-					<center>
-						<span id='resultMsg' style="height: 18px; font-weight: bold;"></span>
-					</center>
 					<!-- form -->
 					<div class="border border-secondary rounded bg-white">
-						<form class="p-4">
+						<form class="p-4" id="form" enctype="multipart/form-data"
+							method="put">
 							<!-- ID -->
 							<div class="row mb-3">
 								<div class="col-6 form-group row">
@@ -80,8 +91,7 @@
 									<label class="col-sm-2 col-form-label text-primary">發文者</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" value="${bean.userid}"
-											id="userid" readonly> <span id='result1c'></span>
-
+											id="userid" readonly> <br>
 									</div>
 									<br>
 								</div>
@@ -89,7 +99,8 @@
 									<label class="col-sm-2 col-form-label text-primary">標題</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" value="${bean.title}"
-											id="title"> <span id='result2c'></span>
+											id="title"><br> <span id="resultMsg1"
+											style="height: 18px; font-weight: bold;"></span>
 
 									</div>
 									<br>
@@ -98,8 +109,8 @@
 									<label class="col-sm-2 col-form-label text-primary">類型</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control"
-											value="${bean.postType}" id="postType"> <span
-											id='result3c'></span>
+											value="${bean.postType}" id="postType"><br> <span
+											id="resultMsg2" style="height: 18px; font-weight: bold;"></span>
 
 									</div>
 								</div>
@@ -107,31 +118,65 @@
 									<label class="col-sm-2 col-form-label text-primary">文章內容</label>
 									<div class="col-sm-9">
 										<textarea class="form-control" rows="8" id="post">${bean.post}</textarea>
-										<span id='result4c'></span>
+										<br> <span id="resultMsg3"
+											style="height: 18px; font-weight: bold;"></span>
 
 									</div>
 								</div>
 								<div class="col-8 form-group row">
 									<label class="col-sm-2 col-form-label text-primary">發文時間</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="${bean.ptime2}"
-											id="ptime"> <span id='result5c'></span>
-
+										<input type="text" class="form-control" value="${bean.ptime}"
+											id="ptime" readonly> <br>
 									</div>
 								</div>
 								<div class="col-8 form-group row">
 									<label class="col-sm-2 col-form-label text-primary">圖片</label>
 									<div class="col-sm-9">
 										<input type="file" class="img-thumbnail" name="pictureFile"
-										 id="pictureFile"/>
+											id="pictureFile" value="${bean.postImage}" /><br>
 									</div>
 								</div>
 							</div>
 							<br> <br> <br>
 							<center>
-								<input type="button" class="btn btn-primary" value="更新文章"
-									id="btnUpd"> <input type="button"
-									class="btn btn-primary" value="刪除此文章" id="btnDel">
+							
+<!-- 								<span href="#" id="btnUpd"> <a -->
+<!-- 									class="btn btn-warning btn-icon-split "> <span -->
+<!-- 										class="icon text-white-50"> <i -->
+<!-- 											class="fas fa-exclamation-triangle"></i> -->
+<!-- 									</span> <span class="text">更新文章</span> -->
+<!-- 								</a> -->
+<!-- 								</span> -->
+
+								<!-- <input type="button" class="btn btn-primary" value="刪除此文章" id="btnDel"> -->
+								
+								<div id="resultMsg4" style="height: 18px; font-weight: bold;"></div>
+								<br>
+								<a class="btn btn-warning btn-icon-split "> <span class="icon text-white-50"> <i
+									class="fas fa-exclamation-triangle"></i>
+								</span>
+								 	<input type="button" class="btn btn-warning" value="更新文章" id="btnUpd">
+								</a> &nbsp;&nbsp;
+								 
+								<span id="btnDel">
+								<a class="btn btn-danger btn-icon-split "> 
+									<span class="icon text-white-50">
+								 		<i class="fas fa-trash"></i>
+									</span>
+									<span class="text">刪除文章</span>
+										<template id="deleteAll-template">
+											<swal-title> 你確定要刪除此文章? </swal-title>
+											<swal-icon type="warning" color="red"></swal-icon>
+											<swal-button type="confirm"> 取消 </swal-button>
+											<swal-button type="deny"> 刪除 </swal-button>
+											<swal-param name="allowEscapeKey" value="false" />
+											<swal-param name="customClass"
+												value='{ "popup": "my-popup" }' />
+										</template>
+								</a>
+								</span>
+
 							</center>
 						</form>
 					</div>
@@ -146,14 +191,14 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
+								<table class="table table-bordered pic" id="dataTable" width="100%"
 									cellspacing="0" style="word-wrap: break-word;">
 									<thead>
 										<tr>
 											<th style="width: 2cm;">留言者</th>
 											<th style="width: 25cm;">留言內容</th>
 											<th style="width: 4cm;">留言時間</th>
-											<th style="width: 4cm;">圖片</th>
+											<th style="width: 6cm;">圖片</th>
 											<th style="width: 2cm;">編輯</th>
 										</tr>
 									</thead>
@@ -223,8 +268,9 @@
 	<script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
 
 	<script>
-                                var btnDel = document.getElementById("btnDel");
-                                var btnUpd = document.getElementById("btnUpd");
+	const formData = new FormData(document.getElementById('form'));
+    var btnDel = document.getElementById("btnDel");
+    var btnUpd = document.getElementById("btnUpd");
 
                             window.onload = function () {
                                 	
@@ -245,7 +291,7 @@
                                             segment += "<td>" + commentA.userid + "</td>"
                                             segment += "<td>" + commentA.comment + "</td>"
                                             segment += "<td>" + commentA.ctime + "</td>"
-                                            segment += "<td><img width='180' height='120' src='" + commentA.pictureString + "' ></td>"
+                                            segment += "<td><img width='240' height='180' src='" + commentA.pictureString + "' ></td>"
                                             segment += "<td><a href='" + tmp + comments[x].comment_num + "'><input type='button' value='編輯留言' id='btnUpd'></a></td>"
                                             segment += "</tr>"
                                         }
@@ -271,82 +317,166 @@
                             }
                             
                                 btnUpd.onclick = function () {
-
+									console.log("修改文章(前端)")
                                     var post_numValue = document.getElementById('post_num').value;
                                     var useridValue = document.getElementById('userid').value;
                                     var titleValue = document.getElementById('title').value;
                                     var postTypeValue = document.getElementById('postType').value;
                                     var postValue = document.getElementById('post').value;
                                     var ptimeValue = document.getElementById('ptime').value;
+                                    
+                        			var divResult1 = document.getElementById('resultMsg1');
+                        			var divResult2 = document.getElementById('resultMsg2');
+                        			var divResult3 = document.getElementById('resultMsg3');
+                        			var divResult4 = document.getElementById('resultMsg4');
+                        			var hasError = false;
 
-                                    var hasError = false; // 設定判斷有無錯誤的旗標
-                                    var div1 = document.getElementById('result1c');
-                                    var div2 = document.getElementById('result2c');
-                                    var div3 = document.getElementById('result3c');
-                                    var div4 = document.getElementById('result4c');
-                                    var div5 = document.getElementById('result5c');
-
-                                    var divResult = document.getElementById('resultMsg');
+                        			if (!titleValue) {
+                        				divResult1.innerHTML = "<font color='red' size='4'>標題不得為空</font>";
+                        				hasError = true;
+                        			} else {
+                        				divResult1.innerHTML = "";
+                        			}
+                        			if (!postTypeValue) {
+                        				divResult2.innerHTML = "<font color='red' size='4'>類型不得為空</font>";
+                        				hasError = true;
+                        			} else {
+                        				divResult2.innerHTML = "";
+                        			}
+                        			if (!postValue) {
+                        				divResult3.innerHTML = "<font color='red' size='4'>文章內容不得為空</font>";
+                        				hasError = true;
+                        			} else {
+                        				divResult3.innerHTML = "";
+                        			}
+                        			if (hasError) {
+                        				return false;
+                        			}
 
                                     var xhr2 = new XMLHttpRequest();
                                     xhr2.open("PUT", "<c:url value='/postedit' />", true);
-                                    var jsonPost = {
-                                        "post_num": post_numValue,
-                                        "userid": useridValue,
-                                        "title": titleValue,
-                                        "postType": postTypeValue,
-                                        "post": postValue,
-                                        "ptime": ptimeValue,
-                                        "pmimeType": "${bean.pmimeType}"
-                                    }
-                                    xhr2.setRequestHeader("Content-Type", "application/json");
-                                    xhr2.send(JSON.stringify(jsonPost));
+                                    var myForm = new FormData();
+                                    
+                                    console.log($("#pictureFile"))
+                                    
+                                    myForm.append("imgFile", $("#pictureFile")[0].files[0])		
+									myForm.append("post_num", post_numValue)		
+									myForm.append("userid", useridValue)		
+									myForm.append("title", titleValue)		
+									myForm.append("postType", postTypeValue)		
+									myForm.append("post", postValue)
+// 									xhr2.setRequestHeader("Content-Type", "multipart/form-data");
+									console.log("myForm="+myForm);
+									console.log("imgFile的值="+ $("#pictureFile")[0].files[0]);
+									xhr2.send(myForm);
+//                                     var jsonPost = {
+//                                         "post_num": post_numValue,
+//                                         "userid": useridValue,
+//                                         "title": titleValue,
+//                                         "postType": postTypeValue,
+//                                         "post": postValue,
+//                                         "ptime": ptimeValue,
+//                                         "pmimeType": "${bean.pmimeType}"
+//                                     }
+//                                     xhr2.setRequestHeader("Content-Type", "application/json");
+//                                     xhr2.send(JSON.stringify(jsonPost));
 
                                     xhr2.onreadystatechange = function () {
                                         // 伺服器請求完成
                                         if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 201)) {
                                             result = JSON.parse(xhr2.responseText);
                                             if (result.fail) {
-                                                divResult.innerHTML = "<font color='red' >" + result.fail + "</font>";
+                                                divResult4.innerHTML = "<font color='red' >" + result.fail + "</font>";
                                                 console.log("失敗");
                                             } else if (result.success) {
-                                                divResult.innerHTML = "<font color='GREEN'>" + result.success + "</font>";
-                                                alert("文章更新成功");
+                                                divResult4.innerHTML = "<font color='GREEN'>" + result.success + "</font>";
+                                                Swal.fire({
+                        							icon : 'success',
+                        							title : '文章修改成功',
+                        						// showConfirmButton: false,
+                        						// timer: 1500
+                        						})
+                        						setTimeout(function() {
+                        							// 自己會載入頁面
+                        							window.location.href = "<c:url value='/post'/>"
+                        						}, 1500);
                                                 console.log("成功");
-                                                window.location.href = "<c:url value='/post'/>"
+//                                                 window.location.href = "<c:url value='/post'/>"
                                             }
                                         }
                                     }
                                 };
 
-                                btnDel.addEventListener('click', (e) => {
+//                                 btnDel.addEventListener('click', (e) => {
 
-                                    var divResult = document.getElementById('resultMsg');
+//                                     var divResult = document.getElementById('resultMsg');
 
-                                    var result = confirm("確定刪除此筆文章(文章編號:" + ${bean.post_num} + ")?");
-                                    if (result) {
-                                        var xhr3 = new XMLHttpRequest();
-                                        xhr3.open("DELETE", "<c:url value='/deletepost/" + ${bean.post_num} + "'/>", true);
-                                        xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                                        xhr3.send();
-                                        xhr3.onreadystatechange = function () {
-                                            if (xhr3.readyState == 4 && (xhr3.status == 200 || xhr3.status == 204)) {
-                                                result = JSON.parse(xhr3.responseText);
-                                                if (result.fail) {
-                                                    divResult.innerHTML = "<font color='red' >"
-                                                        + result.fail + "</font>";
-                                                        console.log("刪除失敗");
-                                                } else if (result.success) {
-                                                    alert("文章刪除成功");
-                                                    window.location.href = "<c:url value='/post'/>"
+//                                     var result = confirm("確定刪除此筆文章(文章編號:" + ${bean.post_num} + ")?");
+//                                     if (result) {
+//                                         var xhr3 = new XMLHttpRequest();
+//                                         xhr3.open("DELETE", "<c:url value='/deletepost/" + ${bean.post_num} + "'/>", true);
+//                                         xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//                                         xhr3.send();
+//                                         xhr3.onreadystatechange = function () {
+//                                             if (xhr3.readyState == 4 && (xhr3.status == 200 || xhr3.status == 204)) {
+//                                                 result = JSON.parse(xhr3.responseText);
+//                                                 if (result.fail) {
+//                                                     divResult.innerHTML = "<font color='red' >"
+//                                                         + result.fail + "</font>";
+//                                                         console.log("刪除失敗");
+//                                                 } else if (result.success) {
+//                                                     alert("文章刪除成功");
+//                                                     window.location.href = "<c:url value='/post'/>"
+//                                                 }
+//                                             }
+
+//                                         }
+//                                     }
+//                                 });
+
+                                // Delete All Data
+                                $('#btnDel').on('click', function(){
+                                    Swal.fire({
+                                        template: '#deleteAll-template'
+                                    }).then((result)=> {
+                                        if (result.isDenied) {
+                                            Swal.fire({
+                                                title: 'Upload File Please Wait......'
+                                            });
+                                            Swal.showLoading();                         
+
+                                            var xhr3 = new XMLHttpRequest();
+                                            xhr3.open("DELETE", "<c:url value='/deletepost/" + ${bean.post_num} + "'/>", true);
+                                            xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                                            xhr3.send();
+                                            xhr3.onreadystatechange = function() {
+                                                if (xhr3.readyState == 4 && (xhr3.status == 200 || xhr3.status == 204)) {
+                                                	result = JSON.parse(xhr3.responseText);
+                                                    if(result.success){
+                                                        Swal.fire({
+                                                            icon: 'success',
+                                                            title: '文章已成功刪除',
+                                                            // showConfirmButton: false,
+                                                            // timer: 1500
+                                                        })
+                                                    }else{
+                                                        Swal.fire({
+                                                            // timer: 1500,
+                                                            icon: 'error',
+                                                            title: 'Oops...',
+                                                            text: '刪除時發生問題!',
+                                                            // footer: '<a href="">Why do I have this issue?</a>'
+                                                        })
+                                                    } 
+                                                    setTimeout(function(){
+                                                    	window.location.href = "<c:url value='/post'/>"
+                                                    },1500);
+                                                   
                                                 }
-                                            }
-
+                                            }        
                                         }
-                                    }
-                                });
-
-
+                                    })
+                                })
                         </script>
 
 </body>

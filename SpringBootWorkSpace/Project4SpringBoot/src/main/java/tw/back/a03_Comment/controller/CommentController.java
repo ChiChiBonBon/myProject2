@@ -6,6 +6,7 @@ import java.security.Timestamp;
 import java.sql.Blob;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -110,26 +111,37 @@ public class CommentController {
 //	判斷管理者有無送出文章
 	@PostMapping(value = "/postinsert", consumes = { "multipart/form-data"})
 	public @ResponseBody Map<String, String> save( 
-			@RequestParam MultipartFile imgFile,
+			@RequestParam (required = false) MultipartFile imgFile,
 			@RequestParam String userid,
 			@RequestParam String title,
 			@RequestParam String postType,
-			@RequestParam String post,
-			@RequestParam String ptime
+			@RequestParam String post
 			) {
 		System.out.println("====Json Testing =====");
-		Map<String, String> map = new HashMap<>();
-		System.out.println(ptime);
 		
-		// timestamp進不去======================================================================
-		DateFormat toFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		toFormat.format(ptime);
-		java.sql.Timestamp date = java.sql.Timestamp.valueOf(ptime);
-		Post_board_3 bean = new Post_board_3(null,userid,postType,title,post,date,null, null, null,imgFile);
-		// =====================================================================================
+		Map<String, String> map = new HashMap<>();
+		Map<String, String> map1 = new HashMap<>();
+		
+		// 如果沒有放圖片
+		if (imgFile==null || imgFile.getSize()<=0) {
+			Post_board_3 nonefile = new Post_board_3(null,userid,postType,title,post,null,null, null, null);
+			boolean insert1 = postService.insertPost(nonefile);
+			if (insert1) {
+				map1.put("success", "已送出文章");
+				System.out.println("true");
+			}else {
+				map1.put("fail", "文章發送失敗");
+				System.out.println("false");
+			}
+			return map1;
+		
+		// 如果有放圖片
+		}else{
+		Post_board_3 bean = new Post_board_3(null,userid,postType,title,post,null,null, null, null,imgFile);
 		
 		boolean insert = postService.insertPost(bean);
 		System.out.println(insert);
+		
 		// 將上傳的檔案放到表格內
 				// 優點是備份後匯入資料庫方便 缺點為圖片檔很大 會給資料庫帶來負擔
 				Blob blob = null;
@@ -170,7 +182,6 @@ public class CommentController {
 					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 				}
 				// ===================================================================================
-
 		if (insert) {
 			map.put("success", "已送出文章");
 			System.out.println("true");
@@ -179,6 +190,7 @@ public class CommentController {
 			System.out.println("false");
 		}
 		return map;
+		}
 	}
 
 	// 文章table的JSON資料
@@ -197,22 +209,85 @@ public class CommentController {
 	
 	
 	// 修改文章
-	@PutMapping(value = "/postedit", consumes = { "application/json" })
-	public @ResponseBody Map<String, String> updatePost(@RequestBody Post_board_3 bean){
-		Map<String, String>map = new HashMap<>();
-		System.out.println("文章put控制器進來了");
-		try {
-			postService.updatePost(bean);
-			map.put("success", "修改成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			map.put("fail", "修改失敗");
+	@PutMapping(value = "/postedit", consumes = { "multipart/form-data"})
+	public @ResponseBody Map<String, String> updatePost( 
+			@RequestParam Integer post_num,
+			@RequestParam (required = false) MultipartFile imgFile,
+			@RequestParam String userid,
+			@RequestParam String title,
+			@RequestParam String postType,
+			@RequestParam String post
+			){
+		System.out.println("====修改文章控制器 =====");
+		System.out.println("imgFile="+imgFile);
+		System.out.println("post_num="+post_num);
+		Map<String, String> map = new HashMap<>();
+		Map<String, String> map1 = new HashMap<>();
+		
+		// 如果沒有放圖片
+		if (imgFile==null || imgFile.getSize()<=0) {
+			Post_board_3 nonefile = new Post_board_3(post_num,userid,postType,title,post,null,null, null, null);
+			try {
+				postService.updatePost(nonefile);
+				map.put("success", "修改成功");
+				System.out.println("沒圖片修改成功");
+			} catch (Exception e) {
+				e.printStackTrace();
+				map.put("fail", "修改失敗");
+				System.out.println("沒圖片修改失敗");
+			}
+			return map;
+		
+		// 如果有放圖片
+		}else{
+		Post_board_3 bean1 = new Post_board_3(post_num,userid,postType,title,post,null,null, null, null,imgFile);
+		
+		// 將上傳的檔案放到表格內
+				// 優點是備份後匯入資料庫方便 缺點為圖片檔很大 會給資料庫帶來負擔
+				Blob blob = null;
+				String mimeType = "";
+				String name = "";
+				try {
+					InputStream is = imgFile.getInputStream();
+					name = imgFile.getOriginalFilename();
+					// 你給我inputStream我就給你Blob
+					blob = SystemUtils.inputStreamToBlob(is);
+					mimeType = context.getMimeType(name);
+					bean1.setPpicture(blob);
+					bean1.setPmimeType(mimeType);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				// ==================================================================================
+				// 將上傳的檔案移到指定的資料夾, 目前註解此功能
+				// 減輕資料庫的負擔 缺點為匯入較麻煩 但業界比較常用此方式
+				String ext = SystemUtils.getExtFilename(name);
+				try {
+					File imageFolder = new File(SystemUtils.POST_IMAGE_FOLDER);
+					if (!imageFolder.exists())
+						imageFolder.mkdirs();
+					File file = new File(imageFolder, "PostImage_" + bean1.getPost_num() + ext);
+					imgFile.transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+				}
+				// ===================================================================================
+				try {
+					postService.updatePost(bean1);
+					map1.put("success", "修改成功");
+					System.out.println("有圖片修改成功");
+				} catch (Exception e) {
+					e.printStackTrace();
+					map1.put("fail", "修改失敗");
+					System.out.println("有圖片修改失敗");
+				}
+				return map1;
 		}
-		return map;
 	}
 	
 	// 修改留言
-	@PutMapping(value = "/commentedit", consumes = { "application/json" })
+	@PutMapping(value = "/commentedit", consumes = { "multipart/form-data"})
 	public @ResponseBody Map<String, String> updateComment(@RequestBody Comment_board_3 bean){
 		Map<String, String>map = new HashMap<>();
 		System.out.println("留言put控制器進來了");
@@ -257,4 +332,25 @@ public class CommentController {
 		}
 		return map;
 	}
+	
+//	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//	// @ModelAttribute這個控制器方法會在執行任何控制器方法前被執行
+//	@ModelAttribute("post_board_3")
+//	// 傳回值自動加到Model中 =>addAttribute("place",place)
+//	// 這邊的話就可以做到修改仍保留舊值的功能
+//	public Post_board_3 getPost1(@RequestParam(value="post_num", required = false ) Integer post_num) {
+//		// required = false是因為@ModelAttribute這個控制器方法會在執行任何控制器方法前被執行
+//		// 但萬一找不到就會報錯 所以設置required = false
+//		System.out.println("------------------------------------------");
+//		// 沒有的話就是null 
+//		Post_board_3 post_board_3 = null;
+//		// 不是null的話就找舊的
+//		if (post_num != null) {
+//			post_board_3 = postService.findPostByPost_num(post_num);
+//		} else {
+//			post_board_3 = new Post_board_3();
+//		}
+//		System.out.println("In @ModelAttribute, post_board_3=" + post_board_3);
+//		return post_board_3;
+//	}
 }

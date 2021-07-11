@@ -1,10 +1,12 @@
 package tw.back.a03_Comment.model;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,8 +39,9 @@ public class Comment_board_3{
 	private String userid;
 	private String comment;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy年MM月dd日 HH:mm", timezone="Asia/Taipei")
-	private Timestamp ctime;
+	@Column(insertable = false ,updatable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, timezone="Asia/Taipei",pattern = "yyyy-MM-dd")
+	private Date ctime;
 	
 	@JsonIgnore
 	// 圖片太大 不會轉成JSON
@@ -59,14 +62,14 @@ public class Comment_board_3{
 	public Comment_board_3(){
 	}
 
-	public Comment_board_3(Post_board_3 postboard, Integer comment_num, String userid, String comment, Timestamp ctime,
+	public Comment_board_3(Post_board_3 postboard, Integer comment_num, String userid, String comment,Date ctime,
 			Blob cpicture, String cmimeType, String pictureString, MultipartFile commentImage) {
 		super();
 		this.postboard = postboard;
 		this.comment_num = comment_num;
 		this.userid = userid;
 		this.comment = comment;
-		this.ctime = ctime;
+		this.ctime = new Date(System.currentTimeMillis());
 		this.cpicture = cpicture;
 		this.cmimeType = cmimeType;
 		this.pictureString = pictureString;
@@ -114,17 +117,17 @@ public class Comment_board_3{
 		this.comment = comment;
 	}
 
-	public Timestamp getCtime() {
+	public Date getCtime() {
 		return ctime;
 	}
 
 	// el可以抓到ctime2  el是抓getter setter裡的變數名(小寫)
-	public String getCtime2() {
-		DateFormat toFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-		return toFormat.format(ctime);
-	}
+//	public String getCtime2() {
+//		DateFormat toFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+//		return toFormat.format(ctime);
+//	}
 	
-	public void setCtime(Timestamp ctime) {
+	public void setCtime(Date ctime) {
 		this.ctime = ctime;
 	}
 

@@ -39,6 +39,7 @@ public class PostServiceImpl {
 
 	// 修改
 	public boolean updatePost(Post_board_3 bean) {
+		System.out.println("updatePost Service控制器");
 		return postDao.updatePost(bean);
 	}
 }

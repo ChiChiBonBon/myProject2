@@ -62,7 +62,7 @@
 					</center>
 					<!-- form -->
 					<div class="border border-secondary rounded bg-white">
-						<form class="p-4">
+						<form class="p-4" id="form">
 							<!-- ID -->
 							<div class="col-8 form-group row">
 								<label class="col-sm-2 col-form-label text-primary">留言者</label>
@@ -81,8 +81,8 @@
 							<div class="col-8 form-group row">
 								<label class="col-sm-2 col-form-label text-primary">留言時間</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" value="${bean.ctime2}"
-										id="ctime">
+									<input type="text" class="form-control" value="${bean.ctime}"
+										id="ctime" readonly>
 								</div>
 							</div>
 							<div class="col-8 form-group row">
