@@ -17,7 +17,7 @@
           <li><a id="header_Company" href="<c:url value='#' />">股票選擇器</a></li>
           <li><a href="<c:url value='#' />">下單</a></li>
           <li><a href="<c:url value='#' />">抽籤</a></li>
-          <li><a href="<c:url value='#' />">留言區</a></li>
+          <li><a href="<c:url value='/front/Post' />">留言區</a></li>
 
           <li class="dropdown"><a href="#"><span>範本(展示用)</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
