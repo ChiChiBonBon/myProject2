@@ -64,8 +64,8 @@
 						</a>
 					</div>
 					<p class="mb-4">
-						資料來源: <a href="https://mops.twse.com.tw/mops/web/t163sb06">
-							公開資料觀測站</a> <br> 可以將資料匯入進來，目前未檢查資料真偽，以後更新。 2021/6/30
+						資料來源: <a href="https://data.gov.tw/dataset/18419">
+							上市公司基本資料</a> <br> 可以將資料匯入進來，目前未檢查資料真偽，以後更新。 2021/7/11
 					</p>
 
 

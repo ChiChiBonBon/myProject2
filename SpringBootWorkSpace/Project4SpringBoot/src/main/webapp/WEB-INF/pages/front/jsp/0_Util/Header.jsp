@@ -14,7 +14,7 @@
         <ul>
           <li><a id="header_front" class="" href="<c:url value='/front' />">首頁</a></li>
           <li><a id="header_About" href="<c:url value='/front/About' />">測試用(展示用)</a></li>
-          <li><a id="header_Company" href="<c:url value='#' />">股票選擇器</a></li>
+          <li><a id="header_Company" href="<c:url value='/front/cTable/Main' />">股票選擇器</a></li>
           <li><a href="<c:url value='#' />">下單</a></li>
           <li><a href="<c:url value='#' />">抽籤</a></li>
           <li><a href="<c:url value='#' />">留言區</a></li>
