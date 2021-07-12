@@ -3,14 +3,17 @@ package tw.back.a04_Drawlost.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import tw.back.a04_Drawlost.dao.DrawableDAOInterface;
 import tw.back.a04_Drawlost.dao.DrawlotsDAO;
 import tw.back.a04_Drawlost.model.Drawlots;
 
-public class DrawlotsService implements Drawable {
+@Service(value = "drawlotsService")
+public class DrawlotsService implements DrawableServiceInterface {
 
 	@Autowired
-	private DrawlotsDAO drawlotsDao;
+	private DrawableDAOInterface drawlotsDao = new DrawlotsDAO();
 	
 	@Override
 	public List<Drawlots> selectAll() {
