@@ -33,8 +33,9 @@ public class FileTool {
 		try (   InputStream is = multipartFile.getInputStream();
 				InputStreamReader isr = new InputStreamReader(is,"Big5_HKSCS");
 				BufferedReader br = new BufferedReader(isr);
+				
 			) {
-
+			//isr.getEncoding()	
 			String line;
 			while ((line = br.readLine()) != null) { // 讀下1行，最後回傳 NULL
 				byte[] bytes = line.getBytes("UTF-8");
