@@ -47,14 +47,15 @@ public class PAcontroller {
 
 	@PostMapping(value = "/pa/insertData", consumes = { "multipart/form-data" })
 	public @ResponseBody Boolean insertData(@RequestParam MultipartFile csvFile) {
+		System.out.println("=============Insert Company Profit Analysis_6====================");
 		Boolean result = true;
 		List<String> Lists = FileTool.multiToStringBig5(csvFile);
 		for (String line : Lists) {
 			ProfitAnalysis_6 bean = new ProfitAnalysis_6();
-			System.out.println("=================================");
+			
 			try {
 
-				System.out.println(line);
+//				System.out.println(line);
 				String[] column = line.split(",");
 				int x = Integer.parseInt(column[0].replace("\"", "")) + 1;
 				bean.setCompany_ID(Integer.parseInt(column[0].replace("\"", "")));
@@ -66,7 +67,7 @@ public class PAcontroller {
 				bean.setNet_Profit_Margin(Double.parseDouble(column[6].replace("\"", "")));
 
 				Boolean insertResult = paService.insert(bean);
-				System.out.println(insertResult);
+//				System.out.println(insertResult);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
