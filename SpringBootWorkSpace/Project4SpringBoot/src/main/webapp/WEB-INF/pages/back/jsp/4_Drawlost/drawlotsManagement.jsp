@@ -110,9 +110,6 @@
                                             <th width="80px">修改 / 刪除</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="drawlotsManagement">
-                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                                    </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>股票代碼</th>
@@ -207,21 +204,263 @@
 
 	<!-- SweetAlert2 -->
 	<script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
+   
 	<script>
 		$(function(){
 			// Sidebar
             $("#Drawlots_Management, #DS").addClass('active')
             $("#collapseDS").addClass('show')
-		})
-	</script>
-	<script>
-		 
-		 let xhr = new XMLHttpRequest();
-		 xhr.addEventListener("load", function(){
-			xhr.open("GET", "<c:url value='/back/drawlots/selectAll'/>",true);
-			xhr.send();
-			console.log(xhr.responseText);
-		 });
+            
+            // Select All Data
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "<c:url value='/back/drawlots/selectAll' />", true);
+            xhr.send()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    $('#dataArea').html(showAll(xhr.responseText))
+                    $('.tableArea').attr('id', 'dataTable')
+                    
+                    // $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
+                    // $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
+                    // $.getScript("<c:url value='/back/js/demo/datatables-demo.js' />");
+                    var scriptsToLoad = [
+                        "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
+                        "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+                        "<c:url value='/back/js/demo/datatables-demo.js' />"
+                    ]; 
+
+                    scriptsToLoad.forEach(function(src) {
+                        var script = document.createElement('script');
+                        script.src = src;
+                        script.async = false;
+                        document.body.appendChild(script);
+                    });
+                }
+            }
+	
+            
+            // Delete Data
+            $('tbody').on('click', '#delete', function(){
+                var x =  $(this).parent().parent().index()
+                var paID = $(".idX")[x].textContent
+                console.log(paID)
+                Swal.fire({
+                    template: '#my-delete'+ paID
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Delete '+ paID + ' Please Wait......'
+                        });
+                        Swal.showLoading();                         
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "<c:url value='/back/drawlots/delete' />", true);
+                        xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+                        xhr.send("id="+paID);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                if(xhr.responseText){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: paID + ' has been deleted.',
+                                        // showConfirmButton: false,
+                                        // timer: 1500
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                } 
+                                setTimeout(function(){
+                                    location.reload();
+                                },1500);
+                               
+                            }
+                        }    
+                    }
+                })
+            })
+            
+            // Delete All Data
+            $('#deleteAll').on('click', function(){
+                Swal.fire({
+                    template: '#deleteAll-template'
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Upload File Please Wait......'
+                        });
+                        Swal.showLoading();                         
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("GET", "<c:url value='/back/drawlots/deleteAll' />", true);
+                        xhr.send();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                if(xhr.responseText){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'All file has been deleted.',
+                                        // showConfirmButton: false,
+                                        // timer: 1500
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                } 
+                                setTimeout(function(){
+                                    location.reload();
+                                },1500);
+                               
+                            }
+                        }        
+                    }
+                })
+            })
+
+            // Insert Data
+            $('#uploadFile').on('click', async function(){    
+                var form = $('#UploadForm')[0];
+                var data = new FormData(form);        
+
+                console.log(data)
+                var xhr1 = new XMLHttpRequest();
+                xhr1.open("POST", "<c:url value='/back/drawlots/insertData' />", true);
+
+                xhr1.send(data);
+
+
+                Swal.fire({
+                    // timer: 2000,
+                    title: 'Upload File Please Wait......'
+                });
+                Swal.showLoading(); 
+
+                xhr1.onreadystatechange = function() {
+                    if (xhr1.readyState == 4 && xhr1.status == 200) {
+                        console.log("success")
+
+                        if(xhr.responseText){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'All file has been Insert.',
+                                // showConfirmButton: false,
+                                // timer: 1500
+                            })
+                        }else{
+                            Swal.fire({
+                                // timer: 1500,
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                // footer: '<a href="">Why do I have this issue?</a>'
+                            })
+                        } 
+                        setTimeout(function(){
+                            location.reload();
+                        },1500);
+                    }
+                }
+
+            })
+
+            // Update Data
+            $('tbody').on('click', '#update', function(){
+                var x =  $(this).parent().parent().index()
+                var paID = $(".idX")[x].textContent
+                console.log(paID)
+                Swal.fire({
+                    template: '#my-update'+ paID
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        location.replace("<c:url value='/paUpdate/' />" + paID);                       
+                    }
+                })
+            })
+            
+            function showAll(text){
+                var beans = JSON.parse(text);
+                var segment = ""
+
+                for(var x in beans){
+                    var bean = beans[x]
+                    var buttonX =
+                        `<span href="#" class="btn btn-warning btn-circle btn-sm" id="update">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <template id="my-update`+bean.stockCode+`">
+                                <swal-title>
+                                你確定要更新` + bean.stockCode +`?
+                                </swal-title>
+                                <swal-icon type="warning" color="red"></swal-icon>
+                                <swal-button type="confirm">
+                                取消
+                                </swal-button>
+                                <swal-button type="deny">
+                                更新
+                                </swal-button>
+                                <swal-param name="allowEscapeKey" value="false" />
+                                <swal-param
+                                name="customClass"
+                                value='{ "popup": "my-popup" }' />
+                            </template>
+                        </span>
+                        &nbsp;&nbsp;
+                        <span" class="btn btn-danger btn-circle btn-sm" id="delete">
+                            <i class="fas fa-trash"></i>
+                            <template id="my-delete`+bean.stockCode+`">
+                                <swal-title>
+                                你確定要刪除 `+ bean.stockCode +` ?
+                                </swal-title>
+                                <swal-icon type="warning" color="red"></swal-icon>
+                                <swal-button type="confirm">
+                                取消
+                                </swal-button>
+                                <swal-button type="deny">
+                                刪除
+                                </swal-button>
+                                <swal-param name="allowEscapeKey" value="false" />
+                                <swal-param
+                                name="customClass"
+                                value='{ "popup": "my-popup" }' />
+                            </template>
+                        </span>`
+
+                    
+
+                    segment += "<tr>"
+                    segment += "<td class='idX'>" + bean.stockCode + "</td>"
+                    segment += "<td>" + bean.stockName + "</td>"
+                    segment += "<td>" + bean.companyLogo + "</td>"
+                    segment += "<td>" + bean.marketType + "</td>"
+                    segment += "<td>" + bean.subscribeStatus + "</td>"
+                    segment += "<td>" + bean.subscribePrice + "</td>"
+                    segment += "<td>" + bean.quantity + "</td>"
+                    segment += "<td>" + bean.startDate + "</td>"
+                    segment += "<td>" + bean.endDate + "</td>"
+                    segment += "<td>" + bean.deductionDate + "</td>"
+                    segment += "<td>" + bean.drawDate + "</td>"
+                    segment += "<td>" + bean.refundDate + "</td>"
+                    segment += "<td>" + bean.grantSecuritiesDate + "</td>"
+                    segment += "<td>" + bean.totalQuantity + "</td>"
+                    segment += "<td>" + bean.updateTime+ "</td>"
+                    segment += "<td>" + bean.remarks + "</td>"
+                    segment += "<td>" + buttonX + "</td>"
+                    segment += "</tr>"
+                }
+                return segment;
+			}
+			});
 	</script>
 </body>
 
