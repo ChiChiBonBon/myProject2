@@ -22,27 +22,43 @@ public class DrawlotsService implements DrawableServiceInterface {
 	}
 
 	@Override
-	public Drawlots selectOne() {
+	public Drawlots selectOne(Integer stock_ID) {
 		// TODO Auto-generated method stub
-		return drawlotsDao.selectOne();
+		return drawlotsDao.selectOne(stock_ID);
 	}
 
 	@Override
-	public List<Drawlots> insertOne(Drawlots drawlots) {
+	public Boolean insertOne(Drawlots drawlots) {
 		// TODO Auto-generated method stub
 		return drawlotsDao.insertOne(drawlots);
 	}
 
 	@Override
-	public List<Drawlots> updateOne(Drawlots drawlots) {
+	public Boolean updateOne(Drawlots drawlots) {
 		// TODO Auto-generated method stub
 		return drawlotsDao.updateOne(drawlots);
 	}
 
 	@Override
-	public boolean deleteOne(Drawlots drawlots) {
+	public Boolean deleteOne(Integer stock_ID) {
 		// TODO Auto-generated method stub
-		return drawlotsDao.deleteOne(drawlots);
+		return drawlotsDao.deleteOne(stock_ID);
 	}
+
+	@Override
+	public Boolean deleteAll() {
+		// TODO Auto-generated method stub
+		return drawlotsDao.deleteAll();
+	}
+	
+	/*
+	public Boolean deleteAll() {
+		return padao.deleteAll();
+	}
+	
+	public Boolean delete(Integer company_ID) {
+		return padao.delete(company_ID);
+	}
+	*/
 
 }

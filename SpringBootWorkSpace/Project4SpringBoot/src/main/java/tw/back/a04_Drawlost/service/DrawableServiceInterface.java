@@ -9,11 +9,13 @@ import tw.back.a04_Drawlost.model.Drawlots;
 public interface DrawableServiceInterface {
 	public List<Drawlots> selectAll();
 	
-	public Drawlots selectOne();
+	public Drawlots selectOne(Integer stock_ID);
 	
-	public List<Drawlots> insertOne(Drawlots drawlots);
+	public Boolean insertOne(Drawlots drawlots);
 	
-	public List<Drawlots> updateOne(Drawlots drawlots);
+	public Boolean updateOne(Drawlots drawlots);
 	
-	public boolean deleteOne(Drawlots drawlots);
+	public Boolean deleteOne(Integer stock_ID);
+	
+	public Boolean deleteAll();
 }

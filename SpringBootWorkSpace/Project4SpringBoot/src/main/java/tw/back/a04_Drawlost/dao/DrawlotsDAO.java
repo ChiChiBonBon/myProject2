@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.back.a04_Drawlost.model.Drawlots;
+import tw.back.a06_Company.bean.ProfitAnalysis_6;
 
 @Transactional
 @Repository(value = "drawlotsDAO")
@@ -28,27 +29,69 @@ public class DrawlotsDAO implements DrawableDAOInterface {
 	}
 
 	@Override
-	public Drawlots selectOne() {
+	public Drawlots selectOne(Integer stock_ID) {
 		// TODO Auto-generated method stub
-		return null;
+		Drawlots drawlots = em.find(Drawlots.class, stock_ID);
+		return drawlots;
 	}
 
 	@Override
-	public List<Drawlots> insertOne(Drawlots drawlots) {
+	public Boolean insertOne(Drawlots drawlots) {
 		// TODO Auto-generated method stub
-		return null;
+		Boolean result = false;
+		try {
+			em.persist(drawlots);
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
-	public List<Drawlots> updateOne(Drawlots drawlots) {
+	public Boolean updateOne(Drawlots drawlots) {
 		// TODO Auto-generated method stub
-		return null;
+		Boolean result = true;
+		try {
+			em.merge(drawlots);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean deleteOne(Drawlots drawlots) {
+	public Boolean deleteOne(Integer stock_ID) {
 		// TODO Auto-generated method stub
-		return false;
+		Boolean result = true;
+		Drawlots drawlots = em.find(Drawlots.class, stock_ID);
+		if(drawlots != null) {
+			try {
+				em.remove(drawlots);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result = false;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Boolean deleteAll() {
+		// TODO Auto-generated method stub
+		Boolean result = false;
+		String sql = "delete from Drawlots";
+		
+		try {
+			em.createQuery(sql).executeUpdate();
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }
