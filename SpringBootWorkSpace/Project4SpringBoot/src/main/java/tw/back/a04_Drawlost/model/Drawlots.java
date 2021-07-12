@@ -3,6 +3,7 @@ package tw.back.a04_Drawlost.model;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
-//hello 老孫
+
 @Entity
 @Table(name = "drawlots_7")
 public class Drawlots {
@@ -74,6 +75,28 @@ public class Drawlots {
 	@Column(name = "probability")
 	private Float probability;
 	
+	@Column(name = "remarks")
+	private String remarks;
+	
+	@Column(name = "updateTime")
+	private Timestamp updateTime;
+	
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	@OneToMany(mappedBy = "stockCode",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<SecuritiesAccount> securitiesAccountSet;
 	

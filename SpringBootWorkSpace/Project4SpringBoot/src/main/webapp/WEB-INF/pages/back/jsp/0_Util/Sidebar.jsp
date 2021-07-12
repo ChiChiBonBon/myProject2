@@ -69,9 +69,24 @@
 	</li>
 
 	<!-- Nav Item - 抽籤 Collapse Menu -->
-	<li class="nav-item"><a class="nav-link" href="<c:url value='/back/drawlots' />" > <i
+	<!--<li class="nav-item"><a class="nav-link" href="<c:url value='/back/drawlots' />" > <i
 			class="fas fa-vote-yea"></i> <span>抽籤</span>
-	</a></li>
+	</a></li>-->
+	
+	<li class="nav-item" >
+		<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseDS"
+		aria-expanded="true" aria-controls="collapseDS" >
+			<i class="fas fa-building"></i>
+			<span>股票抽籤申購管理</span>
+		</a>
+		<div id="collapseDS" class="collapse" aria-labelledby="" data-parent="#accordionSidebar" >
+			<div class="bg-white py-2 collapse-inner rounded">
+				<!-- <h6 class="collapse-header">Custom Components:</h6> -->
+				<a class="collapse-item" href="<c:url value="/back/drawlots" />" >抽籤管理</a>
+				<a class="collapse-item" href="<c:url value="/back/subscription" />" >申購管理</a>
+			</div>
+		</div>
+	</li>
 
 	<!-- Nav Item - 討論區 Collapse Menu -->
 	<li class="nav-item"><a class="nav-link" href="#"> <i
