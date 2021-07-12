@@ -27,8 +27,6 @@
     
     <!-- Custom styles for this page -->
     <link href="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.css' />" rel="stylesheet">
-
-
 </head>
 
 <body id="page-top">
@@ -57,6 +55,7 @@
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-1 text-gray-800">抽籤管理</h1>
+						<input id="test" type="button"/> 
 						<a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv"
 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 							<i class="fas fa-download fa-sm text-white-50"></i> 產生報表
@@ -111,7 +110,7 @@
                                             <th width="80px">修改 / 刪除</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="drawlotsManagement">
                                     <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                                     </tbody>
                                     <tfoot>
@@ -215,7 +214,15 @@
             $("#collapseDS").addClass('show')
 		})
 	</script>
-
+	<script>
+		 
+		 let xhr = new XMLHttpRequest();
+		 xhr.addEventListener("load", function(){
+			xhr.open("GET", "<c:url value='/back/drawlots/selectAll'/>",true);
+			xhr.send();
+			console.log(xhr.responseText);
+		 });
+	</script>
 </body>
 
 </html>

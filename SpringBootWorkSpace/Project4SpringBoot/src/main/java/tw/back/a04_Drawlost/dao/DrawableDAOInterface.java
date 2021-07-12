@@ -1,13 +1,11 @@
-package tw.back.a04_Drawlost.service;
+package tw.back.a04_Drawlost.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import tw.back.a04_Drawlost.model.Drawlots;
 
-@Service(value = "drawlotsService")
-public interface Drawable {
+public interface DrawableDAOInterface {
+	
 	public List<Drawlots> selectAll();
 	
 	public Drawlots selectOne();
