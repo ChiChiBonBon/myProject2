@@ -8,7 +8,12 @@ public class DrawlotsController {
 
 	@GetMapping(value = "/back/drawlots")
 	public String drawlotsMain() {
-		return "back/jsp/4_Drawlost/drawlotsInformation";
+		return "back/jsp/4_Drawlost/drawlotsManagement";
+	}
+	
+	@GetMapping(value = "/back/subscription")
+	public String subscriptionMain() {
+		return "back/jsp/4_Drawlost/subscriptionManagement";
 	}
 	
 	@GetMapping(value = "/back/drawlots/login")
