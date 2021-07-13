@@ -384,7 +384,7 @@
                     template: '#my-update'+ paID
                 }).then((result)=> {
                     if (result.isDenied) {
-                        location.replace("<c:url value='/paUpdate/' />" + paID);                       
+                        location.replace("<c:url value='/back/drawlots/update/' />" + paID);                       
                     }
                 })
             })

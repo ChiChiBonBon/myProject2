@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PA Update - 基本面</title>
+    <title>股票申購管理</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -49,7 +49,7 @@
                     
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-1 text-gray-800">Update Data</h1>
+                        <h1 class="h3 mb-1 text-gray-800">新增或修改資料</h1>
                     </div>
                     <p class="mb-4"></p>
                     
@@ -60,10 +60,10 @@
                             <!-- ID -->
                             <div class="row mb-3">
                                 <div class="col-6 form-group row">
-                                    <label class="col-sm-2 col-form-label text-primary">公司名稱</label>
+                                    <label class="col-sm-2 col-form-label text-primary">股票代碼</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control text-dark" 
-                                        placeholder="${bean.company_Name}(${bean.company_ID})" readonly >
+                                        placeholder="${bean.stockCode}" readonly >
                                     </div>
                                 </div>
                             </div>
@@ -71,38 +71,94 @@
                             <!-- Content -->
                             <div class="row">
                                 <div class="col-6 form-group row">
-                                    <label class="col-sm-2 col-form-label text-primary">營業收入<br>(百萬元)</label>
+                                    <label class="col-sm-2 col-form-label text-primary">公司名稱</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 120.5" id="income" value="${bean.income}">
+                                        <input type="text" class="form-control" placeholder="範例: 台積電" id="income" value="${bean.stockName}">
+                                        <div id="" class="invalid-feedback">請輸入文字</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">市場別</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 上市" id="gross_Margin" value="${bean.marketType}">
+                                        <div id="" class="invalid-feedback">請輸入文字</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">申購狀態</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 申購失敗" id="operating_Profit_Ratio" value="${bean.subscribeStatus}">
+                                        <div id="" class="invalid-feedback">請輸入文字</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">承銷價</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 168" id="net_Income_Margin" value="${bean.subscribePrice}">
                                         <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
-                                    <label class="col-sm-2 col-form-label text-primary">毛利率(%)</label>
+                                    <label class="col-sm-2 col-form-label text-primary">申購股數</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control"  id="gross_Margin" value="${bean.gross_Margin}">
-                                        <div id="" class="invalid-feedback">請輸入數字</div>
+                                        <input type="text" class="form-control" placeholder="範例: 1000" id="net_Profit_Margin" value="${bean.quantity}">
+                                        <div id="" class="invalid-feedback">請輸入數量</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
-                                    <label class="col-sm-2 col-form-label text-primary">營業利益率(%)</label>
+                                    <label class="col-sm-2 col-form-label text-primary">開始日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 20.12" id="operating_Profit_Ratio" value="${bean.gross_Margin}">
-                                        <div id="" class="invalid-feedback">請輸入數字</div>
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.startDate}">
+                                        <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
-                                    <label class="col-sm-2 col-form-label text-primary">稅前純益率(%)</label>
+                                    <label class="col-sm-2 col-form-label text-primary">結束日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: -20.12" id="net_Income_Margin" value="${bean.gross_Margin}">
-                                        <div id="" class="invalid-feedback">請輸入數字</div>
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.endDate}">
+                                        <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
-                                    <label class="col-sm-2 col-form-label text-primary">稅後純益率(%)</label>
+                                    <label class="col-sm-2 col-form-label text-primary">扣款日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 20.12" id="net_Profit_Margin" value="${bean.gross_Margin}">
-                                        <div id="" class="invalid-feedback">請輸入數字</div>
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.deductionDate}">
+                                        <div id="" class="invalid-feedback">請輸入日期</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">抽籤日</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.drawDate}">
+                                        <div id="" class="invalid-feedback">請輸入日期</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">撥券日</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.grantSecuritiesDate}">
+                                        <div id="" class="invalid-feedback">請輸入日期</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">承銷股數</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 3000000" id="income" value="${bean.totalQuantity}">
+                                        <div id="" class="invalid-feedback">請輸入數量</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">更新時間</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13 11:09" id="income" value="${bean.updateTime}">
+                                        <div id="" class="invalid-feedback">請輸入時間</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">備註</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 申購資料有問題，請洽所屬營業員" id="income" value="${bean.remarks}">
+                                        <div id="" class="invalid-feedback">請輸入文字</div>
                                     </div>
                                 </div>
                             </div>

@@ -29,7 +29,7 @@ public class DrawlotsDAO implements DrawableDAOInterface {
 	}
 
 	@Override
-	public Drawlots selectOne(Integer stock_ID) {
+	public Drawlots selectOne(String stock_ID) {
 		// TODO Auto-generated method stub
 		Drawlots drawlots = em.find(Drawlots.class, stock_ID);
 		return drawlots;
@@ -63,7 +63,7 @@ public class DrawlotsDAO implements DrawableDAOInterface {
 	}
 
 	@Override
-	public Boolean deleteOne(Integer stock_ID) {
+	public Boolean deleteOne(String stock_ID) {
 		// TODO Auto-generated method stub
 		Boolean result = true;
 		Drawlots drawlots = em.find(Drawlots.class, stock_ID);
