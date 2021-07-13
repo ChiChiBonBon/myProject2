@@ -60,7 +60,7 @@
                     <p class="mb-4"> 
                         資料來源:  <a href="https://mops.twse.com.tw/mops/web/t163sb06"> 公開資料觀測站</a> 
                         <br>   
-                        可以將CSV資料匯入進來 (Big-5編碼)，目前未檢查資料真偽，以後更新。 2021/6/30 
+                        可以將CSV資料匯入進來 (Big-5編碼)。
                     </p>
                     
                     
@@ -327,7 +327,7 @@
 
                 Swal.fire({
                     // timer: 2000,
-                    title: 'Upload File Please Wait......'
+                    title: '檔案寫入中 請稍等......'
                 });
                 Swal.showLoading(); 
 

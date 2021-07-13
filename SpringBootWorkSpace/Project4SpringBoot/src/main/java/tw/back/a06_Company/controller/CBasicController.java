@@ -156,7 +156,7 @@ public class CBasicController {
 				countApi ++ ;
 				
 				
-				if(x<=10) {
+				if(x<=30) {
 					System.out.print(".");
 					x ++;
 					if(x == 30) {
@@ -232,6 +232,34 @@ public class CBasicController {
 		cDetailService.update(beanDetail);
 		
 		return beanBasicNew;
+	}
+	
+	@GetMapping("/deleteAll")
+	public @ResponseBody Boolean deleteAll() {
+		Boolean resule = true;
+		try {
+			cDetailService.deleteAll();
+			cBasicService.deleteAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+			resule = false;
+		}
+		return resule;
+	}
+	
+	@PostMapping("/delete")
+	public @ResponseBody Boolean delete(@RequestParam String stock) {
+
+		Boolean resule = true;
+		try {
+			cDetailService.delete(stock);
+			cBasicService.delete(stock);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resule = false;
+		}
+		
+		return resule;
 	}
 
 }
