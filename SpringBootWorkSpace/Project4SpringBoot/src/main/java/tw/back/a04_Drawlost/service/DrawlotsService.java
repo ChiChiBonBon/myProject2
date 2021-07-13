@@ -22,7 +22,7 @@ public class DrawlotsService implements DrawableServiceInterface {
 	}
 
 	@Override
-	public Drawlots selectOne(Integer stock_ID) {
+	public Drawlots selectOne(String stock_ID) {
 		// TODO Auto-generated method stub
 		return drawlotsDao.selectOne(stock_ID);
 	}
@@ -40,7 +40,7 @@ public class DrawlotsService implements DrawableServiceInterface {
 	}
 
 	@Override
-	public Boolean deleteOne(Integer stock_ID) {
+	public Boolean deleteOne(String stock_ID) {
 		// TODO Auto-generated method stub
 		return drawlotsDao.deleteOne(stock_ID);
 	}
