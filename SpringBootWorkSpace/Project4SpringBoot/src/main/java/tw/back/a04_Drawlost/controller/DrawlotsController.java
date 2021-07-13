@@ -67,4 +67,18 @@ public class DrawlotsController {
 		m.addAttribute("bean", drawlots);
 		return "back/jsp/4_Drawlost/DM_NewOrModified";
 	}
+	
+	@PutMapping(value="/back/drawlots/update" , consumes = "application/json")
+	public @ResponseBody Boolean companyPaUpdate(@RequestBody Drawlots drawlots, BindingResult result) {
+		Boolean resultBoolean = true;
+		
+		if(result.hasErrors()) {
+			resultBoolean = false;
+			return resultBoolean;
+		}
+		
+		resultBoolean = drawlotsService.updateOne(drawlots);
+		
+		return resultBoolean;
+	}
 }

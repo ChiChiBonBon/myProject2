@@ -73,91 +73,91 @@
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">公司名稱</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 台積電" id="income" value="${bean.stockName}">
+                                        <input type="text" class="form-control" placeholder="範例: 台積電" id="stockName" value="${bean.stockName}">
                                         <div id="" class="invalid-feedback">請輸入文字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">市場別</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 上市" id="gross_Margin" value="${bean.marketType}">
+                                        <input type="text" class="form-control" placeholder="範例: 上市" id="marketType" value="${bean.marketType}">
                                         <div id="" class="invalid-feedback">請輸入文字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">申購狀態</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 申購失敗" id="operating_Profit_Ratio" value="${bean.subscribeStatus}">
+                                        <input type="text" class="form-control" placeholder="範例: 申購失敗" id="subscribeStatus" value="${bean.subscribeStatus}">
                                         <div id="" class="invalid-feedback">請輸入文字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">承銷價</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 168" id="net_Income_Margin" value="${bean.subscribePrice}">
+                                        <input type="text" class="form-control" placeholder="範例: 168" id="subscribePrice" value="${bean.subscribePrice}">
                                         <div id="" class="invalid-feedback">請輸入數字</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">申購股數</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 1000" id="net_Profit_Margin" value="${bean.quantity}">
+                                        <input type="text" class="form-control" placeholder="範例: 1000" id="quantity" value="${bean.quantity}">
                                         <div id="" class="invalid-feedback">請輸入數量</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">開始日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.startDate}">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="startDate" value="${bean.startDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">結束日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.endDate}">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="endDate" value="${bean.endDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">扣款日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.deductionDate}">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="deductionDate" value="${bean.deductionDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">抽籤日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.drawDate}">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="drawDate" value="${bean.drawDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">撥券日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="income" value="${bean.grantSecuritiesDate}">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="grantSecuritiesDate" value="${bean.grantSecuritiesDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">承銷股數</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 3000000" id="income" value="${bean.totalQuantity}">
+                                        <input type="text" class="form-control" placeholder="範例: 3000000" id="totalQuantity" value="${bean.totalQuantity}">
                                         <div id="" class="invalid-feedback">請輸入數量</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">更新時間</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13 11:09" id="income" value="${bean.updateTime}">
+                                        <input type="text" class="form-control" placeholder="" readonly id="updateTime" value="">
                                         <div id="" class="invalid-feedback">請輸入時間</div>
                                     </div>
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">備註</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 申購資料有問題，請洽所屬營業員" id="income" value="${bean.remarks}">
+                                        <input type="text" class="form-control" placeholder="範例: 申購資料有問題，請洽所屬營業員" id="remarks" value="${bean.remarks}">
                                         <div id="" class="invalid-feedback">請輸入文字</div>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@
                     </div>
                     <!-- 返回前頁 Button -->
                     <div class="mt-5 float-right">
-                        <a href="<c:url value='/pa' />" class="btn btn-secondary btn-icon-split">
+                        <a href="<c:url value='/back/drawlots' />" class="btn btn-secondary btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -216,6 +216,8 @@
     <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
     <script>
         $(document).ready(function(){
+        	
+        	$("#updateTime").attr("value",Date.now);
 
             // Sidebar
             $("#Company_PA, #CP").addClass('active')
@@ -240,17 +242,26 @@
                         Swal.showLoading();
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("PUT", "<c:url value='/paUpdate' />", true);
+                        xhr.open("PUT", "<c:url value='/back/drawlots/update' />", true);
                         xhr.setRequestHeader("Content-Type", "application/json");
                         var bean = {
-                            "company_ID" :   ${bean.company_ID},
-                            "company_Name" : "${bean.company_Name}",
-                            "income" :       $('#income').val(),
-                            "gross_Margin" : $('#gross_Margin').val(),
-                            "operating_Profit_Ratio" :  $('#operating_Profit_Ratio').val(),
-                            "net_Income_Margin" :       $('#net_Income_Margin').val(),
-                            "net_Profit_Margin" :       $('#net_Profit_Margin').val()
+                            "stockCode":${bean.stockCode},
+                            "stockName":$('#stockName').val(),
+                            "marketType":$('#marketType').val(),
+                            "subscribeStatus":$('#subscribeStatus').val(),
+                            "subscribePrice":$('#subscribePrice').val(),
+                            "quantity":$('#quantity').val(),
+                            "startDate":$('#startDate').val(),
+                            "endDate":$('#endDate').val(),
+                            "deductionDate":$('#deductionDate').val(),
+                            "drawDate":$('#drawDate').val(),
+                            "grantSecuritiesDate":$('#grantSecuritiesDate').val(),
+                            "totalQuantity":$('#totalQuantity').val(),
+                            "updateTime":$("#updateTime").va1(),
+                            "remarks":$('#remarks').val()                         
                         }
+
+                        console.log(bean.updateTime);
                         // console.log(JSON.stringify(bean))
                         xhr.send(JSON.stringify(bean));
                         xhr.onreadystatechange = function() {
@@ -262,7 +273,7 @@
                                         'success'
                                     )
                                     setTimeout(function(){
-                                        location.replace("<c:url value='/pa' />");   
+                                        location.replace("<c:url value='/back/drawlots' />");   
                                     },1500);
                                 }else{
                                     Swal.fire({

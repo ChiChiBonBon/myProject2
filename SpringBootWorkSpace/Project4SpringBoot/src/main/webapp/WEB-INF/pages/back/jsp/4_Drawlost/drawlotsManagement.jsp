@@ -76,7 +76,7 @@
                                     <span class="icon text-white-50">
                                         <i class="fas fa-file-upload"></i>
                                     </span>
-                                    <span class="text" id="uploadFile">上傳檔案</span>
+                                    <span class="text" id="uploadFile">更新抽籤資訊</span>
                                 </a >
                                 
                                 <form method="POST" enctype="multipart/form-data" id="UploadForm">
