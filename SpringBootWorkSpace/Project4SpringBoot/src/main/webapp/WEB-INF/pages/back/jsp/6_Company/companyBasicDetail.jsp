@@ -55,7 +55,7 @@
                         <span class="text-primary">${bean.company_NikeName}(${bean.stock})</span>
                          
                         
-                        <span class="btn btn-danger btn-icon-split float-right">
+                        <span class="btn btn-danger btn-icon-split float-right" id="delete">
                             <span class="icon text-white-50">
                                 <i class="fas fa-trash"></i>
                             </span>
@@ -71,6 +71,24 @@
                         </span>
                     </h1>
                     
+                    <!-- Delete 樣式 -->
+                    <template id="my-delete${bean.stock}">
+                        <swal-title>
+                        你確定要刪除 ${bean.stock} ?
+                        </swal-title>
+                        <swal-icon type="warning" color="red"></swal-icon>
+                        <swal-button type="confirm">
+                        取消
+                        </swal-button>
+                        <swal-button type="deny">
+                        刪除
+                        </swal-button>
+                        <swal-param name="allowEscapeKey" value="false" />
+                        <swal-param
+                        name="customClass"
+                        value='{ "popup": "my-popup" }' />
+                    </template>
+
                    
                     <!-- form -->
                     <div class="border border-secondary rounded bg-white">
@@ -217,27 +235,117 @@
 
             // Update
             $('#updateSend').on('click', function(){
-                console.log("update....")
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", "<c:url value='/back/cDetail/Update' />", true); 
+                Swal.fire({
+                    title: '你確定要更新?',
+                    text: "資料是沒辦法復原!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, update it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Upload File Please Wait......'
+                        });
+                        Swal.showLoading();
 
-                let arrayX = $('#formArea').serializeArray()
-                let jsonX = {};
+                        console.log("update....")
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "<c:url value='/back/cDetail/Update' />", true); 
 
-                for(let x in arrayX){
-                    let xOb =  arrayX[x]
-                    jsonX[xOb.name] = xOb.value
-                }
+                        let arrayX = $('#formArea').serializeArray()
+                        let jsonX = {};
 
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(JSON.stringify(jsonX))
+                        for(let x in arrayX){
+                            let xOb =  arrayX[x]
+                            jsonX[xOb.name] = xOb.value
+                        }
 
-                xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 201) ) {
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(JSON.stringify(jsonX))
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                if(xhr.responseText){
+                                    Swal.fire(
+                                        'Update!',
+                                        'Your file has been update.',
+                                        'success'
+                                    )
+                                    setTimeout(function(){
+                                        location.reload();
+                                    },1500);
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                }
+                            }
 
-                }} 
+                            if (xhr.readyState == 4 && xhr.status != 200) {
+                                Swal.fire({
+                                    // timer: 1500,
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Something went wrong!',
+                                    // footer: '<a href="">Why do I have this issue?</a>'
+                                })
+                            }
+                        }
+                    }
+                })
             })
 
+            // Delete Data
+            $('#delete').on('click', function(){
+
+                Swal.fire({
+                    template: `#my-delete${bean.stock}`
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        Swal.fire({
+                            title: `Delete ${bean.stock}, Please Wait......`
+                        });
+                        Swal.showLoading();                         
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "<c:url value='/back/cBasic/delete' />", true);
+                        xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+                        xhr.send(`stock=${bean.stock}`);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                if(xhr.responseText){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: `${bean.stock} has been deleted.`,
+                                        // showConfirmButton: false,
+                                        // timer: 1500
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                } 
+                                setTimeout(function(){
+                                    location.replace("<c:url value='/back/cBasic/Main' />");
+                                },1500);
+                               
+                            }
+                        }    
+                    }
+                })
+            })
+
+            
           
         })
 

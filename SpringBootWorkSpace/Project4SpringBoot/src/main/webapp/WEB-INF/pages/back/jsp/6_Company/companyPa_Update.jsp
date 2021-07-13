@@ -169,8 +169,8 @@
             // confirm
             $('#submitButton').on('click', function(){
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: '你確定要更新?',
+                    text: "資料是沒辦法復原!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
