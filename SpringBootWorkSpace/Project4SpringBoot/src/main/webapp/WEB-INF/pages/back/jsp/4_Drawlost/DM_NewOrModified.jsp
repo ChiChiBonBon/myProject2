@@ -217,8 +217,6 @@
     <script>
         $(document).ready(function(){
         	
-        	$("#updateTime").attr("value",Date.now);
-
             // Sidebar
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
@@ -226,6 +224,10 @@
 			
             // confirm
             $('#submitButton').on('click', function(){
+            	let systemTime = Date.now().toLocaleString();
+            	console.log(systemTime);
+  				window.alert(systemTime);
+            	
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
