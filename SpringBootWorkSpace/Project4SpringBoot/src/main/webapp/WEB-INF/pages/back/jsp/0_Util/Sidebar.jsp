@@ -48,7 +48,7 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<!-- <h6 class="collapse-header">Custom Components:</h6> -->
 				<a class="collapse-item" href="<c:url value="/back/cBasic/Main" />" id="Company_Basic">公司介紹</a>
-				<a class="collapse-item" href="<c:url value="/pa" />" id="Company_PA">基本面</a>
+				<a class="collapse-item" href="<c:url value="/back/pa/Main" />" id="Company_PA">基本面</a>
 			</div>
 		</div>
 	</li>
@@ -93,7 +93,22 @@
 			class="fas fa-comments"></i> <span>討論區</span>
 	</a></li>
 
-
+    <!-- Nav Item - 事件管理員 Collapse Menu -->
+    <li class="nav-item" id="Event">
+         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="true"
+             aria-controls="collapseEvent">
+             <i class="fas fa-building"></i>
+             <span>事件管理員</span>
+         </a>
+         <div id="collapseEvent" class="collapse" aria-labelledby="collapseEvent"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <!-- <h6 class="collapse-header">Custom Components:</h6> -->
+                 <a class="collapse-item" href="<c:url value='/back/eventLog/Main' />" id="eventLog">事件紀錄</a>
+                 <a class="collapse-item" href="<c:url value='#' />">系統資源</a>
+             </div>
+         </div>
+     </li>
 
 	<!-- Divider -->
 	<hr class="sidebar-divider d-none d-md-block">

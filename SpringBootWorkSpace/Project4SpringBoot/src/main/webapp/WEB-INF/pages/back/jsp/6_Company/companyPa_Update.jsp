@@ -113,7 +113,7 @@
                     </div>
                     <!-- 返回前頁 Button -->
                     <div class="mt-5 float-right">
-                        <a href="<c:url value='/pa' />" class="btn btn-secondary btn-icon-split">
+                        <a href="<c:url value='/back/pa/Main' />" class="btn btn-secondary btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -184,7 +184,7 @@
                         Swal.showLoading();
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("PUT", "<c:url value='/paUpdate' />", true);
+                        xhr.open("PUT", "<c:url value='/back/paUpdate' />", true);
                         xhr.setRequestHeader("Content-Type", "application/json");
                         var bean = {
                             "company_ID" :   ${bean.company_ID},
@@ -206,7 +206,7 @@
                                         'success'
                                     )
                                     setTimeout(function(){
-                                        location.replace("<c:url value='/pa' />");   
+                                        location.replace("<c:url value='/back/pa/Main' />");   
                                     },1500);
                                 }else{
                                     Swal.fire({
