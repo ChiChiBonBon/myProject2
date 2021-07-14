@@ -150,7 +150,7 @@
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">更新時間</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="" readonly id="updateTime" value="">
+                                        <input type="text" class="form-control" placeholder="" readonly id="updateTime" value="${bean.updateTime}">
                                         <div id="" class="invalid-feedback">請輸入時間</div>
                                     </div>
                                 </div>
@@ -221,12 +221,9 @@
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
 			$("#dashboard").removeClass('active')
-			
+            
             // confirm
             $('#submitButton').on('click', function(){
-            	let systemTime = Date.now().toLocaleString();
-            	console.log(systemTime);
-  				window.alert(systemTime);
             	
                 Swal.fire({
                     title: 'Are you sure?',
@@ -259,11 +256,10 @@
                             "drawDate":$('#drawDate').val(),
                             "grantSecuritiesDate":$('#grantSecuritiesDate').val(),
                             "totalQuantity":$('#totalQuantity').val(),
-                            "updateTime":$("#updateTime").va1(),
+                            "updateTime":new Date().getTime(),
                             "remarks":$('#remarks').val()                         
                         }
 
-                        console.log(bean.updateTime);
                         // console.log(JSON.stringify(bean))
                         xhr.send(JSON.stringify(bean));
                         xhr.onreadystatechange = function() {
