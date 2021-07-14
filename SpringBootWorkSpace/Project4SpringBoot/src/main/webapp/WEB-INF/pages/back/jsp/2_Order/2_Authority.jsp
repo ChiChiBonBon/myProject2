@@ -94,9 +94,8 @@
     <!-- A05 Logout Modal-->
     <%@include file="/WEB-INF/pages/back/jsp/0_Util/LogoutModal.jsp" %>
 
-
     <!-- script -->
-    <script src="<c:url value='/back/js/Account.js' />"></script>
+    <script src="<c:url value='/back/js/Authority.js' />"></script>
     
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value='/back/vendor/jquery/jquery.min.js' />"></script>

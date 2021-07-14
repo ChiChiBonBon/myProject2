@@ -30,30 +30,5 @@ public class EmployeeDAO {
 			return emp;
 	}
 	
-//	public boolean checkLogin(Account users) {	
-//		String hqlstr = "from member where mber_acc=:user and mber_psd=:pwd";
-//		Query<Employee> query = (Query<Employee>) session.createQuery(hqlstr, Employee.class);
-//			
-//		query.setParameter("user", users.getUser_account());
-//		query.setParameter("pwd",  users.getUser_password());
-//		
-//		Employee result = query.uniqueResult();
-//		
-//		
-//		if(result!=null) {
-//			return true;
-//		}
-//		
-//		return false;
-//	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
