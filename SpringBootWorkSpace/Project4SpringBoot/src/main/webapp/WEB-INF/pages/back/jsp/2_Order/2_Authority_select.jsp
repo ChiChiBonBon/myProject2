@@ -31,7 +31,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div style="text-align:center;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title" id="myModalLabel">修改xxx用戶權限:</h4>
             </div>
@@ -66,7 +66,7 @@
     </div><!-- /.modal -->
 </div>    
 
-<!-- 傳送要修改證券帳號 -->
+<!-- 傳送要修改的證券帳號 -->
 
      <form action="<c:url value = '/admin/controller/delete'/>"  method="post" id ="passForm"> 
      	<input id = 'delacc_ID' type = 'hidden' name="delacc_ID"> 
@@ -81,7 +81,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="<c:url value='/back/js/select_account.js' />" async defer></script>
+<script src="<c:url value='/back/js/Authority_select.js' />" async defer></script>
 
 
 
