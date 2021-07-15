@@ -66,5 +66,20 @@ public class TimeTool {
 		return "";
 	}
 	
+	public static Date stringToDate(String st) { // ex: 1962-02-09 >> Date
+		DateFormat toFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date parse = toFormat.parse(st);
+			return parse;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
+	}
+	
 	
 }
