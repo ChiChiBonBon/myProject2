@@ -1,13 +1,16 @@
 package tw.back.a02_Order.model;
 
-import java.text.DecimalFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import tw.back.a02_Order.tools.JsonTools;
 
 @Entity 
 @Table(name = "order_list_2")
@@ -16,7 +19,12 @@ public class OrderBean implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 
 //封裝
-		@Id 
+		
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column(name="id")
+		private String id;
+		
 		@Column(name = "order_ID")
 		private String order_ID ;
 		
@@ -56,8 +64,41 @@ public class OrderBean implements java.io.Serializable{
 		@Column(name = "trans_report")
 		private String trans_report ;      //交易取消=0,預約成功=1,預約失敗=2,委託成功=3,委託失敗=4,部分成交=5,完全成交=6
 
-		
+//建構子
+		public OrderBean() {	
+			super();
+		}
+
+		public OrderBean(String id, String order_ID, String stock_ID, String com_ID, String order_price,
+						 String order_quant, String order_total, String order_date, String order_time, String trans_cond,
+						 String trans_sellorbuy, String trans_way, String trans_stats, String trans_report) {
+			
+			this.id = id;
+			this.order_ID        = order_ID;
+			this.stock_ID        = stock_ID;
+			this.com_ID          = com_ID;
+			this.order_price     = order_price;
+			this.order_quant     = order_quant;
+			this.order_total     = order_total;
+			this.order_date      = order_date;
+			this.order_time      = order_time;
+			this.trans_cond      = trans_cond;
+			this.trans_sellorbuy = trans_sellorbuy;
+			this.trans_way       = trans_way;
+			this.trans_stats     = trans_stats;
+			this.trans_report    = trans_report;
+		}
+
 //get & set
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}	
+		
+		
 		public String getOrder_ID() {
 			return order_ID;
 		}
@@ -166,12 +207,12 @@ public class OrderBean implements java.io.Serializable{
 		@Override
 		public String toString() {
 			return "["              + 
-					"'"+ order_ID        +"',"+
+					"'"+ id              +"',"+
 					"'"+ stock_ID        +"',"+
 					"'"+ com_ID          +"',"+
-					"'"+ order_price     +"',"+
-					"'"+ order_quant     +"',"+
-					"'"+ order_total     +"',"+
+					"'"+ "$"+JsonTools.getMoneyFormat(order_price)+"',"+
+					"'"+ 	 JsonTools.getMoneyFormat(order_quant)+"',"+
+					"'"+ "$"+JsonTools.getMoneyFormat(order_total)+"',"+
 					"'"+ order_date      +"',"+
 					"'"+ order_time      +"',"+
 					"'"+ trans_cond      +"',"+

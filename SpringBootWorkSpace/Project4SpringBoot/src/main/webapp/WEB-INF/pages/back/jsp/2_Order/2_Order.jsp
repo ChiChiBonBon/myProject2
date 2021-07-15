@@ -44,7 +44,10 @@
                 <%@include file="/WEB-INF/pages/back/jsp/0_Util/Topbar.jsp" %>
 				
                 <!-- 內容 -->
-                <!-- Begin Page Content -->
+     			<%  java.util.UUID uuid = java.util.UUID.randomUUID();
+          			String order_ID     = uuid.toString();
+          		%>
+          		<!-- Begin Page Content -->
                 <div class="container-fluid">
       <h2 id="test">Hi,${emp_ID},歡迎使用後台系統!</h2>
       
@@ -60,14 +63,14 @@
           <iframe id="Kline" src="https://s.yimg.com/nb/tw_stock_frontend/scripts/TaChart/tachart.3de240ea9a.html?sid=2330"   style="width: 570px; height: 430px; border-width: 0;"></iframe>
           <iframe id="Top5"  src="https://s.yimg.com/nb/tw_stock_frontend/scripts/StxChart/StxChart.9d11dfe155.html?sid=2330" style="width: 560px; height: 380px; border-width: 0;"></iframe>
       </span>
-  
-      <form action="<c:url value = '/order/check'/>" method="Post" onsubmit="return check_form(this.id);">
+        
+      <form action="<c:url value = '/admin/order'/>" method="Post" onsubmit="return check_form(this.id);" id="orderForm">
       <fieldset name="fieldset">
           <legend></legend>
           <span>
-              <button name="op1" id="but1" value="1" type="button" class="st_change" onclick="change_border_color(this.id),op1_value(this.id),change_odd(this.id),get_total(this.id)">整券</button>
-              <button name="op1" id="but2" value="2" type="button" class="" onclick="change_border_color(this.id),op1_value(this.id)" disabled>期貨</button>
-              <button name="op1" id="but3" value="3" type="button" class="" onclick="change_border_color(this.id),op1_value(this.id)" disabled>選權</button>
+              <button name="op1" id="but1" value="證" type="button" class="st_change" onclick="change_border_color(this.id),op1_value(this.id),change_odd(this.id),get_total(this.id)">證券</button>
+              <button name="op1" id="but2" value="期" type="button" class="" onclick="change_border_color(this.id),op1_value(this.id)" disabled>期貨</button>
+              <button name="op1" id="but3" value="選" type="button" class="" onclick="change_border_color(this.id),op1_value(this.id)" disabled>選權</button>
               <button name="op1" id="but4" value="0" type="button" class="st_change" onclick="change_border_color(this.id),op1_value(this.id),change_odd(this.id),get_total(this.id)">零股</button>
               <input  name="trans_species" id="trans_species" type="hidden" >
               
@@ -77,7 +80,7 @@
               </select>
   
               <label for="">標的:</label>
-              <input type="text" size="16" value="公司短稱">
+              <input name="com_name" id="com_name"type="text" size="19" placeholder="商品名稱">
               
 
               <!--  
@@ -88,7 +91,7 @@
               <button>市</button> -->
 
               <label for="">單位:</label>
-              <label id="oneorodd" for="" class="forlab"></label>
+              <label for="" id="oneorodd" ></label>
               <label for="">股</label>
               
               
@@ -107,26 +110,28 @@
               <input  name="trans_way" id="trans_way" type="hidden" >
               
               <label for="" >商品代碼:</label>
-              <input name="com_ID" type="text" placeholder="股票代號" id="com_ID" autofocus onchange="get_input(this.id)" size="8">
+              <input name="com_ID" type="text" placeholder="股票代號" id="com_ID" autofocus onchange="get_input(this.id)" size="10">
               <select name="trans_cond" id="trans_cond" class="st_rod">
                   <option value="ROD" selected>ROD</option>
                   <option value="IOC">IOC</option>
                   <option value="FOK">FOK</option>
               </select>
               <label for="">價格:</label>
-              <input name="order_price" id="order_price" type="text" size="3" maxlength="7" onchange="get_total(this.id)">
+              <input name="order_price" id="order_price" type="text" size="5" maxlength="7" onkeyup="get_total(this.id)">
               <label for="">數量:</label>
-              <input name="order_quant" id="order_quant" type="text" size="3" maxlength="4" onchange="get_total(this.id)">
+              <input name="input_quant" id="input_quant" type="text" size="4" maxlength="4.5" onkeyup="get_total(this.id)">
+              <input name="order_quant" id="order_quant"   type="hidden" >
               <label for="" >總價:</label>
               <label id="show_total" for=""></label>
               <label for="" >新台幣</label>
               <input name="order_total" id="order_total" type="hidden" >  
-              <input type="submit" value="立即下單" class="st_submit" onclick="get_datetime()" id="order_now"  >
-              <input type="reset"  value="清除" id="clear" onclick="clear()">
+              <input type="button" value="立即下單" class="st_submit" onclick="get_datetime()" id="order_now"  >
+              <input type="reset"  value="清除" id="clear"  onclick="clear(),order_clear(this.id)">
+              <input name="order_ID"     id="order_ID"     type="hidden" value=<%=order_ID%>>
               <input name="order_date"   id="order_date"   type="hidden" >
               <input name="order_time"   id="order_time"   type="hidden" >
               <input name="trans_stats"  id="trans_stats"  type="hidden" value="委託單">
-            <input name="trans_report" id="trans_report" type="hidden" value="委託成功">            
+              <input name="trans_report" id="trans_report" type="hidden" value="委託成功">            
       </fieldset>
       </form>
       
@@ -135,7 +140,7 @@
   
 	  <div class="content" >
     	 <div class="header">訂單查詢</div> 
-      		 <iframe src="<c:url value='/admin/order/select' />" width="100%" frameborder="0"> id="select_firame"></iframe>
+      		 <iframe src="<c:url value='/order/select' />" width="100%" frameborder="0"> id="select_firame"></iframe>
  	  </div>
                 
                 
@@ -168,6 +173,10 @@
     <!-- script -->
     <script src="<c:url value='/back/js/Order.js' />"></script>
     <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
+    <script type="text/javascript"> 
+    	var apiurl = "<c:url value='/getapi' />" + "?"  ; 
+	</script>
+    
     
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value='/back/vendor/jquery/jquery.min.js' />"></script>

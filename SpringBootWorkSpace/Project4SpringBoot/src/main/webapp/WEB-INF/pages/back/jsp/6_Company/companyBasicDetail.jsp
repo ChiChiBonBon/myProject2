@@ -49,104 +49,133 @@
 				<!-- 內容 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    
+
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-1 text-gray-800">Company</h1>
-                        <a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
-                    </div>
-                    <p class="mb-4"> 
-                        資料來源:  <a href="https://mops.twse.com.tw/mops/web/t163sb06"> 公開資料觀測站</a> 
-                        <br>   
-                        可以將CSV資料匯入進來 (Big-5編碼)，目前未檢查資料真偽，以後更新。 2021/6/30 
-                    </p>
-                    
-                    
-                    <!-- Table -->
-                    <!-- Table Upolad-->
-                    <div class="card shadow mb-4">
-                        <div class="card-header">
-                            <div class="input-group w-50">
-                                <a  href="#" class="btn btn-primary btn-icon-split" >
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-file-upload"></i>
-                                    </span>
-                                    <span class="text" id="uploadFile">上傳檔案</span>
-                                </a >
-                                
-                                <form method="POST" enctype="multipart/form-data" id="UploadForm">
-                                    <input type="file" class="form-control" id="csvFile" name="csvFile" accept=".csv">
-                                </form>
-                            </div>
-                        </div>
-                       
-                        <!-- Table Content-->
-                        <div class="card-body">
-                            <div class="table-responsive"> 
-                                <table class="table table-bordered tableX" id="" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>公司代號</th>
-                                            <th>公司名稱</th>
-                                            <th>營業收入(百萬)</th>
-                                            <th>毛利率(%)</th>
-                                            <th>營業利益率(%)</th>
-                                            <th>稅前純益率(%)</th>
-                                            <th>稅後純益率(%)</th>
-                                            <th>修改 / 刪除</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>公司代號</th>
-                                            <th>公司名稱</th>
-                                            <th>營業收入(百萬)</th>
-                                            <th>毛利率(%)</th>
-                                            <th>營業利益率(%)</th>
-                                            <th>稅前純益率(%)</th>
-                                            <th>稅後純益率(%)</th>
-                                            <th>修改 / 刪除</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody id="dataAreaX">
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>   
-
-
-                    <!-- Delete Button -->
-                    <div class="float-right" id="deleteAll">
-                        <a class="btn btn-danger btn-icon-split ">
+                    <h1 class="h3 mb-4 text-gray-800">
+                        <span class="text-primary">${bean.company_NikeName}(${bean.stock})</span>
+                         
+                        
+                        <span class="btn btn-danger btn-icon-split float-right" id="delete">
                             <span class="icon text-white-50">
                                 <i class="fas fa-trash"></i>
                             </span>
-                            <span class="text">Delete All Data</span>
-                            <template id="deleteAll-template">
-                                <swal-title>
-                                你確定要刪除全部資料?
-                                </swal-title>
-                                <swal-icon type="warning" color="red"></swal-icon>
-                                <swal-button type="confirm">
-                                取消
-                                </swal-button>
-                                <swal-button type="deny">
-                                刪除全部
-                                </swal-button>
-                                <swal-param name="allowEscapeKey" value="false" />
-                                <swal-param
-                                name="customClass"
-                                value='{ "popup": "my-popup" }' />
-                            </template>
+                            <span class="text">刪除</span>
+                            
+                        </span>
+                        <span class="float-right">&emsp;</span> 
+                        <span class="btn btn-warning btn-icon-split float-right " id="update">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="text" id="updateArea">修該</span>
+                        </span>
+                    </h1>
+                    
+                    <!-- Delete 樣式 -->
+                    <template id="my-delete${bean.stock}">
+                        <swal-title>
+                        你確定要刪除 ${bean.stock} ?
+                        </swal-title>
+                        <swal-icon type="warning" color="red"></swal-icon>
+                        <swal-button type="confirm">
+                        取消
+                        </swal-button>
+                        <swal-button type="deny">
+                        刪除
+                        </swal-button>
+                        <swal-param name="allowEscapeKey" value="false" />
+                        <swal-param
+                        name="customClass"
+                        value='{ "popup": "my-popup" }' />
+                    </template>
+
+                   
+                    <!-- form -->
+                    <div class="border border-secondary rounded bg-white">
+                        <!-- <h2 id='id'>2330</h2> -->
+                        
+                        <!-- API -->
+                        <div class="justify-content-center d-flex mt-5">
+                            <iframe id="Top5"  src="https://s.yimg.com/nb/tw_stock_frontend/scripts/StxChart/StxChart.9d11dfe155.html?sid=${bean.stock}" style="width: 560px; height: 382px; border-width: 0;"></iframe>
+                        </div>
+                        
+                        <!-- 送出資料 Button -->
+                        <div class="btn btn-primary btn-icon-split ml-4 my-3" id="updateSend" style="display:none">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="text" id="updateArea">送出資料</span>
+                        </div>
+                        <!-- 詳細資料 -->
+                        <form id="formArea" enctype="multipart/form-data">
+                            <div class="row text-dark" >
+                                <div class="col-4">
+                                    <ul class="list-group list-group-flush">
+                                    
+                                        <li class="list-group-item">出表日期:&emsp; <input class="form-control" type="date" value="${bean.formData}" name="formData" readonly></li>
+                                        <li class="list-group-item">公司代號:&emsp; <input class="form-control" type="text" value="${bean.stock}" name="stock" readonly></li>
+                                        <li class="list-group-item">公司名稱:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.company_Name}" name="company_Name" readonly> </li>
+                                        <li class="list-group-item">公司簡稱:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.company_NikeName}" name="company_NikeName" readonly> </li>
+                                        <li class="list-group-item">外國企業註冊地國:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.foreign_Country}" name="foreign_Country" readonly> </li>
+                                        <li class="list-group-item">產業別:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.industry_No}" name="industry_No" readonly> </li>
+                                        <li class="list-group-item">住址:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.company_Location}" name="company_Location" readonly> </li>
+                                        <li class="list-group-item">營利事業統一編號:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.business_Accounting_NO}" name="business_Accounting_NO" readonly> </li>
+                                        <li class="list-group-item">董事長:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.chairman_Board}" name="chairman_Board" readonly> </li>
+                                        <li class="list-group-item">總經理:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.general_Manager}" name="general_Manager" readonly> </li>
+                                        <li class="list-group-item">發言人:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.spokesman}" name="spokesman" readonly> </li>
+                                        <li class="list-group-item"> </li>
+                                    </ul>
+                                </div>
+                                <div class="col-4">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">發言人職稱:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.spokesman_Title}" name="spokesman_Title" readonly> </li>
+                                        <li class="list-group-item">代理發言人:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.spokesman_Acting}" name="spokesman_Acting" readonly> </li>
+                                        <li class="list-group-item">總機電話:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.telephone}" name="telephone" readonly> </li>
+                                        <li class="list-group-item">成立日期:&emsp; <input class="form-control read" type="date" placeholder="-----" value="${bean.establishment_Date}" name="establishment_Date" readonly> </li>
+                                        <li class="list-group-item">上市日期:&emsp; <input class="form-control read" type="date" placeholder="-----" value="${bean.appear_Market_Date}" name="appear_Market_Date" readonly> </li>
+                                        <li class="list-group-item">普通股每股面額:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.denomination_per_Stock}" name="denomination_per_Stock" readonly> </li>
+                                        <li class="list-group-item">實收資本額:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.paid_In_Capital_Amount}" name="paid_In_Capital_Amount" readonly> </li>
+                                        <li class="list-group-item">私募股數:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.private_Equity_Stock}" name="private_Equity_Stock" readonly> </li>
+                                        <li class="list-group-item">特別股:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.special_Stock}" name="special_Stock" readonly> </li>
+                                        <li class="list-group-item">編制財務報表類型:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.financial_Statements_Types}" name="financial_Statements_Types" readonly> </li>
+                                        <li class="list-group-item">股票過戶機構:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.transfer_Agency}" name="transfer_Agency" readonly> </li>
+                                        <li class="list-group-item"> </li>
+                                    </ul>
+                                </div>
+                                <div class="col-4">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">過戶電話:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.agency_Telephone}" name="agency_Telephone" readonly> </li>
+                                        <li class="list-group-item">過戶地址:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.agency_Location}" name="agency_Location" readonly> </li>
+                                        <li class="list-group-item">簽證會計師事務所:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.accounting_Firm}" name="accounting_Firm" readonly> </li>
+                                        <li class="list-group-item">簽證會計師1:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.accounting_Person_1}" name="accounting_Person_1" readonly> </li>
+                                        <li class="list-group-item">簽證會計師2:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.accounting_Person_2}" name="accounting_Person_2" readonly> </li>
+                                        <li class="list-group-item">英文簡稱:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.company_NikeName_EN}" name="company_NikeName_EN" readonly> </li>
+                                        <li class="list-group-item">英文通訊地址:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.company_Location_EN}" name="company_Location_EN" readonly> </li>
+                                        <li class="list-group-item">傳真機號碼:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.fax_Telephone}" name="fax_Telephone" readonly> </li>
+                                        <li class="list-group-item">電子郵件信箱:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.email}" name="email" readonly> </li>
+                                        <li class="list-group-item">網址:&emsp; <input class="form-control read" type="text" placeholder="-----" value="${bean.web_Address}" name="web_Address" readonly> </li>
+                                        <li class="list-group-item"> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        
+
+                    </div>
+                    <!-- 返回前頁 Button -->
+                    <div class="mt-5 float-right">
+                        <a href="<c:url value='/back/cBasic/Main' />" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                            <span class="text">返回前頁</span>
                         </a>
                     </div>
 
+
                 </div>
-                <!-- End of Page Content -->
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -190,65 +219,110 @@
     <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
     <script>
         $(document).ready(function(){
-            
             // Sidebar
-            $("#dashboard").removeClass('active')
-            $("#Company_PA, #CP").addClass('active')
+            $("#Company_Basic, #CP").addClass('active')
             $("#collapseCP").addClass('show')
 
-            // Select All Data
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "<c:url value='/pa/showAllData' />", true);
-            xhr.send()
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    $('#dataAreaX').html(showAll(xhr.responseText))
-                    $('.tableX').attr('id', 'dataTable')
-                    
-                    // $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
-                    // $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
-                    // $.getScript("<c:url value='/back/js/demo/datatables-demo.js' />");
-                    var scriptsToLoad = [
-                        "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
-                        "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-                        "<c:url value='/back/js/demo/datatables-demo.js' />"
-                    ]; 
+            let readonlyBoolean = $('.read').prop("readonly")
+            // UpdateCkeck
+            $('#update').on('click', function(){
+                $('#updateSend').toggle();
+                // console.log(readonlyBoolean)
+                readonlyBoolean = !readonlyBoolean
+                $('.read').prop('readonly', readonlyBoolean)
+                
+            })
 
-                    scriptsToLoad.forEach(function(src) {
-                        var script = document.createElement('script');
-                        script.src = src;
-                        script.async = false;
-                        document.body.appendChild(script);
-                    });
-                }
-            }
-
-            
-            // Delete Data
-            $('tbody').on('click', '#delete', function(){
-                var x =  $(this).parent().parent().index()
-                var paID = $(".idX")[x].textContent
-                console.log(paID)
+            // Update
+            $('#updateSend').on('click', function(){
                 Swal.fire({
-                    template: '#my-delete'+ paID
+                    title: '你確定要更新?',
+                    text: "資料是沒辦法復原!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, update it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Upload File Please Wait......'
+                        });
+                        Swal.showLoading();
+
+                        console.log("update....")
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "<c:url value='/back/cDetail/Update' />", true); 
+
+                        let arrayX = $('#formArea').serializeArray()
+                        let jsonX = {};
+
+                        for(let x in arrayX){
+                            let xOb =  arrayX[x]
+                            jsonX[xOb.name] = xOb.value
+                        }
+
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(JSON.stringify(jsonX))
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                if(xhr.responseText){
+                                    Swal.fire(
+                                        'Update!',
+                                        'Your file has been update.',
+                                        'success'
+                                    )
+                                    setTimeout(function(){
+                                        location.reload();
+                                    },1500);
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                }
+                            }
+
+                            if (xhr.readyState == 4 && xhr.status != 200) {
+                                Swal.fire({
+                                    // timer: 1500,
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Something went wrong!',
+                                    // footer: '<a href="">Why do I have this issue?</a>'
+                                })
+                            }
+                        }
+                    }
+                })
+            })
+
+            // Delete Data
+            $('#delete').on('click', function(){
+
+                Swal.fire({
+                    template: `#my-delete${bean.stock}`
                 }).then((result)=> {
                     if (result.isDenied) {
                         Swal.fire({
-                            title: 'Delete '+ paID + ' Please Wait......'
+                            title: `Delete ${bean.stock}, Please Wait......`
                         });
                         Swal.showLoading();                         
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "<c:url value='/pa/delete' />", true);
+                        xhr.open("POST", "<c:url value='/back/cBasic/delete' />", true);
                         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
-                        xhr.send("id="+paID);
+                        xhr.send(`stock=${bean.stock}`);
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState == 4 && xhr.status == 200) {
 
                                 if(xhr.responseText){
                                     Swal.fire({
                                         icon: 'success',
-                                        title: paID + ' has been deleted.',
+                                        title: `${bean.stock} has been deleted.`,
                                         // showConfirmButton: false,
                                         // timer: 1500
                                     })
@@ -262,7 +336,7 @@
                                     })
                                 } 
                                 setTimeout(function(){
-                                    location.reload();
+                                    location.replace("<c:url value='/back/cBasic/Main' />");
                                 },1500);
                                
                             }
@@ -270,173 +344,9 @@
                     }
                 })
             })
+
             
-            // Delete All Data
-            $('#deleteAll').on('click', function(){
-                Swal.fire({
-                    template: '#deleteAll-template'
-                }).then((result)=> {
-                    if (result.isDenied) {
-                        Swal.fire({
-                            title: 'Upload File Please Wait......'
-                        });
-                        Swal.showLoading();                         
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("GET", "<c:url value='/pa/deleteAll' />", true);
-                        xhr.send();
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState == 4 && xhr.status == 200) {
-
-                                if(xhr.responseText){
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'All file has been deleted.',
-                                        // showConfirmButton: false,
-                                        // timer: 1500
-                                    })
-                                }else{
-                                    Swal.fire({
-                                        // timer: 1500,
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'Something went wrong!',
-                                        // footer: '<a href="">Why do I have this issue?</a>'
-                                    })
-                                } 
-                                setTimeout(function(){
-                                    location.reload();
-                                },1500);
-                               
-                            }
-                        }        
-                    }
-                })
-            })
-
-            // Insert Data
-            $('#uploadFile').on('click', async function(){    
-                var form = $('#UploadForm')[0];
-                var data = new FormData(form);        
-
-                console.log(data)
-                var xhr1 = new XMLHttpRequest();
-                xhr1.open("POST", "<c:url value='/pa/insertData' />", true);
-
-                xhr1.send(data);
-
-
-                Swal.fire({
-                    // timer: 2000,
-                    title: 'Upload File Please Wait......'
-                });
-                Swal.showLoading(); 
-
-                xhr1.onreadystatechange = function() {
-                    if (xhr1.readyState == 4 && xhr1.status == 200) {
-                        console.log("success")
-
-                        if(xhr.responseText){
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'All file has been Insert.',
-                                // showConfirmButton: false,
-                                // timer: 1500
-                            })
-                        }else{
-                            Swal.fire({
-                                // timer: 1500,
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong!',
-                                // footer: '<a href="">Why do I have this issue?</a>'
-                            })
-                        } 
-                        setTimeout(function(){
-                            location.reload();
-                        },1500);
-                    }
-                }
-
-            })
-
-            // Update Data
-            $('tbody').on('click', '#update', function(){
-                var x =  $(this).parent().parent().index()
-                var paID = $(".idX")[x].textContent
-                console.log(paID)
-                Swal.fire({
-                    template: '#my-update'+ paID
-                }).then((result)=> {
-                    if (result.isDenied) {
-                        location.replace("<c:url value='/paUpdate/' />" + paID);                       
-                    }
-                })
-            })
-            
-            function showAll(text){
-                var beans = JSON.parse(text);
-                var segment = ""
-
-                for(var x in beans){
-                    var bean = beans[x]
-                    var buttonX =
-                        `<span href="#" class="btn btn-warning btn-circle btn-sm" id="update">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <template id="my-update`+bean.company_ID+`">
-                                <swal-title>
-                                你確定要更新` + bean.company_ID +`?
-                                </swal-title>
-                                <swal-icon type="warning" color="red"></swal-icon>
-                                <swal-button type="confirm">
-                                取消
-                                </swal-button>
-                                <swal-button type="deny">
-                                更新
-                                </swal-button>
-                                <swal-param name="allowEscapeKey" value="false" />
-                                <swal-param
-                                name="customClass"
-                                value='{ "popup": "my-popup" }' />
-                            </template>
-                        </span>
-                        &nbsp;&nbsp;
-                        <span" class="btn btn-danger btn-circle btn-sm" id="delete">
-                            <i class="fas fa-trash"></i>
-                            <template id="my-delete`+bean.company_ID+`">
-                                <swal-title>
-                                你確定要刪除 `+ bean.company_ID +` ?
-                                </swal-title>
-                                <swal-icon type="warning" color="red"></swal-icon>
-                                <swal-button type="confirm">
-                                取消
-                                </swal-button>
-                                <swal-button type="deny">
-                                刪除
-                                </swal-button>
-                                <swal-param name="allowEscapeKey" value="false" />
-                                <swal-param
-                                name="customClass"
-                                value='{ "popup": "my-popup" }' />
-                            </template>
-                        </span>`
-
-                    
-
-                    segment += "<tr>"
-                    segment += "<td class='idX'>" + bean.company_ID + "</td>"
-                    segment += "<td>" + bean.company_Name + "</td>"
-                    segment += "<td>" + bean.income + "</td>"
-                    segment += "<td>" + bean.gross_Margin + "</td>"
-                    segment += "<td>" + bean.operating_Profit_Ratio + "</td>"
-                    segment += "<td>" + bean.net_Income_Margin + "</td>"
-                    segment += "<td>" + bean.net_Profit_Margin + "</td>"
-                    segment += "<td>" + buttonX + "</td>"
-                    segment += "</tr>"
-                }
-                return segment;
-            }
-
+          
         })
 
     </script>

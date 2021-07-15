@@ -53,14 +53,14 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-1 text-gray-800">Company</h1>
-                        <a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+                        <a href="<c:url value='/back/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i> 檔案下載
                         </a>
                     </div>
                     <p class="mb-4"> 
                         資料來源:  <a href="https://mops.twse.com.tw/mops/web/t163sb06"> 公開資料觀測站</a> 
                         <br>   
-                        可以將CSV資料匯入進來 (Big-5編碼)，目前未檢查資料真偽，以後更新。 2021/6/30 
+                        可以將CSV資料匯入進來 (Big-5編碼)。
                     </p>
                     
                     
@@ -85,7 +85,7 @@
                         <!-- Table Content-->
                         <div class="card-body">
                             <div class="table-responsive"> 
-                                <table class="table table-bordered tableX" id="" width="100%" cellspacing="0">
+                                <table class="table table-bordered tableArea" id="" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>公司代號</th>
@@ -110,7 +110,7 @@
                                             <th>修改 / 刪除</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody id="dataAreaX">
+                                    <tbody id="dataArea">
                                         
                                     </tbody>
                                 </table>
@@ -192,18 +192,17 @@
         $(document).ready(function(){
             
             // Sidebar
-            $("#dashboard").removeClass('active')
             $("#Company_PA, #CP").addClass('active')
             $("#collapseCP").addClass('show')
 
             // Select All Data
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "<c:url value='/pa/showAllData' />", true);
+            xhr.open("GET", "<c:url value='/back/pa/showAllData' />", true);
             xhr.send()
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    $('#dataAreaX').html(showAll(xhr.responseText))
-                    $('.tableX').attr('id', 'dataTable')
+                    $('#dataArea').html(showAll(xhr.responseText))
+                    $('.tableArea').attr('id', 'dataTable')
                     
                     // $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
                     // $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
@@ -239,7 +238,7 @@
                         Swal.showLoading();                         
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "<c:url value='/pa/delete' />", true);
+                        xhr.open("POST", "<c:url value='/back/pa/delete' />", true);
                         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
                         xhr.send("id="+paID);
                         xhr.onreadystatechange = function() {
@@ -283,7 +282,7 @@
                         Swal.showLoading();                         
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("GET", "<c:url value='/pa/deleteAll' />", true);
+                        xhr.open("GET", "<c:url value='/back/pa/deleteAll' />", true);
                         xhr.send();
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -321,14 +320,14 @@
 
                 console.log(data)
                 var xhr1 = new XMLHttpRequest();
-                xhr1.open("POST", "<c:url value='/pa/insertData' />", true);
+                xhr1.open("POST", "<c:url value='/back/pa/insertData' />", true);
 
                 xhr1.send(data);
 
 
                 Swal.fire({
                     // timer: 2000,
-                    title: 'Upload File Please Wait......'
+                    title: '檔案寫入中 請稍等......'
                 });
                 Swal.showLoading(); 
 
@@ -369,7 +368,7 @@
                     template: '#my-update'+ paID
                 }).then((result)=> {
                     if (result.isDenied) {
-                        location.replace("<c:url value='/paUpdate/' />" + paID);                       
+                        location.replace("<c:url value='/back/paUpdate/' />" + paID);                       
                     }
                 })
             })
