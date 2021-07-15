@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="UTF-8">
@@ -122,7 +122,7 @@
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">扣款日</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="deductionDate" value="${bean.deductionDate}">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-12" id="deductionDate" value="${bean.deductionDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
@@ -130,6 +130,13 @@
                                     <label class="col-sm-2 col-form-label text-primary">抽籤日</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="範例: 2021-07-13" id="drawDate" value="${bean.drawDate}">
+                                        <div id="" class="invalid-feedback">請輸入日期</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group row">
+                                    <label class="col-sm-2 col-form-label text-primary">抽籤日</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="範例: 2021-07-14" id="refundDate" value="${bean.refundDate}">
                                         <div id="" class="invalid-feedback">請輸入日期</div>
                                     </div>
                                 </div>
@@ -149,8 +156,8 @@
                                 </div>
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">更新時間</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="" readonly id="updateTime" value="${bean.updateTime}">
+                                    <div class="col-sm-9">                           		
+                                        <input type="text" class="form-control" placeholder="" readonly id="updateTime" value="<fmt:formatDate value='${bean.updateTime}' pattern='yyyy-MM-dd HH:mm:ss'/>">
                                         <div id="" class="invalid-feedback">請輸入時間</div>
                                     </div>
                                 </div>
@@ -254,6 +261,7 @@
                             "endDate":$('#endDate').val(),
                             "deductionDate":$('#deductionDate').val(),
                             "drawDate":$('#drawDate').val(),
+                            "refundDate":$('#refundDate').val(),
                             "grantSecuritiesDate":$('#grantSecuritiesDate').val(),
                             "totalQuantity":$('#totalQuantity').val(),
                             "updateTime":new Date().getTime(),
@@ -334,7 +342,6 @@
                     $('#net_Profit_Margin').removeClass('is-invalid')
                 }
             })
-
         })
 
     </script>
