@@ -226,7 +226,7 @@ public class CBasicController {
 		// 05 update beanDetail
 		CompanyDetail_6 beanDetail =  cDetailService.select(stock);
 		beanDetail.setBusiness_Accounting_NO(beanBasicNew.getBusiness_Accounting_NO());
-		beanDetail.setCompany_NikeName(beanBasicNew.getCompany_Name());
+		beanDetail.setCompany_Name(beanBasicNew.getCompany_Name());
 		beanDetail.setChairman_Board(beanBasicNew.getResponsible_Name());
 		beanDetail.setCompany_Location(beanBasicNew.getCompany_Location());
 		cDetailService.update(beanDetail);

@@ -50,7 +50,7 @@ public class CDetailController {
 		// update beanBasic
 		CompanyBasic_6 beanBasic = cBasicService.select(beanDetail.getStock());
 		beanBasic.setBusiness_Accounting_NO(beanDetail.getBusiness_Accounting_NO());
-		beanBasic.setCompany_Name(beanDetail.getCompany_NikeName());
+		beanBasic.setCompany_Name(beanDetail.getCompany_Name());
 		beanBasic.setResponsible_Name(beanDetail.getChairman_Board());
 		beanBasic.setCompany_Location(beanDetail.getCompany_Location());
 		cBasicService.update(beanBasic);
