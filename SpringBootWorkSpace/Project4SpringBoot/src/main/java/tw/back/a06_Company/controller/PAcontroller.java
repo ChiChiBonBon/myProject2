@@ -99,7 +99,7 @@ public class PAcontroller {
 			  + "營業利益率(%)(營業利益)/(營業收入),稅前純益率(%)(稅前純益)/(營業收入),稅後純益率(%)(稅後純益)/(營業收入)" + "\r\n" ;
 			
 		contentlength = contentlength + title.getBytes().length;
-		File file = new File("C:\\Users\\Student\\Downloads\\testcsv.csv");
+		
 		
 		for(ProfitAnalysis_6 bean : Lists) {
 			String content = bean.toCsv() + "\r\n";
