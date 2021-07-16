@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PA - 基本面</title>
+    <title>STOCK OVERFLOW</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -52,7 +52,7 @@
                     
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-1 text-gray-800">Company</h1>
+                        <h1 class="h3 mb-1 text-gray-800">基本面</h1>
                         <a href="<c:url value='/back/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-download fa-sm text-white-50"></i> 檔案下載
                         </a>
