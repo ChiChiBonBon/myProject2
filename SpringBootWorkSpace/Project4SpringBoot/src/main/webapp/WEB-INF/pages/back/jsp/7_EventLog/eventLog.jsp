@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Event Log</title>
+    <title>STOCK OVERFLOW</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -52,9 +52,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-1 text-gray-800">事件紀錄</h1>
-<!--                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> -->
-<!--                             <i class="fas fa-download fa-sm text-white-50"></i> Generate Report -->
-<!--                         </a> -->
                     </div>
                     <p class="mb-4">這裡提供管理者查閱網站事件，部分資料會需要初始化，基本上會自動匯入，如果發現資料異常或是篩選條件沒有資料，請按鍵按鈕將初始資料匯入資料庫。<button
                             type="button" class="btn btn-secondary btn-sm" id="initData">初始資料匯入</button></p>

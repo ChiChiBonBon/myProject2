@@ -39,6 +39,9 @@ public class EventLogController {
 		return "/back/jsp/7_EventLog/eventLog";
 	}
 	
+	
+	
+	
 	@GetMapping("/initData")
 	public @ResponseBody Boolean initData() {
 		// 初始化資料 -- EventLog
