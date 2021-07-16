@@ -74,6 +74,17 @@ public class SystemPerformanceController {
 	}
 	
 	
+	@GetMapping("/memoryPerformance")
+	public @ResponseBody long memoryPerformance() {
+		long totalMem = osmb.getTotalPhysicalMemorySize();
+		long freeMem = osmb.getFreePhysicalMemorySize();
+		double useMem = (double) (totalMem-freeMem)/totalMem;
+		
+		double useMem100 = (double) useMem*100; // 系統物理記憶體使用率
+		long round = Math.round(useMem100);
+		return round;
+	}
+	
 	@GetMapping("/Main2")
 	public void systemPerformanceMain() {
 		while (true) {
