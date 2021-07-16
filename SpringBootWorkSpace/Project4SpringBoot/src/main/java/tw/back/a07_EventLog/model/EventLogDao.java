@@ -1,6 +1,8 @@
 package tw.back.a07_EventLog.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,7 +39,7 @@ public class EventLogDao {
 		String authorityString = " and  log.authority.authorityType like  :authority";
 		String dateString = "";
 		if(!startDate.equals("all")) {
-			dateString = " and  log.date =  :date";
+			dateString = " and  log.date between  :dateA and :dataB";
 		}
 		
 		
@@ -46,8 +48,17 @@ public class EventLogDao {
 		TypedQuery<EventLog_7> query = em.createQuery(sql, EventLog_7.class);
 
 		if(!startDate.equals("all")) {
-			Date dateX = TimeTool.stringToDate(startDate);
-			query.setParameter("date", dateX);
+			Date dateA = TimeTool.stringToDate(startDate);
+			System.out.println(dateA);
+
+			Calendar calendar = new GregorianCalendar(); 
+			calendar.setTime(dateA); 
+			calendar.add(calendar.DATE,1); 
+			Date dateB = calendar.getTime(); 
+			
+			query.setParameter("dateA", dateA);
+			query.setParameter("dataB", dateB);
+			
 		}
 		if(severityType.equals("all")) {
 			severityType = "";
