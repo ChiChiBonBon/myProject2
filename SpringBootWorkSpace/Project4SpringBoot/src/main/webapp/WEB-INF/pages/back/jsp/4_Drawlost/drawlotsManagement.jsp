@@ -81,6 +81,7 @@
                                                     <form method="POST" enctype="multipart/form-data" id="UploadForm">
                                                         <input type="file" class="form-control" id="csvFile"
                                                             name="csvFile" accept=".csv">
+<!--       													<input type="file" class="img-thumbnail" name="pictureFile" id="pictureFile" />                                                       -->
                                                     </form>
                                                 </div>
                                             </div>
@@ -330,7 +331,9 @@
                                 $('#uploadFile').on('click', async function () {
                                     var form = $('#UploadForm')[0];
                                     var data = new FormData(form);
-
+                                    //data.append("imgFile", $("#pictureFile")[0].files[0])
+                                    
+                                    
                                     console.log(data)
                                     var xhr1 = new XMLHttpRequest();
                                     xhr1.open("POST", "<c:url value='/back/drawlots/insertData' />", true);

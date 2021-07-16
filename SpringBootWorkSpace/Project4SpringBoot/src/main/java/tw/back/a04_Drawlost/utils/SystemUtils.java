@@ -18,9 +18,9 @@ public class SystemUtils {
      
 	// 運用在上傳的檔案移到指定的資料夾 參見PlaceFindViewController下方
 	// 常數要定義在這邊比較好 不要定義在某個class裡 不然找很久
-	public static final String POST_IMAGE_FOLDER = "C:\\images\\post";
-	public static final String COMMENT_IMAGE_FOLDER = "C:\\images\\comment";
-	public static final String NO_IMAGE_PATH = "\\static\\back\\img\\NoImage.png";
+	//public static final String POST_IMAGE_FOLDER = "C:\\images\\post";
+	//public static final String COMMENT_IMAGE_FOLDER = "C:\\images\\comment";
+	public static final String NO_IMAGE_PATH = "\\static\\back\\img\\0000.png";
 	
 	// 你給我檔名 我給你副檔名
 	public static String getExtFilename(String filename) {
