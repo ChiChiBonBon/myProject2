@@ -1,6 +1,8 @@
 package tw.back.a04_Drawlost.controller;
 
 import java.io.File;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -11,10 +13,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.time.format.DecimalStyle;
 import java.util.Locale;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.back.a03_Comment.utils.SystemUtils;
 import tw.back.a04_Drawlost.model.Drawlots;
 import tw.back.a04_Drawlost.service.DrawableServiceInterface;
 import tw.back.a04_Drawlost.service.DrawlotsService;
@@ -42,6 +48,9 @@ public class DrawlotsController {
 	
 	@Autowired
 	private DrawableServiceInterface drawlotsService = new DrawlotsService();
+	
+	@Autowired
+	ServletContext context;
 
 	@GetMapping(value = "/back/drawlots")
 	public String drawlotsMain() {
@@ -127,7 +136,10 @@ public class DrawlotsController {
 	
 	@PostMapping(value = "/back/drawlots/insertData", consumes = { "multipart/form-data" })
 	public @ResponseBody Boolean insertData(@RequestParam MultipartFile csvFile) {
-		System.out.println("=============Insert Company Profit Analysis_6====================");
+//											@RequestParam (required = false) MultipartFile imgFile) {
+		
+		System.out.println("=============Insert Drawlots Information Data====================");
+		
 		Boolean result = true;
 		List<String> Lists = FileTool.multiToStringBig5(csvFile);
 		int i=0;
@@ -228,19 +240,14 @@ public class DrawlotsController {
 					System.out.println(bean.getProbability());
 					
 					bean.setRemarks("");
-			
-
+					
 					Boolean insertResult = drawlotsService.insertOne(bean);
-				} catch (Exception e) {
+				}catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
-				
-				
 			}
-					
 			i=i+1;
 		}
-
 		return result;
 	}
 }
