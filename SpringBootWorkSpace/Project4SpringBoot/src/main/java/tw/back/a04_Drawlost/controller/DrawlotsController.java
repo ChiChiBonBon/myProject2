@@ -47,7 +47,7 @@ import tw.back.a06_Company.bean.ProfitAnalysis_6;
 public class DrawlotsController {
 	
 	@Autowired
-	private DrawableServiceInterface drawlotsService = new DrawlotsService();
+	private DrawableServiceInterface drawlotsService;
 	
 	@Autowired
 	ServletContext context;

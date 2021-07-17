@@ -53,7 +53,6 @@
                                         <!-- Page Heading -->
                                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                             <h1 class="h3 mb-1 text-gray-800">抽籤管理</h1>
-                                            <input id="test" type="button" />
                                             <a href="<c:url value='/back/drawlots/downloadCsv' />" id="downloadCsv"
                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                                 <i class="fas fa-download fa-sm text-white-50"></i> 產生報表
@@ -95,7 +94,7 @@
                                                             <tr>
                                                                 <th>股票代碼</th>
                                                                 <th>公司名稱</th>
-                                                                <th>企業商標</th>
+<!--                                                                 <th>企業商標</th> -->
                                                                 <th>市場別</th>
                                                                 <th>申購狀態</th>
                                                                 <th>承銷價</th>
@@ -116,7 +115,7 @@
                                                             <tr>
                                                                 <th>股票代碼</th>
                                                                 <th>公司名稱</th>
-                                                                <th>企業商標</th>
+<!--                                                                 <th>企業商標</th> -->
                                                                 <th>市場別</th>
                                                                 <th>申購狀態</th>
                                                                 <th>承銷價</th>
@@ -400,14 +399,14 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             <template id="my-update`+ bean.stockCode + `">
                                 <swal-title>
-                                你確定要更新` + bean.stockCode + `?
+                                你確定要修改` + bean.stockCode + `?
                                 </swal-title>
                                 <swal-icon type="warning" color="red"></swal-icon>
                                 <swal-button type="confirm">
                                 取消
                                 </swal-button>
                                 <swal-button type="deny">
-                                更新
+                                修改
                                 </swal-button>
                                 <swal-param name="allowEscapeKey" value="false" />
                                 <swal-param
@@ -441,7 +440,7 @@
                                         segment += "<tr>"
                                         segment += "<td class='idX'>" + bean.stockCode + "</td>"
                                         segment += "<td>" + bean.stockName + "</td>"
-                                        segment += "<td>" + bean.companyLogo + "</td>"
+                                        //segment += "<td>" + bean.companyLogo + "</td>"
                                         segment += "<td>" + bean.marketType + "</td>"
                                         segment += "<td>" + bean.subscribeStatus + "</td>"
                                         segment += "<td>" + bean.subscribePrice + "</td>"

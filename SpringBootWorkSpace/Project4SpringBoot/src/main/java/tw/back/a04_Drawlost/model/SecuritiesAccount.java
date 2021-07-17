@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "securitiesAccount_7")
 public class SecuritiesAccount {
@@ -59,6 +61,7 @@ public class SecuritiesAccount {
     private String customerName;
     
     @Column(name = "subscriptionTime")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone="Asia/Taipei",pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp subscriptionTime;
     
 	@Column(name = "remarks")

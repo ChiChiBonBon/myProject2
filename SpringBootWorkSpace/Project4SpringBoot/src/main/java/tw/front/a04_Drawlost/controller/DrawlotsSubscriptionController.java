@@ -53,8 +53,13 @@ public class DrawlotsSubscriptionController {
 	ServletContext context;
 
 	@GetMapping(value = "/front/guestView")
-	public String drawlotsMain() {
+	public String guestView() {
 		return "/front/jsp/4_Drawlost/guestView";
+	}
+	
+	@GetMapping(value = "/front/userView")
+	public String userView() {
+		return "/front/jsp/4_Drawlost/userView";
 	}
 	
 //	@GetMapping(value = "/back/subscription")
