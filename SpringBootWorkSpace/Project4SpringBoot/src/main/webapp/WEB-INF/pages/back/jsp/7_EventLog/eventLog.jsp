@@ -203,7 +203,7 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         $('#TableAreaMax').html(showEventAll(xhr.responseText))
                         // $('.tableArea').attr('id', 'dataTable')
-                        $('#dataTable').dataTable({"aaSorting": [[6, "desc"]]});        
+                        $('#dataTable').dataTable({"aaSorting": [[0, "desc"]]});        
 //                         let scriptsToLoad = [
 //                             "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
 //                             "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
@@ -263,7 +263,7 @@
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         $('#TableAreaMax').html(showEventAll(xhr.responseText))
-                        $('#dataTable').dataTable({"aaSorting": [[6, "desc"]]});        
+                        $('#dataTable').dataTable({"aaSorting": [[0, "desc"]]});        
 //                         let scriptsToLoad = [
 //                             "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
 //                             "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
