@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>會員登入</title>
+    <title>Message</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -40,9 +40,9 @@
 
         <ol>
          <li><a href="<c:url value='/front' />">Home</a></li>
-         <li>會員</li>
+         <li>會員中心</li>
         </ol>
-        <h2>會員登入</h2>
+        <h2>通知</h2>
 
       </div>
     </section>
@@ -52,58 +52,32 @@
         <div class="container">
 
 
-           <h1>會員登入</h1>
-           <br>
-           <form method="POST" action="login_1">
-
-            <div class="mb-3">
-             <label for="account_input" class="form-label">Account</label>
-             <input style="width: 500px" type="text" name="account_1" class="form-control is-invalid" id="account_input" aria-describedby="emailHelp" placeholder="請輸入帳號或電子郵件" required>
-             <div id="" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-
-            <div class="mb-3">
-             <label for="password_input" class="form-label">Password</label>
-             <input style="width: 500px" type="password" name="password_1" class="form-control" id="password_input" placeholder="密碼" required>
-            </div>
-
-            <div class="mb-3">
-             <a class="large" href="">忘記密碼？</a>
-            </div>
-
-            <span>
-             <button style="width: 200px" class="btn btn-primary" type="submit">登入</button>
-            </span>&nbsp;&nbsp;&nbsp;&nbsp;
-
-           
-            <span>
-             <a style="width: 200px" class="btn btn-success" href="<c:url value='/front/unmember/goregister_1'/>" onclick="miss_required()">建立新帳號</a>
-            </span>
-            
-           </form>
+        <div class='fs-3 fst-italic fw-bold' id="message">${Message}</div>
+        <br>
+        <hr>
+        <p onclick="logout_back_to_login();" id="backToLogin" class='fs-5' style="color: #fd7e14">會員首頁</p>
         
-            <!-- 看是否有錯誤訊息由後端傳入 -->
-           <div id="message" style="display: none">${message}</div>
-           <script>
-               let m;
-               m = document.getElementById("message").innerText;
-               console.log(m);
-               let respond_acc = document.getElementById("account_input");
-               let respond_pass = document.getElementById("password_input");
-               if (m == "請輸入正確帳號密碼") {
-               	/* 改變class 和 裡面的文字 */
-                   respond_acc.setAttribute("placeholder", m);
-                   respond_acc.className = "form-control is-invalid";
-                   
-                   respond_pass.setAttribute("placeholder", m);
-                   respond_pass.className = "form-control is-invalid";
-          
-               } else {
-               	respond_acc.className = "form-control";
-               	respond_pass.classNmae = "form-control";
-               }
-           </script>
-
+        <script type="text/javascript">
+        	window.onload = function(){
+        		let c = document.getElementById("message");
+            	console.log(c.innerText);
+            	if (c.innerText == "帳號刪除！") {
+            		let d = document.getElementById("backToLogin");
+            		d.innerText = "返回登入";
+            	}
+        	}
+        	
+            function logout_back_to_login() {
+            	let c = document.getElementById("message");
+            	console.log(c.innerText);
+                if (c.innerText == "帳號刪除！") {
+        			location.replace("<c:url value='/front/member/logout_1' />");
+                } else {
+                	location.replace("<c:url value='/front/member/gomembermenu_1' />");
+                }
+            }
+            
+        </script>
 
 
         </div>
@@ -134,17 +108,9 @@
     <script src="<c:url value='/front/assets/js/sweetalert2@11.js' />"></script>
 
     <script type="text/javascript">
-		$(function(){
-			$('#header_About').addClass('active')
-		})
-		
-/* 		function miss_required() {
-            let respond_acc = document.getElementById("account_input");
-            let respond_pass = document.getElementById("password_input");
-            respond_acc.setAttribute("required", false);
-            respond_pass.setAttribute("required", false);
-		} */
-		
+        $(function(){
+         $('#header_About').addClass('active')
+        })
     </script>
 
 </body>
