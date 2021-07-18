@@ -1,5 +1,7 @@
 package tw.back.a07_EventLog.bean;
 
+import java.io.CharArrayWriter;
+import java.io.Reader;
 import java.sql.Clob;
 import java.util.Date;
 
@@ -33,7 +35,11 @@ public class EventLog_7 {
 	@ManyToOne
 	@JoinColumn(name = "severity")
 	private SeverityType_7 severity;	// 嚴重度	
-	private String content;			// 內容
+	
+	private Clob content;			// 內容
+	
+	
+	
 	
 	@JsonIgnore
 	private Clob contentDetail;		// 詳細內容
@@ -79,10 +85,24 @@ public class EventLog_7 {
 	}
 
 	public String getContent() {
-		return content;
+		String result = "";
+		try {
+			Reader reader = content.getCharacterStream();
+			CharArrayWriter caw = new CharArrayWriter();
+			char[] c = new char[8192];
+			int len = 0;
+			while ( (len = reader.read(c) ) != -1) {
+				caw.write(c, 0, len);
+			}
+			result = new String(caw.toCharArray());
+//			System.out.println("result = " + result +  "length() = " + content.length() );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	public void setContent(String content) {
+	public void setContent(Clob content) {
 		this.content = content;
 	}
 

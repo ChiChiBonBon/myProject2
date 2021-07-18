@@ -1,5 +1,6 @@
 package tw.back.a07_EventLog.aop;
 
+import java.sql.Clob;
 import java.util.Date;
 
 import org.aspectj.lang.JoinPoint;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
+import tw.back.a06_Company.tools.FileTool;
 import tw.back.a07_EventLog.bean.AuthorityType_7;
 import tw.back.a07_EventLog.bean.EventLog_7;
 import tw.back.a07_EventLog.bean.SeverityType_7;
@@ -42,12 +44,12 @@ public class Aop6_PA_Update {
 		String person = "Admin";
 		severity.setSeverityType("info");
 		String content = point.getArgs()[0] + " - 進入到更新頁面";
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(auto);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);
 	}
@@ -64,12 +66,12 @@ public class Aop6_PA_Update {
 		
 		ProfitAnalysis_6 bean = (ProfitAnalysis_6) point.getArgs()[0];
 		String content = bean.getCompany_Name() + "(" +bean.getCompany_ID() + ")" + " - 進行更新";
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(auto);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);
 	}
@@ -88,12 +90,12 @@ public class Aop6_PA_Update {
 		String functionName = point.getSignature().getName();
 		
 		String content = "[" + classString + "]" + " [" + functionName + "] " +   e.toString();
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(authority);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);      
 	}
@@ -112,12 +114,12 @@ public class Aop6_PA_Update {
 		String functionName = point.getSignature().getName();
 		
 		String content = "[" + classString + "]" + " [" + functionName + "] " +   e.toString();
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(authority);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);      
 	}
