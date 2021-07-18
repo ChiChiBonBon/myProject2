@@ -39,7 +39,7 @@ public class Aop6_PA {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		auto.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("success");
 		
 		MultipartFile file = (MultipartFile) point.getArgs()[0];
@@ -61,7 +61,7 @@ public class Aop6_PA {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		auto.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("success");
 		
 		
@@ -83,7 +83,7 @@ public class Aop6_PA {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		auto.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("success");
 		
 		

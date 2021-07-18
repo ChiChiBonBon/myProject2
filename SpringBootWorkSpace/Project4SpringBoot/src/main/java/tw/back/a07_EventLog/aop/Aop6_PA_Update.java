@@ -39,7 +39,7 @@ public class Aop6_PA_Update {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		auto.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("info");
 		String content = point.getArgs()[0] + " - 進入到更新頁面";
 		
@@ -59,7 +59,7 @@ public class Aop6_PA_Update {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		auto.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("success");
 		
 		ProfitAnalysis_6 bean = (ProfitAnalysis_6) point.getArgs()[0];
@@ -81,7 +81,7 @@ public class Aop6_PA_Update {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		authority.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("danger");
 		
 		String classString = point.getTarget().getClass().toString();
@@ -105,7 +105,7 @@ public class Aop6_PA_Update {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		authority.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("danger");
 		
 		String classString = point.getTarget().getClass().toString();
