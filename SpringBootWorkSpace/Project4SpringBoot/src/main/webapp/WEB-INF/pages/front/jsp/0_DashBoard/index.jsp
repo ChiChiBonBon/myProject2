@@ -21,6 +21,7 @@
 	<link href="<c:url value='/front/assets/vendor/glightbox/css/glightbox.min.css' />" rel="stylesheet">
 	<link href="<c:url value='/front/assets/vendor/swiper/swiper-bundle.min.css' />" rel="stylesheet">
 	
+	
 	<!-- Template Main CSS File -->
 	<link href="<c:url value='/front/assets/css/style.css' />" rel="stylesheet">
 </head>
