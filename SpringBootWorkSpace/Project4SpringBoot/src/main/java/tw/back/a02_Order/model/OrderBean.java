@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
 import tw.back.a02_Order.tools.JsonTools;
 
 @Entity 
-@Table(name = "order_list_2")
-@Component("order_list")
+@Table(name = "orderBean")
 public class OrderBean implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -22,8 +21,7 @@ public class OrderBean implements java.io.Serializable{
 		
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name="id")
-		private String id;
+		private Integer id;
 		
 		@Column(name = "order_ID")
 		private String order_ID ;
@@ -69,7 +67,7 @@ public class OrderBean implements java.io.Serializable{
 			super();
 		}
 
-		public OrderBean(String id, String order_ID, String stock_ID, String com_ID, String order_price,
+		public OrderBean(Integer id, String order_ID, String stock_ID, String com_ID, String order_price,
 						 String order_quant, String order_total, String order_date, String order_time, String trans_cond,
 						 String trans_sellorbuy, String trans_way, String trans_stats, String trans_report) {
 			
@@ -90,11 +88,11 @@ public class OrderBean implements java.io.Serializable{
 		}
 
 //get & set
-		public String getId() {
+		public Integer getId() {
 			return id;
 		}
 
-		public void setId(String id) {
+		public void setId(Integer id) {
 			this.id = id;
 		}	
 		
