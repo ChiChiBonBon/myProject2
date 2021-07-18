@@ -222,86 +222,17 @@
 									for (let i = 0; i < subscribeStatusTagCount; i++) {
 										if (document.getElementsByClassName('subscribeStatus')[i].innerHTML == '可申購') {
 											document.getElementsByClassName('subscribeStatus')[i].innerHTML = '<center><input name type="button" class="btn btn-primary" value="申購" onClick="buttionStateChange(this)" ></center>';
-											//console.log(document.getElementsByClassName('subscribeStatus')[i].firstChild.firstChild.setAttribute('id',));
-											//console.log($('.subscribeStatus')[i].firstChild.firstChild.setAttribute('name','Jason'));
 										}
 									}
-
-
-									// $("#dataTable tbody").on("click", ".btn", function () {
-									// 	//獲取行
-									// 	var row = $("table#dataTable tr").index($(this).closest("tr"));
-									// 	//取得某列的值,eq(0)開始
-									// 	var subscriptionStockCode = $("table#dataTable").find("tr").eq(row).find("td").eq(0).text();
-									// 	//套sweet
-									// 	swal.fire({
-									// 		title: '確定申購此筆交易嗎?',
-									// 		text: '股票代碼:' + subscriptionStockCode,
-									// 		icon: 'warning',
-									// 		showCancelButton: true,
-									// 		cancelButtonText: "取消",
-									// 		cancelButtonColor: '#ADADAD',
-									// 		confirmButtonText: '確定',
-									// 		confirmButtonColor: '#FF5151',
-									// 	}).then((result) => {
-									// 		if (result.isConfirmed) {
-									// 			document.getElementById('subscriptionStockCode').value = subscriptionStockCode;
-									// 			Swal.fire({
-									// 				icon: 'success',
-									// 				title: '申購完成！',
-									// 				position: 'absolute; top:50%; left:50%',
-									// 				showConfirmButton: false,
-									// 				timer: 1500
-									// 			})
-
-
-									// 		} else {
-									// 			//document.getElementById('passForm').reset();
-									// 		}
-									// 	})
-									// });
 								}
 							});
 
-
-
-							// $("#dataTable tbody").on("click", "#statusButton", function () {
-							// 	//獲取行
-							// 	var row = $("table#dataTable tr").index($(this).closest("tr"));
-							// 	//取得某列的值,eq(0)開始
-							// 	var subscriptionStockCode = $("table#dataTable").find("tr").eq(row).find("td").eq(0).text();
-							// 	//套sweet
-							// 	swal.fire({
-							// 		title: '確定申購此筆交易嗎?',
-							// 		text: '股票代碼:' + subscriptionStockCode,
-							// 		icon: 'warning',
-							// 		showCancelButton: true,
-							// 		cancelButtonText: "取消",
-							// 		cancelButtonColor: '#ADADAD',
-							// 		confirmButtonText: '確定',
-							// 		confirmButtonColor: '#FF5151',
-							// 	}).then((result) => {
-							// 		if (result.isConfirmed) {
-							// 			document.getElementById('subscriptionStockCode').value = subscriptionStockCode;
-							// 			Swal.fire({
-							// 				icon: 'success',
-							// 				title: '申購完成！',
-							// 				position: 'absolute; top:50%; left:50%',
-							// 				showConfirmButton: false,
-							// 				timer: 1500
-							// 			})
-
-
-							// 		} else {
-							// 			//document.getElementById('passForm').reset();
-							// 		}
-							// 	})
-							// });
-
 							function buttionStateChange(rowPosition) {
-								
+
 								var row = $("table#dataTable tr").index($(rowPosition).closest("tr"));
 								var subscriptionStockCode = $("table#dataTable").find("tr").eq(row).find("td").eq(0).text();
+								var stockPrice = $("table#dataTable").find("tr").eq(row).find("td").eq(4).text();
+								var stockQuantity = $("table#dataTable").find("tr").eq(row).find("td").eq(5).text();
 
 								if ($(rowPosition).hasClass('btn-primary')) {
 									$(rowPosition).removeClass('btn-primary');
@@ -329,12 +260,41 @@
 												showConfirmButton: false,
 												timer: 1500
 											})
-
-
-										} else {
-											//document.getElementById('passForm').reset();
 										}
 									});
+
+									var xhr = new XMLHttpRequest();
+									var subscriptionTime = new Date().getTime();
+
+									xhr.open("Post", "<c:url value='/front/userView/insertOrupdate' />", true);
+									xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+									//console.log("securitiesAccountID="+null+"&stockCode="+subscriptionStockCode+"&stockPrice="+stockPrice+"&stockQuantity="+stockQuantity.replace(",","")+"&subscriptionTime="+subscriptionTime);
+									xhr.send("securitiesAccountID="+null+"&stockCode="+subscriptionStockCode+"&stockPrice="+stockPrice+"&stockQuantity="+stockQuantity.replace(",","")+"&subscriptionTime="+subscriptionTime);
+									xhr.onreadystatechange = function () {
+										if (xhr.readyState == 4 && xhr.status == 200) {
+
+											if (xhr.responseText) {
+												Swal.fire({
+													icon: 'success',
+													title: 'All file has been deleted.',
+													// showConfirmButton: false,
+													// timer: 1500
+												})
+											} else {
+												Swal.fire({
+													// timer: 1500,
+													icon: 'error',
+													title: 'Oops...',
+													text: 'Something went wrong!',
+													// footer: '<a href="">Why do I have this issue?</a>'
+												})
+											}
+											setTimeout(function () {
+												//location.reload();
+											}, 1500);
+
+										}
+									}
 								} else {
 									$(rowPosition).removeClass('btn-success');
 									$(rowPosition).addClass('btn-primary');
@@ -359,12 +319,41 @@
 												showConfirmButton: false,
 												timer: 1500
 											})
-
-
-										} else {
-											//document.getElementById('passForm').reset();
 										}
 									});
+									
+									var xhr = new XMLHttpRequest();
+									var subscriptionTime = new Date().getTime();
+
+									xhr.open("Post", "<c:url value='/front/userView/delete' />", true);
+									xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+									//console.log("securitiesAccountID="+null+"&stockCode="+subscriptionStockCode+"&stockPrice="+stockPrice+"&stockQuantity="+stockQuantity.replace(",","")+"&subscriptionTime="+subscriptionTime);
+									xhr.send("securitiesAccountID="+null+"&stockCode="+subscriptionStockCode+"&stockPrice="+stockPrice+"&stockQuantity="+stockQuantity.replace(",","")+"&subscriptionTime="+subscriptionTime);
+									xhr.onreadystatechange = function () {
+										if (xhr.readyState == 4 && xhr.status == 200) {
+
+											if (xhr.responseText) {
+												Swal.fire({
+													icon: 'success',
+													title: 'All file has been deleted.',
+													// showConfirmButton: false,
+													// timer: 1500
+												})
+											} else {
+												Swal.fire({
+													// timer: 1500,
+													icon: 'error',
+													title: 'Oops...',
+													text: 'Something went wrong!',
+													// footer: '<a href="">Why do I have this issue?</a>'
+												})
+											}
+											setTimeout(function () {
+												//location.reload();
+											}, 1500);
+
+										}
+									}
 								}
 							}
 						</script>

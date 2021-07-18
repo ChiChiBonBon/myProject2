@@ -86,8 +86,8 @@
 										<tr>
 											<th>證券戶號</th>
 											<th>客戶名稱</th>
-											<th>身份證字號</th>
-											<th>密碼</th>
+<!-- 											<th>身份證字號</th> -->
+<!-- 											<th>密碼</th> -->
 											<th>申購的股票</th>
 											<th>申購價格</th>
 											<th>申購股數</th>
@@ -104,8 +104,8 @@
 										<tr>
 											<th>證券戶號</th>
 											<th>客戶名稱</th>
-											<th>身份證字號</th>
-											<th>密碼</th>
+<!-- 											<th>身份證字號</th> -->
+<!-- 											<th>密碼</th> -->
 											<th>申購的股票</th>
 											<th>申購價格</th>
 											<th>申購股數</th>
@@ -274,8 +274,8 @@
                     segment += "<td class='idX'>" + bean.securitiesAccountID + "</td>"
                     segment += "<td>" + bean.customerName + "</td>"
                     //segment += "<td>" + bean.companyLogo + "</td>"
-                    segment += "<td>" + bean.identityNumber + "</td>"
-                    segment += "<td>" + bean.password + "</td>"
+                    //segment += "<td>" + bean.identityNumber + "</td>"
+                    //segment += "<td>" + bean.password + "</td>"
                     segment += "<td>" + bean.stockCode + "</td>"
                     segment += "<td>" + bean.stockPrice + "</td>"
                     segment += "<td>" + bean.stockQuantity + "</td>"
