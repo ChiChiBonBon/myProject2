@@ -25,6 +25,8 @@ public class JsonTools {
 
 			JSONObject json_input = new JSONObject(sb.toString());
 			json_com = json_input.getJSONArray("msgArray").get(0).toString();
+			
+			
 
 		} finally {
 			is.close();
@@ -57,6 +59,30 @@ public class JsonTools {
 		
 		return df.format(number);
 	}
+	
+	//取得api
+	public static JSONObject getapi(String com_ID) throws Exception {
+		String api = getJson_com(com_ID);
+		JSONObject json_com = new JSONObject(api.toString());	
+		
+		return json_com ;
+	}
+	
+	
+//	//取得api.get.p_now
+//	public static String getapiPrice_now(String com_ID) throws Exception {
+//		String api = getJson_com(com_ID);
+//		
+//		JSONObject json_com = new JSONObject(api.toString());
+//		String com_pnow = json_com.get("z").toString() ;
+//		
+//		return com_pnow ;
+//	}
+	
+	
+	
+	
+	
 	
 	
 	

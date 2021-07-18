@@ -110,7 +110,7 @@
               <input  name="trans_way" id="trans_way" type="hidden" >
               
               <label for="" >商品代碼:</label>
-              <input name="com_ID" type="text" placeholder="股票代號" id="com_ID" autofocus onchange="get_input(this.id)" size="10">
+              <input name="com_ID" type="text" placeholder="股票代號" id="com_ID" autofocus onchange="get_input(this.id)" size="9">
               <select name="trans_cond" id="trans_cond" class="st_rod">
                   <option value="ROD" selected>ROD</option>
                   <option value="IOC">IOC</option>
