@@ -162,12 +162,12 @@
     <!-- Custom scripts for all pages-->
     <script src="<c:url value='/back/js/sb-admin-2.min.js' />"></script>
 	
-	<%-- <!-- Page level plugins -->
+	<!-- Page level plugins -->
     <script src="<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />"></script>
     <script src="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />"></script>
 
     <!-- Page level custom scripts -->
-    <script src="<c:url value='/back/js/demo/datatables-demo.js' />"></script> --%>
+    <script src="<c:url value='/back/js/demo/datatables-demo.js' />"></script>
 
     <!-- SweetAlert2 -->
     <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
@@ -203,19 +203,19 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         $('#TableAreaMax').html(showEventAll(xhr.responseText))
                         // $('.tableArea').attr('id', 'dataTable')
-                                
-                        let scriptsToLoad = [
-                            "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
-                            "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-                            "<c:url value='/back/js/demo/datatables-demo.js' />"
-                        ]; 
+                        $('#dataTable').dataTable({"aaSorting": [[6, "desc"]]});        
+//                         let scriptsToLoad = [
+//                             "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
+//                             "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+//                             "<c:url value='/back/js/demo/datatables-demo.js' />"
+//                         ]; 
 
-                        scriptsToLoad.forEach(function(src) {
-                            let script = document.createElement('script');
-                            script.src = src;
-                            script.async = false;
-                            document.body.appendChild(script);
-                        });
+//                         scriptsToLoad.forEach(function(src) {
+//                             let script = document.createElement('script');
+//                             script.src = src;
+//                             script.async = false;
+//                             document.body.appendChild(script);
+//                         });
                     }
                 }
             }
@@ -263,19 +263,19 @@
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         $('#TableAreaMax').html(showEventAll(xhr.responseText))
-                                
-                        let scriptsToLoad = [
-                            "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
-                            "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-                            "<c:url value='/back/js/demo/datatables-demo.js' />"
-                        ]; 
+                        $('#dataTable').dataTable({"aaSorting": [[6, "desc"]]});        
+//                         let scriptsToLoad = [
+//                             "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
+//                             "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+//                             "<c:url value='/back/js/demo/datatables-demo.js' />"
+//                         ]; 
 
-                        scriptsToLoad.forEach(function(src) {
-                            let script = document.createElement('script');
-                            script.src = src;
-                            script.async = false;
-                            document.body.appendChild(script);
-                        });
+//                         scriptsToLoad.forEach(function(src) {
+//                             let script = document.createElement('script');
+//                             script.src = src;
+//                             script.async = false;
+//                             document.body.appendChild(script);
+//                         });
                     }
                 }
 
