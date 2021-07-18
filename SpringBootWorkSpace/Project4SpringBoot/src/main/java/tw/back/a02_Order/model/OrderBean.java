@@ -203,16 +203,15 @@ public class OrderBean implements java.io.Serializable{
 			this.trans_report = trans_report;
 		}
 		
-		
 		@Override
 		public String toString() {
 			return "["              + 
 					"'"+ id              +"',"+
 					"'"+ stock_ID        +"',"+
 					"'"+ com_ID          +"',"+
-					"'"+ "$"+JsonTools.getMoneyFormat(order_price)+"',"+
-					"'"+ 	 JsonTools.getMoneyFormat(order_quant)+"',"+
-					"'"+ "$"+JsonTools.getMoneyFormat(order_total)+"',"+
+					"'"+ order_price	 +"',"+
+					"'"+ order_quant	 +"',"+
+					"'"+ order_total	 +"',"+
 					"'"+ order_date      +"',"+
 					"'"+ order_time      +"',"+
 					"'"+ trans_cond      +"',"+
@@ -221,6 +220,27 @@ public class OrderBean implements java.io.Serializable{
 					"'"+ trans_stats     +"',"+ 
 					"'"+ trans_report    +"']";
 		}
+		
+		//復原用
+//		public  String toString() {
+//			String orders =  "["              + 
+//					"'"+ id              +"',"+
+//					"'"+ stock_ID        +"',"+
+//					"'"+ com_ID          +"',"+
+//					"'"+ "$"+JsonTools.getMoneyFormat(order_price)+"',"+
+//					"'"+ 	 JsonTools.getMoneyFormat(order_quant)+"',"+
+//					"'"+ "$"+JsonTools.getMoneyFormat(order_total)+"',"+
+//					"'"+ order_date      +"',"+
+//					"'"+ order_time      +"',"+
+//					"'"+ trans_cond      +"',"+
+//					"'"+ trans_way       +"',"+	
+//					"'"+ trans_sellorbuy +"',"+	 			
+//					"'"+ trans_stats     +"',"+ 
+//					"'"+ trans_report    +"']";	
+//			return  orders ;
+//		}
+		
+		
 	
 	
 	

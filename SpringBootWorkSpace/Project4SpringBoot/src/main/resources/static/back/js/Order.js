@@ -41,7 +41,7 @@ function get_input(input) {
 				if (type.indexOf("application/json") === 0) {
 					var json = JSON.parse(xhr.responseText);
 					//抓現價失敗,重新執行請求
-					if(json.z ==="-"){
+					if(json.z =="-"){
 						xhr.open("Get", apiurl + "com_ID=" + com_ID , true);
 						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						xhr.send();	
@@ -49,7 +49,26 @@ function get_input(input) {
 				}
 			}
 			else {
-				alert("查無此商品代號");
+				Swal.fire({
+						  icon: 'error',
+						  title: '查詢失敗',
+						  text: '查無此商品代號,重新輸入!',
+						  confirmButtonText: '確定', 
+			 			  confirmButtonColor:'#FF5151',
+						}).then((result) =>{
+								if (result.isConfirmed){
+									document.getElementById('orderForm').reset();	
+									document.getElementById('com_ID').autofocus;
+									let Kline = document.getElementById("Kline");
+									Kline.src = "https://s.yimg.com/nb/tw_stock_frontend/scripts/TaChart/tachart.3de240ea9a.html?sid=2330";
+									let Top5 = document.getElementById("Top5");
+									Top5.src = "https://s.yimg.com/nb/tw_stock_frontend/scripts/StxChart/StxChart.9d11dfe155.html?sid=2330";	
+								}		
+						   })	
+						
+						
+						
+				
 				//alert("發生錯誤1: " + xhr.status + ", " + xhr.responseText);
 			}
 		}
@@ -62,11 +81,19 @@ function get_input(input) {
 		//套股票名稱
 		document.getElementById("com_name").value = json.n;
 
-		//套現價錢+小數兩位
-		var test = (json.y).toString();
-		var check = /([0-9]+\.[0-9]{2})[0-9]*/;
-		var price = test.replace(check, "$1");
-		document.getElementById("order_price").value = price;
+		//套現價錢+小數兩位 抓到z用z ,若無則用y
+		if(json.z == "-"){
+			var test = (json.y).toString();
+			var check = /([0-9]+\.[0-9]{2})[0-9]*/;
+			var price = test.replace(check, "$1");
+			document.getElementById("order_price").value = price;
+		}else{
+			var test = (json.z).toString();
+			var check = /([0-9]+\.[0-9]{2})[0-9]*/;
+			var price = test.replace(check, "$1");
+			document.getElementById("order_price").value = price;
+		}
+		
 	}
 }
 
@@ -180,50 +207,7 @@ function op3_value(input) {
      document.getElementById('order_date').value = now_date ;
      document.getElementById('order_time').value = now_time ;
 
-	 
-
-//確認資料 + sweeet alert
-swal.fire({ 
-		     icon:  'info',
-			 title: '下單明細', 
-			 html: "<div  style='text-align:left;font-size: 20px'>" + 
-			        '--------------------------------------------------' +'<br/>' +
-		            '證券帳號:' + document.getElementById('input_stock_ID' ).value + '<br/>' +
-                    '--------------------------------------------------' +'<br/>' +
-					'商品代號:' + document.getElementById('com_ID'         ).value + '<br/>' +
-					'商品名稱:' + document.getElementById('com_name'       ).value + '<br/>' +
-					'下單價格:' + format_with_regex(document.getElementById('order_price').value) + '<br/>' +
-					'下單數量:' + format_with_regex(document.getElementById('order_quant').value) + '<br/>' +
-					'下單總價:' + format_with_regex(document.getElementById('order_total').value) + '<br/>' +
-				    '--------------------------------------------------' +'<br/>' +
-				//'下單日期:' + document.getElementById('order_date'     ).value + '<br/>' +
-				//'下單時間:' + document.getElementById('order_time'     ).value + '<br/>' +
-					'交易條件:' + document.getElementById('trans_cond'     ).value + '<br/>' +
-					'交易方式:' + document.getElementById('trans_way'      ).value + '<br/>' +
-					'交易選項:' + document.getElementById('trans_sellorbuy').value + '<br/>' +
-				//'交易狀態:' + document.getElementById('trans_stats'    ).value + '<br/>' + 
-					'--------------------------------------------------' +'</div>',
- 
-			 showCancelButton: true, 
-			 cancelButtonText: "取消", 
-		     cancelButtonColor:'#ADADAD',
-			 confirmButtonText: '確定', 
-			 confirmButtonColor:'#FF5151',
-		}).then((result) =>{
-				if (result.isConfirmed){
-					Swal.fire({
-							icon: 'success',
-							title: '交易完成！',
-						    position: 'absolute; top:50%; left:50%',
-							showConfirmButton: false,
-							timer: 1500})
-						
-							setTimeout("wait_insert()",2000);	
-				}else{
-					document.getElementById('orderForm').reset();
-					document.getElementById('show_total').innerText = "";
-				}		
-		   })
+	 document.getElementById('orderForm').onsubmit();
 }
 
 //等待3秒
@@ -267,6 +251,47 @@ function check_form(input){
 		document.getElementById('input_quant').focus();
 		return false ;
 	}
+	
+	//確認資料沒問題 + sweeet alert
+	swal.fire({ 
+			     icon:  'info',
+				 title: '下單明細', 
+				 html: "<div  style='text-align:left;font-size: 20px'>" + "<hr style='background-color:#272727; height:2px; border:none;'>" + 
+			            '證券帳號:' + document.getElementById('input_stock_ID' ).value + '<br/>' + "<hr style='background-color:#272727; height:2px; border:none;'>" +
+						'商品代號:' + document.getElementById('com_ID'         ).value + '<br/>' +
+						'商品名稱:' + document.getElementById('com_name'       ).value + '<br/>' +
+						'下單價格:' + format_with_regex(document.getElementById('order_price').value) + '<br/>' +
+						'下單數量:' + format_with_regex(document.getElementById('order_quant').value) + '<br/>' +
+						'下單總價:' + format_with_regex(document.getElementById('order_total').value) + '<br/>' + "<hr style='background-color:#272727; height:2px; border:none;'>" +
+					//'下單日期:' + document.getElementById('order_date'     ).value + '<br/>' +
+					//'下單時間:' + document.getElementById('order_time'     ).value + '<br/>' +
+						'交易條件:' + document.getElementById('trans_cond'     ).value + '<br/>' +
+						'交易方式:' + document.getElementById('trans_way'      ).value + '<br/>' +
+						'交易選項:' + document.getElementById('trans_sellorbuy').value + '<br/>' +  "<hr style='background-color:#272727; height:2px; border:none;'>" +
+					//'交易狀態:' + document.getElementById('trans_stats'    ).value + '<br/>' + 
+					   '</div>',
+	 
+				 showCancelButton: true, 
+				 cancelButtonText: "取消", 
+			     cancelButtonColor:'#ADADAD',
+				 confirmButtonText: '確定', 
+				 confirmButtonColor:'#FF5151',
+			}).then((result) =>{
+					if (result.isConfirmed){
+						Swal.fire({
+								icon: 'success',
+								title: '交易完成！',
+							    position: 'absolute; top:50%; left:50%',
+								showConfirmButton: false,
+								timer: 1500})
+							
+								setTimeout("wait_insert()",2000);	
+					}else{
+						document.getElementById('orderForm').reset();
+						document.getElementById('show_total').innerText = "";
+					}		
+			   })
+
 }
 
 

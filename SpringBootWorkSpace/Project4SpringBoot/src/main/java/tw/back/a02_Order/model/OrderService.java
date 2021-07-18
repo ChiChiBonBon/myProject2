@@ -1,5 +1,8 @@
 package tw.back.a02_Order.model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +39,18 @@ public class OrderService implements OrderServiceable{
 	
 //查詢
 	@Override
-	public String selectOrder(OrderBean order_list,Model m) {
+	public String selectOrder(OrderBean order_list,Model m) { //mber.mber
 		String order_lists = orderBeanDao.selectOrder(order_list.getStock_ID()).toString() ;
 		m.addAttribute("order_lists", order_lists);
+		
+		//測試取sum order
+		try {
+			orderBeanDao.selectProfit("0800-123456-9");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return order_lists;
 	}
 	
@@ -49,6 +61,41 @@ public class OrderService implements OrderServiceable{
 		selectOrder(order_list, m);
 		return ;
 	}
+
+	
+//查詢歷史資料	
+	@Override
+	public ArrayList<OrderBean> selectorderlog(String stock_ID,Model m) {
+		String history_lists = orderBeanDao.selectHistoryLog(stock_ID).toString() ;
+		m.addAttribute("history_lists", history_lists);
+		return orderBeanDao.selectHistoryLog(stock_ID) ;
+	}
+	
+//測試庫存損益
+@Override
+	public ArrayList<Profit> selectprofit(String stock_ID, Model m) {
+		String profit_lists;
+		try {
+			profit_lists = orderBeanDao.selectProfit(stock_ID).toString();
+			m.addAttribute("profit_lists", profit_lists);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
+		return null;
+	}
+	
+	
+	
+	
+
+
+
+	
+	
+	
 
 
 
