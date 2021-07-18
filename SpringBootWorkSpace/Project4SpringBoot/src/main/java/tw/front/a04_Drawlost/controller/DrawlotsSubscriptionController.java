@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.back.a03_Comment.utils.SystemUtils;
@@ -44,9 +45,11 @@ import tw.back.a04_Drawlost.service.DrawlotsService;
 import tw.back.a04_Drawlost.tools.FileTool;
 import tw.back.a04_Drawlost.tools.TimeTool;
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
+import tw.front.a01_Member.model.MemberBean;
 import tw.front.a04_Drawlost.service.SubscribableServiceInterface;
 
 @Controller
+@SessionAttributes(names = {"member_info"})
 public class DrawlotsSubscriptionController {
 
 	@Autowired
@@ -64,16 +67,29 @@ public class DrawlotsSubscriptionController {
 	}
 
 	@GetMapping(value = "/front/userView")
-	public String userView() {
+	public String userView(Model m ) {
+		if (m.getAttribute("member_info") != null ) {
+			   MemberBean mber = (MemberBean) m.getAttribute("member_info");
+		
+			   System.out.println("取得的stock:" + mber.getMember_stock_ID());
+			   m.addAttribute("userStockID", mber.getMember_stock_ID());
+			   m.addAttribute("userName", mber.getName());
+			  } else {
+			   System.out.println("沒有取得到stock_id");
+			   return "redirect:/front/unmember/gologin_1";
+			  }
+		
 		return "/front/jsp/4_Drawlost/userView";
 	}
 
 	@PostMapping(value = "/front/userView/insertOrupdate")
 	public void userViewInsert(@RequestParam(value="stockCode",required=false) String stockCode,
-								 @RequestParam(value="securitiesAccountID",defaultValue="1993-082-060-4",required=false) String securitiesAccountID,
+								 @RequestParam(value="securitiesAccountID",required=false) String securitiesAccountID,
 								 @RequestParam(value="stockPrice",required=false) String stockPrice,
 								 @RequestParam(value="stockQuantity",required=false) String stockQuantity,
-								 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime){
+								 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime,
+								 @RequestParam(value="userName",required=false) String customerName
+							   ){
 		
 		//System.out.println(stockCode+","+securitiesAccountID+","+stockPrice+","+stockQuantity+","+subscriptionTime);
 		SecuritiesAccount securitiesAccount =subscribableService.selectOne(securitiesAccountID);
@@ -81,7 +97,7 @@ public class DrawlotsSubscriptionController {
 		if( securitiesAccount != null) {
 			//securitiesAccount = new SecuritiesAccount();
 			
-			securitiesAccount.setCustomerName("Jason Chang");
+			securitiesAccount.setCustomerName(customerName);
 			securitiesAccount.setStockCode(stockCode);
 			securitiesAccount.setStockPrice(Float.parseFloat(stockPrice));
 			securitiesAccount.setStockQuantity(Long.parseLong(stockQuantity));
@@ -97,8 +113,8 @@ public class DrawlotsSubscriptionController {
 			System.out.println("修改成功");
 		}else{
 			securitiesAccount = new SecuritiesAccount();
-			securitiesAccount.setSecuritiesAccountID("1993-082-060-4");
-			securitiesAccount.setCustomerName("Jason Chang");
+			securitiesAccount.setSecuritiesAccountID(securitiesAccountID);
+			securitiesAccount.setCustomerName(customerName);
 			securitiesAccount.setStockCode(stockCode);
 			securitiesAccount.setStockPrice(Float.parseFloat(stockPrice));
 			securitiesAccount.setStockQuantity(Long.parseLong(stockQuantity));
@@ -117,15 +133,17 @@ public class DrawlotsSubscriptionController {
 	
 	@PostMapping(value="/front/userView/delete")
 	public void userViewDelete(@RequestParam(value="stockCode",required=false) String stockCode,
-			 @RequestParam(value="securitiesAccountID",defaultValue="1993-082-060-4",required=false) String securitiesAccountID,
+			 @RequestParam(value="securitiesAccountID",required=false) String securitiesAccountID,
 			 @RequestParam(value="stockPrice",required=false) String stockPrice,
 			 @RequestParam(value="stockQuantity",required=false) String stockQuantity,
-			 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime) {
+			 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime,
+			 @RequestParam(value="userName",required=false) String customerName 
+			) {
 		
-		SecuritiesAccount securitiesAccount =subscribableService.selectOne("1993-082-060-4");
+		SecuritiesAccount securitiesAccount =subscribableService.selectOne(securitiesAccountID);
 		
 		if( securitiesAccount != null) {
-			subscribableService.deleteOne("1993-082-060-4");
+			subscribableService.deleteOne(securitiesAccountID);
 			System.out.println("刪除成功");
 		}
 	}
