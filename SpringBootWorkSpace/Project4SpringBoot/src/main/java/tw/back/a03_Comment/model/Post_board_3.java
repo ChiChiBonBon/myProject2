@@ -1,13 +1,7 @@
 package tw.back.a03_Comment.model;
 
-import java.io.CharArrayWriter;
-import java.io.Reader;
 import java.sql.Blob;
-import java.sql.Clob;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.CollectionId;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

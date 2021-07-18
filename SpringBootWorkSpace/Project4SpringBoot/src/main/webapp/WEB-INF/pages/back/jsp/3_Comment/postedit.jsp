@@ -268,6 +268,9 @@
 	<script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
 
 	<script>
+	// Sidebar
+	$("#PostSidebar,#PostActive").addClass('active')
+	
 	const formData = new FormData(document.getElementById('form'));
     var btnDel = document.getElementById("btnDel");
     var btnUpd = document.getElementById("btnUpd");
@@ -434,7 +437,6 @@
 //                                     }
 //                                 });
 
-                                // Delete All Data
                                 $('#btnDel').on('click', function(){
                                     Swal.fire({
                                         template: '#deleteAll-template'

@@ -89,39 +89,54 @@
 								<label class="col-sm-2 col-form-label text-primary">圖片</label>
 								<div class="col-sm-9">
 									<!--<img src="" class="img-thumbnail" alt="" id="cpicture"> -->
-									<input type="file" class="img-thumbnail" name="pictureFile" id="pictureFile"/>
+									<input type="file" class="img-thumbnail" name="pictureFile"
+										id="pictureFile" />
 								</div>
 							</div>
 					</div>
 					<br> <br> <br>
 					<center>
-						<input type="button" class="btn btn-primary" value="更新留言"
-							id="btnUpd"> <input type="button" class="btn btn-primary"
-							value="刪除留言" id="btnDel">
+								<span id="btnDel">
+								<a class="btn btn-danger btn-icon-split "> 
+									<span class="icon text-white-50">
+								 		<i class="fas fa-trash"></i>
+									</span>
+									<span class="text">刪除留言</span>
+										<template id="deleteAll-template">
+											<swal-title> 你確定要刪除此留言? </swal-title>
+											<swal-icon type="warning" color="red"></swal-icon>
+											<swal-button type="confirm"> 取消 </swal-button>
+											<swal-button type="deny"> 刪除 </swal-button>
+											<swal-param name="allowEscapeKey" value="false" />
+											<swal-param name="customClass"
+												value='{ "popup": "my-popup" }' />
+										</template>
+								</a>
+								</span>
 					</center>
 					</form>
-				<!-- 返回前頁 Button -->
-				<div class="mt-5 float-right">
-					<a href="<c:url value='/post' />"
-						class="btn btn-secondary btn-icon-split"> <span
-						class="icon text-white-50"> <i class="fas fa-arrow-right"></i>
-					</span> <span class="text">返回文章區</span>
-					</a>
-				</div>
+					<!-- 返回前頁 Button -->
+					<div class="mt-5 float-right">
+						<a href="<c:url value='/post' />"
+							class="btn btn-secondary btn-icon-split"> <span
+							class="icon text-white-50"> <i class="fas fa-arrow-right"></i>
+						</span> <span class="text">返回文章區</span>
+						</a>
+					</div>
 
 
-			
+
 				</div>
-			<!-- /.container-fluid -->
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- A03 Footer -->
+			<%@include file="/WEB-INF/pages/back/jsp/0_Util/Footer.jsp"%>
 
 		</div>
-		<!-- End of Main Content -->
-
-		<!-- A03 Footer -->
-		<%@include file="/WEB-INF/pages/back/jsp/0_Util/Footer.jsp"%>
-
-	</div>
-	<!-- End of Content Wrapper -->
+		<!-- End of Content Wrapper -->
 
 	</div>
 	<!-- End of Page Wrapper -->
@@ -151,85 +166,53 @@
 	<script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
 
 	<script>
+	// Sidebar
+	$("#PostSidebar,#PostActive").addClass('active')
         var btnDel = document.getElementById("btnDel");
-        var btnUpd = document.getElementById("btnUpd");
         var divResult = document.getElementById('resultMsg');
-        
-    btnUpd.onclick = function () {
-    	
-        var useridValue = document.getElementById('userid').value;
-        var commentValue = document.getElementById('comment').value;
-        var ctimeValue = document.getElementById('ctime').value;
 
-  //javaScript
-    var scriptsToLoad = [
-    	"<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
-    	"<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-    	"<c:url value='/back/js/demo/datatables-demo.js' />"
-    ]; 
-    scriptsToLoad.forEach(function(src) {
-    	var script = document.createElement('script');
-    	script.src = src;
-    	script.async = false;
-    	document.body.appendChild(script);
-    });
-    
-        var xhr2 = new XMLHttpRequest();
-        xhr2.open("PUT", "<c:url value='/commentedit' />", true);
-        var jsonComment = {
-        	"postboard": {
-        		"post_num":"${bean.postboard.post_num}"
-        	},
-            "comment_num": "${bean.comment_num}",
-            "userid": useridValue,
-            "comment": commentValue,
-            "ctime": ctimeValue,
-            "cmimeType": "${bean.cmimeType}"
-        }
-        xhr2.setRequestHeader("Content-Type", "application/json");
-        xhr2.send(JSON.stringify(jsonComment));
+    $('#btnDel').on('click', function(){
+        Swal.fire({
+            template: '#deleteAll-template'
+        }).then((result)=> {
+            if (result.isDenied) {
+                Swal.fire({
+                    title: 'Upload File Please Wait......'
+                });
+                Swal.showLoading();                         
 
-        xhr2.onreadystatechange = function () {
-            // 伺服器請求完成
-            if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 201)) {
-                result = JSON.parse(xhr2.responseText);
-                if (result.fail) {
-                    divResult.innerHTML = "<font color='red' >" + result.fail + "</font>";
-                    console.log("失敗");
-                } else if (result.success) {
-                    divResult.innerHTML = "<font color='GREEN'>" + result.success + "</font>";
-                    alert("留言更新成功!");
-                    window.location.href = "<c:url value='/post'/>"
-                }
-            }
-        }
-    };
-
-    btnDel.addEventListener('click', (e) => {
-
-        var result = confirm("確定刪除此筆留言(留言編號:" + ${bean.comment_num} + ")?");
-        if (result) {
-            var xhr3 = new XMLHttpRequest();
-            xhr3.open("DELETE", "<c:url value='/deletecomment/" + ${bean.comment_num} + "'/>", true);
-            xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr3.send();
-            xhr3.onreadystatechange = function () {
-                if (xhr3.readyState == 4 && (xhr3.status == 200 || xhr3.status == 204)) {
-                    result = JSON.parse(xhr3.responseText);
-                    if (result.fail) {
-                        divResult.innerHTML = "<font color='red' >"
-                            + result.fail + "</font>";
-                            console.log("刪除失敗");
-                    } else if (result.success) {
-                        alert("留言刪除成功");
-                        window.location.href = "<c:url value='/post'/>"
+                var xhr3 = new XMLHttpRequest();
+                xhr3.open("DELETE", "<c:url value='/deletecomment/" + ${bean.comment_num} + "'/>", true);
+                xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr3.send();
+                xhr3.onreadystatechange = function() {
+                    if (xhr3.readyState == 4 && (xhr3.status == 200 || xhr3.status == 204)) {
+                    	result = JSON.parse(xhr3.responseText);
+                        if(result.success){
+                            Swal.fire({
+                                icon: 'success',
+                                title: '留言已成功刪除',
+                                // showConfirmButton: false,
+                                // timer: 1500
+                            })
+                        }else{
+                            Swal.fire({
+                                // timer: 1500,
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: '刪除時發生問題!',
+                                // footer: '<a href="">Why do I have this issue?</a>'
+                            })
+                        } 
+                        setTimeout(function(){
+                        	window.location.href = "<c:url value='/post'/>"
+                        },1500);
+                       
                     }
-                }
-
+                }        
             }
-        }
-    });
-
+        })
+    })
     </script>
 
 </body>

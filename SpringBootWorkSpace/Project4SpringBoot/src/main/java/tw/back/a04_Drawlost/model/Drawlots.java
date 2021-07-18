@@ -15,7 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "drawlots_7")
@@ -39,6 +42,7 @@ public class Drawlots {
 	@Column(name = "closingPriceOfYesterday")
 	private Float closingPriceOfYesterday;
 	
+	@NumberFormat(pattern="#,###") 
 	@Column(name = "quantity")
 	private Integer quantity;
 	
@@ -66,6 +70,7 @@ public class Drawlots {
 	@Column(name = "marketType")
 	private String marketType;
 	
+	@NumberFormat(pattern="#,###") 
 	@Column(name = "totalQuantity")
 	private Integer totalQuantity;
 	
@@ -78,25 +83,6 @@ public class Drawlots {
 	@Column(name = "remarks")
 	private String remarks;
 	
-	@Column(name = "updateTime")
-	private Timestamp updateTime;
-	
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
-
 	@OneToMany(mappedBy = "stockCode",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<SecuritiesAccount> securitiesAccountSet;
 	
@@ -117,6 +103,108 @@ public class Drawlots {
 	private Boolean display;
 	
 	
+	
+	
+	public Drawlots() {
+		super();
+	}
+
+
+
+	public Drawlots(String drawLotsID, String stockCode, String stockName, String subscribeStatus, Float subscribePrice,
+			Float closingPriceOfYesterday, Integer quantity, Float fluctuationInPrice, Date startDate, Date endDate,
+			Date deductionDate, Date drawDate, Date refundDate, Date grantSecuritiesDate, String marketType,
+			Integer totalQuantity, String securitiesFirm, Float probability, String remarks, Timestamp updateTime,
+			Set<SecuritiesAccount> securitiesAccountSet, Blob companyLogo, String picturePath, MultipartFile mpf,
+			String mimeType, Boolean display) {
+		super();
+		this.drawLotsID = drawLotsID;
+		this.stockCode = stockCode;
+		this.stockName = stockName;
+		this.subscribeStatus = subscribeStatus;
+		this.subscribePrice = subscribePrice;
+		this.closingPriceOfYesterday = closingPriceOfYesterday;
+		this.quantity = quantity;
+		this.fluctuationInPrice = fluctuationInPrice;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.deductionDate = deductionDate;
+		this.drawDate = drawDate;
+		this.refundDate = refundDate;
+		this.grantSecuritiesDate = grantSecuritiesDate;
+		this.marketType = marketType;
+		this.totalQuantity = totalQuantity;
+		this.securitiesFirm = securitiesFirm;
+		this.probability = probability;
+		this.remarks = remarks;
+		this.updateTime = updateTime;
+		this.securitiesAccountSet = securitiesAccountSet;
+		this.companyLogo = companyLogo;
+		this.picturePath = picturePath;
+		this.mpf = mpf;
+		this.mimeType = mimeType;
+		this.display = display;
+		this.updateTime = new Timestamp(System.currentTimeMillis());
+	}
+	
+	
+
+	public Drawlots(String drawLotsID, String stockCode, String stockName, String subscribeStatus, Float subscribePrice,
+			Float closingPriceOfYesterday, Integer quantity, Float fluctuationInPrice, Date startDate, Date endDate,
+			Date deductionDate, Date drawDate, Date refundDate, Date grantSecuritiesDate, String marketType,
+			Integer totalQuantity, String securitiesFirm, Float probability, String remarks,
+			Set<SecuritiesAccount> securitiesAccountSet, Blob companyLogo, String picturePath, String mimeType,
+			Boolean display, Timestamp updateTime) {
+		super();
+		this.drawLotsID = drawLotsID;
+		this.stockCode = stockCode;
+		this.stockName = stockName;
+		this.subscribeStatus = subscribeStatus;
+		this.subscribePrice = subscribePrice;
+		this.closingPriceOfYesterday = closingPriceOfYesterday;
+		this.quantity = quantity;
+		this.fluctuationInPrice = fluctuationInPrice;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.deductionDate = deductionDate;
+		this.drawDate = drawDate;
+		this.refundDate = refundDate;
+		this.grantSecuritiesDate = grantSecuritiesDate;
+		this.marketType = marketType;
+		this.totalQuantity = totalQuantity;
+		this.securitiesFirm = securitiesFirm;
+		this.probability = probability;
+		this.remarks = remarks;
+		this.securitiesAccountSet = securitiesAccountSet;
+		this.companyLogo = companyLogo;
+		this.picturePath = picturePath;
+		this.mimeType = mimeType;
+		this.display = display;
+		this.updateTime = new Timestamp(System.currentTimeMillis());
+	}
+
+
+
+	@Column(name = "updateTime")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, timezone="Asia/Taipei",pattern = "yyyy-MM-dd HH:mm:ss")
+	private Timestamp updateTime;
+	
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public Set<SecuritiesAccount> getSecuritiesAccountSet() {
 		return securitiesAccountSet;
 	}
@@ -307,6 +395,24 @@ public class Drawlots {
 
 	public void setDisplay(Boolean display) {
 		this.display = display;
+	}
+	
+	@Override
+	public String toString() {
+		return "DrawlotsInformation [stockCode=" + stockCode + ", stockName=" + stockName + ", marketType=" + marketType
+				+ ", subscribeStatus=" + subscribeStatus + ", subscribePrice=" + subscribePrice
+				+ ", quantity=" + quantity + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", deductionDate=" + deductionDate + ", drawDate=" + drawDate + ", refundDate=" + refundDate 
+				+ ", grantSecuritiesDate=" + grantSecuritiesDate + ", totalQuantity=" + totalQuantity + ", updateTime=" + updateTime
+				+ ", remarks=" + remarks +"]";
+	}
+	
+	public String toCsv() {
+		return stockCode + "," + stockName + "," + marketType + "," + subscribeStatus+ "," + 
+				subscribePrice + "," + quantity + "," + startDate + "," + endDate + "," +
+			    deductionDate + "," + drawDate + "," + refundDate + "," +
+			    grantSecuritiesDate + "," + totalQuantity + "," + 
+			    updateTime + "," + remarks;
 	}
 	
 	

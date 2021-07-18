@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CBasic - 基本面</title>
+<title>STOCK OVERFLOW</title>
 
 	<!-- Custom fonts for this template-->
 	<link
@@ -56,12 +56,12 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-1 text-gray-800">Company</h1>
-						<a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv"
-							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-							<i class="fas fa-download fa-sm text-white-50"></i> Generate
-							Report
-						</a>
+						<h1 class="h3 mb-1 text-gray-800">公司介紹</h1>
+<%-- 						<a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" --%>
+<!-- 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> -->
+<!-- 							<i class="fas fa-download fa-sm text-white-50"></i> Generate -->
+<!-- 							Report -->
+<!-- 						</a> -->
 					</div>
 					<p class="mb-4">
 						資料來源: <a href="https://data.gov.tw/dataset/18419">

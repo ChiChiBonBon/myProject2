@@ -27,6 +27,9 @@
 
 </head>
 <body>
+	<!-- ======= A00 Cookie ======= -->
+	<%@include file="/WEB-INF/pages/front/jsp/0_Util/Cookie.jsp" %>
+
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp" %>
 

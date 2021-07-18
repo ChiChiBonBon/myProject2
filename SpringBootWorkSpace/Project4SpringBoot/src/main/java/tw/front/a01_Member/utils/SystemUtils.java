@@ -79,20 +79,24 @@ public class SystemUtils {
 		Random random = new Random();
 		char[] alphabet = {'0','1','2', '3', '4', '5', '6', '7', '8', '9'};
 		
-		int random_number = 5;
+		int random_number = 6;
 		random_number -= String.valueOf(ID).length();
 		if (random_number <= 0) {
-			random_number = 5;
+			random_number = 6;
 			String result = NanoIdUtils.randomNanoId(random, alphabet, random_number);
 			m_s_ID.append(result);
 			result = NanoIdUtils.randomNanoId(random, alphabet, 1);
 			m_s_ID.append("-" + result);
+			
 		} else {
-			String result = NanoIdUtils.randomNanoId(random, alphabet, random_number);
-			m_s_ID.append(result);
+			
+			if (random_number != 0) {
+				String result = NanoIdUtils.randomNanoId(random, alphabet, random_number);
+				m_s_ID.append(result);
+			}
 			m_s_ID.append(id);
-			result = NanoIdUtils.randomNanoId(random, alphabet, 1);
-			m_s_ID.append("-" + result);
+			String result_2 = NanoIdUtils.randomNanoId(random, alphabet, 1);
+			m_s_ID.append("-" + result_2);
 		}
 		System.out.println(m_s_ID);
 		return m_s_ID;

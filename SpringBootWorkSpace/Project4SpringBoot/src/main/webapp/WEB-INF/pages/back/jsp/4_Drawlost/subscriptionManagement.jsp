@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,21 +13,24 @@
 
 <title>股票申購管理</title>
 
-	<!-- Custom fonts for this template-->
-	<link
-		href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />"
-		rel="stylesheet" type="text/css">
-	<!-- 文字 -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-		rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link
+	href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />"
+	rel="stylesheet" type="text/css">
+<!-- 文字 -->
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 
 
-    <!-- Custom styles for this template-->
-    <link href="<c:url value='/back/css/sb-admin-2.min.css' />" rel="stylesheet">
-    
-    <!-- Custom styles for this page -->
-    <link href="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.css' />" rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="<c:url value='/back/css/sb-admin-2.min.css' />"
+	rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link
+	href="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.css' />"
+	rel="stylesheet">
 
 
 </head>
@@ -62,93 +66,65 @@
 							<i class="fas fa-download fa-sm text-white-50"></i> 產生報表
 						</a>
 					</div>
-				
+
 					<!-- Table -->
 					<!-- Table Upolad-->
 					<div class="card shadow mb-4">
-                        <div class="card-header">
-                            <div class="input-group w-50">
-                                <a  href="#" class="btn btn-primary btn-icon-split" >
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-file-upload"></i>
-                                    </span>
-                                    <span class="text" id="uploadFile">上傳檔案</span>
-                                </a >
-                                
-                                <form method="POST" enctype="multipart/form-data" id="UploadForm">
-                                    <input type="file" class="form-control" id="csvFile" name="csvFile" accept=".json">
-                                </form>
-                            </div>
-                        </div>
-                       
-                        <!-- Table Content-->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered tableArea" id="" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>序號</th>
-                                            <th>證券戶號</th>
-                                            <th>客戶名稱</th>
-                                            <th>身份證字號</th>
-                                            <th>密碼</th>
-                                            <th>申購的股票</th>
-                                            <th>申購價格</th>
-                                            <th>申購股數</th>
-                                            <th>交割戶餘額</th>
-                                            <th>是否可抽籤</th>
-                                            <th>有無中籤</th>
-                                            <th>中籤的股票</th>
-                                            <th>流程狀態</th>
-                                            <th>申購時間</th>
-                                            <th>備註</th>         
-                                            <th width="80px">修改 / 刪除</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>序號</th>
-                                            <th>證券戶號</th>
-                                            <th>客戶名稱</th>
-                                            <th>身份證字號</th>
-                                            <th>密碼</th>
-                                            <th>申購的股票</th>
-                                            <th>申購價格</th>
-                                            <th>申購股數</th>
-                                            <th>交割戶餘額</th>
-                                            <th>是否可抽籤</th>
-                                            <th>有無中籤</th>
-                                            <th>中籤的股票</th>
-                                            <th>流程狀態</th>
-                                            <th>申購時間</th>
-                                            <th>備註</th>         
-                                            <th width="80px">修改 / 刪除</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody id='dataArea'>
-                                        
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>  
+						<div class="card-header">
+							<div class="input-group w-50">
+								
+
+							</div>
+						</div>
+
+						<!-- Table Content-->
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered tableArea" id="" width="100%"
+									cellspacing="0">
+									<thead>
+										<tr>
+											<th>證券戶號</th>
+											<th>客戶名稱</th>
+											<th>身份證字號</th>
+											<th>密碼</th>
+											<th>申購的股票</th>
+											<th>申購價格</th>
+											<th>申購股數</th>
+											<th>交割戶餘額</th>
+											<th>是否可抽籤</th>
+											<th>有無中籤</th>
+											<th>流程狀態</th>
+											<th>申購時間</th>
+											<th>備註</th>
+											<th width="80px">修改 / 刪除</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>證券戶號</th>
+											<th>客戶名稱</th>
+											<th>身份證字號</th>
+											<th>密碼</th>
+											<th>申購的股票</th>
+											<th>申購價格</th>
+											<th>申購股數</th>
+											<th>交割戶餘額</th>
+											<th>是否可抽籤</th>
+											<th>有無中籤</th>
+											<th>流程狀態</th>
+											<th>申購時間</th>
+											<th>備註</th>
+											<th width="80px">修改 / 刪除</th>
+										</tr>
+									</tfoot>
+									<tbody id='dataArea'>
 
 
-					<!-- Delete Button -->
-					<div class="float-right" id="deleteAll">
-						<a class="btn btn-danger btn-icon-split "> <span
-							class="icon text-white-50"> <i class="fas fa-trash"></i>
-						</span> <span class="text">Delete All Data</span>
-							<template id="deleteAll-template">
-								<swal-title> 你確定要刪除全部資料? </swal-title>
-								<swal-icon type="warning" color="red"></swal-icon>
-								<swal-button type="confirm"> 取消 </swal-button>
-								<swal-button type="deny"> 刪除全部 </swal-button>
-								<swal-param name="allowEscapeKey" value="false" />
-								<swal-param name="customClass" value='{ "popup": "my-popup" }' />
-							</template>
-						</a>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -162,7 +138,7 @@
 
 		</div>
 		<!-- End of Content Wrapper -->
-        
+
 	</div>
 	<!-- End of Page Wrapper -->
 
@@ -172,7 +148,7 @@
 	<!-- A05 Logout Modal-->
 	<%@include file="/WEB-INF/pages/back/jsp/0_Util/LogoutModal.jsp"%>
 
-    
+
 
 	<!-- script -->
 	<!-- Bootstrap core JavaScript-->
@@ -199,10 +175,172 @@
 	<!-- SweetAlert2 -->
 	<script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
 	<script>
-		$(function(){
+		$(function() {
 			// Sidebar
-            $("#Subscription_Management, #DS").addClass('active')
-            $("#collapseDS").addClass('show')
+			$("#Subscription_Management, #DS").addClass('active')
+			$("#collapseDS").addClass('show')
+
+			// Select All Data
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "<c:url value='/back/subscription/selectAll' />",
+					true);
+			xhr.send()
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					$('#dataArea').html(showAll(xhr.responseText))
+					$('.tableArea').attr('id', 'dataTable')
+
+					// $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
+					// $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
+					// $.getScript("<c:url value='/back/js/demo/datatables-demo.js' />");
+					var scriptsToLoad = [
+							"<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />",
+							"<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+							"<c:url value='/back/js/demo/datatables-demo.js' />" ];
+
+					scriptsToLoad.forEach(function(src) {
+						var script = document.createElement('script');
+						script.src = src;
+						script.async = false;
+						document.body.appendChild(script);
+					});
+				}
+			}
+			
+			 // Update Data
+            $('tbody').on('click', '#update', function () {
+                var x = $(this).parent().parent().index()
+                var paID = $(".idX")[x].textContent
+                console.log(paID)
+                Swal.fire({
+                    template: '#my-update' + paID
+                }).then((result) => {
+                    if (result.isDenied) {
+                        location.replace("<c:url value='/back/subscription/update/' />" + paID);
+                    }
+                })
+            })
+			
+			function showAll(text) {
+                var beans = JSON.parse(text);
+                var segment = ""
+
+                for (var x in beans) {
+                    var bean = beans[x]
+                    var buttonX =
+                        `<span href="#" class="btn btn-warning btn-circle btn-sm" id="update">
+        <i class="fas fa-exclamation-triangle"></i>
+        <template id="my-update`+ bean.securitiesAccountID + `">
+            <swal-title>
+            你確定要修改` + bean.securitiesAccountID + `?
+            </swal-title>
+            <swal-icon type="warning" color="red"></swal-icon>
+            <swal-button type="confirm">
+            取消
+            </swal-button>
+            <swal-button type="deny">
+            修改
+            </swal-button>
+            <swal-param name="allowEscapeKey" value="false" />
+            <swal-param
+            name="customClass"
+            value='{ "popup": "my-popup" }' />
+        </template>
+    </span>
+    &nbsp;&nbsp;
+    <span" class="btn btn-danger btn-circle btn-sm" id="delete">
+        <i class="fas fa-trash"></i>
+        <template id="my-delete`+ bean.securitiesAccountID + `">
+            <swal-title>
+            你確定要刪除 `+ bean.securitiesAccountID + ` ?
+            </swal-title>
+            <swal-icon type="warning" color="red"></swal-icon>
+            <swal-button type="confirm">
+            取消
+            </swal-button>
+            <swal-button type="deny">
+            刪除
+            </swal-button>
+            <swal-param name="allowEscapeKey" value="false" />
+            <swal-param
+            name="customClass"
+            value='{ "popup": "my-popup" }' />
+        </template>
+    </span>`
+
+
+
+                    segment += "<tr>"
+                    segment += "<td class='idX'>" + bean.securitiesAccountID + "</td>"
+                    segment += "<td>" + bean.customerName + "</td>"
+                    //segment += "<td>" + bean.companyLogo + "</td>"
+                    segment += "<td>" + bean.identityNumber + "</td>"
+                    segment += "<td>" + bean.password + "</td>"
+                    segment += "<td>" + bean.stockCode + "</td>"
+                    segment += "<td>" + bean.stockPrice + "</td>"
+                    segment += "<td>" + bean.stockQuantity + "</td>"
+                    segment += "<td>" + bean.banlance + "</td>"       
+                    segment += "<td>" + bean.drawable + "</td>"
+                    segment += "<td>" + bean.drawStatus + "</td>"
+                    segment += "<td>" + bean.processStatus + "</td>"
+                    segment += "<td>" + bean.subscriptionTime + "</td>"
+                    segment += "<td>" + bean.remarks + "</td>"
+                    segment += "<td>" + buttonX + "</td>"
+                    segment += "</tr>"
+                }
+                return segment;
+            }
+			
+			// Delete Data
+            $('tbody').on('click', '#delete', function () {
+                var x = $(this).parent().parent().index()
+                var paID = $(".idX")[x].textContent
+                console.log(paID)
+                Swal.fire({
+                    template: '#my-delete' + paID
+                }).then((result) => {
+                    if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Delete ' + paID + ' Please Wait......'
+                        });
+                        Swal.showLoading();
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "<c:url value='/back/subscription/delete' />", true);
+                        xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+                        xhr.send("id=" + paID);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                if (xhr.responseText) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: paID + ' has been deleted.',
+                                        // showConfirmButton: false,
+                                        // timer: 1500
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                }
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1500);
+
+                            }
+                        }
+                    }
+                })
+            })
+			
+			function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
 
 		})
 	</script>
