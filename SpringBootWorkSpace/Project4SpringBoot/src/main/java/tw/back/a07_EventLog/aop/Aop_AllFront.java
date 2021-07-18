@@ -31,7 +31,7 @@ public class Aop_AllFront {
 		SeverityType_7 severity = new SeverityType_7();
 			
 		authority.setAuthorityType("unknow");
-		String person = "testAdmin";
+		String person = "Admin";
 		severity.setSeverityType("danger");
 		
 		String classString = point.getTarget().getClass().toString();
