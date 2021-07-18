@@ -2,6 +2,7 @@ package tw.front.a04_Drawlost.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -37,30 +38,98 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.back.a03_Comment.utils.SystemUtils;
 import tw.back.a04_Drawlost.model.Drawlots;
+import tw.back.a04_Drawlost.model.SecuritiesAccount;
 import tw.back.a04_Drawlost.service.DrawableServiceInterface;
 import tw.back.a04_Drawlost.service.DrawlotsService;
 import tw.back.a04_Drawlost.tools.FileTool;
 import tw.back.a04_Drawlost.tools.TimeTool;
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
+import tw.front.a04_Drawlost.service.SubscribableServiceInterface;
 
 @Controller
 public class DrawlotsSubscriptionController {
-	
+
 	@Autowired
-	private DrawableServiceInterface drawlotsService = new DrawlotsService();
-	
+	private SubscribableServiceInterface subscribableService;
+
 	@Autowired
 	ServletContext context;
+	
+	//@Autowired
+	//SecuritiesAccount securitiesAccount = new SecuritiesAccount();
 
 	@GetMapping(value = "/front/guestView")
 	public String guestView() {
 		return "/front/jsp/4_Drawlost/guestView";
 	}
-	
+
 	@GetMapping(value = "/front/userView")
 	public String userView() {
 		return "/front/jsp/4_Drawlost/userView";
 	}
+
+	@PostMapping(value = "/front/userView/insertOrupdate")
+	public void userViewInsert(@RequestParam(value="stockCode",required=false) String stockCode,
+								 @RequestParam(value="securitiesAccountID",defaultValue="1993-082-060-4",required=false) String securitiesAccountID,
+								 @RequestParam(value="stockPrice",required=false) String stockPrice,
+								 @RequestParam(value="stockQuantity",required=false) String stockQuantity,
+								 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime){
+		
+		//System.out.println(stockCode+","+securitiesAccountID+","+stockPrice+","+stockQuantity+","+subscriptionTime);
+		SecuritiesAccount securitiesAccount =subscribableService.selectOne(securitiesAccountID);
+		
+		if( securitiesAccount != null) {
+			//securitiesAccount = new SecuritiesAccount();
+			
+			securitiesAccount.setCustomerName("Jason Chang");
+			securitiesAccount.setStockCode(stockCode);
+			securitiesAccount.setStockPrice(Float.parseFloat(stockPrice));
+			securitiesAccount.setStockQuantity(Long.parseLong(stockQuantity));
+			securitiesAccount.setBanlance(new BigDecimal(10000));
+			securitiesAccount.setDrawable(true);
+			securitiesAccount.setDrawStatus(false);
+			securitiesAccount.setProcessStatus("申購中");
+			securitiesAccount.setSubscriptionTime(new Timestamp(Long.parseLong(subscriptionTime)));
+			securitiesAccount.setRemarks("");
+			
+			subscribableService.updateOne(securitiesAccount);
+			
+			System.out.println("修改成功");
+		}else{
+			securitiesAccount = new SecuritiesAccount();
+			securitiesAccount.setSecuritiesAccountID("1993-082-060-4");
+			securitiesAccount.setCustomerName("Jason Chang");
+			securitiesAccount.setStockCode(stockCode);
+			securitiesAccount.setStockPrice(Float.parseFloat(stockPrice));
+			securitiesAccount.setStockQuantity(Long.parseLong(stockQuantity));
+			securitiesAccount.setBanlance(new BigDecimal(10000));
+			securitiesAccount.setDrawable(true);
+			securitiesAccount.setDrawStatus(false);
+			securitiesAccount.setProcessStatus("申購中");
+			securitiesAccount.setSubscriptionTime(new Timestamp(Long.parseLong(subscriptionTime)));
+			securitiesAccount.setRemarks("");
+			
+			subscribableService.insertOne(securitiesAccount);
+			
+			System.out.println("新增成功");
+		}
+	}
+	
+	@PostMapping(value="/front/userView/delete")
+	public void userViewDelete(@RequestParam(value="stockCode",required=false) String stockCode,
+			 @RequestParam(value="securitiesAccountID",defaultValue="1993-082-060-4",required=false) String securitiesAccountID,
+			 @RequestParam(value="stockPrice",required=false) String stockPrice,
+			 @RequestParam(value="stockQuantity",required=false) String stockQuantity,
+			 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime) {
+		
+		SecuritiesAccount securitiesAccount =subscribableService.selectOne(securitiesAccountID);
+		
+		if( securitiesAccount != null) {
+			subscribableService.deleteOne(securitiesAccountID);
+			System.out.println("刪除成功");
+		}
+	}
+	
 	
 //	@GetMapping(value = "/back/subscription")
 //	public String subscriptionMain() {

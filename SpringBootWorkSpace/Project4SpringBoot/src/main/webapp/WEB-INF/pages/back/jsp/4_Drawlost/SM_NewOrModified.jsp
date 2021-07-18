@@ -84,24 +84,24 @@
 										<div id="" class="invalid-feedback">請輸入文字</div>
 									</div>
 								</div>
-								<div class="col-6 form-group row">
-									<label class="col-sm-2 col-form-label text-primary">身分證字號</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control"
-											placeholder="範例: H123456789" id="identityNumber"
-											value="${bean.identityNumber}">
-										<div id="" class="invalid-feedback">請輸入文字</div>
-									</div>
-								</div>
-								<div class="col-6 form-group row">
-									<label class="col-sm-2 col-form-label text-primary">密碼</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control"
-											placeholder="範例: p@ssw0rd" id="password"
-											value="${bean.password}">
-										<div id="" class="invalid-feedback">請輸入文字</div>
-									</div>
-								</div>
+<!-- 								<div class="col-6 form-group row"> -->
+<!-- 									<label class="col-sm-2 col-form-label text-primary">身分證字號</label> -->
+<!-- 									<div class="col-sm-9"> -->
+<!-- 										<input type="text" class="form-control" -->
+<!-- 											placeholder="範例: H123456789" id="identityNumber" -->
+<%-- 											value="${bean.identityNumber}"> --%>
+<!-- 										<div id="" class="invalid-feedback">請輸入文字</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-6 form-group row"> -->
+<!-- 									<label class="col-sm-2 col-form-label text-primary">密碼</label> -->
+<!-- 									<div class="col-sm-9"> -->
+<!-- 										<input type="text" class="form-control" -->
+<!-- 											placeholder="範例: p@ssw0rd" id="password" -->
+<%-- 											value="${bean.password}"> --%>
+<!-- 										<div id="" class="invalid-feedback">請輸入文字</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								<div class="col-6 form-group row">
 									<label class="col-sm-2 col-form-label text-primary">申購的股票</label>
 									<div class="col-sm-9">
@@ -264,8 +264,8 @@
                         var bean = {
                         		"securitiesAccountID":$('#securitiesAccountID').val(),
                         		"customerName":$('#customerName').val(),
-                        		"identityNumber":$('#identityNumber').val(),
-                        		"password":$('#password').val(),
+                        		//"identityNumber":$('#identityNumber').val(),
+                        		//"password":$('#password').val(),
                         		"stockCode":$('#stockCode').val(),
                         		"stockPrice":$('#stockPrice').val(),
                         		"stockQuantity":$('#stockQuantity').val(),
