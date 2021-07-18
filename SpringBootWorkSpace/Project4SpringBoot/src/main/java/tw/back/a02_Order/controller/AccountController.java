@@ -41,57 +41,41 @@ public class AccountController {
 	@Autowired
 	private AccountDAO  accountDao;
 	
-	@Autowired
-	private OrderBeanDAO  orderBeanDao;
-
 //登入導向+權限修改
 	@GetMapping("/admin/login")
     public String loadLoginPage() {
-    	return "back/jsp/2_Order/2_Login";	
+    	return "back/jsp/2_Order/2_Admin_login";	
     }
 	
 	@PostMapping("/admin/authority")
     public String loadPage(Account acc,Employee emp,Model m) {
 		m.addAttribute("emp_ID" , "admin");
 		m.addAttribute("stock_ID" , acc.getStock_ID());
-    	return "back/jsp/2_Order/2_Account";	
+    	return "back/jsp/2_Order/2_Authority";	
     }
 
-//代課導向+後台訂單查詢
-	@GetMapping("/admin/order")
-	public String loadOrderPage(Account acc,Employee emp ,Model m) {
-		m.addAttribute("emp_ID" , "admin");
-		m.addAttribute("stock_ID" , acc.getStock_ID());
-		m.addAttribute("order_lists" , orderBeanDao.selectOrder(acc.getStock_ID()).toString());
-		return "back/jsp/2_Order/2_Order" ;
-	}
-	
-	@GetMapping("/admin/order/select")
-	public String loadSelectOrder() {
-		return "back/jsp/2_Order/2_Order_select" ;
-	}
-	
-//後台-查改刪
+
+//查詢會員資料 + 修改會員權限 auth + quota
 	@GetMapping("/admin/account/select")
 	public String loadSelectAcc(Account acc_list,Model m) {
 		String acc_lists = accountDao.selectAcc(acc_list.getStock_ID()).toString() ;
 		m.addAttribute("acc_lists", acc_lists);
-		return "back/jsp/2_Order/2_Account_select" ;
-	}
-	
-	@PostMapping("/admin/controller/delete")
-	public String loadDeleteOrderService(String delacc_ID,Account acc_list,Model m){
-		accountDao.deleteAcc(delacc_ID);
-		loadSelectAcc(acc_list, m);
-		return "back/jsp/2_Order/2_Order_select" ;
+		return "back/jsp/2_Order/2_Authority_select" ;
 	}
 	
 	@GetMapping("/admin/controller/update")
 	public String loadUpdateAcc(String change_ID,String change_auth,String change_quota ,Account acc_list,Model m){
 		accountDao.updateAuth(change_ID, change_auth, change_quota);
 		loadSelectAcc(acc_list, m);
-		return "back/jsp/2_Order/2_Account_select" ;
+		return "back/jsp/2_Order/2_Authority_select" ;
 	}
+	
+//	@PostMapping("/admin/controller/delete")
+//	public String loadDeleteOrderService(String delacc_ID,Account acc_list,Model m){
+//		accountDao.deleteAcc(delacc_ID);
+//		loadSelectAcc(acc_list, m);
+//		return "back/jsp/2_Order/2_Order_select" ;
+//	}
 	
 	
 	

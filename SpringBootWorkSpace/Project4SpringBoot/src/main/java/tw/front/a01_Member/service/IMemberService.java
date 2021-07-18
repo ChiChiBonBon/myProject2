@@ -15,4 +15,11 @@ public interface IMemberService {
 	boolean member_deleteAccount(long id);
 	
 	public MemberBean member_member_info(long id);
+	
+	public String check_unique(String column, String value, String origin_value);
+	
+	public String check_unique(String column, String value);
+	
+	public boolean check_cookie(String cookie_value);
+
 }

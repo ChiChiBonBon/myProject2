@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.back.a01_Member.model.MemberJobs;
+import tw.back.a01_Member.service.IAdminMemberService;
 import tw.front.a01_Member.dao.IMemberDao;
 import tw.front.a01_Member.model.MemberBean;
 
@@ -14,6 +16,9 @@ public class MemberService implements IMemberService {
 	
 	@Autowired
 	private IMemberDao mDao;
+	
+	@Autowired
+	private IAdminMemberService adminservice;
 
 	public MemberService() {
 		super();
@@ -35,6 +40,13 @@ public class MemberService implements IMemberService {
 	@Override
 	public int member_updateAccount(MemberBean bean) {
 		// TODO Auto-generated method stub
+		if (bean.getJobType_id() == null) {
+			System.out.println("here: (bean.getJobType_id()" + bean);
+			return mDao.member_updateAccount(bean);
+		} else if (bean.getJobType_id() != null) {
+			MemberJobs memberjob = adminservice.admin_selectJob(bean.getJobType_id().getJob_id());
+			bean.setJobType_id(memberjob);
+		}
 		return mDao.member_updateAccount(bean);
 	}
 
@@ -56,4 +68,22 @@ public class MemberService implements IMemberService {
 		return mDao.member_select(id);
 	}
 
+	@Override
+	public String check_unique(String column, String value, String origin_value) {
+		// TODO Auto-generated method stub
+		return mDao.check_unique(column, value, origin_value);
+	}
+
+	@Override
+	public String check_unique(String column, String value) {
+		// TODO Auto-generated method stub
+		return mDao.check_unique(column, value);
+	}
+
+	@Override
+	public boolean check_cookie(String cookie_value) {
+		// TODO Auto-generated method stub
+		System.out.println("check_cookie service cookie:  " + cookie_value);
+		return mDao.check_cookie(cookie_value);
+	}
 }

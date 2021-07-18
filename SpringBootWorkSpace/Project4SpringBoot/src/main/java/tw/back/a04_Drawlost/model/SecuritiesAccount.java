@@ -1,6 +1,7 @@
 package tw.back.a04_Drawlost.model;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,15 +14,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "securitiesAccount_7")
 public class SecuritiesAccount {
 
 	@Column(name = "drawableAccountSN")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer drawableAccountSN;
 	
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long securitiesAccountID;
+    @Id 
+	private String securitiesAccountID;
 	
     @Column(name = "drawStatus")
 	private Boolean drawStatus;
@@ -47,6 +51,46 @@ public class SecuritiesAccount {
     @Column(name = "stockPrice")
 	private Float stockPrice;
     
+    @Column(name = "display")
+    private Boolean display;
+    
+    @Column(name = "password")
+    private String password;
+    
+    @Column(name = "customerName")
+    private String customerName;
+    
+    @Column(name = "subscriptionTime")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone="Asia/Taipei",pattern = "yyyy-MM-dd HH:mm:ss")
+    private Timestamp subscriptionTime;
+    
+	@Column(name = "remarks")
+	private String remarks;
+    
+    public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public Timestamp getSubscriptionTime() {
+		return subscriptionTime;
+	}
+
+	public void setSubscriptionTime(Timestamp subscriptionTime) {
+		this.subscriptionTime = subscriptionTime;
+	}
+    
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Drawlots drawlots;
 
@@ -58,11 +102,11 @@ public class SecuritiesAccount {
 		this.drawableAccountSN = drawableAccountSN;
 	}
 
-	public Long getSecuritiesAccountID() {
+	public String getSecuritiesAccountID() {
 		return securitiesAccountID;
 	}
 
-	public void setSecuritiesAccountID(Long securitiesAccountID) {
+	public void setSecuritiesAccountID(String securitiesAccountID) {
 		this.securitiesAccountID = securitiesAccountID;
 	}
 
@@ -128,6 +172,30 @@ public class SecuritiesAccount {
 
 	public void setStockPrice(Float stockPrice) {
 		this.stockPrice = stockPrice;
+	}
+
+	public Boolean getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(Boolean display) {
+		this.display = display;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Drawlots getDrawlots() {
+		return drawlots;
+	}
+
+	public void setDrawlots(Drawlots drawlots) {
+		this.drawlots = drawlots;
 	}
 	
 	

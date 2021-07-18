@@ -44,4 +44,32 @@ public class CBasicDao {
 		
 		return result;
 	}
+	
+	public Boolean delete(String stock) {
+		Boolean result = true;
+		CompanyBasic_6 bean = em.find(CompanyBasic_6.class, stock);
+		if(bean != null) {
+			try {
+				em.remove(bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result = false;
+			}
+		}
+		return result;
+	}
+	
+	public Boolean deleteAll() {
+		Boolean result = false;
+		String sql = "delete from CompanyBasic_6";
+		
+		try {
+			em.createQuery(sql).executeUpdate();
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

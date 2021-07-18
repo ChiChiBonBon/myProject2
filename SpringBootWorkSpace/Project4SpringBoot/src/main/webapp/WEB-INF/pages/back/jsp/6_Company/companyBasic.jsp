@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CBasic - 基本面</title>
+<title>STOCK OVERFLOW</title>
 
 	<!-- Custom fonts for this template-->
 	<link
@@ -56,16 +56,16 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-1 text-gray-800">Company</h1>
-						<a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv"
-							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-							<i class="fas fa-download fa-sm text-white-50"></i> Generate
-							Report
-						</a>
+						<h1 class="h3 mb-1 text-gray-800">公司介紹</h1>
+<%-- 						<a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" --%>
+<!-- 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> -->
+<!-- 							<i class="fas fa-download fa-sm text-white-50"></i> Generate -->
+<!-- 							Report -->
+<!-- 						</a> -->
 					</div>
 					<p class="mb-4">
 						資料來源: <a href="https://data.gov.tw/dataset/18419">
-							上市公司基本資料</a> <br> 可以將資料匯入進來，目前未檢查資料真偽，以後更新。 2021/7/11
+							上市公司基本資料</a> <br> 可以將資料匯入進來(JSON)。
 					</p>
 
 
@@ -230,7 +230,7 @@
 
                 Swal.fire({
                     // timer: 2000,
-                    title: 'Upload File Please Wait......'
+                    title: '檔案寫入中 約要6~7分鐘 請稍等......'
                 });
                 Swal.showLoading(); 
 
@@ -265,48 +265,91 @@
             // Delete Data
             $('tbody').on('click', '#delete', function(){
                 var x =  $(this).parent().parent().index()
-                var paID = $(".idX")[x].textContent
-                console.log(paID)
-                // Swal.fire({
-                //     template: '#my-delete'+ paID
-                // }).then((result)=> {
-                //     if (result.isDenied) {
-                //         Swal.fire({
-                //             title: 'Delete '+ paID + ' Please Wait......'
-                //         });
-                //         Swal.showLoading();                         
+                var stock = $(".idX")[x].textContent
+                console.log(stock)
+                Swal.fire({
+                    template: '#my-delete'+ stock
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Delete '+ stock + ' Please Wait......'
+                        });
+                        Swal.showLoading();                         
 
-                //         var xhr = new XMLHttpRequest();
-                //         xhr.open("POST", "<c:url value='/pa/delete' />", true);
-                //         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
-                //         xhr.send("id="+paID);
-                //         xhr.onreadystatechange = function() {
-                //             if (xhr.readyState == 4 && xhr.status == 200) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "<c:url value='/back/cBasic/delete' />", true);
+                        xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+                        xhr.send("stock="+stock);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
 
-                //                 if(xhr.responseText){
-                //                     Swal.fire({
-                //                         icon: 'success',
-                //                         title: paID + ' has been deleted.',
-                //                         // showConfirmButton: false,
-                //                         // timer: 1500
-                //                     })
-                //                 }else{
-                //                     Swal.fire({
-                //                         // timer: 1500,
-                //                         icon: 'error',
-                //                         title: 'Oops...',
-                //                         text: 'Something went wrong!',
-                //                         // footer: '<a href="">Why do I have this issue?</a>'
-                //                     })
-                //                 } 
-                //                 setTimeout(function(){
-                //                     location.reload();
-                //                 },1500);
+                                if(xhr.responseText){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: stock + ' has been deleted.',
+                                        // showConfirmButton: false,
+                                        // timer: 1500
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                } 
+                                setTimeout(function(){
+                                    location.reload();
+                                },1500);
                                
-                //             }
-                //         }    
-                //     }
-                // })
+                            }
+                        }    
+                    }
+                })
+            })
+            
+            // Delete All Data
+            $('#deleteAll').on('click', function(){
+                Swal.fire({
+                    template: '#deleteAll-template'
+                }).then((result)=> {
+                    if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Upload File Please Wait......'
+                        });
+                        Swal.showLoading();                         
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("GET", "<c:url value='/back/cBasic/deleteAll' />", true);
+                        xhr.send();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                if(xhr.responseText){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'All file has been deleted.',
+                                        // showConfirmButton: false,
+                                        // timer: 1500
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        // timer: 1500,
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                    })
+                                } 
+                                setTimeout(function(){
+                                    location.reload();
+                                },1500);
+                               
+                            }
+                        }        
+                    }
+                })
             })
 
             // Update Data
@@ -343,7 +386,7 @@
                         </span>
                         &nbsp;&nbsp;
                         <!-- delete -->
-                        <span" class="btn btn-danger btn-circle btn-sm" id="delete">
+                        <span class="btn btn-danger btn-circle btn-sm" id="delete">
                             <i class="fas fa-trash"></i>
                             <template id="my-delete`+bean.stock+`">
                                 <swal-title>

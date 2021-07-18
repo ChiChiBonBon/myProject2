@@ -22,4 +22,12 @@ public class CDetailService {
 	public Boolean update(CompanyDetail_6 bean){
 		return dao.update(bean);
 	}
+	
+	public Boolean delete(String stock) {
+		return dao.delete(stock);
+	}
+	
+	public Boolean deleteAll() {
+		return dao.deleteAll();
+	}
 }

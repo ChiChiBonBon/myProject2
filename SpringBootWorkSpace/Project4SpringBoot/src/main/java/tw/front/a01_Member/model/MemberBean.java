@@ -8,12 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import tw.back.a01_Member.model.MemberJobs;
 
 @Entity
 @Table(name = "member_3")
@@ -24,21 +31,29 @@ public class MemberBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty(message = "不能空")
 	@Column(unique = true, nullable = false)
 	private String account;
 	
+	@NotEmpty(message = "不能空")
 	@Column(nullable = false)
 	private String password;
 	
+	@NotEmpty(message = "不能空")
 	@Column(nullable = false)
 	private String name;
 	
-	private String birthday; 
+	@Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}$", message="出生日期格式不正確")
+	private String birthday;
+	
 	private String nickname;
 	
+	@NotEmpty(message = "不能空")
 	@Column(nullable = false)
 	private String gender;
 	
+	@NotEmpty(message = "不能空")
+	@Email(message = "要輸電子信箱")
 	@Column(unique = true, nullable = false)
 	private String e_mail;
 	
@@ -47,9 +62,16 @@ public class MemberBean {
 	
 	private String address;
 	
-	private String job;
+	
+	@ManyToOne
+	@JoinColumn(name = "jobid", nullable = true)
+	private MemberJobs jobType_id;
+	
 	
 	private String carrier;
+	
+	private Timestamp lastUsing;
+	
 	private Timestamp registertime;
 	
 	@JsonIgnore
@@ -73,6 +95,8 @@ public class MemberBean {
 	private String member_auth;
 	
 	private String member_status;
+	
+	private String acc_encode_cookie;
 	
 	
 	public Long getId() {
@@ -135,11 +159,11 @@ public class MemberBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getJob() {
-		return job;
+	public MemberJobs getJobType_id() {
+		return jobType_id;
 	}
-	public void setJob(String job) {
-		this.job = job;
+	public void setJobType_id(MemberJobs jobType_id) {
+		this.jobType_id = jobType_id;
 	}
 	public String getCarrier() {
 		return carrier;
@@ -158,6 +182,12 @@ public class MemberBean {
 	}
 	public void setMember_status(String member_status) {
 		this.member_status = member_status;
+	}
+	public Timestamp getLastUsing() {
+		return lastUsing;
+	}
+	public void setLastUsing(Timestamp lastUsing) {
+		this.lastUsing = lastUsing;
 	}
 	public Timestamp getRegistertime() {
 		return registertime;
@@ -206,6 +236,12 @@ public class MemberBean {
 	}
 	public void setPictureFile_name(String pictureFile_name) {
 		this.pictureFile_name = pictureFile_name;
+	}
+	public String getAcc_encode_cookie() {
+		return acc_encode_cookie;
+	}
+	public void setAcc_encode_cookie(String acc_encode_cookie) {
+		this.acc_encode_cookie = acc_encode_cookie;
 	}
 
 }

@@ -11,22 +11,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
 import tw.back.a06_Company.model.PAservice;
 
 @Controller
+@RequestMapping("/back")
 public class PA_UpdateController {
 
 	@Autowired
 	public PAservice paService;
 	
 	@GetMapping("/paUpdate/{id}")
-	public String companyPaUpdateMain(@PathVariable String id, Model m) {
-		ProfitAnalysis_6 bean = paService.select(Integer.parseInt(id));
-		m.addAttribute("bean", bean);
-		return "back/jsp/6_Company/companyPa_Update";
+	public String companyPaUpdateMain(@PathVariable String id, Model m) {	
+//		try {
+			ProfitAnalysis_6 bean = paService.select(Integer.parseInt(id));
+			m.addAttribute("bean", bean);
+			return "back/jsp/6_Company/companyPa_Update";
+//		} catch (Exception e) {
+//			return "redirect:/back/pa/Main";
+//		}
 	}
 	
 	@PutMapping(value="/paUpdate" , consumes = "application/json")

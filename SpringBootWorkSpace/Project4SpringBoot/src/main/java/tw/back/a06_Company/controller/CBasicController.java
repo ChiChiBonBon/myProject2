@@ -44,6 +44,7 @@ public class CBasicController {
 	
 	@PostMapping(value = "/insertData", consumes = { "multipart/form-data" })
 	public @ResponseBody Boolean insertBasicData(@RequestParam MultipartFile csvFile) {
+		System.out.println("=============Insert Company Basic&Detail====================");
 		long time1 = System.currentTimeMillis(); 
 		Boolean result = true;
 		System.out.println("=============Data Waiting...");
@@ -55,12 +56,14 @@ public class CBasicController {
 		int count = 0;
 		int countApi = 0;
 		int countE = 0;
+		int x = 0; // print ...
 		System.out.println("=============Ready Insert");
 		for (Object object : jsonArray) {
 			JSONObject jsonObject = new JSONObject(object.toString());
 			CompanyDetail_6 beanDetail = new CompanyDetail_6();
 			CompanyBasic_6 beanBasic = new CompanyBasic_6();
 			String urlResource = "";
+			
 			try {
 				// 01 放到Bean
 //				System.out.println("=================================");
@@ -152,6 +155,16 @@ public class CBasicController {
 				cBasicService.insertCBasic(beanBasic);
 				countApi ++ ;
 				
+				
+				if(x<=30) {
+					System.out.print(".");
+					x ++;
+					if(x == 30) {
+						x = 0;
+						System.out.println();
+					}
+				}
+				
 			} catch (Exception e) {
 				System.out.println("=================================");
 				System.out.println(jsonObject);
@@ -163,7 +176,7 @@ public class CBasicController {
 				result = false; 
 			} 
 		}
-		
+		System.out.println();
 		long time2 = System.currentTimeMillis();
 		long finalTime = (time2 - time1)/1000;
 		System.out.println("共花費 " + finalTime +" 秒");
@@ -213,12 +226,40 @@ public class CBasicController {
 		// 05 update beanDetail
 		CompanyDetail_6 beanDetail =  cDetailService.select(stock);
 		beanDetail.setBusiness_Accounting_NO(beanBasicNew.getBusiness_Accounting_NO());
-		beanDetail.setCompany_NikeName(beanBasicNew.getCompany_Name());
+		beanDetail.setCompany_Name(beanBasicNew.getCompany_Name());
 		beanDetail.setChairman_Board(beanBasicNew.getResponsible_Name());
 		beanDetail.setCompany_Location(beanBasicNew.getCompany_Location());
 		cDetailService.update(beanDetail);
 		
 		return beanBasicNew;
+	}
+	
+	@GetMapping("/deleteAll")
+	public @ResponseBody Boolean deleteAll() {
+		Boolean resule = true;
+		try {
+			cDetailService.deleteAll();
+			cBasicService.deleteAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+			resule = false;
+		}
+		return resule;
+	}
+	
+	@PostMapping("/delete")
+	public @ResponseBody Boolean delete(@RequestParam String stock) {
+
+		Boolean resule = true;
+		try {
+			cDetailService.delete(stock);
+			cBasicService.delete(stock);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resule = false;
+		}
+		
+		return resule;
 	}
 
 }

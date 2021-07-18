@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PA - 基本面</title>
+    <title>STOCK OVERFLOW</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -52,15 +52,15 @@
                     
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-1 text-gray-800">Company</h1>
-                        <a href="<c:url value='/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+                        <h1 class="h3 mb-1 text-gray-800">基本面</h1>
+                        <a href="<c:url value='/back/pa/downloadCsv' />" id="downloadCsv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i> 檔案下載
                         </a>
                     </div>
                     <p class="mb-4"> 
                         資料來源:  <a href="https://mops.twse.com.tw/mops/web/t163sb06"> 公開資料觀測站</a> 
                         <br>   
-                        可以將CSV資料匯入進來 (Big-5編碼)，目前未檢查資料真偽，以後更新。 2021/6/30 
+                        可以將CSV資料匯入進來 (Big-5編碼)。
                     </p>
                     
                     
@@ -197,7 +197,7 @@
 
             // Select All Data
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "<c:url value='/pa/showAllData' />", true);
+            xhr.open("GET", "<c:url value='/back/pa/showAllData' />", true);
             xhr.send()
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
@@ -238,7 +238,7 @@
                         Swal.showLoading();                         
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "<c:url value='/pa/delete' />", true);
+                        xhr.open("POST", "<c:url value='/back/pa/delete' />", true);
                         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
                         xhr.send("id="+paID);
                         xhr.onreadystatechange = function() {
@@ -282,7 +282,7 @@
                         Swal.showLoading();                         
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open("GET", "<c:url value='/pa/deleteAll' />", true);
+                        xhr.open("GET", "<c:url value='/back/pa/deleteAll' />", true);
                         xhr.send();
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -320,14 +320,14 @@
 
                 console.log(data)
                 var xhr1 = new XMLHttpRequest();
-                xhr1.open("POST", "<c:url value='/pa/insertData' />", true);
+                xhr1.open("POST", "<c:url value='/back/pa/insertData' />", true);
 
                 xhr1.send(data);
 
 
                 Swal.fire({
                     // timer: 2000,
-                    title: 'Upload File Please Wait......'
+                    title: '檔案寫入中 請稍等......'
                 });
                 Swal.showLoading(); 
 
@@ -368,7 +368,7 @@
                     template: '#my-update'+ paID
                 }).then((result)=> {
                     if (result.isDenied) {
-                        location.replace("<c:url value='/paUpdate/' />" + paID);                       
+                        location.replace("<c:url value='/back/paUpdate/' />" + paID);                       
                     }
                 })
             })
