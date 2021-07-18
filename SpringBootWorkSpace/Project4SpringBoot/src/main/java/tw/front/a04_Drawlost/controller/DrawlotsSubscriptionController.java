@@ -102,7 +102,7 @@ public class DrawlotsSubscriptionController {
 			securitiesAccount.setStockCode(stockCode);
 			securitiesAccount.setStockPrice(Float.parseFloat(stockPrice));
 			securitiesAccount.setStockQuantity(Long.parseLong(stockQuantity));
-			securitiesAccount.setBanlance(new BigDecimal(10000));
+			securitiesAccount.setBanlance(new BigDecimal(5000));
 			securitiesAccount.setDrawable(true);
 			securitiesAccount.setDrawStatus(false);
 			securitiesAccount.setProcessStatus("申購中");
@@ -122,10 +122,10 @@ public class DrawlotsSubscriptionController {
 			 @RequestParam(value="stockQuantity",required=false) String stockQuantity,
 			 @RequestParam(value="subscriptionTime",required=false) String subscriptionTime) {
 		
-		SecuritiesAccount securitiesAccount =subscribableService.selectOne(securitiesAccountID);
+		SecuritiesAccount securitiesAccount =subscribableService.selectOne("1993-082-060-4");
 		
 		if( securitiesAccount != null) {
-			subscribableService.deleteOne(securitiesAccountID);
+			subscribableService.deleteOne("1993-082-060-4");
 			System.out.println("刪除成功");
 		}
 	}
