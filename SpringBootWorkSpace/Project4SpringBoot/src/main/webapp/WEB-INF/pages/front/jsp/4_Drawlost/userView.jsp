@@ -163,18 +163,20 @@
 										$('#dataArea').html(showAll(xhr.responseText))
 										$('.tableArea').attr('id', 'dataTable')
 
-										var scriptsToLoad = [
-											"<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />",
-											"<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-											"<c:url value='/back/js/demo/datatables-demo.js' />"
-										];
+										$('#dataTable').dataTable({"aaSorting": [[6, "desc"]]});
 
-										scriptsToLoad.forEach(function (src) {
-											var script = document.createElement('script');
-											script.src = src;
-											script.async = false;
-											document.body.appendChild(script);
-										});
+										// var scriptsToLoad = [
+										// 	"<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />",
+										// 	"<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+										// 	"<c:url value='/back/js/demo/datatables-demo.js' />"
+										// ];
+
+										// scriptsToLoad.forEach(function (src) {
+										// 	var script = document.createElement('script');
+										// 	script.src = src;
+										// 	script.async = false;
+										// 	document.body.appendChild(script);
+										// });
 
 										subscribableUrl();
 
