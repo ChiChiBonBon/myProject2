@@ -11,12 +11,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.sql.Clob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialClob;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +26,17 @@ import tw.back.a06_Company.bean.ProfitAnalysis_6;
 
 public class FileTool {
 
-	
+
+	public static Clob StringToClob(String str) {
+	        Clob clob = null;
+	        try {
+	                char[] data = str.toCharArray();
+	                clob = new SerialClob(data);
+	        } catch (Exception e) {
+	                e.printStackTrace();
+	        }
+	        return clob;
+	}
 	
 	
 	public static List<String> multiToStringBig5(MultipartFile multipartFile) {

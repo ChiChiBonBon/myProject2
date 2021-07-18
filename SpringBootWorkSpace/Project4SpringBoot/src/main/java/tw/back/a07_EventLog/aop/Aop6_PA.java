@@ -1,5 +1,6 @@
 package tw.back.a07_EventLog.aop;
 
+import java.sql.Clob;
 import java.util.Date;
 
 import org.aspectj.lang.JoinPoint;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
+import tw.back.a06_Company.tools.FileTool;
 import tw.back.a07_EventLog.bean.AuthorityType_7;
 import tw.back.a07_EventLog.bean.EventLog_7;
 import tw.back.a07_EventLog.bean.SeverityType_7;
@@ -44,12 +46,12 @@ public class Aop6_PA {
 		
 		MultipartFile file = (MultipartFile) point.getArgs()[0];
 		String content = file.getOriginalFilename() + " - 進行檔案上傳";
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(auto);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);
 	}
@@ -66,12 +68,12 @@ public class Aop6_PA {
 		
 		
 		String content = "基本面 - 進行資料刪除";
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(auto);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);
 	}
@@ -88,12 +90,12 @@ public class Aop6_PA {
 		
 		
 		String content = point.getArgs()[0] + " - 進行資料刪除";
-		
+		Clob stringToClob = FileTool.StringToClob(content);
 		log.setDate(new Date());
 		log.setAuthority(auto);
 		log.setPerson(person);
 		log.setSeverity(severity);
-		log.setContent(content);
+		log.setContent(stringToClob);
 		
 		eventLogDao.insert(log);
 	}
