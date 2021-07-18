@@ -1,4 +1,4 @@
-package tw.back.a03_Comment.model;
+package tw.front.a03_Comment.model;
 
 import java.sql.Blob;
 import java.sql.Date;
@@ -21,15 +21,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import tw.back.a03_Comment.utils.SystemUtils;
+import tw.front.a03_Comment.utils.FrontSystemUtils;
+
 
 @Entity
 @Table(name = "post_board_3")
-@Component("post_board_3")
-public class Post_board_3 {
+public class Post_board {
 
 	@OneToMany(mappedBy = "postboard")
-	Set<Comment_board_3> commentboard = new HashSet<>();
+	Set<Comment_board> commentboard = new HashSet<>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,10 +65,10 @@ public class Post_board_3 {
 	@Transient   // @Transient簡單講就是不要在資料庫建立欄位
 	private MultipartFile postImage;
 	
-	public Post_board_3() {		
+	public Post_board() {		
 	}
 
-	public Post_board_3(Integer post_num, String userid, String postType, String title, String post,Date ptime,
+	public Post_board(Integer post_num, String userid, String postType, String title, String post,Date ptime,
 			Blob ppicture, String pmimeType, String pictureString, MultipartFile postImage) {
 		super();
 		this.post_num = post_num;
@@ -83,7 +83,7 @@ public class Post_board_3 {
 		this.postImage = postImage;
 	}
 
-	public Post_board_3(Integer post_num, String userid, String postType, String title, String post,Date ptime,
+	public Post_board(Integer post_num, String userid, String postType, String title, String post,Date ptime,
 			Blob ppicture, String pmimeType, String pictureString) {
 		super();
 		this.post_num = post_num;
@@ -168,7 +168,7 @@ public class Post_board_3 {
 	}
 
 	public String getPictureString() {
-		return SystemUtils.blobToDataProtocol(pmimeType, ppicture);
+		return FrontSystemUtils.blobToDataProtocol(pmimeType, ppicture);
 	}
 
 	public void setPictureString(String pictureString) {
