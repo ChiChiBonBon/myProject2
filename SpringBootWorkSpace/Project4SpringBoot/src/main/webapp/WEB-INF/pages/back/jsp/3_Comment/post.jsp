@@ -92,7 +92,7 @@
 
 									<label class="col-sm-2 col-form-label text-primary">管理者</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" name="userid"
+										<input type="text" class="form-control" name="userid" value="${bean.userid}"
 											id="userid" placeholder="例:admin1..."><br> <span
 											id="resultMsg1" style="height: 18px; font-weight: bold;"></span>
 									</div>
@@ -242,6 +242,9 @@
 
 
 	<script>
+	// Sidebar
+    $("#PostSidebar,#PostActive").addClass('active')
+	
 		const formData = new FormData(document.getElementById('form'));
 		var btnIns = document.getElementById("btnIns");
 		var btnUpd = document.getElementById("btnUpd");
@@ -296,7 +299,6 @@
 			var titleValue = document.getElementById("title").value;
 			var postTypeValue = document.getElementById("postType").value;
 			var postValue = document.getElementById("post").value;
-			// 											var ptimeValue = document.getElementById("ptime").value;
 			var divResult1 = document.getElementById('resultMsg1');
 			var divResult2 = document.getElementById('resultMsg2');
 			var divResult3 = document.getElementById('resultMsg3');
@@ -352,16 +354,11 @@
 			myForm.append("title", titleValue)
 			myForm.append("postType", postTypeValue)
 			myForm.append("post", postValue)
-			// 											myForm.append("ptime", ptimeValue)	
-			// 											xhr1.setRequestHeader("Content-Type", "multipart/form-data");
 			console.log("myForm=" + myForm);
 			console.log("imgFile的值=" + $("#pictureFile")[0].files[0]);
-			// 											if($("#pictureFile")[0].files[0]!=null){
+
 			xhr1.send(myForm);
-			// 												console.log("有檔案")
-			// 											} else{
-			// 												alert("沒有檔案");
-			// 											}
+
 			xhr1.onreadystatechange = function() {
 				// 伺服器請求完成
 				if (xhr1.readyState == 4

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
   <!-- ======= A02 Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex justify-content-between align-items-center">
@@ -17,7 +16,7 @@
           <li><a id="header_Company" href="<c:url value='/front/cTable/Main' />">股票選擇器</a></li>
           <li><a href="<c:url value='#' />">下單</a></li>
           <li><a href="<c:url value='#' />">抽籤</a></li>
-          <li><a href="<c:url value='#' />">留言區</a></li>
+          <li><a id="header_post" href="<c:url value='/front/post' />">股市討論區</a></li>
 
           <li class="dropdown"><a href="#"><span>範本(展示用)</span> <i class="bi bi-chevron-down"></i></a>
             <ul>

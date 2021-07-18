@@ -74,7 +74,7 @@
 	</a></li>
 
 	<!-- Nav Item - 討論區 Collapse Menu -->
-	<li class="nav-item"><a class="nav-link" href="#"> <i
+	<li class="nav-item" id="PostSidebar"><a class="nav-link" href="<c:url value="/post" />" id="PostActive"> <i
 			class="fas fa-comments"></i> <span>討論區</span>
 	</a></li>
 
