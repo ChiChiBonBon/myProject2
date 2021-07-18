@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -41,6 +42,7 @@ public class Drawlots {
 	@Column(name = "closingPriceOfYesterday")
 	private Float closingPriceOfYesterday;
 	
+	@NumberFormat(pattern="#,###") 
 	@Column(name = "quantity")
 	private Integer quantity;
 	
@@ -68,6 +70,7 @@ public class Drawlots {
 	@Column(name = "marketType")
 	private String marketType;
 	
+	@NumberFormat(pattern="#,###") 
 	@Column(name = "totalQuantity")
 	private Integer totalQuantity;
 	
@@ -392,6 +395,24 @@ public class Drawlots {
 
 	public void setDisplay(Boolean display) {
 		this.display = display;
+	}
+	
+	@Override
+	public String toString() {
+		return "DrawlotsInformation [stockCode=" + stockCode + ", stockName=" + stockName + ", marketType=" + marketType
+				+ ", subscribeStatus=" + subscribeStatus + ", subscribePrice=" + subscribePrice
+				+ ", quantity=" + quantity + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", deductionDate=" + deductionDate + ", drawDate=" + drawDate + ", refundDate=" + refundDate 
+				+ ", grantSecuritiesDate=" + grantSecuritiesDate + ", totalQuantity=" + totalQuantity + ", updateTime=" + updateTime
+				+ ", remarks=" + remarks +"]";
+	}
+	
+	public String toCsv() {
+		return stockCode + "," + stockName + "," + marketType + "," + subscribeStatus+ "," + 
+				subscribePrice + "," + quantity + "," + startDate + "," + endDate + "," +
+			    deductionDate + "," + drawDate + "," + refundDate + "," +
+			    grantSecuritiesDate + "," + totalQuantity + "," + 
+			    updateTime + "," + remarks;
 	}
 	
 	

@@ -5,7 +5,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.html">Eterna</a></h1>
+        <h1><a href="index.html">STOCK OVERFLOW</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -16,7 +16,7 @@
           <li><a id="header_About" href="<c:url value='/front/About' />">測試用(展示用)</a></li>
           <li><a id="header_Company" href="<c:url value='/front/cTable/Main' />">股票選擇器</a></li>
           <li><a href="<c:url value='#' />">下單</a></li>
-          <li><a href="<c:url value='#' />">抽籤</a></li>
+          <li><a id="header_DrawlotsSubscription" href="<c:url value='/front/guestView' />">抽籤與申購</a></li>
           <li><a href="<c:url value='#' />">留言區</a></li>
 
           <li class="dropdown"><a href="#"><span>範本(展示用)</span> <i class="bi bi-chevron-down"></i></a>

@@ -165,7 +165,7 @@
 		// Select PA Table
 		function select_PA_Table() {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "<c:url value='/pa/showAllData' />", true);
+            xhr.open("GET", "<c:url value='/back/pa/showAllData' />", true);
             xhr.send()
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {

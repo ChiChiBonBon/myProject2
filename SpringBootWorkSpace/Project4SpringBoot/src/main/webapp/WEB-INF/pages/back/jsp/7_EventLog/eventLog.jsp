@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Event Log</title>
+    <title>STOCK OVERFLOW</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/back/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -52,9 +52,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-1 text-gray-800">事件紀錄</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
                     </div>
                     <p class="mb-4">這裡提供管理者查閱網站事件，部分資料會需要初始化，基本上會自動匯入，如果發現資料異常或是篩選條件沒有資料，請按鍵按鈕將初始資料匯入資料庫。<button
                             type="button" class="btn btn-secondary btn-sm" id="initData">初始資料匯入</button></p>
@@ -62,40 +59,37 @@
 
                     <!-- 事件篩選 -->
                     <div>
-                        <form action="/aaaa">
+                        <form>
                             <div class="row">
 
-                                <div class="form-group col-2">
-                                    <label for="FormControlSelect2">開始時間 &emsp;<i
-                                            class="fas fa-chevron-right"></i></label>
-                                    <input id="startDate" type="datetime-local" class="form-control" name="startDate"
+                                <div class="form-group col-4">
+                                    <label for="FormControlSelect2">時間</label>
+                                    <input id="startDate" type="date" class="form-control" name="startDate"
                                         max="" value="">
                                 </div>
 
-                                <div class="form-group col-2">
+                                <%-- <div class="form-group col-2">
                                     <label for="FormControlSelect2">結束時間</label>
-                                    <input id="endDate" type="datetime-local" class="form-control" name="endDate" min=""
+                                    <input id="endDate" type="date" class="form-control" name="endDate" min=""
                                         value="">
-                                </div>
+                                </div> --%>
 
                                 <div class="form-group col-4">
-                                    <label for="FormControlSelect2">嚴重度</label>
-                                    <select class="form-control" id="FormControlSelect2" name="severity">
-                                        <option>A1</option>
-                                        <option>A2</option>
-                                        <option>A3</option>
-                                        <option>A4</option>
-                                        <option>A5</option>
+                                    <label for="severityType">嚴重度</label>
+                                    <select class="form-control" id="severityType">
+                                        <option>all</option> 
+                                        <c:forEach items="${severityList}" var="severitybean">        
+                                            <option>${severitybean.severityType}</option> 
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group col-4">
-                                    <label for="FormControlSelect3">使用者類別</label>
-                                    <select class="form-control" id="FormControlSelect3" name="authorityType">
-                                        <option>B1</option>
-                                        <option>B2</option>
-                                        <option>B3</option>
-                                        <option>B4</option>
-                                        <option>B5</option>
+                                    <label for="authorityType">使用者類別</label>
+                                    <select class="form-control" id="authorityType">
+                                        <option>all</option>    
+                                        <c:forEach items="${authorityList}" var="authoritybean">        
+                                            <option>${authoritybean.authorityType}</option> 
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -182,27 +176,23 @@
 		$(function(){
             // Sidebar
             $("#eventLog, #Event").addClass('active')
-            $("#collapseCP").addClass('show')
+            $("#collapseEvent").addClass('show')
             
             // 初始內容
             select_Basic_Tabel()
 
             // 時間設定
-            let maxData
-            let minDate
+            // let maxData
+            // let minDate
 
-            $('#startDate').on('change', function () {
-                minDate = $('#startDate').val()
-                $('#endDate').attr('min', minDate)
-
-                console.log($('#startDate').val())
-            })
-            $('#endDate').on('change', function () {
-                maxData = $('#endDate').val()
-                $('#startDate').attr('max', maxData)
-
-                console.log($('#endDate').val())
-            })
+            // $('#startDate').on('change', function () {
+            //     minDate = $('#startDate').val()
+            //     $('#endDate').attr('min', minDate)
+            // })
+            // $('#endDate').on('change', function () {
+            //     maxData = $('#endDate').val()
+            //     $('#startDate').attr('max', maxData)
+            // })
 
             // Select Basic Table
             function select_Basic_Tabel() {
@@ -252,6 +242,42 @@
 
             // 篩選資料 
             $("#searchButton").on("click", function () {
+                
+                let startDate = $('#startDate').val();
+                let severityType = $('#severityType').val();
+                let authorityType = $('#authorityType').val();
+
+                if(startDate == ""){
+                    startDate = "all"
+                }
+
+                console.log(startDate)
+                console.log(severityType)
+                console.log(authorityType)
+                console.log("===")
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "<c:url value='/back/eventLog/filter' />", true);
+                let sendData = "startDate="+startDate  +"&severityType="+severityType  +"&authorityType="+authorityType
+                xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+                xhr.send(sendData)
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        $('#TableAreaMax').html(showEventAll(xhr.responseText))
+                                
+                        let scriptsToLoad = [
+                            "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
+                            "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+                            "<c:url value='/back/js/demo/datatables-demo.js' />"
+                        ]; 
+
+                        scriptsToLoad.forEach(function(src) {
+                            let script = document.createElement('script');
+                            script.src = src;
+                            script.async = false;
+                            document.body.appendChild(script);
+                        });
+                    }
+                }
 
             })
 
@@ -264,48 +290,48 @@
 
             // Event Log
             function showEventAll(text){
-			let beans = JSON.parse(text);
-            
-			let segment = ""
+                let beans = JSON.parse(text);
+                
+                let segment = ""
 
-			segment += `<table class="table table-bordered  table-sm" id="dataTable" width="100%" cellspacing="0">`
-			segment += 
-				`<thead>
-                    <tr>
-                        <th width="15%">時間</th>
-                        <th width="10%">嚴重度</th>
-                        <th width="10%">用戶類別</th>
-                        <th width="10%">用戶</th>
-                        <th>內容</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>時間</th>
-                        <th>嚴重度</th>
-                        <th>用戶類別</th>
-                        <th>用戶</th>
-                        <th>內容</th>
-                    </tr>
-                </tfoot>`
+                segment += `<table class="table table-bordered  table-sm" id="dataTable" width="100%" cellspacing="0">`
+                segment += 
+                    `<thead>
+                        <tr>
+                            <th width="15%">時間</th>
+                            <th width="10%">嚴重度</th>
+                            <th width="10%">用戶類別</th>
+                            <th width="10%">用戶</th>
+                            <th>內容</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>時間</th>
+                            <th>嚴重度</th>
+                            <th>用戶類別</th>
+                            <th>用戶</th>
+                            <th>內容</th>
+                        </tr>
+                    </tfoot>`
 
-			segment += `<tbody>`												
-			for(let x in beans){
-				let bean = beans[x]
-                let badge = `badge-`+ bean.severity.severityType
-				segment += 
-                    `<tr>
-                        <td>` + bean.date + `</td>
-                        <td><span class="badge badge-pill `+ badge +`">` + bean.severity.severityType + `</span></td>
-                        <td>` + bean.authority.authorityType + `</td>
-                        <td>` + bean.person + `</td>
-                        <td>` + bean.content + `</td>
-                    </tr>`
-			}
-			segment += `</tbody>`
-			segment += `</table>`
-			return segment;
-		}
+                segment += `<tbody>`												
+                for(let x in beans){
+                    let bean = beans[x]
+                    let badge = `badge-`+ bean.severity.severityType
+                    segment += 
+                        `<tr>
+                            <td>` + bean.date + `</td>
+                            <td><span class="badge badge-pill `+ badge +`">` + bean.severity.severityType + `</span></td>
+                            <td>` + bean.authority.authorityType + `</td>
+                            <td>` + bean.person + `</td>
+                            <td>` + bean.content + `</td>
+                        </tr>`
+                }
+                segment += `</tbody>`
+                segment += `</table>`
+                return segment;
+            }
 
 
 		})

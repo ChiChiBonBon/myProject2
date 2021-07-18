@@ -97,7 +97,7 @@
     <li class="nav-item" id="Event">
          <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="true"
              aria-controls="collapseEvent">
-             <i class="fas fa-building"></i>
+             <i class="fas fa-users-cog"></i>
              <span>事件管理員</span>
          </a>
          <div id="collapseEvent" class="collapse" aria-labelledby="collapseEvent"
@@ -105,7 +105,7 @@
              <div class="bg-white py-2 collapse-inner rounded">
                  <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                  <a class="collapse-item" href="<c:url value='/back/eventLog/Main' />" id="eventLog">事件紀錄</a>
-                 <a class="collapse-item" href="<c:url value='#' />">系統資源</a>
+                 <a class="collapse-item" href="<c:url value='/back/systemPerformance/Main' />" id="performance">系統資源</a>
              </div>
          </div>
      </li>

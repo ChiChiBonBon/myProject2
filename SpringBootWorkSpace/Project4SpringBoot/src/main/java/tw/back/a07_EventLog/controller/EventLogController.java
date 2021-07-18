@@ -7,12 +7,15 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.back.a06_Company.bean.ProfitAnalysis_6;
-import tw.back.a07_EventLog.Util.InitializationData;
 import tw.back.a07_EventLog.bean.AuthorityType_7;
 import tw.back.a07_EventLog.bean.EventLog_7;
 import tw.back.a07_EventLog.bean.SeverityType_7;
@@ -32,9 +35,12 @@ public class EventLogController {
 	EventLogDao eventLogDao;
 	
 	@GetMapping("/Main")
-	public String cBasicMain() {		
+	public String cBasicMain(Model m) {		
 		return "/back/jsp/7_EventLog/eventLog";
 	}
+	
+	
+	
 	
 	@GetMapping("/initData")
 	public @ResponseBody Boolean initData() {
@@ -55,6 +61,27 @@ public class EventLogController {
 	public @ResponseBody List<EventLog_7> showAllData() {
 		return eventLogDao.selectAll();
 	}
+	
+	@PostMapping("/filter" )
+	public @ResponseBody List<EventLog_7> filter(@RequestParam String startDate,
+												 @RequestParam String severityType,
+												 @RequestParam String authorityType
+			) {
+		
+		List<EventLog_7> lists = eventLogDao.filter(startDate, severityType, authorityType);
+		return lists;
+	}
+	
+	@ModelAttribute("severityList")
+	public List<SeverityType_7> selectAllSeverity(){
+		return severityDao.selectAll();
+	}
+	
+	@ModelAttribute("authorityList")
+	public List<AuthorityType_7> selectAllAuthority(){
+		return authorityDao.selectAll();
+	}
+	
 	
 	public void initSeverity() {
 		List<String> severityList = new ArrayList<String>();
