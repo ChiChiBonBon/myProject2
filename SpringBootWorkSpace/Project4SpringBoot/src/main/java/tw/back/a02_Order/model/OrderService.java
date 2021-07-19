@@ -39,17 +39,9 @@ public class OrderService implements OrderServiceable{
 	
 //查詢
 	@Override
-	public String selectOrder(OrderBean order_list,Model m) { //mber.mber
+	public String selectOrder(OrderBean order_list,Model m) { //mber.mber		
 		String order_lists = orderBeanDao.selectOrder(order_list.getStock_ID()).toString() ;
 		m.addAttribute("order_lists", order_lists);
-		
-		//測試取sum order
-		try {
-			orderBeanDao.selectProfit("0800-123456-9");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return order_lists;
 	}

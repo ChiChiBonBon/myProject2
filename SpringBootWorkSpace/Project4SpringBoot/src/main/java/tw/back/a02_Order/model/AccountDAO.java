@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import tw.front.a01_Member.model.MemberBean;
+
 @Repository("accountDao")
 @Transactional
 public class AccountDAO {
@@ -28,13 +30,11 @@ public class AccountDAO {
 	}
 
 //查詢
-	public  ArrayList<Account> selectAcc(String stock_ID) {
-	    
-		String hql = "from Account where stock_ID=:id ";
-		Query<Account> query = (Query<Account>) session.createQuery(hql, Account.class);		
+	public  ArrayList<MemberBean> selectAcc(String stock_ID) {
+		String hql = "from MemberBean where member_stock_ID=:id ";
+		Query<MemberBean> query = (Query<MemberBean>) session.createQuery(hql, MemberBean.class);		
 		query.setParameter("id", stock_ID);
-		
-		ArrayList<Account> acc_lists = (ArrayList<Account>) query.list();	 
+		ArrayList<MemberBean> acc_lists = (ArrayList<MemberBean>) query.list();	 
 		return acc_lists ;
 	}
 	
