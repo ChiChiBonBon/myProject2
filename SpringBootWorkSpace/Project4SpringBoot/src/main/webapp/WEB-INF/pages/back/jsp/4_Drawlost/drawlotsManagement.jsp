@@ -216,22 +216,20 @@
                                     if (xhr.readyState == 4 && xhr.status == 200) {
                                         $('#dataArea').html(showAll(xhr.responseText))
                                         $('.tableArea').attr('id', 'dataTable')
+										$('#dataTable').dataTable({ "aaSorting": [[6, "desc"]] });
+                                        
+//                                         var scriptsToLoad = [
+//                                             "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />",
+//                                             "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+//                                             "<c:url value='/back/js/demo/datatables-demo.js' />"
+//                                         ];
 
-                                        // $.getScript("<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />");
-                                        // $.getScript("<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />");
-                                        // $.getScript("<c:url value='/back/js/demo/datatables-demo.js' />");
-                                        var scriptsToLoad = [
-                                            "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />",
-                                            "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-                                            "<c:url value='/back/js/demo/datatables-demo.js' />"
-                                        ];
-
-                                        scriptsToLoad.forEach(function (src) {
-                                            var script = document.createElement('script');
-                                            script.src = src;
-                                            script.async = false;
-                                            document.body.appendChild(script);
-                                        });
+//                                         scriptsToLoad.forEach(function (src) {
+//                                             var script = document.createElement('script');
+//                                             script.src = src;
+//                                             script.async = false;
+//                                             document.body.appendChild(script);
+//                                         });
                                     }
                                 }
 
