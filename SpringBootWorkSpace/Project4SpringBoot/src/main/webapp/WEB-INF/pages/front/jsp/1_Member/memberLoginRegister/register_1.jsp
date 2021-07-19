@@ -190,8 +190,20 @@
                </script>
                    
                <div class="col-12">
-                   <form:button style="width: 150px" class="btn btn-primary" id="commitAndsned" value="Send">註冊</form:button>
+                   <form:button style="width: 150px" class="btn btn-primary" id="commitAndsned" value="Send" onclick="onetime()">註冊</form:button>
                </div>
+               
+               <script>
+                   let d = 0;
+                   function onetime() {
+                	   d += 1;
+                	   /* 因為讀去的關係 寄email比較慢 用這個限制來擋住以免按太多次 */
+                	   if (d > 1) {
+                    	   let c = document.getElementById("commitAndsned");
+                    	   c.disabled = true;
+                	   }
+                   }
+               </script>
                
            </form:form>
 

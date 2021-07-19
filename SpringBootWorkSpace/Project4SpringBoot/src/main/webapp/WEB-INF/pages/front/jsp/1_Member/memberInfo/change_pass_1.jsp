@@ -70,7 +70,7 @@
                   Looks good!
               </div>
               <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                  輸入密碼不一樣
+                  密碼不一致
              </div>
             </div>
 

@@ -1,6 +1,8 @@
 package tw.front.a01_Member.service;
 
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,5 +87,17 @@ public class MemberService implements IMemberService {
 		// TODO Auto-generated method stub
 //		System.out.println("check_cookie service cookie:  " + cookie_value);
 		return mDao.check_cookie(cookie_value);
+	}
+
+	@Override
+	public MemberBean member_checkAccount_email(String email, String password) {
+		// TODO Auto-generated method stub
+		return mDao.member_checkAccount_email(email, password);
+	}
+
+	@Override
+	public boolean member_updateTime(long id, Timestamp timestamp) {
+		// TODO Auto-generated method stub
+		return mDao.member_updateTime(id, timestamp);
 	}
 }
