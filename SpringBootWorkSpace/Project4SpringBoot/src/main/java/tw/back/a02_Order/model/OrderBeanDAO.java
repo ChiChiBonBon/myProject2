@@ -41,7 +41,7 @@ public class OrderBeanDAO  {
 		String hql="update OrderBean set trans_report=:stats  where id=:delid";
 		Query query = (Query) session.createQuery(hql);	
 		query.setParameter("stats", "刪單成功");
-		query.setParameter("delid", delorder_ID);
+		query.setParameter("delid", Integer.parseInt(delorder_ID));
 		query.executeUpdate();	
 	}
 	
@@ -90,7 +90,7 @@ public class OrderBeanDAO  {
 		query.setParameter("price", change_price);
 		query.setParameter("quant", change_quant);
 		query.setParameter("total", change_total);
-		query.setParameter("id", change_ID);
+		query.setParameter("id", Integer.parseInt(change_ID));
 		query.executeUpdate();		
 	}
 	

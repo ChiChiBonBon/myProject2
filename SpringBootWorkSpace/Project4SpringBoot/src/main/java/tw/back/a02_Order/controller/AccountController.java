@@ -20,26 +20,30 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+
 import tw.back.a02_Order.model.Employee;
 import tw.back.a02_Order.model.EmployeeDAO;
 import tw.back.a02_Order.model.OrderBean;
 import tw.back.a02_Order.model.OrderBeanDAO;
 import tw.back.a02_Order.model.OrderServiceable;
+import tw.front.a01_Member.dao.MemberDao;
+import tw.front.a01_Member.model.MemberBean;
 import tw.back.a02_Order.model.Account;
 import tw.back.a02_Order.model.AccountDAO;
 
 
 @Controller
 @EnableTransactionManagement
-@SessionAttributes(names = {"stock_ID", "mber_acc","mber_psd","mber_auth","mber_quota",
+@SessionAttributes(names = {"mber_stock_ID","member_info",
 							"change_ID","change_auth","change_quota",
 							"acc_lists","order_lists","delacc_ID"},
-					types = {Account.class})
+					types = {Account.class,MemberBean.class})
 
 public class AccountController {
 	
 	@Autowired
 	private AccountDAO  accountDao;
+	
 	
 //登入導向+權限修改
 	@GetMapping("/admin/login")
@@ -48,9 +52,15 @@ public class AccountController {
     }
 	
 	@PostMapping("/admin/authority")
-    public String loadPage(Account acc,Employee emp,Model m) {
+    public String loadPage(Model m) {
 		m.addAttribute("emp_ID" , "admin");
-		m.addAttribute("stock_ID" , acc.getStock_ID());
+		String stockid =  (String) m.getAttribute("mber_stock_ID");
+		System.out.println("mber stock:" + stockid);
+		
+		MemberBean mber = (MemberBean) m.getAttribute("member_info");
+		//System.out.println("取得的stock:" + mber.getMember_stock_ID());
+		
+
     	return "back/jsp/2_Order/2_Authority";	
     }
 
@@ -58,11 +68,20 @@ public class AccountController {
 //查詢會員資料 + 修改會員權限 auth + quota
 	@GetMapping("/admin/account/select")
 	public String loadSelectAcc(Account acc_list,Model m) {
-		String acc_lists = accountDao.selectAcc(acc_list.getStock_ID()).toString() ;
+		String stockid =  (String) m.getAttribute("mber_stock_ID");
+		System.out.println(stockid);
+		
+		MemberBean mber = (MemberBean) m.getAttribute("member_info");
+		System.out.println("取得的stock:" + mber.getMember_stock_ID());
+		
+		String acc_lists = accountDao.selectAcc("0620-817781-0").toString() ;
 		m.addAttribute("acc_lists", acc_lists);
 		return "back/jsp/2_Order/2_Authority_select" ;
+		
 	}
 	
+	
+
 	@GetMapping("/admin/controller/update")
 	public String loadUpdateAcc(String change_ID,String change_auth,String change_quota ,Account acc_list,Model m){
 		accountDao.updateAuth(change_ID, change_auth, change_quota);
@@ -76,6 +95,24 @@ public class AccountController {
 //		loadSelectAcc(acc_list, m);
 //		return "back/jsp/2_Order/2_Order_select" ;
 //	}
+	
+	
+//備份區
+//	@GetMapping("/admin/account/select")
+//	public String loadSelectAcc(Account acc_list,Model m) {
+//		String acc_lists = accountDao.selectAcc(acc_list.getStock_ID()).toString() ;
+//		m.addAttribute("acc_lists", acc_lists);
+//		return "back/jsp/2_Order/2_Authority_select" ;
+//	}
+//	
+//	@GetMapping("/admin/controller/update")
+//	public String loadUpdateAcc(String change_ID,String change_auth,String change_quota ,Account acc_list,Model m){
+//		accountDao.updateAuth(change_ID, change_auth, change_quota);
+//		loadSelectAcc(acc_list, m);
+//		return "back/jsp/2_Order/2_Authority_select" ;
+//	}
+	
+	
 	
 	
 	

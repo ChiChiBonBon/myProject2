@@ -62,7 +62,6 @@
 			</a>
 			<div id="collapseOD" class="collapse" aria-labelledby="" data-parent="#accordionSidebar" >
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="<c:url value='/admin/login' />" id="back_auth">權限修改</a>
 					<a class="collapse-item" href="<c:url value='/admin/order' />" id="back_order">代客下單</a>
 				</div>
 			</div>

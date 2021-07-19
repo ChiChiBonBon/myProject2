@@ -55,7 +55,8 @@
         <div class='fs-3 fst-italic fw-bold' id="message">${Message}</div>
         <br>
         <hr>
-        <p onclick="logout_back_to_login();" id="backToLogin" class='fs-5' style="color: #fd7e14">會員首頁</p>
+        <button onclick="logout_back_to_login();" id="backToLogin" type="button" class="btn btn-outline-primary" style="color: #fd7e14">會員首頁</button>
+<!--         <p onclick="logout_back_to_login();" id="backToLogin" style="color: #fd7e14" class='fs-5'>會員首頁</p> -->
         
         <script type="text/javascript">
         	window.onload = function(){
