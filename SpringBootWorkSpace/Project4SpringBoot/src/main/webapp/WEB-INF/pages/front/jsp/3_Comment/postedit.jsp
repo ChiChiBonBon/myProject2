@@ -44,6 +44,8 @@
 </head>
 
 <body>
+
+
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp"%>
 
@@ -91,11 +93,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-10 form-group row" hidden="true">
+									<div class="col-10 form-group row">
 										<label class="col-sm-2 col-form-label text-danger">發文者</label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control"
-												value="${bean.userid}" id="userid"><br>
+												value="${bean.userid}" id="userid" readonly><br>
 										</div>
 									</div>
 									<div class="col-10 form-group row">
@@ -230,6 +232,16 @@
 				</div>
 
 			</div>
+			<center>
+				<!-- 返回前頁 Button -->
+				<div class="mt-5 float-right">
+					<a href="<c:url value='/front/post' />"
+						class="btn btn-secondary btn-icon-split"> <span
+						class="icon text-white-50"> <i class="fas fa-arrow-right"></i>
+					</span> <span class="text">返回文章區</span>
+					</a>
+				</div>
+			</center>
 		</section>
 		<!-- End Blog Section -->
 

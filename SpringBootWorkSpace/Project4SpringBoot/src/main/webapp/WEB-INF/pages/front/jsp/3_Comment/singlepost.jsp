@@ -44,6 +44,8 @@
 </head>
 
 <body>
+
+
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp"%>
 
@@ -123,12 +125,12 @@
 										id="form">
 										<!-- Content -->
 										<div>
-											<div class="col-15 form-group row" hidden>
+											<div class="col-15 form-group row">
 
 												<label class="col-sm-2 col-form-label text-danger">留言者</label>
 												<div class="col-sm-9">
-													<input class="form-control" name="userid" id="userid"></input>
-													<br>
+													<input class="form-control" name="userid" id="userid"
+														value="${userid}" readonly></input> <br>
 												</div>
 											</div>
 											<div class="col-15 form-group row">
@@ -228,6 +230,16 @@
 				</div>
 
 			</div>
+			<center>
+			<!-- 返回前頁 Button -->
+			<div class="mt-5 float-right">
+				<a href="<c:url value='/front/post' />"
+					class="btn btn-secondary btn-icon-split"> <span
+					class="icon text-white-50"> <i class="fas fa-arrow-right"></i>
+				</span> <span class="text">返回文章區</span>
+				</a>
+			</div>
+			</center>
 		</section>
 		<!-- End Blog Single Section -->
 
@@ -281,8 +293,13 @@
                                     for (var x in comments) {
                                         tmp = "<c:url value='/front/comedit/' />";
                                         var commentA = comments[x]
-                                        
-                                        segment += "<div class='comment'><span><a href='" + tmp + comments[x].comment_num + "'><button style='float: right;opacity: 0.7;'><i class='bi bi-pen'></i></button></a></span>"
+                                        if(commentA.userid=="${userid}"){
+                        					console.log("==OK")
+                        					segment += "<div class='comment'><span><a href='" + tmp + comments[x].comment_num + "'><button style='float: right;opacity: 0.7;'><i class='bi bi-pen'></i></button></a></span>"
+                                        }else{
+                        					console.log("==not")
+                                        	segment += "<div class='comment'><span><a href='" + tmp + comments[x].comment_num + "'><button style='float: right;opacity: 0.7;'hidden><i class='bi bi-pen'></i></button></a></span>"
+                                        }
                                         segment += "<div class='d-flex'>"   
                                         segment += "<div class='comment-img'><svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' fill='currentColor' class='bi bi-person-fill' viewBox='0 0 16 16'>"  
                                         segment += "<path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' /></svg></div>"  
@@ -291,7 +308,6 @@
                                         segment += "<img width='300px' src='" + commentA.pictureString + "' class='img-fluid'>"   
                                         segment += "<p>" + commentA.comment + "</p>"   
                                         segment += "</div></div></div><hr>"
-                                    console.log("測試"+commentA.ctime);
                                     }
                                     console.log("map="+map);
                                     var dataArea01 = document.getElementById("dataArea01");

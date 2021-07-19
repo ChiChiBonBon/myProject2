@@ -54,6 +54,7 @@
 </head>
 
 <body>
+
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp"%>
 
@@ -87,8 +88,7 @@
 					<div class="col-lg-8 entries">
 						<a class="btn btn-danger" data-bs-toggle="collapse"
 							href="#collapseExample" role="button" aria-expanded="false"
-							aria-controls="collapseExample"> 討論區發文點我~ </a><br>
-						<br>
+							aria-controls="collapseExample"> 討論區發文點我~ </a><br> <br>
 						<div class="collapse" id="collapseExample">
 
 							<form method="POST" enctype="multipart/form-data" class="p-4"
@@ -99,7 +99,7 @@
 										<label class="col-sm-2 col-form-label text-danger">發文者</label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control" name="title"
-												value="${bean.userid}" id="userid" readonly> <br>
+												value="${userid}" id="userid" readonly> <br>
 										</div>
 									</div>
 									<div class="col-10 form-group row">
@@ -330,6 +330,7 @@
 			var map = JSON.parse(textObj);
 			var segment = ""
 			var posts = map.posts;
+				
 			for ( var x in posts) {
 				tmp = "<c:url value='/front/singlepost/' />";
 				tmp1 = "<c:url value='/front/postedit/' />";
@@ -345,7 +346,13 @@
 
 				console.log(stringData);
 				segment += "<article class='entry' style = 'background-color: rgb(255, 239, 221);' >"
-				segment += "<span><a href='" + tmp1 + posts[x].post_num + "'><button style='float: right;opacity: 0.7;'><i class='bi bi-pen'></i></button></a></span>"
+				if(post.userid=="${userid}"){
+					console.log("==OK")
+					segment += "<span><a href='" + tmp1 + posts[x].post_num + "'><button style='float: right;opacity: 0.7;'><i class='bi bi-pen'></i></button></a></span>"
+				}else{
+					console.log("==not")
+					segment += "<span><a href='" + tmp1 + posts[x].post_num + "'><button style='float: right;opacity: 0.7;'hidden><i class='bi bi-pen'></i></button></a></span>"
+				}
 				segment += "<div class='entry-img' style='text-align: center;'><br>"
 				segment += "<img src='" + post.pictureString + "' class='img-fluid'></div>"
 				segment += "<h2 class='entry-title'><a href='" + tmp + posts[x].post_num + "'>"
@@ -359,8 +366,11 @@
 				segment += "<div class='entry-content'><p class='ellipsis'>"
 						+ newData + "</p>"
 				segment += "<div class='read-more'><a href='" + tmp + posts[x].post_num + "'>查看更多</a></div></div></article>"
+				
+					
 			}
 			return segment;
+			
 		}
 
 		btnIns.onclick = function() {

@@ -75,7 +75,7 @@
 							<div class="col-8 form-group row">
 								<label class="col-sm-2 col-form-label text-primary">留言內容</label>
 								<div class="col-sm-9">
-									<textarea class="form-control" rows="3" id="comment">${bean.comment}</textarea>
+									<textarea class="form-control" rows="3" id="comment" readonly>${bean.comment}</textarea>
 								</div>
 							</div>
 							<div class="col-8 form-group row">
@@ -85,7 +85,7 @@
 										id="ctime" readonly>
 								</div>
 							</div>
-							<div class="col-8 form-group row">
+							<div class="col-8 form-group row" hidden>
 								<label class="col-sm-2 col-form-label text-primary">圖片</label>
 								<div class="col-sm-9">
 									<!--<img src="" class="img-thumbnail" alt="" id="cpicture"> -->
