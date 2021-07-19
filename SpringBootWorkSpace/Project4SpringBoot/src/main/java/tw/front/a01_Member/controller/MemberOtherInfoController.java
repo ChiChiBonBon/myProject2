@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -301,35 +300,4 @@ public class MemberOtherInfoController {
 		se_status.setComplete();
 		return "redirect:/front/unmember/gologin_1";
 	}
-	
-	
-	@RequestMapping(path = "/logout_throughAjax_1", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=UTF-8")
-	public @ResponseBody int logout_throughAjax_1(HttpSession session, SessionStatus se_status,
-							        			  HttpServletResponse response, Model m
-							        			 ) {
-		
-		Cookie userNameCookieRemove = new Cookie("StockOverFlowMember", null);
-		userNameCookieRemove.setMaxAge(0);
-		response.addCookie(userNameCookieRemove);
-		System.out.println("cookie remove");
-		
-		if (m.getAttribute("member_info") != null) {
-			MemberBean member = (MemberBean) session.getAttribute("member_info");
-//			登入會記錄進入時間 登出也會紀錄
-	        Long datetime = System.currentTimeMillis();
-	        Timestamp timestamp = new Timestamp(datetime);
-			member.setLastUsing(timestamp);
-			
-			memberservice.member_updateAccount(member);
-			
-			System.out.println("Not logout yet:" + member);
-			
-			session.removeAttribute("member_info");
-			System.out.println("logout:" + session.getAttribute("member_info"));
-			se_status.setComplete();
-		}
-		return 1;
-	}
-	
-	
 }

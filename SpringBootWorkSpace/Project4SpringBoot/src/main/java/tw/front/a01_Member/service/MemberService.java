@@ -83,7 +83,7 @@ public class MemberService implements IMemberService {
 	@Override
 	public boolean check_cookie(String cookie_value) {
 		// TODO Auto-generated method stub
-		System.out.println("check_cookie service cookie:  " + cookie_value);
+//		System.out.println("check_cookie service cookie:  " + cookie_value);
 		return mDao.check_cookie(cookie_value);
 	}
 }
