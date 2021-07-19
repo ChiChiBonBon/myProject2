@@ -122,7 +122,7 @@
                
                <div class="col-3 md-2">
                  <label for="" class="form-label">出生日期</label>
-                 <form:input class="form-control" type="date" path="birthday" onchange="valid_after_onchange(this)" value="${memberinfo.getBirthday()}"/>
+                 <form:input class="form-control" type="date" path="birthday" onchange="valid_after_onchange(this)" required="required" value="${memberinfo.getBirthday()}"/>
                  <form:errors path='birthday' cssClass="error"/>
                </div>
                

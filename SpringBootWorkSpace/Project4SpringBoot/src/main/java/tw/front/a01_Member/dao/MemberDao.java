@@ -192,11 +192,11 @@ public class MemberDao implements IMemberDao {
 	@Override
 	public boolean check_cookie(String cookie_value) {
 		// TODO Auto-generated method stub
-		System.out.println("Here check_cookie dao");
+//		System.out.println("Here check_cookie dao");
 		String hqlString = "from MemberBean m where m.acc_encode_cookie = :account_cookie_insert"; // MemberBean 這邊是指javabean的
 		TypedQuery<MemberBean> query = em.createQuery(hqlString, MemberBean.class);
 		
-		System.out.println("Dao insert attribute");
+//		System.out.println("Dao insert attribute");
 		query.setParameter("account_cookie_insert", cookie_value);
 		
 		List<MemberBean> resultlist = query.getResultList();

@@ -34,6 +34,7 @@ public class MemberLoginRegisterController {
 	@Autowired
 	private IMemberService memberservice;
 
+
 	@GetMapping("/gologin_1")
 	public String processHrefLogin() {
 		return "front/jsp/1_Member/memberLoginRegister/login_1";
@@ -209,8 +210,9 @@ public class MemberLoginRegisterController {
 			System.out.println("密碼輸入不一樣,失敗");
 			ra.addFlashAttribute("Message", "帳號註冊失敗, 密碼輸入不一樣,失敗");
 			return "redirect:/front/unmember/gomessage_page_1";
-		}
-		ra.addFlashAttribute("Message", "帳號註冊成功");
-		return "redirect:/front/unmember/gomessage_page_1";
+		}		
+		ra.addFlashAttribute("send_email_to", memberbean.getE_mail());
+		ra.addFlashAttribute("send_email_url", cookie_value);
+		return "redirect:/email_request/double_qualification_send";
 	}
 }
