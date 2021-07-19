@@ -55,7 +55,14 @@
         <div class='fs-3 fst-italic fw-bold'>${Message}</div>
         <br>
         <hr>
-        <a href="<c:url value='/front/unmember/gologin_1'/> " class='fs-5'>回會員登入</a> 
+<%--         <a href="<c:url value='/front/unmember/gologin_1'/> " class='fs-5 ' style="color: #fd7e14">回會員登入</a>  --%>
+        <button onclick="logout_back_to_login();" id="backToLogin" type="button" class="btn btn-outline-primary" style="color: #fd7e14">回會員登入</button>
+
+        <script type="text/javascript">
+            function logout_back_to_login() {
+                location.replace("<c:url value='/front/unmember/gologin_1'/>");
+            }
+        </script>
 
 
         </div>

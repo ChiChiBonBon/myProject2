@@ -174,20 +174,22 @@ public class MemberUpdateController {
 		}
 		
 		String birthday = memberbean.getBirthday();
-		System.out.println("birthday:   " + birthday );
-		
+
+		System.out.println("birthday:   " + birthday);
+
+  
 		String phone = memberbean.getCellphone();
 //		因為數據庫出生日期類行為date, 
 //		所以如果前端不選擇任何值會認定為是空字串 數據庫會報錯 因此改設為null來表示
 		if (birthday.equals("")) {
-			birthday = "0000-00-00";
+			birthday = null;
 		}
 //		因為前端會把空值 設成空字串 所以沒輸入要維持 null
 //		在這設為null
 		if (phone.equals("")) {
 			phone = null;
 		}
-		
+		System.out.println("birthday:   " + birthday);
 //		不會用 vaildator 檢查 用這種方式檢查
 		if (result.hasErrors()) {
 			System.out.println("member register validaing");
