@@ -57,7 +57,7 @@ public class MemberBean {
 	@Column(unique = true, nullable = false)
 	private String e_mail;
 	
-	@Column(unique = true)
+	@Column
 	private String cellphone;
 	
 	private String address;
@@ -86,10 +86,10 @@ public class MemberBean {
 	
 	private String mimeType;
 	
-	@Column(unique = true)
+	@Column
 	private String pictureFile_name;
 	
-	@Column(unique = true)
+	@Column
 	private String member_stock_ID; 
 	private String member_quote;  
 	private String member_auth;

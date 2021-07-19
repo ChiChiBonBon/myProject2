@@ -44,6 +44,8 @@
 </head>
 
 <body>
+
+
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp"%>
 
@@ -92,19 +94,19 @@
 											<br>
 										</div>
 									</div>
+									<div class="col-10 form-group row">
+										<label class="col-sm-2 col-form-label text-danger">留言者</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" name="userid"
+												value="${bean.userid}" id="userid" readonly> <br>
+										</div>
+									</div>
 									<div class="col-10 form-group row" hidden>
 										<label class="col-sm-2 col-form-label text-danger">留言編號</label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control" name="comment_num"
 												value="${bean.comment_num}" id="comment_num" readonly>
 											<br>
-										</div>
-									</div>
-									<div class="col-10 form-group row" hidden>
-										<label class="col-sm-2 col-form-label text-danger">留言者</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" name="userid"
-												value="${bean.userid}" id="userid" readonly> <br>
 										</div>
 									</div>
 									<div class="col-10 form-group row">
@@ -220,6 +222,16 @@
 				</div>
 
 			</div>
+			<center>
+				<!-- 返回前頁 Button -->
+				<div class="mt-5 float-right">
+					<a href="<c:url value='/front/post' />"
+						class="btn btn-secondary btn-icon-split"> <span
+						class="icon text-white-50"> <i class="fas fa-arrow-right"></i>
+					</span> <span class="text">返回文章區</span>
+					</a>
+				</div>
+			</center>
 		</section>
 		<!-- End Blog Section -->
 
@@ -262,6 +274,7 @@
             </script>
 
 	<script>
+	console.log("${bean.postboard.post_num}")
             var btnDel = document.getElementById("btnDel");
             var btnUpd = document.getElementById("btnUpd");
             var divResult = document.getElementById('resultMsg');
@@ -320,7 +333,7 @@
     						})
     						setTimeout(function() {
     							// 自己會載入頁面
-    							window.location.href = "<c:url value='/front/post'/>"
+    							window.location.href = "<c:url value='/front/singlepost/"+post_numValue+"'/>"
     						}, 1500);
                             console.log("成功");
 //                             window.location.href = "<c:url value='/post'/>"
@@ -330,6 +343,8 @@
             };
         
         $('#btnDel').on('click', function(){
+            var post_numValue = document.getElementById("post_num").value;
+                
             Swal.fire({
                 template: '#deleteAll-template'
             }).then((result)=> {
@@ -363,7 +378,7 @@
                                 })
                             } 
                             setTimeout(function(){
-                            	window.location.href = "<c:url value='/front/post'/>"
+                            	window.location.href = "<c:url value='/front/singlepost/"+post_numValue+"'/>"
                             },1500);
                            
                         }

@@ -88,12 +88,12 @@
 							<div class="table">
 								<h1 class="h3 mb-2 text-gray-800">管理者發文</h1>
 								<br>
-								<div class="col-8 form-group row">
+								<div class="col-8 form-group row" hidden>
 
 									<label class="col-sm-2 col-form-label text-primary">管理者</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" name="userid" value="${bean.userid}"
-											id="userid" placeholder="例:admin1..."><br> <span
+										<input type="text" class="form-control" name="userid" value="admin"
+											id="userid"><br> <span
 											id="resultMsg1" style="height: 18px; font-weight: bold;"></span>
 									</div>
 									<br>

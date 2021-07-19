@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.front.a01_Member.model.MemberBean;
 import tw.front.a03_Comment.model.Comment_board;
 import tw.front.a03_Comment.model.Post_board;
 import tw.front.a03_Comment.service.FrontCommentServiceImpl;
@@ -43,9 +44,20 @@ public class FrontCommentController {
 	ServletContext context;
 
 	// 跳轉頁面===============================================================================================
+	
+	
 	// 進入前臺文章首頁
 	@GetMapping("/front/post")
-	public String PostHomePage() {
+	public String PostHomePage(Model m) {
+		
+		if (m.getAttribute("member_info") != null ) {
+			MemberBean mber = (MemberBean) m.getAttribute("member_info");
+			System.out.println("取得的stock:" + mber.getMember_stock_ID());
+			m.addAttribute("userid",mber.getAccount());
+		} else {
+			System.out.println("沒有取得到stock_id");
+			return "redirect:/front/unmember/gologin_1";
+		}
 		return "front/jsp/3_Comment/post";
 	}
 
@@ -53,9 +65,11 @@ public class FrontCommentController {
 	@GetMapping(value = "/front/singlepost/{post_num}")
 	public String SinglePost(@PathVariable Integer post_num, Model m) {
 		Post_board bean = postService.findPostByPost_num(post_num);
+		MemberBean mber = (MemberBean) m.getAttribute("member_info");
 		System.out.println("文章編號 = " + post_num);
 		System.out.println(bean.getPost_num());
 		m.addAttribute("bean", bean);
+		m.addAttribute("userid",mber.getAccount());
 		System.out.println("Model = " + m);
 		return "front/jsp/3_Comment/singlepost";
 	}
