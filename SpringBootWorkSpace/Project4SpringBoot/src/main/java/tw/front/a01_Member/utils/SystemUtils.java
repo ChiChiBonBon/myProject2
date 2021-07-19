@@ -102,4 +102,18 @@ public class SystemUtils {
 		return m_s_ID;
 	}
 	
+	
+	public static StringBuffer generateRandomPassword() {
+		StringBuffer password = new StringBuffer();
+		
+		Random random = new Random();
+		char[] alphabet = {'0','1','2', '3', '4', '5', '6', '7', '8', '9',
+							'L', 'e', 'b', 'r', 'i', 'c', 'k', 's', 'h', 'i', 't'};
+		
+		String result = NanoIdUtils.randomNanoId(random, alphabet, 10);
+		password.append(result);
+		System.out.println("newPassword created!");
+		return password;
+	}
+	
 }

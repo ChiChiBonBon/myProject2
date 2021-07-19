@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,19 +37,28 @@ public class MemberLoginRegisterController {
 
 
 	@GetMapping("/gologin_1")
-	public String processHrefLogin() {
+	public String processHrefLogin(@CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value, RedirectAttributes ra) {
+		if (!cookie_value.equals("None")) {
+			return "redirect:/front/member/gomembermenu_1";
+		}
 		return "front/jsp/1_Member/memberLoginRegister/login_1";
 	}
 
 	@GetMapping("/goregister_1")
-	public String processHrefRegister(Model m) {
+	public String processHrefRegister(Model m, @CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value, RedirectAttributes ra) {
+		if (!cookie_value.equals("None")) {
+			return "redirect:/front/member/gomembermenu_1";
+		}
 		MemberBean member = new MemberBean();
 		m.addAttribute("member", member);
 		return "front/jsp/1_Member/memberLoginRegister/register_1";
 	}
 	
 	@GetMapping("/gomessage_page_1")
-	public String processHrefMessage(Model m) {
+	public String processHrefMessage(Model m, @CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value, RedirectAttributes ra) {
+		if (!cookie_value.equals("None")) {
+			return "redirect:/front/member/gomembermenu_1";
+		}
 		return "front/jsp/1_Member/memberLoginRegister/message_page_1";
 	}
 	
@@ -68,7 +78,10 @@ public class MemberLoginRegisterController {
 
 //	擋住直接輸入 post url
 	@GetMapping("/login_1")
-	public String processRedirPosttoGetLogin() {
+	public String processRedirPosttoGetLogin(@CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value, RedirectAttributes ra) {
+		if (!cookie_value.equals("None")) {
+			return "redirect:/front/member/gomembermenu_1";
+		}
 		return "redirect:/front/unmember/gologin_1";
 	}
 	
@@ -78,7 +91,13 @@ public class MemberLoginRegisterController {
 							   @RequestParam(name = "password_1") String password,
 							   RedirectAttributes ra,
 							   Model m,
-							   HttpServletResponse response) {
+							   HttpServletResponse response,
+							   @CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value) {
+		
+		if (!cookie_value.equals("None")) {
+			return "redirect:/front/member/gomembermenu_1";
+		}
+		
 		if (account == null || password == null) {
 			ra.addFlashAttribute("Message", "請輸入帳號和密碼");
 			return "redirect:/front/unmember/gomessage_page_1";
@@ -95,7 +114,7 @@ public class MemberLoginRegisterController {
 
 //		從DB中 拿出會員的資訊 之後放入session
 		MemberBean member_info = memberservice.member_checkAccount(account, password_encodeString);
-
+		
 		if (member_info != null) {
 			System.out.println("login Success");
 			System.out.println("account info: " + member_info);
@@ -112,8 +131,8 @@ public class MemberLoginRegisterController {
 
 	//      創造cookie
 			String cookie_key = "StockOverFlowMember";
-			String cookie_value = member_info.getAcc_encode_cookie();
-			Cookie myCookie = new Cookie(cookie_key, cookie_value);
+			String cookie_for_value = member_info.getAcc_encode_cookie();
+			Cookie myCookie = new Cookie(cookie_key, cookie_for_value);
 	//		60 分鐘到期
 			myCookie.setMaxAge(60*60);
 			myCookie.setPath("/project4");
@@ -134,7 +153,6 @@ public class MemberLoginRegisterController {
 		m.addAttribute("message", message);
 		System.out.println(message);
 		return "front/jsp/1_Member/memberLoginRegister/login_1";
-
 	}
 
 	
@@ -149,7 +167,12 @@ public class MemberLoginRegisterController {
 								  BindingResult result,
 								  @RequestParam(name = "password_2") String pass_che,
 								  RedirectAttributes ra,
-								  Model m) {
+								  Model m,
+								  @CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value) {
+		
+		if (!cookie_value.equals("None")) {
+			return "redirect:/front/member/gomembermenu_1";
+		}
 		
 //		不會用 vaildator 檢查 用這種方式檢查
 		if (result.hasErrors()) {
@@ -170,8 +193,8 @@ public class MemberLoginRegisterController {
 			return "處理錯誤訊息";
 		}
 //		加密帳號作為 cookie 
-		String cookie_value = SystemUtils.encodePassword(memberbean.getAccount());
-		if (cookie_value == null) {
+		String cookie_value_insert = SystemUtils.encodePassword(memberbean.getAccount());
+		if (cookie_value_insert == null) {
 			return "處理錯誤訊息";
 		}
 
@@ -182,7 +205,7 @@ public class MemberLoginRegisterController {
 		if (memberbean.getPassword().equals(pass_che)) {
 				
 			memberbean.setPassword(password_encodeString);
-			memberbean.setAcc_encode_cookie(cookie_value);
+			memberbean.setAcc_encode_cookie(cookie_value_insert);
 			memberbean.setMember_status("unactivated");
 			memberbean.setMember_auth("一般戶");
 			
@@ -212,7 +235,7 @@ public class MemberLoginRegisterController {
 			return "redirect:/front/unmember/gomessage_page_1";
 		}		
 		ra.addFlashAttribute("send_email_to", memberbean.getE_mail());
-		ra.addFlashAttribute("send_email_url", cookie_value);
+		ra.addFlashAttribute("send_email_url", cookie_value_insert);
 		return "redirect:/email_request/double_qualification_send";
 	}
 }

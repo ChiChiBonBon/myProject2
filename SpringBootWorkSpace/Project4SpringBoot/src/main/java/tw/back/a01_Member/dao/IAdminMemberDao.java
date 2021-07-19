@@ -16,6 +16,9 @@ public interface IAdminMemberDao {
 	
 	public MemberJobs admin_selectJob(long id);
 	
-	public boolean admin_update_member(long id, String quote, String auth, String status);
+	public int admin_update_member(long id, String quote, String auth, String status);
 
+	public boolean change_status_byEmail(String member_cookieValue);
+	
+	public String check_email_to_resetPassword(String email);
 }

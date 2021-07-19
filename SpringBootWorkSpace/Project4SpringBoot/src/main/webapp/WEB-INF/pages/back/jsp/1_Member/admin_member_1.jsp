@@ -104,153 +104,150 @@
 
 <!-- 這三行 js 讀不到 所以需要下面來重新渲染 -->
 
-<!-- Page level plugins -->
-    <script src="<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />"></script>
-    <script src="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value='/back/js/demo/datatables-demo.js' />"></script>
 
 
-	<script>
-		
-		let dataArea = null;
-		window.addEventListener('load', function() {
+    <script>
+        
+        let dataArea = null;
+        window.addEventListener('load', function() {
+       
+         dataArea = document.getElementById("dataArea");
+         let xhr = new XMLHttpRequest();
+         xhr.open('GET', "<c:url value='/back/admin_1/findAdminAllMember_1' />", true);
+         xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+           console.log(xhr.responseText);
+           dataArea.innerHTML = showData(xhr.responseText);
+           
+           console.log(showData(xhr.responseText))
+                    /* js 重新渲染 jsp行程順序不一樣 所以用這個方式重新跑一次 */
+                    $('.tabletest').attr('id', 'dataTable')
+                    var scriptsToLoad = [
+                     "<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
+                     "<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
+                     "<c:url value='/back/js/demo/datatables-demo.js' />"
+                    ]; 
+                    scriptsToLoad.forEach(function(src) {
+                     var script = document.createElement('script');
+                     script.src = src;
+                     script.async = false;
+                     document.body.appendChild(script);
+                    });
+           
+                    
+           console.log(dataArea)
+          }
+         };
+         xhr.send();
+        });
+   
+        function showData(textObj) {
+      
+         let obj = JSON.parse(textObj);
+         let size = obj.size;
+         let members = obj.list;
+      
+         let segment = `<div class="container-fluid">
+         
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary float-left">所有會員資料</h6>
 
-			dataArea = document.getElementById("dataArea");
-			let xhr = new XMLHttpRequest();
-			xhr.open('GET', "<c:url value='/back/admin_1/findAdminAllMember_1' />", true);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					console.log(xhr.responseText);
-					dataArea.innerHTML = showData(xhr.responseText);
-					
-					
-		            /* js 重新渲染 jsp行程順序不一樣 所以用這個方式重新跑一次 */
-		            $('.tabletest').attr('id', 'dataTable')
-		            var scriptsToLoad = [
-		            	"<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />", 
-		            	"<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-		            	"<c:url value='/back/js/demo/datatables-demo.js' />"
-		            ]; 
-		            scriptsToLoad.forEach(function(src) {
-		            	var script = document.createElement('script');
-		            	script.src = src;
-		            	script.async = false;
-		            	document.body.appendChild(script);
-		            });
-					
-		            
-					console.log(dataArea)
-				}
-			};
-			xhr.send();
-		});
-		
-		function showData(textObj) {
+                                    <button class="btn btn-info float-right" onclick="update_info()" id="update_butten" >修改資料</button>
 
-			let obj = JSON.parse(textObj);
-			let size = obj.size;
-			let members = obj.list;
-
-			let segment = `<div class="container-fluid">
-			
-								<div class="card shadow mb-4">
-									<div class="card-header py-3">
-										<h6 class="m-0 font-weight-bold text-primary float-left">所有會員資料</h6>
-										
-										<button class="btn btn-info float-right" onclick="update_info()" id="update_butten" >修改資料</button>
-										
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table table-bordered tabletest" id="" width="100%" cellspacing="0">`;
-											
-	    	    segment += `                	 <thead>
-													<tr>
-														<th>帳號</th>
-														<th>證卷號</th>
-														<th>Email</th>
-														<th>額度</th>
-														<th>權限</th>
-														<th>其他個資</th>
-														<th>註冊時間</th>
-														<th>會員狀態</th>
-													</tr>
-												</thead>
-												<tfoot>
-													<tr>
-														<th>帳號</th>
-														<th>證卷號</th>
-														<th>Email</th>
-														<th>額度</th>
-														<th>權限</th>
-														<th>其他個資</th>	
-														<th>註冊時間</th>
-														<th>會員狀態</th>
-													</tr>
-												</tfoot>
-												
-												<tbody>`;
-
-
-				for (n = 0; n < members.length; n++) {
-					let member = members[n];
-					let path_memberid = member.id;
-					
-					/* 其他個資超連結 */
-					let member_other_info_path = `<c:url value = "/back/admin_1/goAdminMemberOtherInfo_1?id=" />` + path_memberid;
-					let member_other_info = `<a href=` + member_other_info_path + `>` + "其他個資" + `</a>`;
-					
-					
-					segment += `				<tr>`
-					segment += 						"<th hidden id='member_idForfinal_update'>" + member.id + "</th>";
-					segment += 						"<th>" + member.account + "</th>";
-					segment += 						"<th width=150px>" + member.member_stock_ID + "</th>";
-					segment += 						"<th>" + member.e_mail + "</th>";
-					
-					segment += 						"<th width=150px name='member_member_quote'>" + 
-														 member.member_quote + 
-													"</th>";
-					
-					
-					segment += 						"<th width=100px name='member_member_auth'>" +
-														member.member_auth +
-													"</th>";
-					
-					segment += 						"<th width=100px>" + member_other_info + "</th>";
-					
-					/* 換時間格式 */
-					var date_fromat = new Date(member.registertime)
-					segment += 						"<th width=250px>" + date_fromat.toLocaleString() + "</th>";
-					
-					
-					
-					segment += 						"<th width=150px name='member_member_status'>" +
-														member.member_status +
-													"</th>";
-													
-					segment += `							
-												</tr>`;
-				}
-			segment += `						</tbody>
-			
-											</table>
-										</div>
-									</div>
-								</div>`
-
-			return segment;
-		}
-		
-	</script>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered tabletest" id="" width="100%" cellspacing="0">`;
+                 
+             segment += `                   <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>帳號</th>
+                                                    <th>證卷號</th>
+                                                    <th>Email</th>
+                                                    <th>額度</th>
+                                                    <th>權限</th>
+                                                    <th>其他個資</th>
+                                                    <th>註冊時間</th>
+                                                    <th>會員狀態</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>帳號</th>
+                                                    <th>證卷號</th>
+                                                    <th>Email</th>
+                                                    <th>額度</th>
+                                                    <th>權限</th>
+                                                    <th>其他個資</th> 
+                                                    <th>註冊時間</th>
+                                                    <th>會員狀態</th>
+                                                </tr>
+                                            </tfoot>
+                                            
+                                            <tbody>`;
+ 
+ 
+             for (n = 0; n < members.length; n++) {
+            	 
+                 let member = members[n];
+                 let path_memberid = member.id;
+                 
+                 /* 其他個資超連結 */
+                 let member_other_info_path = `<c:url value = "/back/admin_1/goAdminMemberOtherInfo_1?id=" />` + path_memberid;
+                 let member_other_info = `<a href=` + member_other_info_path + `>` + "其他個資" + `</a>`;
+                 
+                 
+                 segment += `               <tr>`
+                 segment +=                     "<th  name='member_idForfinal_update'>" + member.id + "</th>";
+                 segment +=                     "<th>" + member.account + "</th>";
+                 segment +=                     "<th width=150px>" + member.member_stock_ID + "</th>";
+                 segment +=                     "<th>" + member.e_mail + "</th>";
+                 
+                 segment +=                     "<th width=150px name='member_member_quote'>" + 
+                                                    member.member_quote + 
+                                                "</th>";
+                 
+                 
+                 segment +=                     "<th width=100px name='member_member_auth'>" +
+                                                    member.member_auth +
+                                                "</th>";
+                 
+                 segment +=                     "<th width=100px>" + member_other_info + "</th>";
+                 
+                 /* 換時間格式 */
+                 var date_fromat = new Date(member.registertime)
+                 segment +=                    "<th width=250px>" + date_fromat.toLocaleString() + "</th>";
+                 
+                 
+                 
+                 segment +=                    "<th width=150px name='member_member_status'>" +
+                                                    member.member_status +
+                                               "</th>";
+                         
+                 segment += `       
+                                            </tr>`;
+            }
+           segment += `                     </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+          
+         return segment;
+        }
+    </script>
     
     <script>
     /* 變換修改模式和修改完成模式 */
     	let mode = "unedit"
-    	let final_member_quote = "";
-    	let final_member_auth = "";
-    	let final_member_status = "";
+    	let final_member_id = [];
+    	let final_member_quote = [];
+    	let final_member_auth = [];
+    	let final_member_status = [];
     	
     	function update_info() {
     		if (mode == "unedit") {
@@ -266,6 +263,7 @@
         		for (let Auth of member_auth) {
         			
         			segment = "";
+        			console.log("switch" + Auth.innerText);
         			if (Auth.innerText == "一般戶") {
 						segment += 	"<option value='一般戶' selected>一般戶</option>"
 					} else {
@@ -293,6 +291,7 @@
         		for (let Status of member_status) {
         			
         			segment = "";
+        			console.log("switch" + Status.innerText);
         			if (Status.innerText == "unactivated") {
 						segment += 	"<option value='unactivated' selected>unactivated</option>"
 					} else {
@@ -303,7 +302,7 @@
 					} else {
 						segment += 	"<option value='activated' >activated</option>"
 					}
-					if (Status.innerText == "activated") {
+					if (Status.innerText == "deleted") {
 						segment += 	"<option value='deleted' selected>deleted</option>"
 					} else {
 						segment += 	"<option value='deleted' >deleted</option>"
@@ -322,12 +321,20 @@
     		
         		
     		} else if (mode == "edit") {
+    			/* 用list來獲取所有更改得值 來一次包成Json來送回 */
+    			let member_id_forAjax = document.getElementsByName("member_idForfinal_update");
+    			for (let id of member_id_forAjax) {
+    				final_member_id.push(id.innerHTML);
+    				console.log("final_member_id" + final_member_id);
+    			}
+    			
+    			
     			/* 換模式 把<th> 標籤中 input 換掉或放回去*/
     			let member_quote = document.getElementsByName("member_member_quote");
         		console.log(typeof(member_quote), member_quote);
         		for (let Quote of member_quote) {
         			Quote.innerHTML = Quote.children[0].value;
-        			final_member_quote = Quote.innerHTML;
+        			final_member_quote.push(Quote.innerHTML);
         			console.log("final_member_quote" + final_member_quote);
         		}
         		
@@ -336,7 +343,7 @@
         		for (let Auth of member_auth) {
         			/* select 包成很多層 要寫很多層才能抓到資料 */
         			Auth.innerHTML = Auth.children[0].children[0].selectedOptions[0].value;
-        			final_member_auth = Status.innerHTML;
+        			final_member_auth.push(Auth.innerHTML);
         			console.log("final_member_auth" + final_member_auth);
         		}
         		
@@ -345,40 +352,76 @@
         		for (let Status of member_status) {
         			/* select 包成很多層 要寫很多層才能抓到資料 */
         			Status.innerHTML = Status.children[0].children[0].selectedOptions[0].value;
-        			final_member_status = Status.innerHTML;
-        			console.log("final_member_status" + final_member_status);
+/*         			console.log("Status.innerHTML " + Status.innerHTML); */
+        			final_member_status.push(Status.innerHTML);
+        			console.log("final_member_status " + final_member_status);
         		}
         		
-        		c = document.getElementById("update_butten");
+         		c = document.getElementById("update_butten");
         		c.className = "btn btn-success float-right";
         		c.innerText = "修改資料";
         		mode = "unedit";
         		
         		
-        		let xhrUpdateAjax = new XMLHttpRequest();
+        		
+        		var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        		xmlhttp.open("POST", "<c:url value='/back/admin_1/saveAdminMemberInfo_1' />", true);
+        		xmlhttp.setRequestHeader("Content-Type", "application/json");
+        		
+        		
+        		var jsonUpdateMember = {};
+        		console.log("final_member_id.length:" + final_member_id.length);
+        		for (let i = 0; i < final_member_id.length; i++) {
+        			jsonUpdateMember[i + ""] = [ final_member_id[i], final_member_quote[i],
+        			                        final_member_auth[i], final_member_status[i]];
+        			console.log("total" + final_member_id[i] + final_member_quote[i] + final_member_auth[i] + final_member_status[i])
+        		}
+        		
+        		xmlhttp.send(JSON.stringify(jsonUpdateMember));
+
+        		xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && (xmlhttp.status == 200 || xmlhttp.status == 201) ) {
+                        result = xmlhttp.responseText;
+                        if (result == final_member_id.length) {
+                            my_alert();
+                        }
+                        }
+                    }
+/*         		let xhrUpdateAjax = new XMLHttpRequest();
         		xhrUpdateAjax.open("POST", "<c:url value='/back/admin_1/saveAdminMemberInfo_1' />", true);
         		xhrUpdateAjax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         		
-        		final_member_id = document.getElementById("member_idForfinal_update");
+        		final_member_id = document.getElementById("member_idForfinal_update").innerText;
         		let content = "";
-        		content += "member_id" + final_member_id;
+        		content += "member_id=" + final_member_id;
         		content += "&member_quote=" + final_member_quote;
         		content += "&member_auth=" + final_member_auth;
         		content += "&member_status=" + final_member_status;
-        		xhrUpdateAjax.send(content);
         		
+        		console.log("final_member_id: " + final_member_id);
+        		console.log("final_member_quote: " + final_member_quote);
+        		console.log("final_member_auth: " + final_member_auth);
+        		console.log("final_member_status: " + final_member_status);
+        		xhrUpdateAjax.send(content); */
 
-        		xhr1.onreadystatechange = function() {
-        		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
-					result = JSON.parse(xhr1.responseText);
+        		
         		}
-        		} 
-        		
     		}
-    	}
-    		
     </script>
-
+    
+    
+        <!-- SweetAlert2 -->
+    <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
+    <script type="text/javascript">
+        function my_alert(){
+            swal.fire({ 
+                icon: 'success',
+                title: '成功更新',
+            })
+        }
+    </script>
+    
+    
 	<script>
 		$(function(){
             // Sidebar
@@ -386,6 +429,12 @@
             
 		})
 	</script>
+     <!-- Page level plugins -->
+    <script src="<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />"></script>
+    <script src="<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />"></script>
+
+     <!-- Page level custom scripts -->
+    <script src="<c:url value='/back/js/demo/datatables-demo.js' />"></script>
 	
 
 </body>

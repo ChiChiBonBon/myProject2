@@ -1,5 +1,6 @@
 package tw.back.a01_Member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -71,15 +73,47 @@ public class AdminController {
 	}
 	
 	
-//	接收json資料 除存DB	
-	@PostMapping(value = "/saveAdminMemberInfo_1")
-	public boolean saveAdminMemberotherInfo(@RequestParam("member_id") long id,
-											@RequestParam("member_quote") String quote,
-											@RequestParam("member_auth") String auth,
-											@RequestParam("member_status") String status) {
-		boolean is_update = adminservice.admin_update_member(id, quote, auth, status);
-		return is_update;
-	}
+////	接收json資料 除存DB	
+//	@PostMapping(value = "/saveAdminMemberInfo_1")
+//	public @ResponseBody int saveAdminMemberotherInfo(@RequestParam("member_id") String id,
+//											@RequestParam("member_quote") String quote,
+//											@RequestParam("member_auth") String auth,
+//											@RequestParam("member_status") String status) {
+//		System.out.println("saveAdminMemberInfo_1");
+//		System.out.println(id);
+//		System.out.println(quote);
+//		long convert_id = Long.parseLong(id);
+//		System.out.println("convert_id: " + convert_id);
+//		int is_update = adminservice.admin_update_member(convert_id, quote, auth, status);
+//		return is_update;
+//	}
+	
+	
+    //接收json資料 除存DB	
+    @PostMapping(value="/saveAdminMemberInfo_1", consumes = "application/json")
+    public @ResponseBody int saveAdminMemberotherInfo(@RequestBody Map<String, List<String>> allupdateMember) {
+    	int how_many_member = allupdateMember.size();
+    	System.out.println(how_many_member);
+    	int suceess = 0;
+    	for (int i = 0; i < how_many_member; i++) {
+    		List<String> listOfMemberValue = allupdateMember.get(i + "");
+    		System.out.println("i" + i);
+    		System.out.println(listOfMemberValue);
+    		Map<Integer, String> member_map = new HashMap<>();
+    		for (int j = 0; j < listOfMemberValue.size() ; j++) {
+    			member_map.put(j, listOfMemberValue.get(j));
+    		}
+    		System.out.println("member_map.get(1): " + member_map.get(0));
+    		System.out.println("member_map.get(2): " + member_map.get(1));
+    		System.out.println("member_map.get(3): " + member_map.get(2));
+    		System.out.println("member_map.get(4): " + member_map.get(3));
+    		long convert_id = Long.parseLong(member_map.get(0));
+    		System.out.println(convert_id + member_map.get(1) + member_map.get(2) + member_map.get(3));
+    		int is_update = adminservice.admin_update_member(convert_id, member_map.get(1), member_map.get(2), member_map.get(3));
+    		suceess += is_update;
+    	}
+    	return suceess;
+    }
 	
 	
 	@GetMapping(value = "/goAdminMemberJob_1")

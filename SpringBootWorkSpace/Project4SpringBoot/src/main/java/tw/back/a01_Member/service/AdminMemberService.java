@@ -43,9 +43,21 @@ public class AdminMemberService implements IAdminMemberService {
 	}
 
 	@Override
-	public boolean admin_update_member(long id, String quote, String auth, String status) {
+	public int admin_update_member(long id, String quote, String auth, String status) {
 		// TODO Auto-generated method stub
 		return adminDao.admin_update_member(id, quote, auth, status);
+	}
+
+	@Override
+	public boolean change_status_byEmail(String member_cookieValue) {
+		// TODO Auto-generated method stub
+		return adminDao.change_status_byEmail(member_cookieValue);
+	}
+
+	@Override
+	public String check_email_to_resetPassword(String email) {
+		// TODO Auto-generated method stub
+		return adminDao.check_email_to_resetPassword(email);
 	}
 
 }

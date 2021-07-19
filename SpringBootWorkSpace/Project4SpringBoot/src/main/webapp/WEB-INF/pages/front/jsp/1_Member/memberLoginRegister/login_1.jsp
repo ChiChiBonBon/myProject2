@@ -51,25 +51,63 @@
   <!-- 內容 -->
         <div class="container">
 
-
-           <h1>會員登入</h1>
-           <br>
            <form method="POST" action="login_1">
 
             <div class="mb-3">
              <label for="account_input" class="form-label">Account</label>
-             <input style="width: 500px" type="text" name="account_1" class="form-control is-invalid" id="account_input" aria-describedby="emailHelp" placeholder="請輸入帳號或電子郵件" required>
-             <div id="" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
+             <input style="width: 500px" type="text" name="account_1" class="form-control is-invalid" id="account_input" aria-describedby="emailHelp" placeholder="請輸入帳號" required>
+<!--              <div id="" class="form-text">We'll never share your email with anyone else.</div>
+ -->            </div>
 
             <div class="mb-3">
              <label for="password_input" class="form-label">Password</label>
-             <input style="width: 500px" type="password" name="password_1" class="form-control" id="password_input" placeholder="密碼" required>
+             <input style="width: 500px" type="password" name="password_1" class="form-control" id="password_input" placeholder="請輸入密碼" required>
             </div>
 
             <div class="mb-3">
-             <a class="large" href="">忘記密碼？</a>
+<%--              <a class="large" href="<c:url value='/front/email_request/forget_password'/>">忘記密碼？</a> --%>
+              <p onclick='for_pass()' id="backToLogin" style="color: #fd7e14" class="large">忘記密碼？</p>
+             
             </div>
+            
+                    <!-- SweetAlert2 -->
+            <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
+            
+            <script type="text/javascript">
+            
+                function for_pass() {
+                	const { value: email } = await Swal.fire({
+                		  title: '請輸入你註冊的電子郵件',
+                		  input: 'email',
+                		  inputLabel: 'email address',
+                		  inputPlaceholder: '請輸入你的Email'
+                		})
+                		if (email) {
+                		  Swal.fire(`傳送新密碼到此信箱: ${email}`)
+                		  
+                          $.ajax({
+                              type: 'POST',
+                              url: "<c:url value='/email_request/forget_password' />" + id,
+                              data: {"email": ${email}},
+                              dataType: 'JSON',
+                              }); done(function(response) {
+                                  if(response === 'Success') {
+                                      swal({
+                                          icon: 'success',
+                                          title: '成功重置',
+                                          text: '以重置密碼，請去信箱做更新',
+                                      })
+                                  } else if () {
+                                        swal({
+                                            icon: 'error',
+                                            title: '重置失敗',
+                                            text: '請輸入已註冊密碼',
+                                        })
+                                  }
+                              });
+                              }
+                	}
+            </script>
 
             <span>
              <button style="width: 200px" class="btn btn-primary" type="submit">登入</button>
@@ -130,8 +168,8 @@
     <!-- JQuery -->
     <script src="<c:url value='/front/assets/js/jquery-3.6.0.slim.js' />"></script>
     
-    <!-- SweetAlert2 -->
-    <script src="<c:url value='/front/assets/js/sweetalert2@11.js' />"></script>
+<%--     <!-- SweetAlert2 -->
+    <script src="<c:url value='/front/assets/js/sweetalert2@11.js' />"></script> --%>
 
     <script type="text/javascript">
 		$(function(){

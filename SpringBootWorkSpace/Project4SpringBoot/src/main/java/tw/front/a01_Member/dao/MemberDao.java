@@ -60,17 +60,55 @@ public class MemberDao implements IMemberDao {
 				em.persist(resultlist.get(0));
 				
 //				確定帳號是否激活 
-//				if (resultlist.get(0).getMember_status().equals("activated")) {
-//					return resultlist.get(0);
-//				}
-				return resultlist.get(0);
+				if (resultlist.get(0).getMember_status().equals("activated")) {
+					return resultlist.get(0);
+				}
+			}
+//			密碼不一樣 返回空值
+		}
+		return null;
+	}
+	
+	
+	@Override
+	public MemberBean member_checkAccount_email(String email, String password) {
+		// TODO Auto-generated method stub
+		String hqlString = "from MemberBean m where m.e_mail = :email_insert"; // MemberBean 這邊是指javabean的
+		TypedQuery<MemberBean> query = em.createQuery(hqlString, MemberBean.class);
+		
+		query.setParameter("email_insert", email);
+		
+		List<MemberBean> resultlist = query.getResultList();
+		System.out.println(resultlist);
+
+//		判斷密碼
+		if (!resultlist.isEmpty()) {
+			System.out.println("resultlist: not null");
+			if (password.equals(resultlist.get(0).getPassword())) {
+				
+//				要獲取 Java 中的當前時間戳，可以使用 Timestamp 類。由於此類沒有預設的建構函式
+//				，因此我們以毫秒為單位傳遞時間。我們使用 System 類的 currentTimeMillis() 方法獲取時間。
+		        Long datetime = System.currentTimeMillis();
+		        Timestamp timestamp = new Timestamp(datetime);
+				resultlist.get(0).setLastUsing(timestamp);
+				
+//				確定密碼符合後 插入當前時間然後存入
+				em.persist(resultlist.get(0));
+				
+//				確定帳號是否激活 
+				System.out.println("check Active Account!!!");
+				if (resultlist.get(0).getMember_status().equals("activated")) {
+					return resultlist.get(0);
+				}
+				System.out.println("No Avtive");
 			}
 //			密碼不一樣 返回空值
 			return null;
 		}
 		return null;
 	}
-
+	
+	
 	@Override
 	public int member_updateAccount(MemberBean bean) {
 		// TODO Auto-generated method stub
@@ -134,6 +172,7 @@ public class MemberDao implements IMemberDao {
 		MemberBean resultbean = em.find(MemberBean.class, id);
 		if (resultbean != null) {
 			resultbean.setMember_status("deleted");
+			System.out.println("from dao delete: " + resultbean.getMember_status());
 			return true;
 		}
 		return false;
@@ -205,5 +244,16 @@ public class MemberDao implements IMemberDao {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean member_updateTime(long id, Timestamp timestamp) {
+		// TODO Auto-generated method stub
+		MemberBean resultbean = em.find(MemberBean.class, id);
+		if (resultbean != null) {
+			resultbean.setLastUsing(timestamp);
+			return true;
+		}
+		return false;
 	}
 }

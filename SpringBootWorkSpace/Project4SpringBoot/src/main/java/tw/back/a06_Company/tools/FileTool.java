@@ -1,6 +1,5 @@
 package tw.back.a06_Company.tools;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
