@@ -54,7 +54,7 @@
           <legend></legend>
              <div>
       			  <label for="" >客戶權限查詢:</label>
-      			  <input name="stock_ID" type="text" placeholder="請輸入證券帳號" id="stock_ID" autofocus onchange="get_stock_ID(this.id)" size="17">
+      			  <input name="mber_stock_ID" type="text" placeholder="請輸入證券帳號" id="mber_stock_ID" autofocus onchange="get_stock_ID(this.id)" size="17">
       			  <input type="submit" value="查詢" class="st_submit">		
       		 </div>
       </fieldset>

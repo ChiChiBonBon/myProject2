@@ -174,7 +174,10 @@ public class MemberUpdateController {
 		}
 		
 		String birthday = memberbean.getBirthday();
+
 		System.out.println("birthday:   " + birthday);
+
+  
 		String phone = memberbean.getCellphone();
 //		因為數據庫出生日期類行為date, 
 //		所以如果前端不選擇任何值會認定為是空字串 數據庫會報錯 因此改設為null來表示

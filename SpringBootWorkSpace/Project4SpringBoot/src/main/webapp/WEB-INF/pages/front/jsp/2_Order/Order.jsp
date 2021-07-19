@@ -28,6 +28,9 @@
 	<link href="<c:url value='/front/assets/css/style.css' />" rel="stylesheet">
 </head>
 <body>
+	<!-- ======= A00 Cookie ======= -->
+	<%@include file="/WEB-INF/pages/front/jsp/0_Util/Cookie.jsp" %>
+	
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp" %>
 
@@ -53,7 +56,7 @@
 		<%  java.util.UUID uuid = java.util.UUID.randomUUID();
           	String order_ID     = uuid.toString();%>
           	
-		<div class="container"   style="margin:-34px 100px">
+		<div class="container"   style="margin:auto auto">
 		<!--  
 		<h3 id="test">Hi,${user_ID},歡迎使用後台系統!</h3>-->
 		

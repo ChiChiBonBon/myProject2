@@ -30,7 +30,7 @@ import tw.back.a02_Order.model.AccountDAO;
 
 @Controller
 @EnableTransactionManagement
-@SessionAttributes(names = {"stock_ID", "user_account","user_password",
+@SessionAttributes(names = {"stock_ID", "user_account","user_password","member_info","pre_lists",
 		                    "member_stock_ID","member_auth","member_quote","member_status",
 							"emp_ID","emp_acc","emp_psd",
 							"id","com_ID","order_ID","order_price","order_quant","order_total","order_date","order_time","trans_cond","trans_way","trans_sellorbuy","trans_stats","trans_report",
@@ -56,10 +56,20 @@ public class OrderController {
 	
 //管理者新增>get = 導向+查詢 ,  post = 導向+下單+查詢　
 	@GetMapping("/admin/order")
-	public String loadOrderPage_GET(Account acc,OrderBean order_list,Model m) {
-		m.addAttribute("emp_ID" , "admin");
-		m.addAttribute("stock_ID" , acc.getStock_ID());
-		orderService.selectOrder(order_list, m);
+	public String loadOrderPage_GET(OrderBean order_list,String mber_stock ,Model m) {
+		if (m.getAttribute("stock_ID") == null ) {
+			orderService.selectOrder(order_list, m);
+			m.addAttribute("stock_ID","0620-817781-0");
+			
+			
+		} else {	
+			orderService.selectOrder(order_list, m);
+		}
+		
+		
+//		m.addAttribute("emp_ID" , "admin");
+//		m.addAttribute("stock_ID" , acc.getStock_ID());
+//		orderService.selectOrder(order_list, m);
 		return "back/jsp/2_Order/2_Order" ;
 	}
 	
@@ -68,23 +78,42 @@ public class OrderController {
 		m.addAttribute("emp_ID" , "admin");
 		m.addAttribute("stock_ID" , acc.getStock_ID());
 		orderService.insertOrder(order_list,m);
+		
+		
+		
+		
+		
 		return "back/jsp/2_Order/2_Order" ;
 	}
 
 //使用者新增>
 	@GetMapping("/front/order")
-	public String loadOrder_GET(Account acc,OrderBean order_list,MemberBean mber,Model m) {
-		m.addAttribute("user_ID" , "王曉明");           
-		m.addAttribute("stock_ID" ,"0800-123456-9"); 
-		orderService.selectOrder(order_list, m);
+	public String loadOrder_GET(Account acc,OrderBean order_list,Model m) {
+		if (m.getAttribute("member_info") != null ) {
+			MemberBean mber = (MemberBean) m.getAttribute("member_info");
+			m.addAttribute("user_ID" , mber.getName());           
+			m.addAttribute("stock_ID" , mber.getMember_stock_ID()); 
+			System.out.println("取得的stock:" + mber.getMember_stock_ID());
+			orderService.selectOrder(order_list, m);
+		} else {
+			System.out.println("沒有取得到stock_id");
+			return "redirect:/front/unmember/gologin_1";
+		}
 		return "front/jsp/2_Order/Order" ;
 	}
 	
 	@PostMapping("/front/order")
 	public String loadOrder_POST(Account acc,OrderBean order_list ,Model m) {
-		m.addAttribute("user_ID" , "王曉明");            
-		m.addAttribute("stock_ID" , "0800-123456-9"); 
-		orderService.insertOrder(order_list,m);
+		if (m.getAttribute("member_info") != null ) {
+			MemberBean mber = (MemberBean) m.getAttribute("member_info");
+			m.addAttribute("user_ID" , mber.getName());           
+			m.addAttribute("stock_ID" , mber.getMember_stock_ID()); 
+			System.out.println("取得的stock:" + mber.getMember_stock_ID());
+			orderService.insertOrder(order_list,m);
+		} else {
+			System.out.println("沒有取得到stock_id");
+			return "redirect:/front/unmember/gologin_1";
+		}
 		return "front/jsp/2_Order/Order" ;
 	}
 
@@ -122,7 +151,13 @@ public class OrderController {
 //歷史紀錄iframe
 	@GetMapping("/history/select")
 	public String loadHistoryTable(String stock_ID ,Model m) {
-		orderService.selectorderlog("0800-123456-9", m);
+		if (m.getAttribute("member_info") != null ) {
+			MemberBean mber = (MemberBean) m.getAttribute("member_info");
+			orderService.selectorderlog(mber.getMember_stock_ID(), m);	
+		} else {
+			System.out.println("歷史紀錄iframe>沒有取得到stock_id");
+			return "redirect:/front/unmember/gologin_1";
+		}
 		return "back/jsp/2_Order/History_select" ;
 	}
 	
@@ -136,7 +171,13 @@ public class OrderController {
 //庫存損益ifame
 	@GetMapping("/profit/select")
 	public String loadProfitTable(String stock_ID ,Model m) {
-		orderService.selectprofit("0800-123456-9", m);
+		if (m.getAttribute("member_info") != null ) {
+			MemberBean mber = (MemberBean) m.getAttribute("member_info");
+			orderService.selectprofit(mber.getMember_stock_ID(), m);	
+		} else {
+			System.out.println("庫存損益iframe>沒有取得到stock_id");
+			return "redirect:/front/unmember/gologin_1";
+		}
 		return "back/jsp/2_Order/Profit_select" ;
 	}
 	

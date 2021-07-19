@@ -35,6 +35,9 @@
 	<link href="<c:url value='/front/assets/css/style.css' />" rel="stylesheet">
 </head>
 <body>
+	<!-- ======= A00 Cookie ======= -->
+	<%@include file="/WEB-INF/pages/front/jsp/0_Util/Cookie.jsp" %>
+
 	<!-- ======= A01 Top Bar ======= -->
 	<%@include file="/WEB-INF/pages/front/jsp/0_Util/TopBar.jsp" %>
 
@@ -61,7 +64,65 @@
 		<div class="container">
 
 <!-- 分隔線 -->		
+<!-- DataTable -->  
+     <table id="example" class="display" width="100%">
+     <thead></thead>
+     <tbody></tbody>
+     </table>
+     
+<!-- modal --> 
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div style="text-align:center;" >
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" id="myModalLabel">修改xxx訂單編號:</h4>
+            </div>
+            <div class="modal-body">
+            	<form action="<c:url value = '/order/update'/>" method="Post" id="updateForm">
+          			<div class="mb-3">
+          				<p>	
+          					<label for="" id="show_p" style="font-size:18px;"></label>
+          				</p>
+            			<label for="recipient-name" class="col-form-label">價格：</label>
+            			<input type="text" class="form-control" id="change_price" name="change_price">
+          			</div>
+          			
+          			<div class="mb-3">
+          				<p>	
+          					<label for="" id="show_q" style="font-size:18px;"></label>
+          				</p>
+            			<label for="message-text" class="col-form-label">股數：</label>
+            			<input type="text"   class="form-control" id="change_quant" name="change_quant">
+            			<input type="hidden" class="form-control" id="change_total" name="change_total">
+            			<input type="hidden" class="form-control" id="change_ID"    name="change_ID" >
+         			</div>
+         			 
+         			<div class="modal-footer">
+                		<button type="button" class="btn btn-primary" onclick="update_ok()" id="check_ok">確認修改</button>
+                		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                		
+            		</div>
+         			  
+       			</form>
+            
+            </div>
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>    
+
+        
+<!-- 傳送要修改訂單編號 -->
+    <form action="<c:url value = '/order/delete'/>" method="POST" id ="passForm">
+			<input  name="delorder_ID" id="delorder_ID" type="hidden">
+    </form>
+    
+<!-- 訂單資料送去JS -->
+<script type="text/javascript"> 
+    var order_lists = ${order_lists}  ; 
+</script>
 
 			
 <!-- 分隔線 -->		
