@@ -86,6 +86,8 @@ public class MemberBean {
 	
 	private String mimeType;
 	
+	private String pictureFile_name;
+
 
 	private String member_stock_ID; 
 	private String member_quote;  
