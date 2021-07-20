@@ -178,7 +178,7 @@
 
 										
 
-										subscribableUrl();
+// 										subscribableUrl();
 
 										console.log($('#sorting').addClass('sorting_desc').attr('aria-label', '開始日: activate to sort column ascending').attr('aria-sort', 'descending'))
 									}
@@ -196,7 +196,13 @@
 										segment += "<td class='idX'>" + bean.stockCode + "</td>"
 										segment += "<td>" + bean.stockName + "</td>"
 										segment += "<td>" + bean.marketType + "</td>"
-										segment += "<td class='subscribeStatus'>" + bean.subscribeStatus + "</td>"
+										
+										if(bean.subscribeStatus == '可申購'){
+											segment += "<td class='subscribeStatus'>" + `<a href="<c:url value="/front/userView"/>">可申購</a>` + "</td>"
+										}else{
+											segment += "<td class='subscribeStatus'>" + bean.subscribeStatus + "</td>"
+										}
+										
 										segment += "<td>" + bean.subscribePrice + "</td>"
 										segment += "<td>" + numberWithCommas(bean.quantity) + "</td>"
 										segment += "<td>" + bean.startDate + "</td>"
