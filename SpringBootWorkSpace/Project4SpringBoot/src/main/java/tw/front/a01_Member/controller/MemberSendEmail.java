@@ -43,7 +43,7 @@ public class MemberSendEmail {
 		if (email_send != null && url_unique != null) {
 			System.out.println(email_send);
 			System.out.println(url_unique);
-			String url_final = "http://localhost:8099/project4/email_request/double_qualification_received?member=" + url_unique;
+			String url_final = "http://localhost:8080/project4/email_request/double_qualification_received?member=" + url_unique;
 //			sender.setHost("joycepan0513@gmail.com");
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper;
@@ -93,7 +93,7 @@ public class MemberSendEmail {
 			String check_email_result = adminservice.check_email_to_resetPassword(email);
 			if (!check_email_result.equals("None")){
 				
-				String url_final = "http://localhost:8099/project4/front/unmember/gologin_1";
+				String url_final = "http://localhost:8080/project4/front/unmember/gologin_1";
 //				sender.setHost("joycepan0513@gmail.com");
 				MimeMessage message = javaMailSender.createMimeMessage();
 				MimeMessageHelper helper;
