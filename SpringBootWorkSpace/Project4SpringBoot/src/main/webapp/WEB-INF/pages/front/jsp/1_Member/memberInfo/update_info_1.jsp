@@ -99,7 +99,7 @@
                       };
                       
                       let account = document.getElementById("account_check").value;
-                      xhttp.open("GET", "<c:url value='/front/unmember/gocheck_account?account=' />" + account, true);
+                      xhttp.open("GET", "<c:url value='/front/member_up/gocheck_account?account=' />" + account, true);
                       xhttp.send();
                       }
                </script>
@@ -107,14 +107,14 @@
                
                <div class="col-4 md-2">
                  <label for="" class="form-label">輸入名字</label>
-                 <form:input class="form-control" type="text" path="name" onchange="valid_after_onchange(this)" required="required" value="${memberinfo.getName()}"/>
+                 <form:input class="form-control" id="name_input" type="text" path="name" onchange="valid_after_onchange(this)" required="required" value="${memberinfo.getName()}"/>
                  <form:errors path='name' cssClass="error"/>
                </div>
                
                
                <div class="col-2 md-2">
                  <label for="" class="form-label">輸入別稱</label>
-                 <form:input class="form-control" type="text" path="nickname" onchange="valid_after_onchange(this)" value="${memberinfo.getNickname()}"/>
+                 <form:input class="form-control" id="nickname_input" type="text" path="nickname" onchange="valid_after_onchange(this)" value="${memberinfo.getNickname()}"/>
                  <form:errors path='nickname' cssClass="error"/>
                </div>
                
@@ -122,14 +122,14 @@
                
                <div class="col-3 md-2">
                  <label for="" class="form-label">出生日期</label>
-                 <form:input class="form-control" type="date" path="birthday" onchange="valid_after_onchange(this)" required="required" value="${memberinfo.getBirthday()}"/>
+                 <form:input class="form-control" id="birth_input" type="date" path="birthday" onchange="valid_after_onchange(this)" required="required" value="${memberinfo.getBirthday()}"/>
                  <form:errors path='birthday' cssClass="error"/>
                </div>
                
                
                <div class="col-3 md-2">
                  <label for="" class="form-label">選擇性別</label>
-                 <form:select class="form-select" path="gender" required="required" onchange="valid_after_onchange(this)">
+                 <form:select class="form-select" id="gender_select_input" path="gender" required="required" onchange="valid_after_onchange(this)">
                    <form:options items="${gender_map}"/>
                  </form:select>
                  <form:errors path='gender' cssClass="error"/>
@@ -178,7 +178,7 @@
                       };
                       
                       let account = document.getElementById("phone_check").value;
-                      xhttp.open("GET", "<c:url value='/front/unmember/gocheck_account?account=' />" + cellphone, true);
+                      xhttp.open("GET", "<c:url value='/front/member_up/gocheck_account?account=' />" + cellphone, true);
                       xhttp.send();
                       }
                </script>
@@ -222,7 +222,7 @@
                       };
                       
                       let email = document.getElementById("email_check").value;
-                      xhttp.open("GET", "<c:url value='/front/unmember/gocheck_email?email=' />"
+                      xhttp.open("GET", "<c:url value='/front/member_up/gocheck_email?email=' />"
                                  + email, true);
                       xhttp.send();
                    }
@@ -231,7 +231,7 @@
                
                <div class="col-6 mb-2">
                  <label for="" class="form-label">輸入地址</label>
-                 <form:input id="" class="form-control" type="text" path="address" onchange="valid_after_onchange(this)" value="${memberinfo.getAddress()}"/>
+                 <form:input id="address_input" class="form-control" type="text" path="address" onchange="valid_after_onchange(this)" value="${memberinfo.getAddress()}"/>
                  <form:errors path='address' cssClass="error"/>
                </div>
 
@@ -239,12 +239,12 @@
 
                <div class="col-3 md-2">
                  <label for="" class="form-label">手機載具</label>
-                 <form:input id="" class="form-control" type="text" path="carrier" onchange="valid_after_onchange(this)" value="${memberinfo.getCarrier()}"/>
+                 <form:input id="carrier_input" class="form-control" type="text" path="carrier" onchange="valid_after_onchange(this)" value="${memberinfo.getCarrier()}"/>
                  <form:errors path='carrier' cssClass="error"/>
                </div>
                
                
-               <div class="col-3 md-2">
+               <div class="col-9 md-2">
                  <label for="" class="form-label">上傳頭貼</label>
                  <form:input id="" class="form-control" type="file" path="memberImage" onchange="valid_after_onchange(this)"/>
                  <form:errors path='memberImage' cssClass="error"/>
@@ -252,11 +252,69 @@
 
 
                
-               <div class="col-12">
+               <div class="col-2 md-2">
                    <label for="" class="form-label"></label>
                    <form:button style="width: 200px" class="btn btn-primary" id="commitAndsned" value="send">更新資料</form:button>
                </div>
                
+               
+               <div class="col-2 md-2">
+                   <label for="" class="form-label"></label>
+                   <button style="width: 200px" class="btn btn-outline-danger" type='button' onclick="input_update()">一鍵更新</button>
+               </div>
+               <script type="text/javascript">
+                    function input_update() {
+                     let acc = document.getElementById("account_check");
+                     let name = document.getElementById("name_input");
+                     let nickname = document.getElementById("nickname_input");
+                     let birth = document.getElementById("birth_input");
+                     let gender = document.getElementById("gender_select_input");
+                     let job = document.getElementById("job");
+                     let phone = document.getElementById("phone_check");
+                     let email = document.getElementById("email_check");
+                     let address = document.getElementById("address_input");
+                     let carrier = document.getElementById("carrier_input");
+
+                     acc.value = "johnnypan";
+                     name.value = "潘啟勛";
+                     nickname.value = "Johnny"
+                     birth.value = "1996-05-13";
+                     /* 不確定如何取select中的值 */
+                     gender.value = "女性";
+                     /* 先不處理 */
+                     job.value = "";
+                     phone.value = "0912345678";
+                     email.value = "joycepan0513333333@hotmail.com";
+                     address.value = "新北市............";
+                     carrier.value = "/FASDF-R";
+                     }
+               </script>
+               
+               
+               <div class="col-2 md-2">
+                   <label for="" class="form-label"></label>
+                   <button style="width: 200px" class="btn btn-outline-danger" type='button' onclick="input_update_wrongAcc()">更新重複帳號</button>
+               </div>
+               <script type="text/javascript">
+                    function input_update_wrongAcc() {
+                     let acc = document.getElementById("account_check");
+
+                     acc.value = "joycepan";
+                     }
+               </script>
+               
+               
+               <div class="col-2 md-2">
+                   <label for="" class="form-label"></label>
+                   <button style="width: 200px" class="btn btn-outline-danger" type='button' onclick="input_update_wrongEmail()">更新重複Email</button>
+               </div>
+               <script type="text/javascript">
+                    function input_update_wrongEmail() {
+                     let email = document.getElementById("email_check");
+
+                     email.value = "joycepan0513@yahoo.com.tw";
+                     }
+               </script>
            </form:form>
 
 

@@ -107,14 +107,14 @@
                
                <div class="col-4 md-2">
                  <label for="" class="form-label">輸入名字</label>
-                 <form:input class="form-control" type="text" path="name" required="required" onchange="valid_after_onchange(this)"/>
+                 <form:input id="name_input" class="form-control" type="text" path="name" required="required" onchange="valid_after_onchange(this)"/>
                  <form:errors path='name' cssClass="error" />
                </div>
                
                
                <div class="col-2 md-2">
                  <label for="" class="form-label">選擇性別</label>
-                 <form:select id="" class="form-select" path="gender" required="required" onchange="valid_after_onchange(this)">
+                 <form:select id="gender_select_input" class="form-select" path="gender" required="required" onchange="valid_after_onchange(this)">
                    <option value="男性" selected>男性</option>
                    <option value=女性>女性</option>
                    <option value="其他">其他</option>
@@ -134,7 +134,7 @@
                
                <div class="col-6 md-2">
                  <label for="" class="form-label">密碼確認</label>
-                 <input class="form-control" type="password" id="pass2" name="password_2">
+                 <input class="form-control" type="password" id="pass2" name="password_2" required="required">
                  <div class="valid-feedback">
                      Looks good!
                  </div>
@@ -189,7 +189,7 @@
                    }
                </script>
                    
-               <div class="col-12">
+               <div class="col-2">
                    <form:button style="width: 150px" class="btn btn-primary" id="commitAndsned" value="Send" onclick="onetime()">註冊</form:button>
                </div>
                
@@ -205,8 +205,51 @@
                    }
                </script>
                
+               <span class="col-2">
+                   <button style="width: 150px" class="btn btn-outline-danger" type='button' onclick="input_resgister()">一鍵註冊</button>
+               </span>
+               <script type="text/javascript">
+                    function input_resgister() {
+                     let acc = document.getElementById("account_check");
+                     let name = document.getElementById("name_input");
+                     let gender = document.getElementById("gender_select_input");
+                     let pass1 = document.getElementById("pass1");
+                     let pass2 = document.getElementById("pass2");
+                     let email = document.getElementById("email_check");
+                     acc.value = "johnnypan";
+                     name.value = "潘啟勛";
+                     /* 不確定如何取select中的值 */
+                     gender.value = "男性";
+                     pass1.value = "johnnypan";
+                     pass2.value = "johnnypan";
+                     email.value = "joycepan0513@hotmail.com";
+                     }
+               </script>
+               
+
            </form:form>
 
+
+<!--            <span class="col-2">
+               <button style="width: 150px" type='button' class="btn btn-outline-danger" onclick="input_resgister()">一鍵輸入</button>
+           </span>
+           <script type="text/javascript">
+               function input_resgister() {
+                let acc = document.getElementById("account_check");
+                let name = document.getElementById("name_input");
+                let gender = document.getElementById("gender_select_input");
+                let pass1 = document.getElementById("pass1");
+                let pass2 = document.getElementById("pass2");
+                let email = document.getElementById("email_check");
+                acc.value = "johnnypan";
+                name.value = "潘啟勛";
+                /* 不確定如何取select中的值 */
+                   gender.value = "";
+                pass1.value = "johnnypan";
+                pass2.value = "johnnypan";
+                email.value = "joycepan0513@hotmail.com";
+           }
+           </script> -->
 
 
         </div>

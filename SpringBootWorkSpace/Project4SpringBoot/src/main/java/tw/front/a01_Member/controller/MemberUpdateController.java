@@ -85,6 +85,7 @@ public class MemberUpdateController {
 	public @ResponseBody String processAjaxCheckAccount(@RequestParam("account") String account, Model m) {
 		MemberBean session_member = (MemberBean) m.getAttribute("member_info");
 		String origin_value = session_member.getAccount();
+		System.out.println("origin_value" + origin_value);
 		String Result = memberservice.check_unique("account", account, origin_value);
 		System.out.println(Result);
 		return Result;
@@ -95,6 +96,7 @@ public class MemberUpdateController {
 	public @ResponseBody String processAjaxCheckEmail(@RequestParam("email") String email,  Model m) {
 		MemberBean session_member = (MemberBean) m.getAttribute("member_info");
 		String origin_value = session_member.getE_mail();
+		System.out.println("origin_value" + origin_value);
 		String Result = memberservice.check_unique("e_mail", email, origin_value);
 		System.out.println(Result);
 		return Result;
@@ -105,6 +107,7 @@ public class MemberUpdateController {
 	public @ResponseBody String processAjaxCheckPhone(@RequestParam("cellphone") String phone, Model m) {
 		MemberBean session_member = (MemberBean) m.getAttribute("member_info");
 		String origin_value = session_member.getCellphone();
+		System.out.println("origin_value" + origin_value);
 		String Result = memberservice.check_unique("cellphone", phone, origin_value);
 		System.out.println(Result);
 		return Result;
@@ -174,10 +177,7 @@ public class MemberUpdateController {
 		}
 		
 		String birthday = memberbean.getBirthday();
-
 		System.out.println("birthday:   " + birthday);
-
-  
 		String phone = memberbean.getCellphone();
 //		因為數據庫出生日期類行為date, 
 //		所以如果前端不選擇任何值會認定為是空字串 數據庫會報錯 因此改設為null來表示

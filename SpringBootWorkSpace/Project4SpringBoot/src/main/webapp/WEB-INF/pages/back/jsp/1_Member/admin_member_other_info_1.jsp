@@ -49,7 +49,7 @@
                 <!-- Begin Page Content -->
                 
                 <div id="member_id_passing" style="display:none;">${id}</div>
-
+                <br><br><br>
                 <form>
                     <div class="row justify-content-md-center">
                       <div class="form-group col-md-4">
@@ -168,8 +168,8 @@
                     document.getElementById("member_nickname_json").value = dataArea.nickname;
                     document.getElementById("member_cellphone_json").value = dataArea.cellphone;
                     document.getElementById("member_address_json").value = dataArea.address;
-                    document.getElementById("member_job_json").value = dataArea.jobType_id.job;
-                    document.getElementById("member_carrier_json").value = dataArea.carrier;
+/*                     document.getElementById("member_job_json").value = dataArea.jobType_id.job;
+ */                    document.getElementById("member_carrier_json").value = dataArea.carrier;
                     
 
 
