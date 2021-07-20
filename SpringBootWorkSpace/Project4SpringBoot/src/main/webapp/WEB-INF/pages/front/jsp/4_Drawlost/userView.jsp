@@ -313,7 +313,7 @@
 
 											$('#dataTable').dataTable({ "aaSorting": [[6, "desc"]] });
 
-											subscribableUrl();
+											//subscribableUrl();
 										}
 									}
 
@@ -331,7 +331,14 @@
 											segment += "<td class='idX'>" + bean.stockCode + "</td>"
 											segment += "<td id='subscriptionStockCode'>" + bean.stockName + "</td>"
 											segment += "<td>" + bean.marketType + "</td>"
-											segment += "<td class='subscribeStatus'>" + bean.subscribeStatus + "</td>"
+											
+											if(bean.remarks == '申購失敗'){
+												segment += "<td class='subscribeStatus'>" + `<center><input name type="button" class="btn btn-danger" value="申購失敗" data-toggle="modal" data-target="#myModal" onClick="buttionStateChange(this)" ></center>` + "</td>"
+											}else if(bean.subscribeStatus == '可申購'){
+												segment += "<td class='subscribeStatus'>" + `<center><input name type="button" class="btn btn-primary" value="申購" onClick="buttionStateChange(this)" ></center>` + "</td>"
+											}else{
+												segment += "<td class='subscribeStatus'>" + bean.subscribeStatus + "</td>"
+											}
 											segment += "<td>" + bean.subscribePrice + "</td>"
 											segment += "<td>" + numberWithCommas(bean.quantity) + "</td>"
 											segment += "<td>" + bean.startDate + "</td>"
@@ -359,9 +366,9 @@
 												document.getElementsByClassName('subscribeStatus')[i].innerHTML = '<center><input name type="button" class="btn btn-danger" value="申購失敗" data-toggle="modal" data-target="#myModal" onClick="buttionStateChange(this)" ></center>';
 											}
 
-											if (document.getElementsByClassName('subscribeStatus')[i].innerHTML == '可申購') {
-												document.getElementsByClassName('subscribeStatus')[i].innerHTML = '<center><input name type="button" class="btn btn-primary" value="申購" onClick="buttionStateChange(this)" ></center>';
-											}
+// 											if (document.getElementsByClassName('subscribeStatus')[i].innerHTML == '可申購') {
+// 												document.getElementsByClassName('subscribeStatus')[i].innerHTML = '<center><input name type="button" class="btn btn-primary" value="申購" onClick="buttionStateChange(this)" ></center>';
+// 											}
 										}
 									}
 								});
