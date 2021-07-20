@@ -171,36 +171,36 @@
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h4 class="modal-title" style="left: 15px;">申購失敗原因</h4>
-										<button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+										<h4 class="modal-title" style="position: relative;left: 5px;">申購失敗原因</h4>
+										<!-- <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button> -->
 									</div>
 									<div class="modal-body">
 										<div class="bootbox-body">
-											<table style="border-style: dotted;border-color: coral;border: 3px;">
-												<tbody>
-													<tr>
-														<th colspan="2" style="text-align:center;">證券戶號:</th>
-														<td>${userStockID}</td>
+											<table style="border: 1px solid #333;margin: auto auto;">
+												<tbody >
+													<tr style="border: 1px solid #333;">
+														<th  style="text-align:center;">證券戶號</th>
+														<td style="border: 1px solid #333;text-align:center;">${userStockID}</td>
 													</tr>
-													<tr>
-														<th colspan="2" style="text-align:center;">股票代碼/名稱</th>
-														<td id="a"></td>
+													<tr style="border: 1px solid #333;">
+														<th  style="text-align:center;">股票代碼/名稱</th>
+														<td style="border: 1px solid #333;text-align:center;" id="a"></td>
 													</tr>
-													<tr>
-														<th colspan="2" style="text-align:center;">承銷價格</th>
-														<td id="b"></td>
+													<tr style="border: 1px solid #333;">
+														<th  style="text-align:center;">承銷價格</th>
+														<td style="border: 1px solid #333;text-align:center;" id="b"></td>
 													</tr>
-													<tr>
-														<th colspan="2" style="text-align:center;">申購股數</th>
-														<td id="c"></td>
+													<tr style="border: 1px solid #333;">
+														<th  style="text-align:center;">申購股數</th>
+														<td style="border: 1px solid #333;text-align:center;" id="c"></td>
 													</tr>
-													<tr>
-														<th colspan="2" style="text-align:center;">申購狀態</th>
-														<td>申購失敗</td>
+													<tr style="border: 1px solid #333;">
+														<th  style="text-align:center;">申購狀態</th>
+														<td style="border: 1px solid #333;text-align:center;">申購失敗</td>
 													</tr>
-													<tr>
-														<th colspan="2" style="text-align:center;">錯誤訊息說明</th>
-														<td>申購資料有問題，請洽所屬營業員</td>
+													<tr style="border: 1px solid #333;">
+														<th style="text-align:center;">錯誤訊息說明</th>
+														<td style="border: 1px solid #333;text-align:center;">申購資料有問題，請洽所屬營業員</td>
 													</tr>
 												</tbody>
 											</table>
@@ -208,7 +208,6 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-success" data-dismiss="modal">確定</button>
-										<!-- <button data-bb-handler="success" type="button" class="btn btn-success">確定</button> -->
 									</div>
 								</div><!-- /.modal-content -->
 							</div><!-- /.modal -->
@@ -314,22 +313,7 @@
 
 											$('#dataTable').dataTable({ "aaSorting": [[6, "desc"]] });
 
-											// var scriptsToLoad = [
-											// 	"<c:url value='/back/vendor/datatables/jquery.dataTables.min.js' />",
-											// 	"<c:url value='/back/vendor/datatables/dataTables.bootstrap4.min.js' />",
-											// 	"<c:url value='/back/js/demo/datatables-demo.js' />"
-											// ];
-
-											// scriptsToLoad.forEach(function (src) {
-											// 	var script = document.createElement('script');
-											// 	script.src = src;
-											// 	script.async = false;
-											// 	document.body.appendChild(script);
-											// });
-
 											subscribableUrl();
-
-
 										}
 									}
 
@@ -357,7 +341,7 @@
 											segment += "<td>" + bean.refundDate + "</td>"
 											segment += "<td>" + bean.grantSecuritiesDate + "</td>"
 											segment += "<td>" + numberWithCommas(bean.totalQuantity) + "</td>"
-											segment += "<td>" + bean.remarks + "</td>"
+											segment += "<td class='remarks'>" + bean.remarks + "</td>"
 											segment += "</tr>"
 										}
 										return segment;
@@ -371,6 +355,10 @@
 										let subscribeStatusTagCount = document.getElementsByClassName('subscribeStatus').length;
 
 										for (let i = 0; i < subscribeStatusTagCount; i++) {
+											if(document.getElementsByClassName('remarks')[i].innerHTML == '申購失敗'){
+												document.getElementsByClassName('subscribeStatus')[i].innerHTML = '<center><input name type="button" class="btn btn-danger" value="申購失敗" data-toggle="modal" data-target="#myModal" onClick="buttionStateChange(this)" ></center>';
+											}
+
 											if (document.getElementsByClassName('subscribeStatus')[i].innerHTML == '可申購') {
 												document.getElementsByClassName('subscribeStatus')[i].innerHTML = '<center><input name type="button" class="btn btn-primary" value="申購" onClick="buttionStateChange(this)" ></center>';
 											}
@@ -382,6 +370,7 @@
 
 									var row = $("table#dataTable tr").index($(rowPosition).closest("tr"));
 									var subscriptionStockCode = $("table#dataTable").find("tr").eq(row).find("td").eq(0).text();
+									var stockName = $("table#dataTable").find("tr").eq(row).find("td").eq(1).text();
 									var stockPrice = $("table#dataTable").find("tr").eq(row).find("td").eq(4).text();
 									var stockQuantity = $("table#dataTable").find("tr").eq(row).find("td").eq(5).text();
 									var userStockID = $("#userStockID").val();
@@ -389,7 +378,12 @@
 									var remarks = $("table#dataTable").find("tr").eq(row).find("td").eq(13).text();
 									var subscriptionStatus = $("table#dataTable").find("tr").eq(row).find("td").eq(3);
 
-									//alert(userStockID);
+									if(remarks == '申購失敗'){
+										$('#a').text(subscriptionStockCode+"/"+stockName);
+										$('#b').text(stockPrice);
+										$('#c').text(stockQuantity);
+									}
+					
 
 									if ($(rowPosition).hasClass('btn-primary')) {
 										$(rowPosition).removeClass('btn-primary');
@@ -531,33 +525,6 @@
 									$('#c').val(stockQuantity);
 
 								}
-
-								// function ShowOrderFailDetail() {
-
-								// 	var htmlOrderFailDesc =
-								// 		"<table class='tbl_order_fail_detail'>" +
-								// 		"<tr><th colspan='2' style='text-align:center;'>帳號:"  + "-"  + "</th></tr>" +
-								// 		"<tr><th>股票代碼/名稱</th><td>"  + "<br>" + "</td></tr>" +
-								// 		"<tr><th>承銷價格</th><td>" + "</td></tr>" +
-								// 		"<tr><th>申購股數</th><td>"  + "</td></tr>" +
-								// 		"<tr><th>申購狀態</th><td>" +  "</td></tr>" +
-								// 		"<tr><th>錯誤訊息說明</th><td>" +  "</td></tr>" +
-								// 		"</table>";
-
-								// 	bootbox.dialog({
-								// 		title: "申購失敗原因",
-								// 		message: htmlOrderFailDesc,
-								// 		buttons: {
-								// 			success: {
-								// 				label: "確定",
-								// 				className: "btn-success",
-								// 				callback: function () {
-								// 					return;
-								// 				}
-								// 			}
-								// 		}
-								// 	});
-								// }
 							</script>
 		</body>
 
