@@ -49,7 +49,7 @@
           		%>
           		<!-- Begin Page Content -->
                 <div class="container-fluid">
-      <h2 id="test">Hi,${emp_ID},歡迎使用後台系統!</h2>
+      <h2 id="test">Hi,admin,歡迎使用後台系統!</h2>
       
       <form action="<c:url value = '/admin/order'/>" method="Get">
              <div>

@@ -58,7 +58,13 @@
 						<div class="icon-box">
 						<i class="bi bi-bar-chart"></i>
 						<h3><a href="">股票交易</a></h3>
-						<p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+						<p>
+						1.提供行情報價、K線、五檔圖表、下單<br>
+						2.查詢委託單狀態，進行刪單及改單<br>
+						3.查詢所有委託單歷史交易資訊<br>
+						4.查詢交易總成本、損益、投資報酬率
+						5.管理者:針對使用者CRUD，當沖功能開通。<br>
+						</p>
 						</div>
 					</div>
 					<div class="col-lg-3 mt-4 mt-lg-0">

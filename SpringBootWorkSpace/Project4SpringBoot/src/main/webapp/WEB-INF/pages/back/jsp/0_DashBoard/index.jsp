@@ -77,11 +77,11 @@
                                 <i class="bi bi-person-circle"></i>
                                 <h3><a href="">會員資料</a></h3>
                                 <p>
-                                1. 使用者 - 可以查閱資料 <br>
-                                2. 管理者 - 可以對資料CRUD <br>
-                                3. 管理者 - 可以上傳資料進行更新  <br>
-                                4. 管理者 - 可以利用API 自動更新資料<br>
-                                5. 管理者 - 可以下載資料<br>
+                                1. 使用者 - 登入帳號 <br>
+                                2. 使用者 - 註冊帳號 <br>
+                                3. 使用者 - 更新帳號 <br>
+                                4. 使用者 - 刪除帳號 <br>
+                                5. 管理者 - 修改帳號<br>
                                 </p>
                                 </div>
                             </div>
@@ -102,7 +102,13 @@
                                 <div class="icon-box">
                                 <i class="bi bi-bar-chart"></i>
                                 <h3><a href="">股票交易</a></h3>
-                                <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                                <p>						
+                                1.提供行情報價,K線,五檔圖表,下單<br>
+                                2.查詢委託單狀態，進行刪單及改單<br>
+                                3.查詢所有委託單歷史交易資訊<br>
+                                4.查詢交易總成本、損益、投資報酬率
+                                5.管理者:針對使用者CRUD，當沖功能開通。<br>
+                                </p>
                                 </div>
                             </div>
                             <div class="col-lg-2 mt-4 mt-lg-0">
