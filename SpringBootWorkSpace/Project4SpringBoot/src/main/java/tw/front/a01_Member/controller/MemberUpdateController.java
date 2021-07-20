@@ -28,8 +28,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import tw.back.a01_Member.dao.IAdminMemberDao;
-import tw.back.a01_Member.model.MemberJobs;
 import tw.front.a01_Member.model.MemberBean;
 import tw.front.a01_Member.service.IMemberService;
 import tw.front.a01_Member.utils.SystemUtils;
@@ -43,8 +41,8 @@ public class MemberUpdateController {
 	@Autowired
 	private IMemberService memberservice;
 	
-	@Autowired
-	private IAdminMemberDao adminmemberservice;
+//	@Autowired
+//	private IAdminMemberDao adminmemberservice;
 	
 	@Autowired
 	ServletContext context;
@@ -127,11 +125,37 @@ public class MemberUpdateController {
 		return null;
 	}
 	
-	@ModelAttribute("job_list")
-	public List<MemberJobs> getMemberJob_BerforEveryMethod(Model m) {
+//	@ModelAttribute("job_list")
+//	public List<MemberJobs> getMemberJob_BerforEveryMethod()
+	@ModelAttribute("job_map")
+	public Map<String, String> getMemberJob_BerforEveryMethod() {
 		System.out.println("job_list : ModelAttribute auto execute before every method");
-		List<MemberJobs> list = adminmemberservice.admin_selectAll_jobs();		
-		return list;	
+//		List<MemberJobs> list = adminmemberservice.admin_selectAll_jobs();
+		Map<String, String> map = new HashMap<>();
+		map.put("農牧業", "農牧業");
+		map.put("漁業", "漁業");
+		map.put("木材森林業", "木材森林業");
+		map.put("礦業採石業", "礦業採石業");
+		map.put("交通運輸業", "交通運輸業");
+		map.put("餐旅業", "餐旅業");
+		map.put("建築工程業", "建築工程業");
+		map.put("製造業", "製造業");
+		map.put("衛生保健", "衛生保健");
+		map.put("娛樂業", "娛樂業");
+		map.put("文教機關", "文教機關");
+		map.put("宗教團體", "宗教團體");
+		map.put("公共事業", "公共事業");
+		map.put("宗教團體", "宗教團體");
+		map.put("一般商業", "一般商業");
+		map.put("服務業", "服務業");
+		map.put("家庭管理", "家庭管理");
+		map.put("資訊業", "資訊業");
+		map.put("治安人員", "治安人員");
+		map.put("軍人", "軍人");
+		map.put("運動人員", "運動人員");
+		map.put("學生", "學生");
+		map.put("其他", "其他");
+		return map;	
 	}
 	
 	@ModelAttribute("gender_map")

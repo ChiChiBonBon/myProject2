@@ -293,13 +293,15 @@ public class MemberOtherInfoController {
         Long datetime = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(datetime);
         
-		memberservice.member_updateTime(member.getId(), timestamp);
-		
-		System.out.println("Not logout yet:" + member);
-		
-		session.removeAttribute("member_info");
-		System.out.println("logout:" + session.getAttribute("member_info"));
-		se_status.setComplete();
+        if (member.getId() != null) {
+    		memberservice.member_updateTime(member.getId(), timestamp);
+    		
+    		System.out.println("Not logout yet:" + member);
+    		
+    		session.removeAttribute("member_info");
+    		System.out.println("logout:" + session.getAttribute("member_info"));
+    		se_status.setComplete();
+		}
 		return "redirect:/front/unmember/gologin_1";
 	}
 }

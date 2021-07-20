@@ -65,15 +65,15 @@
             </div>
 
             <div class="mb-3">
-<%--              <a class="large" href="<c:url value='/front/email_request/forget_password'/>">忘記密碼？</a> --%>
-              <p onclick='for_pass()' id="backToLogin" style="color: #fd7e14" class="large">忘記密碼？</p>
-             
+                <a class="large" href="<c:url value='/email_request/go_send_resetEmail'/>">忘記密碼？</a>
+<!--               <p onclick='for_pass()' id="backToLogin" style="color: #fd7e14" class="large">忘記密碼？</p>
+ -->             
             </div>
             
                     <!-- SweetAlert2 -->
             <script src="<c:url value='/back/js/sweetalert2@11.js' />"></script>
             
-            <script type="text/javascript">
+<!--             <script type="text/javascript">
             
                 function for_pass() {
                 	const { value: email } = await Swal.fire({
@@ -85,7 +85,7 @@
                 		if (email) {
                 		  Swal.fire(`傳送新密碼到此信箱: ${email}`)
                 		  
-/*                           $.ajax({
+                           $.ajax({
                               type: 'POST',
                               url: "<c:url value='/email_request/forget_password' />" + id,
                               data: {"email": ${email}},
@@ -104,10 +104,10 @@
                                             text: '請輸入已註冊密碼',
                                         })
                                   }
-                              }); */
+                              }); 
                               }
                 	}
-            </script>
+            </script> -->
 
             <span>
              <button style="width: 200px" class="btn btn-primary" type="submit">登入</button>
