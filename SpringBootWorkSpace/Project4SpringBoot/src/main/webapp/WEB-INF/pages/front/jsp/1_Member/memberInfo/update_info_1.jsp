@@ -285,14 +285,14 @@
                      /* 先不處理 */
                      job.value = "";
                      phone.value = "0912345678";
-                     email.value = "joycepan0513333333@hotmail.com";
+                     email.value = "joycepan0513@hotmail.com";
                      address.value = "新北市............";
                      carrier.value = "/FASDF-R";
                      }
                </script>
                
                
-               <div class="col-2 md-2">
+<!--                <div class="col-2 md-2">
                    <label for="" class="form-label"></label>
                    <button style="width: 200px" class="btn btn-outline-danger" type='button' onclick="input_update_wrongAcc()">更新重複帳號</button>
                </div>
@@ -315,7 +315,7 @@
 
                      email.value = "joycepan0513@yahoo.com.tw";
                      }
-               </script>
+               </script> -->
            </form:form>
 
 
