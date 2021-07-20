@@ -164,7 +164,7 @@
                                 <div class="col-6 form-group row">
                                     <label class="col-sm-2 col-form-label text-primary">備註</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="範例: 申購資料有問題，請洽所屬營業員" id="remarks" value="${bean.remarks}">
+                                        <input type="text" class="form-control" placeholder="範例: 資料有問題申購失敗，請洽所屬營業員" id="remarks" value="${bean.remarks}">
                                         <div id="" class="invalid-feedback">請輸入文字</div>
                                     </div>
                                 </div>
