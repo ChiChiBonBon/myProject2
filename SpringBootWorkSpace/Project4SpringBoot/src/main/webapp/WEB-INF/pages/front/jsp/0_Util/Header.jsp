@@ -30,10 +30,11 @@
       </nav><!-- .navbar -->
 	
     </div>
+    
     <span>
     	<div class=""> 
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small ">Douglas McGee</span> 
+<!--         <span class="mr-2 d-none d-lg-inline text-gray-600 small ">JonyPan</span>  -->
         <img class="rounded-circle me-4" src="<c:url value='/front/assets/img/person/aaa.jpg' />" height="50 ">
-		  </div> <!-- Dropdown - User Information -->	
+		 </div> <!-- Dropdown - User Information -->	
     </span>
   </header><!-- End Header -->
