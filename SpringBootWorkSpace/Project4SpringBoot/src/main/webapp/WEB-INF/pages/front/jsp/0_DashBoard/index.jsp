@@ -41,25 +41,51 @@
 		<section id="featured" class="featured">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-3">
 						<div class="icon-box">
 						<i class="bi bi-card-checklist"></i>
-						<h3><a href="">Lorem Ipsum</a></h3>
-						<p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+						<h3><a href="">股票選擇器</a></h3>
+						<p>
+						1. 使用者 - 可以查閱資料 <br>
+						2. 管理者 - 可以對資料CRUD <br>
+						3. 管理者 - 可以上傳資料進行更新  <br>
+						4. 管理者 - 可以利用API 自動更新資料<br>
+						5. 管理者 - 可以下載資料<br>
+						</p>
 						</div>
 					</div>
-					<div class="col-lg-4 mt-4 mt-lg-0">
+					<div class="col-lg-3 mt-4 mt-lg-0">
 						<div class="icon-box">
 						<i class="bi bi-bar-chart"></i>
-						<h3><a href="">Dolor Sitema</a></h3>
+						<h3><a href="">股票交易</a></h3>
 						<p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
 						</div>
 					</div>
-					<div class="col-lg-4 mt-4 mt-lg-0">
+					<div class="col-lg-3 mt-4 mt-lg-0">
 						<div class="icon-box">
-						<i class="bi bi-binoculars"></i>
-						<h3><a href="">Sed ut perspiciatis</a></h3>
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+						<i class="bi bi-archive"></i>
+						<h3><a href="">申購與抽籤</a></h3>
+						<p>
+						1.後台發佈抽籤資料 <br>
+						2.前台載入抽籤資訊  <br>
+						3.前台發出、取消申購請求  <br>
+						4.後台收到、被取消申購請求 <br>
+						5.管理員人工審核交割戶存款  <br>
+						6.前台申購狀態成功與否  <br>
+						</p>
+						</div>
+					</div>
+					<div class="col-lg-3 mt-4 mt-lg-0">
+						<div class="icon-box">
+						<i class="bi bi-chat-dots"></i>
+						<h3><a href="">股市討論區</a></h3>
+						<p>
+						1.前台使用者針對個人文章 留言CRUD <br>
+						2.後台管理者全部文章CRUD <br>
+						3.後台管理者全部留言RD <br>
+						4.前後台圖片上傳處理 <br>
+						5.前台分類查詢 <br>
+						</p>
 						</div>
 					</div>
 				</div>
@@ -71,7 +97,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
-						<img src="front/assets/img/about.jpg" class="img-fluid" alt="">
+						<img src="front/assets/img/person/all-7.jpeg" class="img-fluid" alt="">
 					</div>
 					<div class="col-lg-6 pt-4 pt-lg-0 content">
 						<h3>Stock Overflow</h3>
@@ -102,7 +128,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
 						<div class="icon-box">
-						<img src="front/assets/img/person/peko.png" class="img-thumbnail w-25" alt="...">
+						<img src="front/assets/img/person/jonny-1.png" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">潘啟勛 (組長)</a></h4>
 						<p>會員功能:1.註冊會員 2.修改會員資料 3.刪除會員 4.登入會員 </p>
 						</div>
@@ -110,7 +136,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
 						<div class="icon-box">
-						<img src="front/assets/img/person/peko.png" class="img-thumbnail w-25" alt="...">
+						<img src="front/assets/img/person/Cary.png" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">鄭景文 (技術長)</a></h4>
 						<p>股票篩選器: 1.公司基本資料 2.基本面</p>
 						<p>事件管理員: 1.事件紀錄 2.系統資源</p>
@@ -119,7 +145,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
 						<div class="icon-box">
-						<img src="front/assets/img/person/peko.png" class="img-thumbnail w-25" alt="...">
+						<img src="front/assets/img/person/Ray.png" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">孫偉騰</a></h4>
 						<p>討論區: 1.管理討論區留言 2.管理者貼文 3.使用者貼文留言</p>
 						</div>
@@ -127,7 +153,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
 						<div class="icon-box">
-						<img src="front/assets/img/person/peko.png" class="img-thumbnail w-25" alt="...">
+						<img src="front/assets/img/person/ChiBon.png" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">張啟邦</a></h4>
 						<p>申購抽籤: 1.新股申購 2.管理申購數量 3.刪除已截止申購 4.查抽籤結果</p>
 						</div>
@@ -135,7 +161,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
 						<div class="icon-box">
-						<img src="front/assets/img/person/peko.png" class="img-thumbnail w-25" alt="...">
+						<img src="front/assets/img/person/K.png" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">徐振凱</a></h4>
 						<p>下單功能: 1.下單2.委託單查詢3.歷史記錄查詢4.庫存損益</p>
 						</div>
@@ -148,9 +174,8 @@
 		<section id="clients" class="clients">
 			<div class="container">
 				<div class="section-title">
-					<h2>本次技術</h2>
-					<p></p>
-					</div>
+					<h2>網站使用技術</h2>
+					<p>Java &emsp;SpringBoot &emsp;MSSQL &emsp;SpringMVC &emsp;Hibernate &emsp;HTML&emsp; JavaScript&emsp; Ajxa&emsp; API&emsp; RestFul&emsp; BootStrap &emsp;SweetAlert&emsp;  JQuery&emsp; MySQL &emsp; Servlet&emsp; JSP&emsp;</p>
 
 					<div class="clients-slider swiper-container">
 						<div class="swiper-wrapper align-items-center">
