@@ -175,12 +175,20 @@ public class DrawlotsController {
 					
 					bean.setStartDate(Date.valueOf(LocalDate.from(chrono.date(df.parse(column[5])))));
 					
+					Date startDate =Date.valueOf(LocalDate.from(chrono.date(df.parse(column[5]))));
+					
 					Date endDate =Date.valueOf(LocalDate.from(chrono.date(df.parse(column[6]))));
+					
+					
+					System.out.print(LocalDate.from(chrono.date(df.parse(column[5]))));
+					System.out.print(LocalDate.from(chrono.date(df.parse(column[6]))));
 					
 					bean.setEndDate(endDate);
 					
 					if(endDate.before(new Date(System.currentTimeMillis()))) {
 						bean.setSubscribeStatus("申購期間已過");
+					}else if(startDate.after(new Date(System.currentTimeMillis()))){
+						bean.setSubscribeStatus("");
 					}else {
 						bean.setSubscribeStatus("可申購");
 					}
