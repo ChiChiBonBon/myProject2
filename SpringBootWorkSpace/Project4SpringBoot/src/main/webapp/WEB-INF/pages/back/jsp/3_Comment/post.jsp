@@ -144,6 +144,8 @@
 								<div id="resultMsg4" style="height: 18px; font-weight: bold;"></div><br>
 								<input type="button" class="btn btn-primary" id="btnIns"
 									value="送出">
+									&nbsp;&nbsp;
+								<input type="button" class="btn btn-primary" id="key" value="一鍵輸入">
 							</center>
 						</form>
 					</div>
@@ -248,7 +250,25 @@
 		const formData = new FormData(document.getElementById('form'));
 		var btnIns = document.getElementById("btnIns");
 		var btnUpd = document.getElementById("btnUpd");
+		var key = document.getElementById("key");
 
+		key.onclick = function(){
+			var title = document.getElementById("title");
+			var post = document.getElementById("post");
+			
+			let content = 
+				"增修條文\n\n\n1.政府官員或外資對台灣總經、產業看法的新聞，每日限五篇\n，且內容不得類似；回文必須有具體論述，酸文或意識型態\n看法請在閒聊文內進行，違反此以板規4.處理。\n\n"+ 
+
+				"2.不得發與股市無直接關係之新聞，違反此以板規4.處理。\n\n3.研究生問卷需經過板主群允許才可發文，並須檢附認證板主\n，否則刪文並水桶一個月並退文。詳見第 9頁說明。\n\n"+
+
+				"4.本板全面原作禁止刪修推文，除外條款外違者依板規4.處理。\n\n"+
+
+				"5. [閒聊] 文的管理依 [公告] 閒聊文規範 管理，詳見第\n11頁說明。\n\n6.二手書請至forsale跳蚤板或barterbooks二手書板，違者已以\n廣告文論之。";
+			document.getElementById("title").value = "股票版版規";
+			document.getElementById("post").value = content;
+		}
+		
+		
 		window.onload = function() {
 
 			//秀出全部文章

@@ -140,7 +140,9 @@
 									<center>
 										<div id="resultMsg4" style="height: 18px; font-weight: bold;"></div>
 										<br> <input type="button" class="btn btn-danger"
-											id="btnIns" value="發布文章">
+											id="btnIns" value="發布文章">&nbsp;&nbsp;
+											<input type="button" class="btn btn-danger"
+											id="key" value="一鍵輸入">
 									</center>
 								</div>
 							</form>
@@ -259,10 +261,32 @@
 		var btnSingle = document.getElementById("btnSingle");
 		var forumCon = document.getElementById("forumCon");
 		var dataArea01 = document.getElementById("dataArea01");
+		var key = document.getElementById("key");
 
 		function unpackForContent(text) {
 			let content = JSON.parse(text);
 			return content;
+		}
+		
+		
+		
+		key.onclick = function(){
+			let content = 
+				"航海王今（19）日持續維持盤面熱點，超級航海周將由下午陽明（2609）的線上法人說明會率先登場啟動，早盤股價開高走高，一度拉升至196.5元，開盤約20分鐘爆出逾12萬張成交量，高居個股成交量冠軍。\n\n"+ 
+
+				"陽明今日將召開法說會，市場關注在現增完成後，明日將有16萬張新股掛牌上市，另外，下半年的營運展望、未來航線規劃、運價趨勢等，都將由董事長鄭貞茂對外說明，陽明今日以193元開高，一度拉升至196.5元。\n\n"+
+
+				"陽明法說會後，萬海（ 2615 ）明日將舉辦股東會，長榮（ 2603 ）股東會則是在21日召開，同時處置交易也期滿「出關」，交易恢復正常，市場預期兩家公司的股東會也將釋出產業及榮運的正面訊息；萬海今日以293元開高，一度拉升至297元；長榮以186元開高。\n\n"+
+
+				"航運股先前經過一波大跌修正，法人表示，在貨櫃股價連續大跌修正 8 天後，可能在上周三股價跌到最低點修正完畢，在獲利大好、景氣及趨勢往上、運價報價不跌反漲遭，加上近兩週籌碼經過換手，融資大幅下降、融券大增，可望有利於貨櫃航運股及傳產漲價股再啟動第五波上漲行情。";
+							
+				
+				
+			document.getElementById("title").value = "超級航海周登場 陽明領軍貨櫃股續漲、成交量居冠";
+			document.getElementById("postType").value = "股票";
+			document.getElementById("post").value = content;
+				
+				
 		}
 
 		window.onload = function() {
