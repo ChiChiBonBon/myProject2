@@ -122,35 +122,35 @@ public class AdminController {
 		m.addAttribute("AllJobs", list);
 		return "back/jsp/1_Member/?";	
 	}
-
-	
-	
-	@GetMapping(value = "/goAdminMember_oth_info_1")
-	public String processHrehAdminMember_Other_Info(Model m) {
-		return null;
-//		超連結的其他個資選單
-	}
-	
-	
-	@PostMapping("/admin_member_1")
-	public String processAmdinMember() {
-		
-//		資料中可以改的部分都用下拉式選單 或是 按鈕
-		
-		return null;
-	}
-
-//	處理工作項目 可以增加或減少
-	@PostMapping("/admin_update_job_1")
-	public String processAdminJobs() {
-		return null;
-	}
-	
-	
-	@PostMapping("/admin_change_memb_password_1")
-	public String processAdminChangePassword() {
-		return null;
-//		直接改新密碼
-	}
+//
+//	
+//	
+//	@GetMapping(value = "/goAdminMember_oth_info_1")
+//	public String processHrehAdminMember_Other_Info(Model m) {
+//		return null;
+////		超連結的其他個資選單
+//	}
+//	
+//	
+//	@PostMapping("/admin_member_1")
+//	public String processAmdinMember() {
+//		
+////		資料中可以改的部分都用下拉式選單 或是 按鈕
+//		
+//		return null;
+//	}
+//
+////	處理工作項目 可以增加或減少
+//	@PostMapping("/admin_update_job_1")
+//	public String processAdminJobs() {
+//		return null;
+//	}
+//	
+//	
+//	@PostMapping("/admin_change_memb_password_1")
+//	public String processAdminChangePassword() {
+//		return null;
+////		直接改新密碼
+//	}
 
 }

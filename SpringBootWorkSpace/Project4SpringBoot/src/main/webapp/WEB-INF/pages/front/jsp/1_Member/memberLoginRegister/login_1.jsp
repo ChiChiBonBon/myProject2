@@ -85,7 +85,7 @@
                 		if (email) {
                 		  Swal.fire(`傳送新密碼到此信箱: ${email}`)
                 		  
-                          $.ajax({
+/*                           $.ajax({
                               type: 'POST',
                               url: "<c:url value='/email_request/forget_password' />" + id,
                               data: {"email": ${email}},
@@ -104,7 +104,7 @@
                                             text: '請輸入已註冊密碼',
                                         })
                                   }
-                              });
+                              }); */
                               }
                 	}
             </script>
@@ -119,6 +119,21 @@
             </span>
             
            </form>
+           
+           <br>
+           <div>
+               <button id="input_login_button" style="width: 200px" class="btn btn-outline-danger" onclick="input_login()">一鍵輸入</button>
+           </div>
+           <script type="text/javascript">
+               
+               function input_login() {
+            	   let acc = document.getElementById("account_input");
+            	   let pass = document.getElementById("password_input");
+            	   acc.value = "johnnypan";
+            	   pass.value = "johnnypan";
+               }
+               
+           </script>
         
             <!-- 看是否有錯誤訊息由後端傳入 -->
            <div id="message" style="display: none">${message}</div>
