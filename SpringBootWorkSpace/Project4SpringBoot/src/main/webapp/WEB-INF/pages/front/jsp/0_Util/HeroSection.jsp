@@ -10,7 +10,7 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background: url(front/assets/img/person/all-1.jpg)">
+          <div class="carousel-item active" style="background: url(/project4/front/assets/img/person/all-1.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">STOCK OVERFLOW :<span> Show Me The Money</span></h2>
@@ -21,7 +21,7 @@
           </div>
 
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background: url(front/assets/img/person/all-2.jpg)">
+          <div class="carousel-item" style="background: url(/project4/front/assets/img/person/all-2.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated fanimate__adeInDown">STOCK OVERFLOW :<span> Show Me The Money</span></h2>
@@ -32,7 +32,7 @@
           </div>
 
           <!-- Slide 3 -->
-          <div class="carousel-item" style="background: url(front/assets/img/person/all-3.jpg)">
+          <div class="carousel-item" style="background: url(/project4/front/assets/img/person/all-3.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">STOCK OVERFLOW :<span> Show Me The Money</span></h2>

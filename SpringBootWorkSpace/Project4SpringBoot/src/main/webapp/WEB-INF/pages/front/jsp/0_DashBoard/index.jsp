@@ -103,7 +103,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
-						<img src="front/assets/img/person/all-7.jpeg" class="img-fluid" alt="">
+						<img src="<c:url value='/front/assets/img/person/all-7.jpeg' />" class="img-fluid" alt="">
 					</div>
 					<div class="col-lg-6 pt-4 pt-lg-0 content">
 						<h3>Stock Overflow</h3>
@@ -134,7 +134,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
 						<div class="icon-box">
-						<img src="front/assets/img/person/jonny-1.png" class="img-thumbnail w-50" alt="...">
+						<img src="<c:url value='/front/assets/img/person/jonny-1.png' />" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">潘啟勛 (組長)</a></h4>
 						<p>會員功能:1.註冊會員 2.修改會員資料 3.刪除會員 4.登入會員 </p>
 						</div>
@@ -142,7 +142,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
 						<div class="icon-box">
-						<img src="front/assets/img/person/Cary.png" class="img-thumbnail w-50" alt="...">
+						<img src="<c:url value='/front/assets/img/person/Cary.png' />" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">鄭景文 (技術長)</a></h4>
 						<p>股票篩選器: 1.公司基本資料 2.基本面</p>
 						<p>事件管理員: 1.事件紀錄 2.系統資源</p>
@@ -151,7 +151,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
 						<div class="icon-box">
-						<img src="front/assets/img/person/Ray.png" class="img-thumbnail w-50" alt="...">
+						<img src="<c:url value='/front/assets/img/person/Ray.png' />" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">孫偉騰</a></h4>
 						<p>討論區: 1.管理討論區留言 2.管理者貼文 3.使用者貼文留言</p>
 						</div>
@@ -159,7 +159,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
 						<div class="icon-box">
-						<img src="front/assets/img/person/ChiBon.png" class="img-thumbnail w-50" alt="...">
+						<img src="<c:url value='/front/assets/img/person/ChiBon.png' />" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">張啟邦</a></h4>
 						<p>申購抽籤: 1.新股申購 2.管理申購數量 3.刪除已截止申購 4.查抽籤結果</p>
 						</div>
@@ -167,7 +167,7 @@
 
 					<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
 						<div class="icon-box">
-						<img src="front/assets/img/person/K.png" class="img-thumbnail w-50" alt="...">
+						<img src="<c:url value='/front/assets/img/person/K.png' />" class="img-thumbnail w-50" alt="...">
 						<h4><a href="">徐振凱</a></h4>
 						<p>下單功能: 1.下單2.委託單查詢3.歷史記錄查詢4.庫存損益</p>
 						</div>
@@ -185,13 +185,13 @@
 
 					<div class="clients-slider swiper-container">
 						<div class="swiper-wrapper align-items-center">
-							<div class="swiper-slide"><img src="front/assets/img/clients/java.png" class="img-fluid" alt=""></div>
-							<div class="swiper-slide"><img src="front/assets/img/clients/bootstrap2.jpg" class="img-fluid" alt=""></div>
-							<div class="swiper-slide"><img src="front/assets/img/clients/hibernate.jpg" class="img-fluid" alt=""></div>
-							<div class="swiper-slide"><img src="front/assets/img/clients/html.png" class="img-fluid" alt=""></div>
-							<div class="swiper-slide"><img src="front/assets/img/clients/mssql.jpg" class="img-fluid" alt=""></div>
-							<div class="swiper-slide"><img src="front/assets/img/clients/springboot2.png" class="img-fluid" alt=""></div>
-							<div class="swiper-slide"><img src="front/assets/img/clients/sweetalert.png" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/java.png' />" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/bootstrap2.jpg' />" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/hibernate.jpg' />" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/html.png' />" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/mssql.jpg' />" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/springboot2.png' />" class="img-fluid" alt=""></div>
+							<div class="swiper-slide"><img src="<c:url value='/front/assets/img/clients/sweetalert.png' />" class="img-fluid" alt=""></div>
 							<%-- <div class="swiper-slide"><img src="front/assets/img/clients/client-8.png" class="img-fluid" alt=""></div> --%>
 						</div>
 					<div class="swiper-pagination"></div>
