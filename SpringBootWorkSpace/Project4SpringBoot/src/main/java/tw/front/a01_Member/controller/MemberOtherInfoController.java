@@ -242,6 +242,7 @@ public class MemberOtherInfoController {
 				System.out.println("delete password: " + is_delete);
 
 				if (is_delete) {
+					
 					System.out.println("帳號刪除！");
 					ra.addFlashAttribute("Message", "帳號刪除！");
 					return "redirect:/front/member/gomessage_page_1";
@@ -279,8 +280,10 @@ public class MemberOtherInfoController {
 			}
 		}
 		
+//		都要設 path
 		Cookie userNameCookieRemove = new Cookie("StockOverFlowMember", null);
 		userNameCookieRemove.setMaxAge(0);
+		userNameCookieRemove.setPath("/project4");
 		response.addCookie(userNameCookieRemove);
 		System.out.println("cookie remove");
 
@@ -289,9 +292,8 @@ public class MemberOtherInfoController {
 //		登入會記錄進入時間 登出也會紀錄
         Long datetime = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(datetime);
-		member.setLastUsing(timestamp);
-		
-		memberservice.member_updateAccount(member);
+        
+		memberservice.member_updateTime(member.getId(), timestamp);
 		
 		System.out.println("Not logout yet:" + member);
 		

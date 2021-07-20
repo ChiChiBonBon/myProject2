@@ -1,5 +1,7 @@
 package tw.front.a01_Member.dao;
 
+import java.sql.Timestamp;
+
 import tw.front.a01_Member.model.MemberBean;
 
 public interface IMemberDao {
@@ -8,7 +10,11 @@ public interface IMemberDao {
 	
 	public MemberBean member_checkAccount(String account, String password);
 	
+	public MemberBean member_checkAccount_email(String email, String password);
+	
 	public int member_updateAccount(MemberBean bean);
+	
+	public boolean member_updateTime(long id, Timestamp timestamp);
 	
 	public boolean member_updatePassword(long id, String password);
 	

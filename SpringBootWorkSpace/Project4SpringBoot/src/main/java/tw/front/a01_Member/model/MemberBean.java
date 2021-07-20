@@ -88,6 +88,7 @@ public class MemberBean {
 	
 	private String pictureFile_name;
 
+
 	private String member_stock_ID; 
 	private String member_quote;  
 	private String member_auth;
