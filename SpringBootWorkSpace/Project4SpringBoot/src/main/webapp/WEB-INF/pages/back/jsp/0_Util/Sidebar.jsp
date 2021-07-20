@@ -33,7 +33,7 @@
 	<div class="sidebar-heading">Interface</div>
 
 	<!-- Nav Item - 會員資料 Collapse Menu -->
-	<li class="nav-item"><a class="nav-link" href="#"> <i
+	<li class="nav-item"><a class="nav-link" href="<c:url value='/back/admin_1/goAdminMember_1' />"> <i
 			class="fas fa-user-cog"></i> <span>會員資料</span>
 	</a></li>
 
