@@ -40,7 +40,7 @@ public class MemberLoginRegisterController {
 	public String processHrefLogin(@CookieValue(value = "StockOverFlowMember", defaultValue = "None") String cookie_value, RedirectAttributes ra) {
 		if (!cookie_value.equals("None")) {
 			return "redirect:/front/member/gomembermenu_1";
-		}
+		} 
 		return "front/jsp/1_Member/memberLoginRegister/login_1";
 	}
 

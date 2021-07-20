@@ -2,7 +2,6 @@ package tw.front.a01_Member.controller;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.back.a01_Member.service.IAdminMemberService;
@@ -81,42 +79,78 @@ public class MemberSendEmail {
 		return "redirect:/front/unmember/gomessage_page_1";
 	}
 	
+//	ajax sweetalert 目前失敗換成跳出另一個JSP
+//	
+//	@PostMapping(value = "/forget_password", produces = "application/json; charset=UTF-8")
+//	public @ResponseBody String emailDoubleQualification(@RequestParam("email") String email,
+//														 RedirectAttributes ra) {
+//		
+//		if (email != null) {
+//			System.out.println(email);
+//			
+//			String check_email_result = adminservice.check_email_to_resetPassword(email);
+//			if (!check_email_result.equals("None")){
+//				
+//				String url_final = "http://localhost:8080/project4/front/unmember/gologin_1";
+////				sender.setHost("joycepan0513@gmail.com");
+//				MimeMessage message = javaMailSender.createMimeMessage();
+//				MimeMessageHelper helper;
+//				String new_password = "";
+//				try {
+//					helper = new MimeMessageHelper(message, true);
+//					helper.setTo(email);
+//			        helper.setSubject("主旨：密碼以重置");
+//			        String htmlString = "<div>這是新密碼"+ new_password +"</div>"
+//			        		+ "<html><body><a href='"+ url_final +"'>按此返回登入區</a></body></html>";
+//					helper.setText(htmlString, true);
+//					javaMailSender.send(message);
+//					return "Success";
+//				} catch (MessagingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return "Fail";
+//	}
+
+	@GetMapping("/go_send_resetEmail")
+	public String processHrefsendEmail() {
+		return "front/jsp/1_Member/memberLoginRegister/send_reset_email_1";
+	}
 	
 	
-	@PostMapping(value = "/forget_password", produces = "application/json; charset=UTF-8")
-	public @ResponseBody String emailDoubleQualification(@RequestParam("email") String email,
-														 RedirectAttributes ra) {
-		
+	@PostMapping("/send_resetemail")
+	public String sendEmailtoreset (@RequestParam("email") String email,
+									RedirectAttributes ra) {
 		if (email != null) {
-			System.out.println(email);
+		System.out.println(email);
+		
+		String check_email_result = adminservice.check_email_to_resetPassword(email);
+		if (!check_email_result.equals("None")){
 			
-			String check_email_result = adminservice.check_email_to_resetPassword(email);
-			if (!check_email_result.equals("None")){
-				
-				String url_final = "http://localhost:8080/project4/front/unmember/gologin_1";
-//				sender.setHost("joycepan0513@gmail.com");
-				MimeMessage message = javaMailSender.createMimeMessage();
-				MimeMessageHelper helper;
-				String new_password = "";
-				try {
-					helper = new MimeMessageHelper(message, true);
-					helper.setTo(email);
-			        helper.setSubject("主旨：密碼以重置");
-			        String htmlString = "<div>這是新密碼"+ new_password +"</div>"
-			        		+ "<html><body><a href='"+ url_final +"'>按此返回登入區</a></body></html>";
-					helper.setText(htmlString, true);
-					javaMailSender.send(message);
-					return "Success";
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			String url_final = "http://localhost:8080/project4/front/unmember/gologin_1";
+//			sender.setHost("joycepan0513@gmail.com");
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper;
+			String new_password = check_email_result;
+			try {
+				helper = new MimeMessageHelper(message, true);
+				helper.setTo(email);
+		        helper.setSubject("主旨：密碼以重置");
+		        String htmlString = "<div>這是新密碼: "+ new_password +"</div>"
+		        		+ "<html><body><a href='"+ url_final +"'>按此返回登入區</a></body></html>";
+				helper.setText(htmlString, true);
+				javaMailSender.send(message);
+				ra.addFlashAttribute("Message", "請去信箱確認重置密碼");
+				return "redirect:/front/unmember/gomessage_page_1";
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		return "Fail";
+		}
+		ra.addFlashAttribute("Message", "密碼重置失敗，請輸入已有的信箱");
+		return "redirect:/front/unmember/gomessage_page_1";
 	}
-
-
-	
-	
 }

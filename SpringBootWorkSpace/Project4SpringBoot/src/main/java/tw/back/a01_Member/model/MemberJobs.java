@@ -1,22 +1,14 @@
 package tw.back.a01_Member.model;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import tw.front.a01_Member.model.MemberBean;
 
 @Entity
 @Table(name = "member_3_jobs")
@@ -32,8 +24,8 @@ public class MemberJobs {
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date createDate;
 	
-	@OneToMany(mappedBy = "jobType_id", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	Set<MemberBean> members = new HashSet<>();
+//	@OneToMany(mappedBy = "jobType_id", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+//	Set<MemberBean> members = new HashSet<>();
 	
 	   
 	public MemberJobs() {

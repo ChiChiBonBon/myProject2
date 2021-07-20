@@ -139,8 +139,9 @@
                <div class="col-3 md-2">
                  <label for="job" class="form-label">選擇職業</label>
                  <!-- paht 這邊顯示的是 Memberbean 物件中的 jobType_id（是MemberJobs）的 job_id -->
-                 <form:select id="job" class="form-select" path="jobType_id.job_id" onchange="valid_after_onchange(this)">
-                   <form:options items="${job_list}" itemLabel="job"  itemValue="job_id" />
+                 <form:select id="job" class="form-select" path="jobType_id" onchange="valid_after_onchange(this)">
+<%--                    <form:options items="${job_list}" itemLabel="job"  itemValue="job_id" /> --%>
+                     <form:options items="${job_map}"/>
                  </form:select>
                  <form:errors path='jobType_id' cssClass="error"/>
                </div>

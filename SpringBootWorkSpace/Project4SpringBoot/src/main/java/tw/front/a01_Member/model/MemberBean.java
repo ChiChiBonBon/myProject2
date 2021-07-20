@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
@@ -19,8 +17,6 @@ import javax.validation.constraints.Pattern;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import tw.back.a01_Member.model.MemberJobs;
 
 @Entity
 @Table(name = "member_3")
@@ -62,11 +58,19 @@ public class MemberBean {
 	private String address;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "jobid", nullable = true)
-	private MemberJobs jobType_id;
+//	@ManyToOne
+//	@JoinColumn(name = "jobid", nullable = true)
+//	private MemberJobs jobType_id;
+	
+	private String jobType_id;
 	
 	
+	public String getJobType_id() {
+		return jobType_id;
+	}
+	public void setJobType_id(String jobType_id) {
+		this.jobType_id = jobType_id;
+	}
 	private String carrier;
 	
 	private Timestamp lastUsing;
@@ -156,12 +160,12 @@ public class MemberBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public MemberJobs getJobType_id() {
-		return jobType_id;
-	}
-	public void setJobType_id(MemberJobs jobType_id) {
-		this.jobType_id = jobType_id;
-	}
+//	public MemberJobs getJobType_id() {
+//		return jobType_id;
+//	}
+//	public void setJobType_id(MemberJobs jobType_id) {
+//		this.jobType_id = jobType_id;
+//	}
 	public String getCarrier() {
 		return carrier;
 	}
